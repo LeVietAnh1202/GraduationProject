@@ -1,0 +1,86 @@
+[
+    {
+        "_id": {
+          "$oid": "657985c56d8dd423d059ee97"
+        },
+        "moduleID": "231129", 
+        "subjectID": "311113",
+        "classCode": "10120TN",
+        "lecturerId": "1221",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "657985c56d8dd423d059ee98"
+        },
+        
+        "moduleID": "211263",
+        "subjectID": "311112",
+        "classCode": "10120TN",
+        "lecturerId": "1222",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "657985c56d8dd423d059ee96"
+        },
+        
+        "moduleID": "211011",
+        "subjectID": "311114",
+        "classCode": "10120TN",
+        "lecturerId": "1224",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "657985c56d8dd423d059ee95"
+        },
+        
+        "moduleID": "221167",
+        "subjectID": "311111",
+        "classCode": "10120TN",
+        "lecturerId": "1223",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "657985c56d8dd423d059ee91"
+        },
+        
+        "moduleID": "215667",
+        "subjectID": "311115",
+        "classCode": "10120TN",
+        "lecturerId": "1223",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      }
+]

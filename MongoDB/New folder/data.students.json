@@ -1,0 +1,441 @@
+[{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990731"
+  },
+  "studentId": "10120603",
+  "studentName": "Đỗ Quỳnh Anh",
+  "classCode": "10120TN",
+  "gender": "Nữ",
+  "fingerprintID":"1",
+  "birthDate": {
+    "$date": "2002-05-07T17:00:00.000Z"
+  },
+  "avatar":"10120603_DoQuynhAnh.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990732"
+  },
+  "studentId": "12520088",
+  "studentName": "Lê Việt Anh",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"2",
+  "birthDate": {
+    "$date": "2002-01-01T17:00:00.000Z"
+  },
+  "avatar":"12520088_LeVietAnh.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990733"
+  },
+  "studentId": "10120766",
+  "studentName": "Nguyễn Minh Ánh",
+  "classCode": "10120TN",
+  "gender": "Nữ",
+  "fingerprintID":"3",
+  "birthDate": {
+    "$date": "2002-02-05T17:00:00.000Z"
+  },
+  "avatar":"10120766_NguyenMinhAnh.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990734"
+  },
+  "studentId": "10120620",
+  "studentName": "Nguyễn Minh Doanh",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"4",
+  "birthDate": {
+    "$date": "2002-10-08T17:00:00.000Z"
+  },
+  "avatar":"10120620_NguyenMinhDoanh.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990735"
+  },
+  "studentId": "10120623",
+  "studentName": "Nguyễn Thái Dương",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"5",
+  "birthDate": {
+    "$date": "2002-04-10T17:00:00.000Z"
+  },
+  "avatar":"10120623_NguyenThaiDuong.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990736"
+  },
+  "studentId": "10120626",
+  "studentName": "Lê Hải Đăng",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"6",
+  "birthDate": {
+    "$date": "2002-03-01T17:00:00.000Z"
+  },
+  "avatar":"10120626_LeHaiDang.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990737"
+  },
+  "studentId": "10120635",
+  "studentName": "Phạm Thanh Hằng",
+  "classCode": "10120TN",
+  "gender": "Nữ",
+  "fingerprintID":"7",
+  "birthDate": {
+    "$date": "2002-08-11T17:00:00.000Z"
+  },
+  "avatar":"10120635_PhamThanhHang.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990738"
+  },
+  "studentId": "10120741",
+  "studentName": "Lưu Huy Hoàng",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"8",
+  "birthDate": {
+    "$date": "2002-04-28T17:00:00.000Z"
+  },
+  "avatar":"10120741_LuuHuyHoang.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990739"
+  },
+  "studentId": "10120745",
+  "studentName": "Nguyễn Mạnh Hùng",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"9",
+  "birthDate": {
+    "$date": "2002-12-15T17:00:00.000Z"
+  },
+  "avatar":"10120745_NguyenManhHung.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990740"
+  },
+  "studentId": "10120056",
+  "studentName": "Lê Ngọc Lành",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"10",
+  "birthDate": {
+    "$date": "2002-11-22T17:00:00.000Z"
+  },
+  "avatar":"10120056_LeNgocLanh.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990741"
+  },
+  "studentId": "10120792",
+  "studentName": "Thân Thị Mỹ Linh",
+  "classCode": "10120TN",
+  "gender": "Nữ",
+  "fingerprintID":"11",
+  "birthDate": {
+    "$date": "2002-01-10T17:00:00.000Z"
+  },
+  "avatar":"10120792_ThanThiMyLinh.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990742"
+  },
+  "studentId": "10120748",
+  "studentName": "Trịnh Thị Linh",
+  "classCode": "10120TN",
+  "gender": "Nữ",
+  "fingerprintID":"12",
+  "birthDate": {
+    "$date": "2002-11-04T17:00:00.000Z"
+  },
+  "avatar":"10120748_TrinhThiLinh.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990743"
+  },
+  "studentId": "10120669",
+  "studentName": "Đào Ngọc Long",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"13",
+  "birthDate": {
+    "$date": "2002-09-05T17:00:00.000Z"
+  },
+  "avatar":"10120669_DaoNgocLong.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990744"
+  },
+  "studentId": "10120674",
+  "studentName": "Nguyễn Thị Cẩm Ly",
+  "classCode": "10120TN",
+  "gender": "Nữ",
+  "fingerprintID":"14",
+  "birthDate": {
+    "$date": "2002-05-15T17:00:00.000Z"
+  },
+  "avatar":"10120674_NguyenThiCamLy.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990745"
+  },
+  "studentId": "10120678",
+  "studentName": "Vũ Ngọc Minh",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"15",
+  "birthDate": {
+    "$date": "2002-09-08T17:00:00.000Z"
+  },
+  "avatar":"10120678_VuNgocMinh.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990746"
+  },
+  "studentId": "10120683",
+  "studentName": "Đặng Ngọc Nhân",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"16",
+  "birthDate": {
+    "$date": "2002-11-07T17:00:00.000Z"
+  },
+  "avatar":"10120683_DangNgocNhan.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990747"
+  },
+  "studentId": "10120773",
+  "studentName": "Nguyễn Thị Ngọc Phượng",
+  "classCode": "10120TN",
+  "gender": "Nữ",
+  "fingerprintID":"17",
+  "birthDate": {
+    "$date": "2002-11-15T17:00:00.000Z"
+  },
+  "avatar":"10120773_NguyenThiNgocPhuong.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990748"
+  },
+  "studentId": "10120701",
+  "studentName": "Lê Hoàng Sơn",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"18",
+  "birthDate": {
+    "$date": "2002-08-12T17:00:00.000Z"
+  },
+  "avatar":"10120701_LeHoangSon.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990749"
+  },
+  "studentId": "10120707",
+  "studentName": "Nguyễn Văn Thái",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"19",
+  "birthDate": {
+    "$date": "2002-04-10T17:00:00.000Z"
+  },
+  "avatar":"10120707_NguyenVanThai.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990750"
+  },
+  "studentId": "10120734",
+  "studentName": "Trần Anh Tú",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"20",
+  "birthDate": {
+    "$date": "2002-02-11T17:00:00.000Z"
+  },
+  "avatar":"10120734_TranAnhTu.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6579c038e2ce7ce73e990751"
+  },
+  "studentId": "10120736",
+  "studentName": "Đỗ Tràng Tuấn",
+  "classCode": "10120TN",
+  "gender": "Nam",
+  "fingerprintID":"21",
+  "birthDate": {
+    "$date": "2002-09-23T17:00:00.000Z"
+  },
+  "avatar":"10120736_DoTrangTuan.jpg",
+  "createdAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T14:31:20.870Z"
+  },
+  "__v": 0
+}]

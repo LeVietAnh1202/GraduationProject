@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "65659f3102f664f54019934f"
+  },
+  "account": "admin",
+  "password": "$2b$10$nJ8pPurc883H58ShZSLfp.2yjz53zyLTiCZP/Zl8nVoQLYddmlZBm",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2023-11-28T08:05:05.970Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-28T08:05:05.970Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65659f8102f664f540199352"
+  },
+  "account": "doanh",
+  "password": "$2b$10$nJ8pPurc883H58ShZSLfp.2yjz53zyLTiCZP/Zl8nVoQLYddmlZBm",
+  "role": "giangvien",
+  "createdAt": {
+    "$date": "2023-11-28T08:06:25.699Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-28T08:06:25.699Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657348df5aad048a4af6a2ca"
+  },
+  "account": "sinhvien1",
+  "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+  "role": "sinhvien",
+  "createdAt": {
+    "$date": "2023-12-08T16:48:31.467Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-08T16:48:31.467Z"
+  },
+  "__v": 0
+}]
