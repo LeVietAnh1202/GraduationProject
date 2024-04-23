@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/singleChoice.dart';
 import 'package:flutter_todo_app/students/detailStudent.dart';
@@ -24,7 +25,8 @@ class DetailStudent extends StatefulWidget {
 }
 
 class _DetailStudentState extends State<DetailStudent> {
-  List<Map<String, dynamic>> students = [];
+  List<Student> students = [];
+  // List<Map<String, dynamic>> students = [];
 
   @override
   void initState() {
@@ -101,20 +103,22 @@ class _DetailStudentState extends State<DetailStudent> {
   @override
   Widget build(BuildContext context) {
     // Tìm sinh viên có studentId tương ứng trong danh sách students đã tải
-    Map<String, dynamic> defaultStudent = {
-      'studentId': '',
-      'studentName': '',
-      'classCode': '',
-      'gender': '',
-      'birthDate': '',
-    };
+    // Map<String, dynamic> defaultStudent = {
+    //   'studentId': '',
+    //   'studentName': '',
+    //   'classCode': '',
+    //   'gender': '',
+    //   'birthDate': '',
+    // };
+    Student defaultStudent = Student.fromMap({});
     students = context.watch<AppStateProvider>().appState!.students;
-    Map<String, dynamic> student = students.firstWhere(
+    Student student = students.firstWhere(
+    // Map<String, dynamic> student = students.firstWhere(
       (student) {
         print(student);
-        print("student['studentId']" + student['studentId']);
+        print("student['studentId']" + student.studentId);
         print("widget.studentId" + widget.studentId);
-        return student['studentId'] == widget.studentId;
+        return student.studentId == widget.studentId;
       },
       orElse: () => defaultStudent,
     );
@@ -124,7 +128,7 @@ class _DetailStudentState extends State<DetailStudent> {
       return Center(child: Text('Student not found'));
     }
 
-    print('${ULRNodeJSServer}/images/avatar/${student['avatar']}');
+    print('${ULRNodeJSServer}/images/avatar/${student.avatar}');
 
     return AlertDialog(
       title: Text('Detail student'),
@@ -141,14 +145,14 @@ class _DetailStudentState extends State<DetailStudent> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildInfoRow('ID:', student['studentId']),
-                      _buildInfoRow('Full name:', student['studentName']),
-                      _buildInfoRow('Class code:', student['classCode']),
-                      _buildInfoRow('Gender:', student['gender']),
+                      _buildInfoRow('ID:', student.studentId),
+                      _buildInfoRow('Full name:', student.studentName),
+                      _buildInfoRow('Class code:', student.classCode),
+                      _buildInfoRow('Gender:', student.gender),
                       _buildInfoRow(
                         'Birth date:',
                         DateFormat('dd/MM/yyyy')
-                            .format(DateTime.parse(student['birthDate'])),
+                            .format(student.birthDate),
                       ),
                     ],
                   ),
@@ -156,7 +160,7 @@ class _DetailStudentState extends State<DetailStudent> {
                 SizedBox(width: 50),
                 Container(
                   child: Image.network(
-                    '${ULRNodeJSServer_RaspberryPi_Images}/avatar/${student['avatar']}',
+                    '${ULRNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
                     width: 150, // Điều chỉnh chiều rộng nếu cần
                     height: 150, // Điều chỉnh chiều cao nếu cần
                     loadingBuilder: (BuildContext context, Widget child,
@@ -226,7 +230,7 @@ class _DetailStudentState extends State<DetailStudent> {
                     padding: EdgeInsets.all(8.0),
                     child: Column(children: [
                       Image.network(
-                        '${ULRNodeJSServer_RaspberryPi_Images}/${(Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView) == ShowImage.full ? 'full_images' : 'crop_images'}/${student['avatar'].toString().substring(0, student['avatar'].toString().indexOf('.'))}/${1}.jpg',
+                        '${ULRNodeJSServer_RaspberryPi_Images}/${(Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView) == ShowImage.full ? 'full_images' : 'crop_images'}/${student.avatar.toString().substring(0, student.avatar.toString().indexOf('.'))}/${1}.jpg',
                         width: 131, // Điều chỉnh chiều rộng nếu cần
                         height: 131, // Điều chỉnh chiều cao nếu cần
                         fit: BoxFit.contain,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -13,7 +14,8 @@ class AppState {
   int tableLength;
   int currentPage;
   int rowsPerPage;
-  List<Map<String, dynamic>> students;
+  List<Student> students;
+  // List<Map<String, dynamic>> students;
   List<Map<String, dynamic>> lecturers;
   List<Map<String, dynamic>> scheduleStudentWeeks;
   List<Map<String, dynamic>> scheduleStudentTerms;
@@ -114,10 +116,15 @@ class AppStateProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setStudents(List<Map<String, dynamic>> students) {
+  void setStudents(List<Student> students) {
     _appState?.students = students;
     notifyListeners();
   }
+
+  // void setStudents(List<Map<String, dynamic>> students) {
+  //   _appState?.students = students;
+  //   notifyListeners();
+  // }
 
   void setLecturers(List<Map<String, dynamic>> lecturers) {
     _appState?.lecturers = lecturers;
@@ -266,7 +273,8 @@ class AppStateProvider with ChangeNotifier {
       int currentPage = parseCurrentPage(currentPageString);
       int rowsPerPage = parseRowsPerPage(rowsPerPageString);
 
-      List<Map<String, dynamic>> students = parseStudents(studentsString);
+      List<Student> students = parseStudents(studentsString);
+      // List<Map<String, dynamic>> students = parseStudents(studentsString);
       List<Map<String, dynamic>> lecturers = parseLecturers(lecturersString);
       List<Map<String, dynamic>> scheduleStudentWeeks =
           parseScheduleStudentWeeks(scheduleStudentWeeksString);
@@ -365,13 +373,14 @@ class AppStateProvider with ChangeNotifier {
 
   //----------------------------------------------------------------
 
-  List<Map<String, dynamic>> parseStudents(String studentsString) {
+  List<Student> parseStudents(String studentsString) {
+  // List<Map<String, dynamic>> parseStudents(String studentsString) {
     // Thực hiện chuyển đổi chuỗi thành danh sách sinh viên phù hợp
     // Ví dụ:
     List<dynamic> studentsJson = jsonDecode(studentsString);
-    List<Map<String, dynamic>> students = [];
+    List<Student> students = [];
     for (var studentJson in studentsJson) {
-      students.add(Map<String, dynamic>.from(studentJson));
+      students.add(Student.fromMap(studentJson));
     }
     return students;
   }

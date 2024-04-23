@@ -1,5 +1,6 @@
-const url = '192.168.1.3:3000';
-const url_ras = '123.18.235.196:3002';
+const url = 'localhost:3000';
+// const url = '192.168.1.3:3000';
+const url_ras = '14.255.135.132:3002';
 final register = "user/register";
 final login = 'user/login';
 

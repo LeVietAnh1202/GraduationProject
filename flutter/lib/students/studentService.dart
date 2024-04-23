@@ -1,29 +1,29 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class StudentService {
-  static Future<int> fetchStudents(
+  static Future<List<dynamic>> fetchStudents(
       BuildContext context, ValueChanged<bool> isLoading) async {
     final response = await http.get(Uri.http(url, getAllStudentAPI));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
-      final studentList = data['data'] as List<dynamic>;
-      print("Student list: " + studentList.toString());
+      final studentsList = data['data'] as List<dynamic>;
+      print("Student list: " + studentsList.toString());
 
-      // setState(() {
-      //   students = studentList.cast<Map<String, dynamic>>();
-      // });
+      final students = studentsList.map((e) => Student.fromMap(e)).toList();
+      print("Students: " + students.toString());
 
       Provider.of<AppStateProvider>(context, listen: false)
-          .setStudents(studentList.cast<Map<String, dynamic>>());
+          .setStudents(students);
+          // .setStudents(studentsList.cast<Map<String, dynamic>>());
       isLoading(false);
-      return studentList.length;
+      return studentsList;
     } else {
       throw Exception('Failed to fetch students');
     }

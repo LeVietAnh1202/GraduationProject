@@ -130,3 +130,5 @@ dist
 .pnp.*
 
 nodejs_backend/public/images/
+facial_recognition_server/train_img
+facial_recognition_server/aligned_img

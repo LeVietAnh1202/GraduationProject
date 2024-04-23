@@ -3,6 +3,7 @@ import 'package:flutter_todo_app/breadcrumb.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/sidebar.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/processingAndTraining.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/singleChoice.dart';
@@ -95,34 +96,36 @@ class _BodyContentState extends State<BodyContent> {
                     child: sidebarMap.getSidebarMap(),
                   )
                 // ? DtScheduleStudentWeek()
-                : DataTable(
-                    columns: [
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Column 1',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Column 2',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      )
-                    ],
-                    rows: [
-                      DataRow(
-                        cells: [
-                          DataCell(Center(child: Text("234324242"))),
-                          DataCell(Center(child: Text("31111114"))),
-                        ],
-                      ),
-                    ],
-                  ),
+                : 
+                ProcessingAndTraining()
+                // DataTable(
+                //     columns: [
+                //       DataColumn(
+                //         label: Expanded(
+                //           child: Text(
+                //             'Column 1',
+                //             textAlign: TextAlign.center,
+                //           ),
+                //         ),
+                //       ),
+                //       DataColumn(
+                //         label: Expanded(
+                //           child: Text(
+                //             'Column 2',
+                //             textAlign: TextAlign.center,
+                //           ),
+                //         ),
+                //       )
+                //     ],
+                //     rows: [
+                //       DataRow(
+                //         cells: [
+                //           DataCell(Center(child: Text("234324242"))),
+                //           DataCell(Center(child: Text("31111114"))),
+                //         ],
+                //       ),
+                //     ],
+                //   ),
           ),
           SizedBox(height: 16.0),
           Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/students/detailStudent.dart';
 import 'package:flutter_todo_app/students/formAddStudent.dart';
@@ -25,28 +26,10 @@ class _DataTableStudentState extends State<DataTableStudent> {
     });
   }
 
-  // Future<void> fetchStudents() async {
-  //   final response = await http.get(Uri.http(url, getAllStudentAPI));
-
-  //   if (response.statusCode == 200) {
-  //     final data = jsonDecode(response.body) as Map<String, dynamic>;
-  //     final studentList = data['data'] as List<dynamic>;
-  //     print("Student list: " + studentList.toString());
-
-  //     // setState(() {
-  //     //   students = studentList.cast<Map<String, dynamic>>();
-  //     // });
-
-  //     Provider.of<AppStateProvider>(context, listen: false)
-  //         .setStudents(studentList.cast<Map<String, dynamic>>());
-  //   } else {
-  //     throw Exception('Failed to fetch students');
-  //   }
-  // }
-
   void fetchStudents() async {
     int student_length =
-        await StudentService.fetchStudents(context, (value) => {});
+        await StudentService.fetchStudents(context, (value) => {})
+            .then((value) => value.length);
     Provider.of<AppStateProvider>(context, listen: false)
         .setTableLength(student_length);
   }
@@ -63,7 +46,8 @@ class _DataTableStudentState extends State<DataTableStudent> {
     int rowsPerPage = context.watch<AppStateProvider>().appState!.rowsPerPage;
 
     // Get the student list from AppStateProvider
-    List<Map<String, dynamic>> students =
+    // List<Map<String, dynamic>> students =
+    List<Student> students =
         context.watch<AppStateProvider>().appState!.students;
 
     // Calculate the start and end index of the current page
@@ -72,8 +56,8 @@ class _DataTableStudentState extends State<DataTableStudent> {
     endIndex = endIndex > students.length ? students.length : endIndex;
 
     // Get the student list for the current page
-    List<Map<String, dynamic>> currentPageStudents =
-        students.sublist(startIndex, endIndex);
+    // List<Map<String, dynamic>> currentPageStudents =
+    List<Student> currentPageStudents = students.sublist(startIndex, endIndex);
 
     print('currentPageStudents: ');
     print(currentPageStudents);
@@ -140,11 +124,6 @@ class _DataTableStudentState extends State<DataTableStudent> {
         ),
         // Add other columns as needed
       ],
-      // rows: context
-      //     .watch<AppStateProvider>()
-      //     .appState!
-      //     .students
-
       rows: currentPageStudents.asMap().entries.map((entry) {
         final index = entry.key;
         final student = entry.value;
@@ -152,18 +131,10 @@ class _DataTableStudentState extends State<DataTableStudent> {
         return DataRow(
           cells: [
             DataCell(
-              // Center(
-              //   child: student['imageUrl'] == null
-              //       ? Image.asset(
-              //           'assets/images/avatar.jpg',
-              //           width: 50,
-              //         )
-              //       : Text('No image'),
-              // ),
               Center(
                 child: ClipOval(
                   child: Image.network(
-                    '${ULRNodeJSServer_RaspberryPi_Images}/avatar/${student['avatar']}',
+                    '${ULRNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
                     width: 45, // Điều chỉnh chiều rộng nếu cần
                     height: 45, // Điều chỉnh chiều cao nếu cần
                     fit: BoxFit.cover,
@@ -188,13 +159,18 @@ class _DataTableStudentState extends State<DataTableStudent> {
               ),
             ),
 
-            DataCell(Center(child: Text(student['studentId']))),
-            DataCell(Text(student['studentName'], textAlign: TextAlign.left,)),
-            DataCell(Text(student['classCode'], textAlign: TextAlign.left,)),
-            DataCell(Center(child: Text(student['gender']))),
+            DataCell(Center(child: Text(student.studentId))),
+            DataCell(Text(
+              student.studentName,
+              textAlign: TextAlign.left,
+            )),
+            DataCell(Text(
+              student.classCode,
+              textAlign: TextAlign.left,
+            )),
+            DataCell(Center(child: Text(student.gender))),
             DataCell(Center(
-              child: Text(DateFormat('dd/MM/yyyy')
-                  .format(DateTime.parse(student['birthDate']))),
+              child: Text(DateFormat('dd/MM/yyyy').format(student.birthDate)),
             )),
             DataCell(
               Row(
@@ -208,7 +184,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
                           context: context,
                           builder: (BuildContext context) {
                             return DetailStudent(
-                              studentId: student['studentId'],
+                              studentId: student.studentId,
                             );
                           });
                     },

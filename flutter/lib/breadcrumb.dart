@@ -32,15 +32,17 @@ class _BreadcrumbState extends State<Breadcrumb> {
             ElevatedButton(
               onPressed: () {
                 // xử lý sự kiện
-                print(breadcrumbs);
-                if (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien') {
-                  showDialog(
-                  context: mainContext,
-                  builder: (BuildContext context) {
-                    return FromAddStudent();
-                  },
-                );
-                }
+                // print(breadcrumbs);
+                // if (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien') {
+                //   showDialog(
+                //   context: mainContext,
+                //   builder: (BuildContext context) {
+                //     return FromAddStudent();
+                //   },
+                // );
+                // }
+
+
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green, // Đổi màu xanh cho nút

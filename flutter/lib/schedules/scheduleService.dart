@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_todo_app/constant/config.dart';
@@ -21,7 +22,8 @@ class ScheduleService with ChangeNotifier {
       // });
 
       Provider.of<AppStateProvider>(context, listen: false)
-          .setStudents(studentList.cast<Map<String, dynamic>>());
+          .setStudents(studentList.cast<Student>());
+      // .setStudents(studentList.cast<Map<String, dynamic>>());
     } else {
       throw Exception('Failed to fetch students');
     }
@@ -33,27 +35,6 @@ class ScheduleService with ChangeNotifier {
         Provider.of<AccountProvider>(context, listen: false).account?.account;
     print('studentID: ' + studentId!);
     final bodyData = {'studentId': studentId};
-
-    // final response = await http.post(
-    //     Uri.http(url, getAllScheduleStudentWeekAPI),
-    //     headers: {'Content-Type': 'application/json'},
-    //     body: jsonEncode(bodyData));
-
-    // if (response.statusCode == 200) {
-    //   final data = jsonDecode(response.body) as Map<String, dynamic>;
-    //     final scheduleList = data['data'] as List<dynamic>;
-    //     //  final scheduleListData = scheduleList.cast<Map<String, dynamic>>();
-    //     print("Schedule list: " + scheduleList.toString());
-
-    //     // setState(() {
-    //     //   students = studentList.cast<Map<String, dynamic>>();
-    //     // });
-
-    //     Provider.of<AppStateProvider>(context, listen: false)
-    //         .setScheduleStudentWeeks(scheduleList.cast<Map<String, dynamic>>());
-    // } else {
-    //   throw Exception('Failed to fetchScheduleStudentWeeks');
-    // }
 
     http
         .post(
@@ -147,34 +128,6 @@ class ScheduleService with ChangeNotifier {
       print('Error: $error');
     });
   }
-
-  // static Future<void> fetchScheduleLecturerTerms(BuildContext context) async {
-  //   final lecturerId =
-  //       Provider.of<AccountProvider>(context, listen: false).account?.account;
-  //   print('lecturerId: ' + lecturerId!);
-  //   final bodyData = {'lecturerID': lecturerId};
-
-  //   final response = await http.post(
-  //       Uri.http(url, getAllScheduleLecturerTermAPI),
-  //       headers: {'Content-Type': 'application/json'},
-  //       body: jsonEncode(bodyData));
-
-  //   if (response.statusCode == 200) {
-  //     final data = jsonDecode(response.body) as Map<String, dynamic>;
-  //     final scheduleList = data['data'] as List<dynamic>;
-  //     //  final scheduleListData = scheduleList.cast<Map<String, dynamic>>();
-  //     print("Schedule list: " + scheduleList.toString());
-
-  //     // setState(() {
-  //     //   students = studentList.cast<Map<String, dynamic>>();
-  //     // });
-
-  //     Provider.of<AppStateProvider>(context, listen: false)
-  //         .setScheduleLecturerTerms(scheduleList.cast<Map<String, dynamic>>());
-  //   } else {
-  //     throw Exception('Failed to fetchScheduleLecturerTerms');
-  //   }
-  // }
 
   static Future<void> fetchScheduleLecturerTerms(
       BuildContext context, ValueChanged<bool> isLoading) async {
