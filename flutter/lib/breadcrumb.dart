@@ -16,9 +16,9 @@ class _BreadcrumbState extends State<Breadcrumb> {
   @override
   Widget build(BuildContext context) {
     BuildContext mainContext = context;
-    String breadcrumbs = context.watch<AppStateProvider>().appState!.breadcrumbs;
+    String breadcrumbs =
+        context.watch<AppStateProvider>().appState!.breadcrumbs;
     return Column(
-      
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,28 +28,27 @@ class _BreadcrumbState extends State<Breadcrumb> {
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             DateTimePickerWidget(),
-            (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien') ?
-            ElevatedButton(
-              onPressed: () {
-                // xử lý sự kiện
-                // print(breadcrumbs);
-                // if (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien') {
-                //   showDialog(
-                //   context: mainContext,
-                //   builder: (BuildContext context) {
-                //     return FromAddStudent();
-                //   },
-                // );
-                // }
-
-
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Đổi màu xanh cho nút
-                padding: EdgeInsets.all(16.0), // Tăng kích thước của nút
-              ),
-              child: Text('Thêm'),
-            ) : Container()
+            (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien')
+                ? ElevatedButton(
+                    onPressed: () {
+                      // xử lý sự kiện
+                      print(breadcrumbs);
+                      if (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien') {
+                        showDialog(
+                          context: mainContext,
+                          builder: (BuildContext context) {
+                            return FromAddStudent();
+                          },
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green, // Đổi màu xanh cho nút
+                      padding: EdgeInsets.all(16.0), // Tăng kích thước của nút
+                    ),
+                    child: Text('Thêm'),
+                  )
+                : Container()
           ],
         ),
       ],

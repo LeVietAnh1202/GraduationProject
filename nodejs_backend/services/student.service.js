@@ -1,4 +1,7 @@
 const StudentModel = require("../models/student.model");
+
+const multer = require('multer');
+const path = require('path');
 class StudentService {
     static async createStudent(studentId, studentName, classCode, gender, birthDate, avatar) {
         try {
@@ -22,6 +25,49 @@ class StudentService {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    static uploadAvatar(req) {
+        // // Cấu hình Multer để tải lên avatar
+        // const storage = multer.diskStorage({
+        //     destination: function (req, file, cb) {
+        //         cb(null, './public/images/default/avatar'); // Thư mục lưu trữ avatar
+        //     },
+        //     filename: function (req, file, cb) {
+        //         // const fileName = `${studentId}_${studentName}${path.extname(file.originalname)}`;
+        //         const fileName = file.originalname;
+        //         print(fileName)
+        //         cb(null, fileName); // Sử dụng tên và mã sinh viên để đặt tên cho file
+
+        //     }
+        // });
+
+        // const upload = multer({ storage: storage }).single('image');
+
+        // return upload;
+
+        return new Promise((resolve, reject) => {
+            const storage = multer.diskStorage({
+                destination: function (req, file, cb) {
+                    cb(null, './public/images/default/avatar'); // Thư mục lưu trữ avatar
+                },
+                filename: function (req, file, cb) {
+                    const fileName = file.originalname;
+                    console.log(fileName);
+                    cb(null, fileName); // Sử dụng tên file gốc
+                }
+            });
+
+            const upload = multer({ storage: storage }).single('image');
+
+            upload(req, {}, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(req.file.filename); // Trả về tên file đã được đặt
+                }
+            });
+        });
     }
 
 

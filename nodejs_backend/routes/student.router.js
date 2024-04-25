@@ -7,6 +7,8 @@ const AttendanceStudentTermController = require('../controller/attendance/attend
 
 router.post("/create", StudentController.createStudent);
 
+router.post("/uploadAvatar", StudentController.uploadAvatar);
+
 router.get("/getAll", StudentController.getAllStudent);
 
 router.post("/getAllScheduleWeek", ScheduleStudentWeekController.getAllScheduleStudentWeek);

@@ -148,20 +148,20 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   SizedBox(height: 20.0),
                   Text(
-                    'Đăng nhập',
+                    'Login',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16.0),
                   _buildTextField(
                     controller: _accountController,
-                    labelText: 'Tài khoản',
+                    labelText: 'Account',
                     obscureText: false,
                     isClicked: _accountClicked,
                   ),
                   SizedBox(height: 16.0),
                   _buildTextField(
                     controller: _passwordController,
-                    labelText: 'Mật khẩu',
+                    labelText: 'Password',
                     obscureText: true,
                     isClicked: _passwordClicked,
                   ),

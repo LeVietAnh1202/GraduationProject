@@ -1,5 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'package:flutter_todo_app/constant/number.dart';
+import 'package:flutter_todo_app/constant/string.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -85,6 +87,7 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
+                  dataRowHeight: 120,
                   dividerThickness: 2.0, // Độ dày của đường kẻ
                   // decoration: BoxDecoration(
                   //   border:
@@ -110,66 +113,15 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                         ),
                       ),
                     ),
-                    // ...attendances.expand((attendance) {
-                    //   print('attendance: ');
-                    //   print(attendance);
-                    //   return (attendance['dateList']
-                    //       as List<Map<String, dynamic>>);
-                    // }).map<DataColumn>((date) {
-                    //   print('date in datelist: ');
-                    //   print(date);
-                    //   final dateKey = date.keys.first;
-                    //   return DataColumn(
-                    //     label: Expanded(
-                    //       child: Text(
-                    //         dateKey,
-                    //         textAlign: TextAlign.center,
-                    //       ),
-                    //     ),
-                    //   );
-                    // }).toList(),
-
-                    // ...context
-                    //     .watch<AppStateProvider>()
-                    //     .appState!
-                    //     .attendanceLecturerWeeks
-                    //     .expand((attendance) {
-                    //   print('attendance datacolumn: ');
-                    //   print(attendance);
-                    //   return (attendance['dateList'] as List<dynamic>)
-                    //       .map((entry) {
-                    //     print('entry dateList: ');
-                    //     print(entry);
-                    //     return DataColumn(
-                    //       label: Expanded(
-                    //         child: Text(
-                    //           'abc',
-                    //           textAlign: TextAlign.center,
-                    //         ),
-                    //       ),
-                    //     );
-                    //   }).toList();
-                    // }),
-
-                    // ...(context
-                    //         .watch<AppStateProvider>()
-                    //         .appState!
-                    //         .attendanceLecturerWeeks
-                    //         .first['dateList'] as List<dynamic>)
-                    //     .map<DataColumn>((entry) {
-                    //   return DataColumn(
-                    //     label: Expanded(
-                    //       child: RotatedBox(
-                    //         quarterTurns: 1,
-                    //         child: Text(
-                    //           Utilities.formatDate(entry.keys.first),
-                    //           textAlign: TextAlign.center,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   );
-                    // }).toList(),
-
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'FaceID',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                     DataColumn(
                       label: Expanded(
                         child: Text(
@@ -179,33 +131,6 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                         ),
                       ),
                     ),
-
-                    // DataColumn(
-                    //   label: Expanded(
-                    //     child: Text(
-                    //       'Số buổi\nđúng giờ',
-                    //       textAlign: TextAlign.center,
-                    //     ),
-                    //   ),
-                    // ),
-                    // DataColumn(
-                    //   label: Expanded(
-                    //     child: Text(
-                    //       'Số buổi\nđi muộn',
-                    //       textAlign: TextAlign.center,
-                    //     ),
-                    //   ),
-                    // ),
-                    // DataColumn(
-                    //   label: Expanded(
-                    //     child: Text(
-                    //       'Số buổi\nnghỉ',
-                    //       textAlign: TextAlign.center,
-                    //     ),
-                    //   ),
-                    // ),
-
-                    // Add other columns as needed
                   ],
                   rows: ((context
                           .watch<AppStateProvider>()
@@ -227,32 +152,93 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                               ),
                             )), // Thêm cột số thứ tự
                             DataCell(Text(entry.keys.first)),
-                            // ...(attendance['dateList'] as List<dynamic>)
-                            //     .map((entry) {
-                            //   return DataCell(Center(
-                            //     child: Utilities.attendanceIcon(
-                            //         entry.values.first),
-                            //   ));
-                            // }).toList(),
+                            DataCell(Container(
+                              height: 200,
+                              width: 450,
+                              child: ListView.builder(
+                                scrollDirection: Axis
+                                    .horizontal, // Hiển thị ảnh theo chiều ngang
+                                itemCount: entry['attendanceImages']
+                                    .length, // Số lượng ảnh
+                                itemBuilder: (context, index) {
+                                  // Tạo widget Image cho mỗi URL
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            5), // Khoảng cách giữa các ảnh
+                                    child: Column(
+                                      children: [
+                                        Image.network(
+                                          '${ULRNodeJSServer}/images/attendance_images/${entry['attendanceImages'][index]}', // URL của ảnh
+                                          width: 100, // Chiều rộng của ảnh
+                                          height: 100, // Chiều cao của ảnh
+                                        ),
+                                        Text('2023-11-21 07:15'),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                                //   SizedBox(
+                                //   height: 50,
+                                //   width: 50,
+                                //   child: GridView.builder(
+                                //     shrinkWrap: true,
+                                //     gridDelegate:
+                                //         SliverGridDelegateWithFixedCrossAxisCount(
+                                //       crossAxisCount: 10,
+                                //       crossAxisSpacing: 8.0,
+                                //       mainAxisSpacing: 8.0,
+                                //     ),
+                                //     itemCount: 1,
+                                //     itemBuilder: (context, index) {
+                                //       return Container(
+                                //         padding: EdgeInsets.all(8.0),
+                                //         child: Column(children: [
+                                //           Image.network(
+                                //             '${ULRNodeJSServer}/images/attendance_images/${entry.attendanceImages[0]}',
+                                //             width:
+                                //                 131, // Điều chỉnh chiều rộng nếu cần
+                                //             height:
+                                //                 131, // Điều chỉnh chiều cao nếu cần
+                                //             fit: BoxFit.contain,
+                                //             loadingBuilder: (BuildContext context,
+                                //                 Widget child,
+                                //                 ImageChunkEvent? loadingProgress) {
+                                //               if (loadingProgress == null) {
+                                //                 return child;
+                                //               } else {
+                                //                 return CircularProgressIndicator();
+                                //               }
+                                //             },
+                                //             errorBuilder: (BuildContext context,
+                                //                 Object error,
+                                //                 StackTrace? stackTrace) {
+                                //               return Image.network(
+                                //                 '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+                                //                 width:
+                                //                     131, // Điều chỉnh chiều rộng nếu cần
+                                //                 height:
+                                //                     131, // Điều chỉnh chiều cao nếu cần
+                                //               );
+                                //             },
+                                //           ),
+                                //           SizedBox(height: 10),
+                                //           Text(
+                                //             'Image ' + (index + 1).toString(),
+                                //             style: TextStyle(
+                                //                 fontSize: 12,
+                                //                 fontWeight: FontWeight.bold),
+                                //           )
+                                //         ]),
+                                //       );
+                                //     },
+                                //   ),
+                                // )
+                                ),
                             DataCell(
                                 Utilities.attendanceIcon(entry.values.first)),
-                            // DataCell(Center(
-                            //     child: Text(
-                            //         (entry['numberOfOnTimeSessions'] == 0
-                            //                 ? '-'
-                            //                 : entry['numberOfOnTimeSessions'])
-                            //             .toString()))),
-                            // DataCell(Center(
-                            //     child: Text((entry['numberOfLateSessions'] == 0
-                            //             ? '-'
-                            //             : entry['numberOfLateSessions'])
-                            //         .toString()))),
-                            // DataCell(Center(
-                            //     child: Text(
-                            //         (entry['numberOfBreaksSessions'] == 0
-                            //                 ? '-'
-                            //                 : entry['numberOfBreaksSessions'])
-                            //             .toString()))),
                           ],
                         );
                       })

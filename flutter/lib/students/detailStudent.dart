@@ -113,7 +113,7 @@ class _DetailStudentState extends State<DetailStudent> {
     Student defaultStudent = Student.fromMap({});
     students = context.watch<AppStateProvider>().appState!.students;
     Student student = students.firstWhere(
-    // Map<String, dynamic> student = students.firstWhere(
+      // Map<String, dynamic> student = students.firstWhere(
       (student) {
         print(student);
         print("student['studentId']" + student.studentId);
@@ -151,8 +151,7 @@ class _DetailStudentState extends State<DetailStudent> {
                       _buildInfoRow('Gender:', student.gender),
                       _buildInfoRow(
                         'Birth date:',
-                        DateFormat('dd/MM/yyyy')
-                            .format(student.birthDate),
+                        DateFormat('dd/MM/yyyy').format(student.birthDate),
                       ),
                     ],
                   ),
@@ -235,21 +234,21 @@ class _DetailStudentState extends State<DetailStudent> {
                         height: 131, // Điều chỉnh chiều cao nếu cần
                         fit: BoxFit.contain,
                         loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      } else {
-                        return CircularProgressIndicator();
-                      }
-                    },
-                    errorBuilder: (BuildContext context, Object error,
-                        StackTrace? stackTrace) {
-                      return Image.network(
-                        '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
-                        width: 131, // Điều chỉnh chiều rộng nếu cần
-                        height: 131, // Điều chỉnh chiều cao nếu cần
-                      );
-                    },
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
+                        errorBuilder: (BuildContext context, Object error,
+                            StackTrace? stackTrace) {
+                          return Image.network(
+                            '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+                            width: 131, // Điều chỉnh chiều rộng nếu cần
+                            height: 131, // Điều chỉnh chiều cao nếu cần
+                          );
+                        },
                       ),
                       SizedBox(height: 10),
                       Text(

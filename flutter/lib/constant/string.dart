@@ -16,3 +16,4 @@ const String adminWeek = 'adminWeek';
 const String ULRNodeJSServer = 'http://${url}';
 const String ULRNodeJSServer_RaspberryPi = 'http://${url_ras}';
 const String ULRNodeJSServer_RaspberryPi_Images = 'http://${url_ras}/images/default';
+const String ULRNodeJSServer_RaspberryPi_Videos = 'http://${url_ras}/videos/default';

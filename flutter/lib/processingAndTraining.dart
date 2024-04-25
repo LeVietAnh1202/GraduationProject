@@ -29,80 +29,80 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
   //   return response.stream;
   // }
 
-  void _callAPIProcess() async {
-    setState(() {
-      _loading = true;
-    });
+  // void _callAPIProcess() async {
+  //   setState(() {
+  //     _loading = true;
+  //   });
 
-    try {
-      var response = await http.get(
-        Uri.http('127.0.0.1:8000', 'process'),
-        // headers: <String, String>{
-        //   'Content-Type': 'application/json; charset=UTF-8',
-        // },
-        // body: jsonEncode(<String, dynamic>{
-        //   'manu_scripts': [
-        //     {'name': 'Your Manuscript Name'}
-        //     // Add more manuscripts if needed
-        //   ],
-        //   'n_db_view': 10,
-        // }),
-      );
+  //   try {
+  //     var response = await http.get(
+  //       Uri.http('127.0.0.1:8000', 'process'),
+  //       // headers: <String, String>{
+  //       //   'Content-Type': 'application/json; charset=UTF-8',
+  //       // },
+  //       // body: jsonEncode(<String, dynamic>{
+  //       //   'manu_scripts': [
+  //       //     {'name': 'Your Manuscript Name'}
+  //       //     // Add more manuscripts if needed
+  //       //   ],
+  //       //   'n_db_view': 10,
+  //       // }),
+  //     );
 
-      // var stream = response.bodyBytes;
-      //   var stream = await getStream(http.Request('GET', Uri.http('127.0.0.1:8000', 'process')));
-      //   stream.transform(utf8.decoder).transform(const LineSplitter()).listen((String line) {
-      //     print(line);
-      //   setState(() {
-      //     // messages.add(line);
-      //     widget.text = line;
-      //     _streamController.add(line); // Thêm dòng vào stream
-      //   });
-      // });
+  //     // var stream = response.bodyBytes;
+  //     //   var stream = await getStream(http.Request('GET', Uri.http('127.0.0.1:8000', 'process')));
+  //     //   stream.transform(utf8.decoder).transform(const LineSplitter()).listen((String line) {
+  //     //     print(line);
+  //     //   setState(() {
+  //     //     // messages.add(line);
+  //     //     widget.text = line;
+  //     //     _streamController.add(line); // Thêm dòng vào stream
+  //     //   });
+  //     // });
 
-      // Stream<List<int>> byteStream = Stream.fromIterable([stream]);
+  //     // Stream<List<int>> byteStream = Stream.fromIterable([stream]);
 
-      // byteStream
-      //     .transform(utf8.decoder)
-      //     .transform(const LineSplitter())
-      //     .listen((dynamic line) {
-      //   print("line: " + line);
-      //   setState(() {
-      //     // messages.add(line);
-      //     widget.text = line.toString();
-      //   });
-      // });
+  //     // byteStream
+  //     //     .transform(utf8.decoder)
+  //     //     .transform(const LineSplitter())
+  //     //     .listen((dynamic line) {
+  //     //   print("line: " + line);
+  //     //   setState(() {
+  //     //     // messages.add(line);
+  //     //     widget.text = line.toString();
+  //     //   });
+  //     // });
 
-      if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
-        // Handle your response data here
-        setState(() {
-          _result = jsonResponse.toString();
-        });
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: Text('API Response'),
-            content: Text(_result),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('OK'),
-              ),
-            ],
-          ),
-        );
-      } else {
-        throw Exception('Failed to load data');
-      }
-    } catch (error) {
-      print(error);
-    }
+  //     if (response.statusCode == 200) {
+  //       var jsonResponse = jsonDecode(response.body);
+  //       // Handle your response data here
+  //       setState(() {
+  //         _result = jsonResponse.toString();
+  //       });
+  //       showDialog(
+  //         context: context,
+  //         builder: (_) => AlertDialog(
+  //           title: Text('API Response'),
+  //           content: Text(_result),
+  //           actions: [
+  //             TextButton(
+  //               onPressed: () => Navigator.pop(context),
+  //               child: Text('OK'),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     } else {
+  //       throw Exception('Failed to load data');
+  //     }
+  //   } catch (error) {
+  //     print(error);
+  //   }
 
-    setState(() {
-      _loading = false;
-    });
-  }
+  //   setState(() {
+  //     _loading = false;
+  //   });
+  // }
 
   void _callAPITrainModel() async {
     setState(() {
@@ -191,10 +191,10 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
     return Center(
       child: Column(
         children: [
-          ElevatedButton(
-            onPressed: _callAPIProcess,
-            child: Text('Call API process'),
-          ),
+          // ElevatedButton(
+          //   onPressed: _callAPIProcess,
+          //   child: Text('Call API process'),
+          // ),
           SizedBox(height: 10),
           ElevatedButton(
             onPressed: _callAPITrainModel,

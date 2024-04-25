@@ -26,11 +26,11 @@ const studentSchema = new Schema({
         type: Date,
         required: [true, "Birth Date is required"],
     },
-    fingerprintID: {
-        type: String,
-        required: [true, "Fingerprint ID is required"],
-        unique: true,
-    },
+    // fingerprintID: {
+    //     type: String,
+    //     required: [true, "Fingerprint ID is required"],
+    //     unique: true,
+    // },
     avatar: {
         type: String,
         required: [true, "avatar is required"],
