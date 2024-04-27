@@ -1,20 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/singleChoice.dart';
-import 'package:flutter_todo_app/students/detailStudent.dart';
-import 'package:flutter_todo_app/students/formAddStudent.dart';
 import 'package:flutter_todo_app/students/studentService.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:html' hide File;
-import 'package:http/http.dart' as http;
 
 class DetailStudent extends StatefulWidget {
   final String studentId; // Thêm trường studentId
@@ -35,30 +27,30 @@ class _DetailStudentState extends State<DetailStudent> {
         .setCalendarView(Calendar.week);
     // Gọi hàm fetchStudents để tải dữ liệu sinh viên
     StudentService.fetchStudents(context, (value) {
-      if (value != null) {
-        // // Nếu dữ liệu không phải null, gán vào biến students và gọi setState để rebuild widget
-        // setState(() {
-        //   students = value as List<Map<String, dynamic>>;
-        // });
-      } else {
-        // Xử lý khi dữ liệu trả về từ fetchStudents là null
-        // Ví dụ: hiển thị thông báo lỗi
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Error'),
-            content: Text('Failed to load student data.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
+      // if (value != null) {
+      //   // // Nếu dữ liệu không phải null, gán vào biến students và gọi setState để rebuild widget
+      //   // setState(() {
+      //   //   students = value as List<Map<String, dynamic>>;
+      //   // });
+      // } else {
+      //   // Xử lý khi dữ liệu trả về từ fetchStudents là null
+      //   // Ví dụ: hiển thị thông báo lỗi
+      //   showDialog(
+      //     context: context,
+      //     builder: (context) => AlertDialog(
+      //       title: Text('Error'),
+      //       content: Text('Failed to load student data.'),
+      //       actions: <Widget>[
+      //         TextButton(
+      //           onPressed: () {
+      //             Navigator.of(context).pop();
+      //           },
+      //           child: Text('OK'),
+      //         ),
+      //       ],
+      //     ),
+      //   );
+      // }
     });
   }
 
@@ -91,15 +83,6 @@ class _DetailStudentState extends State<DetailStudent> {
     );
   }
 
-  // Future<void> _loadImage(Map<String, dynamic> student) async {
-  //   try {
-  //     await http.get(Uri.http(url, 'images/avatar/${student['avatar']}'));
-  //   } catch (e) {
-  //     // Xử lý lỗi
-  //     print("CHeckErrorImages" + e.toString());
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     // Tìm sinh viên có studentId tương ứng trong danh sách students đã tải
@@ -110,25 +93,13 @@ class _DetailStudentState extends State<DetailStudent> {
     //   'gender': '',
     //   'birthDate': '',
     // };
-    Student defaultStudent = Student.fromMap({});
-    students = context.watch<AppStateProvider>().appState!.students;
-    Student student = students.firstWhere(
-      // Map<String, dynamic> student = students.firstWhere(
-      (student) {
-        print(student);
-        print("student['studentId']" + student.studentId);
-        print("widget.studentId" + widget.studentId);
-        return student.studentId == widget.studentId;
-      },
+    final defaultStudent = Student.fromMap({});
+    final students = context.watch<AppStateProvider>().appState!.students;
+    final student = students.firstWhere(
+    // Map<String, dynamic> student = students.firstWhere(
+      (student) => student.studentId == widget.studentId,
       orElse: () => defaultStudent,
     );
-
-    if (student == null) {
-      // Nếu không tìm thấy sinh viên, có thể thông báo hoặc hiển thị một widget thích hợp ở đây
-      return Center(child: Text('Student not found'));
-    }
-
-    print('${ULRNodeJSServer}/images/avatar/${student.avatar}');
 
     return AlertDialog(
       title: Text('Detail student'),
@@ -160,8 +131,8 @@ class _DetailStudentState extends State<DetailStudent> {
                 Container(
                   child: Image.network(
                     '${ULRNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
-                    width: 150, // Điều chỉnh chiều rộng nếu cần
-                    height: 150, // Điều chỉnh chiều cao nếu cần
+                    width: 150,
+                    height: 150,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) {
@@ -174,8 +145,8 @@ class _DetailStudentState extends State<DetailStudent> {
                         StackTrace? stackTrace) {
                       return Image.network(
                         '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
-                        width: 150, // Điều chỉnh chiều rộng nếu cần
-                        height: 150, // Điều chỉnh chiều cao nếu cần
+                        width: 150,
+                        height: 150,
                       );
                     },
                   ),
@@ -192,15 +163,15 @@ class _DetailStudentState extends State<DetailStudent> {
                 //           // Xử lý khi gặp lỗi
                 //           return Image.network(
                 //             '${ULRNodeJSServer}/images/avatar/avatar.jpg',
-                //             width: 150, // Điều chỉnh chiều rộng nếu cần
-                //             height: 150, // Điều chỉnh chiều cao nếu cần
+                //             width: 150,
+                //             height: 150,
                 //           );
                 //         } else {
                 //           // Xử lý khi tải hình ảnh thành công
                 //           return Image.network(
                 //             '${ULRNodeJSServer}/images/avatar/${student['avatar']}',
-                //             width: 150, // Điều chỉnh chiều rộng nếu cần
-                //             height: 150, // Điều chỉnh chiều cao nếu cần
+                //             width: 150,
+                //             height: 150,
                 //           );
                 //         }
                 //       } else {
@@ -230,25 +201,25 @@ class _DetailStudentState extends State<DetailStudent> {
                     child: Column(children: [
                       Image.network(
                         '${ULRNodeJSServer_RaspberryPi_Images}/${(Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView) == ShowImage.full ? 'full_images' : 'crop_images'}/${student.avatar.toString().substring(0, student.avatar.toString().indexOf('.'))}/${1}.jpg',
-                        width: 131, // Điều chỉnh chiều rộng nếu cần
-                        height: 131, // Điều chỉnh chiều cao nếu cần
+                        width: 131,
+                        height: 131,
                         fit: BoxFit.contain,
                         loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        },
-                        errorBuilder: (BuildContext context, Object error,
-                            StackTrace? stackTrace) {
-                          return Image.network(
-                            '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
-                            width: 131, // Điều chỉnh chiều rộng nếu cần
-                            height: 131, // Điều chỉnh chiều cao nếu cần
-                          );
-                        },
+                        ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    },
+                    errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Image.network(
+                        '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+                        width: 131,
+                        height: 131,
+                      );
+                    },
                       ),
                       SizedBox(height: 10),
                       Text(
