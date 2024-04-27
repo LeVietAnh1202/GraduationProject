@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class AppState {
+  Map<String, dynamic>? _parsedSharedPreferencesData;
+
   String breadcrumbs;
   Calendar calendarView;
   ShowImage imagesView;
@@ -67,6 +69,29 @@ class AppStateProvider with ChangeNotifier {
     restoreFromSharedPreferences();
   }
 
+  List<Map<String, dynamic>> parseJsonListOld(String jsonString) {
+    List<dynamic> jsonList = jsonDecode(jsonString);
+    // List<Map<String, dynamic>> resultList = [];
+    // for (var jsonObject in jsonList) {
+    //   resultList.add(Map<String, dynamic>.from(jsonObject));
+    // }
+    // return resultList;
+    return jsonList
+        .map((jsonObject) => Map<String, dynamic>.from(jsonObject))
+        .toList();
+  }
+
+  List<T> parseJsonList<T>(
+      String jsonString, T Function(Map<String, dynamic>) fromMap) {
+    List<dynamic> jsonList = jsonDecode(jsonString);
+    // List<T> resultList = [];
+    // for (var jsonItem in jsonList) {
+    //   resultList.add(fromMap(jsonItem));
+    // }
+    // return resultList;
+    return jsonList.map((jsonObject) => fromMap(jsonObject)).toList();
+  }
+
   void setAppState(AppState appState) async {
     _appState = appState;
     await saveToSharedPreferences(appState);
@@ -82,7 +107,7 @@ class AppStateProvider with ChangeNotifier {
     _appState?.tableLength = tableLength;
     notifyListeners();
   }
-  
+
   void setCurrentPage(int currentPage) {
     _appState?.currentPage = currentPage;
     notifyListeners();
@@ -101,9 +126,10 @@ class AppStateProvider with ChangeNotifier {
         : (_appState!.tableLength / _appState!.rowsPerPage).ceil();
     notifyListeners();
   }
-  
+
   void goToLastPage() {
-    _appState?.currentPage = (_appState!.tableLength / _appState!.rowsPerPage).ceil();
+    _appState?.currentPage =
+        (_appState!.tableLength / _appState!.rowsPerPage).ceil();
     notifyListeners();
   }
 
@@ -265,7 +291,6 @@ class AppStateProvider with ChangeNotifier {
         attendanceLecturerTermsString != null &&
         attendanceAdminWeeksString != null &&
         attendanceAdminTermsString != null) {
-      print("Calendar view:" + calendarViewString);
       Calendar calendarView = parseCalendar(calendarViewString);
       ShowImage imagesView = parseImagesView(imagesViewString);
 
@@ -278,8 +303,6 @@ class AppStateProvider with ChangeNotifier {
       List<Map<String, dynamic>> lecturers = parseLecturers(lecturersString);
       List<Map<String, dynamic>> scheduleStudentWeeks =
           parseScheduleStudentWeeks(scheduleStudentWeeksString);
-      print('scheduleStudentWeeks restore: ');
-      print(scheduleStudentWeeks);
       List<Map<String, dynamic>> scheduleStudentTerms =
           parseScheduleStudentTerms(scheduleStudentTermsString);
       List<Map<String, dynamic>> scheduleLecturerWeeks =
@@ -366,122 +389,54 @@ class AppStateProvider with ChangeNotifier {
   }
 
   int parseRowsPerPage(String rowsPerPageString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách sinh viên phù hợp
-    // Ví dụ:
     return int.parse(rowsPerPageString);
   }
 
   //----------------------------------------------------------------
 
   List<Student> parseStudents(String studentsString) {
-  // List<Map<String, dynamic>> parseStudents(String studentsString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách sinh viên phù hợp
-    // Ví dụ:
-    List<dynamic> studentsJson = jsonDecode(studentsString);
-    List<Student> students = [];
-    for (var studentJson in studentsJson) {
-      students.add(Student.fromMap(studentJson));
-    }
-    return students;
+    return parseJsonList(studentsString, (json) => Student.fromMap(json));
   }
 
   List<Map<String, dynamic>> parseLecturers(String lecturersString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> lecturersJson = jsonDecode(lecturersString);
-    List<Map<String, dynamic>> lecturers = [];
-    for (var lecturerJson in lecturersJson) {
-      lecturers.add(Map<String, dynamic>.from(lecturerJson));
-    }
-    return lecturers;
+    return parseJsonListOld(lecturersString);
   }
+
   // ----------------------------------------------------------------
 
   List<Map<String, dynamic>> parseScheduleStudentWeeks(
       String scheduleStudentWeeksString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> scheduleStudentWeeksJson =
-        jsonDecode(scheduleStudentWeeksString);
-    List<Map<String, dynamic>> scheduleStudentWeeks = [];
-    for (var scheduleStudentWeekJson in scheduleStudentWeeksJson) {
-      scheduleStudentWeeks
-          .add(Map<String, dynamic>.from(scheduleStudentWeekJson));
-    }
-    return scheduleStudentWeeks;
+    return parseJsonListOld(scheduleStudentWeeksString);
   }
 
   List<Map<String, dynamic>> parseScheduleStudentTerms(
       String scheduleStudentTermsString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> scheduleStudentTermsJson =
-        jsonDecode(scheduleStudentTermsString);
-    List<Map<String, dynamic>> scheduleStudentTerms = [];
-    for (var scheduleStudentTermJson in scheduleStudentTermsJson) {
-      scheduleStudentTerms
-          .add(Map<String, dynamic>.from(scheduleStudentTermJson));
-    }
-    return scheduleStudentTerms;
+    return parseJsonListOld(scheduleStudentTermsString);
   }
 
   List<Map<String, dynamic>> parseScheduleLecturerWeeks(
       String scheduleLecturerWeeksString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> scheduleLecturerWeeksJson =
-        jsonDecode(scheduleLecturerWeeksString);
-    List<Map<String, dynamic>> scheduleLecturerWeeks = [];
-    for (var scheduleLecturerWeekJson in scheduleLecturerWeeksJson) {
-      scheduleLecturerWeeks
-          .add(Map<String, dynamic>.from(scheduleLecturerWeekJson));
-    }
-    return scheduleLecturerWeeks;
+    return parseJsonListOld(scheduleLecturerWeeksString);
   }
 
   List<Map<String, dynamic>> parseScheduleLecturerTerms(
       String scheduleLecturerTermsString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> scheduleLecturerTermsJson =
-        jsonDecode(scheduleLecturerTermsString);
-    List<Map<String, dynamic>> scheduleLecturerTerms = [];
-    for (var scheduleLecturerTermJson in scheduleLecturerTermsJson) {
-      scheduleLecturerTerms
-          .add(Map<String, dynamic>.from(scheduleLecturerTermJson));
-    }
-    return scheduleLecturerTerms;
+    return parseJsonListOld(scheduleLecturerTermsString);
   }
 
   List<Map<String, dynamic>> parseScheduleAdminWeeks(
       String scheduleAdminWeeksString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> scheduleAdminWeeksJson = jsonDecode(scheduleAdminWeeksString);
-    List<Map<String, dynamic>> scheduleAdminWeeks = [];
-    for (var scheduleAdminWeekJson in scheduleAdminWeeksJson) {
-      scheduleAdminWeeks.add(Map<String, dynamic>.from(scheduleAdminWeekJson));
-    }
-    return scheduleAdminWeeks;
+    return parseJsonListOld(scheduleAdminWeeksString);
   }
 
   List<Map<String, dynamic>> parseScheduleAdminTerms(
       String scheduleAdminTermsString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> scheduleAdminTermsJson = jsonDecode(scheduleAdminTermsString);
-    List<Map<String, dynamic>> scheduleAdminTerms = [];
-    for (var scheduleAdminTermJson in scheduleAdminTermsJson) {
-      scheduleAdminTerms.add(Map<String, dynamic>.from(scheduleAdminTermJson));
-    }
-    return scheduleAdminTerms;
+    return parseJsonListOld(scheduleAdminTermsString);
   }
 
 //----------------------------------------------------------------
   Map<String, dynamic> parseAttendanceStudentTerms(
       String attendanceStudentTermsString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
     List<dynamic> attendanceStudentTermsJson =
         jsonDecode(attendanceStudentTermsString);
     Map<String, dynamic> attendanceStudentTerms = {};
@@ -521,44 +476,17 @@ class AppStateProvider with ChangeNotifier {
 
   List<Map<String, dynamic>> parseAttendanceLecturerTerms(
       String attendanceLecturerTermsString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> attendanceLecturerTermsJson =
-        jsonDecode(attendanceLecturerTermsString);
-    List<Map<String, dynamic>> attendanceLecturerTerms = [];
-    for (var attendanceLecturerTermJson in attendanceLecturerTermsJson) {
-      attendanceLecturerTerms
-          .add(Map<String, dynamic>.from(attendanceLecturerTermJson));
-    }
-    return attendanceLecturerTerms;
+    return parseJsonListOld(attendanceLecturerTermsString);
   }
 
   List<Map<String, dynamic>> parseAttendanceAdminWeeks(
       String attendanceAdminWeeksString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> attendanceAdminWeeksJson =
-        jsonDecode(attendanceAdminWeeksString);
-    List<Map<String, dynamic>> attendanceAdminWeeks = [];
-    for (var attendanceAdminWeekJson in attendanceAdminWeeksJson) {
-      attendanceAdminWeeks
-          .add(Map<String, dynamic>.from(attendanceAdminWeekJson));
-    }
-    return attendanceAdminWeeks;
+    return parseJsonListOld(attendanceAdminWeeksString);
   }
 
   List<Map<String, dynamic>> parseAttendanceAdminTerms(
       String attendanceAdminTermsString) {
-    // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-    // Ví dụ:
-    List<dynamic> attendanceAdminTermsJson =
-        jsonDecode(attendanceAdminTermsString);
-    List<Map<String, dynamic>> attendanceAdminTerms = [];
-    for (var attendanceAdminTermJson in attendanceAdminTermsJson) {
-      attendanceAdminTerms
-          .add(Map<String, dynamic>.from(attendanceAdminTermJson));
-    }
-    return attendanceAdminTerms;
+    return parseJsonListOld(attendanceAdminTermsString);
   }
 
   Future<void> saveToSharedPreferences(AppState appState) async {
@@ -585,7 +513,6 @@ class AppStateProvider with ChangeNotifier {
         'scheduleAdminWeeks', appState.scheduleAdminWeeks.toString());
     prefs.setString(
         'scheduleAdminTerms', appState.scheduleAdminTerms.toString());
-
 // --------------------------------------------------------------
     prefs.setString(
         'attendanceStudentTerms', appState.attendanceStudentTerms.toString());
@@ -597,7 +524,6 @@ class AppStateProvider with ChangeNotifier {
         'attendanceAdminWeeks', appState.attendanceAdminWeeks.toString());
     prefs.setString(
         'attendanceAdminTerms', appState.attendanceAdminTerms.toString());
-    // Lưu các trường khác nếu cần
   }
 
   void removePrefs() async {

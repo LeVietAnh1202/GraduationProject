@@ -26,12 +26,10 @@ class _DataTableStudentState extends State<DataTableStudent> {
     });
   }
 
-  void fetchStudents() async {
-    int student_length =
-        await StudentService.fetchStudents(context, (value) => {})
-            .then((value) => value.length);
+  Future<void> fetchStudents() async {
+    final students = await StudentService.fetchStudents(context, (value) => {});
     Provider.of<AppStateProvider>(context, listen: false)
-        .setTableLength(student_length);
+        .setTableLength(students.length);
   }
 
   void deleteStudent(int index) {
@@ -41,23 +39,19 @@ class _DataTableStudentState extends State<DataTableStudent> {
 
   @override
   Widget build(BuildContext context) {
-    bool isHovering = false;
-    int currentPage = context.watch<AppStateProvider>().appState!.currentPage;
-    int rowsPerPage = context.watch<AppStateProvider>().appState!.rowsPerPage;
-
-    // Get the student list from AppStateProvider
-    // List<Map<String, dynamic>> students =
-    List<Student> students =
-        context.watch<AppStateProvider>().appState!.students;
+    final appState = context.watch<AppStateProvider>().appState!;
+    final currentPage = appState.currentPage;
+    final rowsPerPage = appState.rowsPerPage;
+    final students = appState.students;
 
     // Calculate the start and end index of the current page
     int startIndex = (currentPage - 1) * rowsPerPage;
     int endIndex = startIndex + rowsPerPage;
-    endIndex = endIndex > students.length ? students.length : endIndex;
 
     // Get the student list for the current page
     // List<Map<String, dynamic>> currentPageStudents =
-    List<Student> currentPageStudents = students.sublist(startIndex, endIndex);
+    List<Student> currentPageStudents = students.sublist(
+        startIndex, endIndex > students.length ? students.length : endIndex);
 
     print('currentPageStudents: ');
     print(currentPageStudents);
@@ -236,13 +230,6 @@ class _DataTableStudentState extends State<DataTableStudent> {
           ],
         );
       }).toList(),
-    );
-  }
-
-  IconButton acctionButton(void Function()? onPressed, Widget icon) {
-    return IconButton(
-      onPressed: onPressed,
-      icon: icon,
     );
   }
 }
