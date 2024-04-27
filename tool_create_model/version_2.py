@@ -20,6 +20,19 @@ class ModelGenerator:
         class_definition = class_definition[:-2]  # Remove the last comma and space
         class_definition += "\n\t});\n"
         class_definition += "\n"
+
+        class_definition += "\n"
+        class_definition += "\tfactory " + class_name + ".fromMap(Map<String, dynamic> json) {\n"
+        class_definition += f"\t\treturn {class_name}(\n"
+
+        for attribute, _ in self.attributes.items():
+            class_definition += f"\t\t\t{attribute}: json['{attribute}'],\n"
+
+        class_definition += "\t\t);\n"
+        class_definition += "\t}\n"
+
+
+        class_definition += "\n"
         class_definition += "\t@override\n"
         class_definition += "\tString toString() {\n"
         class_definition += f'\t\treturn \'{" - ".join([f"${{{attribute}}}" for attribute in self.attributes.keys()])}\';\n'
