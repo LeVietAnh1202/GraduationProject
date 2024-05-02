@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/constant/number.dart';
@@ -7,14 +5,11 @@ import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/singleChoice.dart';
-import 'package:flutter_todo_app/students/detailStudent.dart';
-import 'package:flutter_todo_app/students/formAddStudent.dart';
 import 'package:flutter_todo_app/students/studentService.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:html' hide File;
-import 'package:http/http.dart' as http;
+import 'package:video_player/video_player.dart';
+import 'package:flick_video_player/flick_video_player.dart';
 
 class DetailStudent extends StatefulWidget {
   final String studentId; // Thêm trường studentId
@@ -26,40 +21,39 @@ class DetailStudent extends StatefulWidget {
 
 class _DetailStudentState extends State<DetailStudent> {
   List<Student> students = [];
+  late VideoPlayerController _controller;
+
+  bool isVideoPlaying = false;
+  bool isVideoEnded = false;
+  double videoPosition = 0.0;
+  double videoDuration = 0.0;
+
+  late FlickManager flickManager;
+
   // List<Map<String, dynamic>> students = [];
 
   @override
   void initState() {
     super.initState();
+    // _controller = VideoPlayerController.networkUrl(
+    //     Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'));
+    // _controller.initialize().then((_) {
+    //   setState(() {});
+    // });
+    flickManager = FlickManager(
+        videoPlayerController: VideoPlayerController.networkUrl(
+            Uri.http(url_ras, '${URLVideoPath}/video_default.mp4')));
+
     Provider.of<AppStateProvider>(context, listen: false)
         .setCalendarView(Calendar.week);
     // Gọi hàm fetchStudents để tải dữ liệu sinh viên
-    StudentService.fetchStudents(context, (value) {
-      if (value != null) {
-        // // Nếu dữ liệu không phải null, gán vào biến students và gọi setState để rebuild widget
-        // setState(() {
-        //   students = value as List<Map<String, dynamic>>;
-        // });
-      } else {
-        // Xử lý khi dữ liệu trả về từ fetchStudents là null
-        // Ví dụ: hiển thị thông báo lỗi
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Error'),
-            content: Text('Failed to load student data.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-    });
+    StudentService.fetchStudents(context, (value) {});
+  }
+
+  @override
+  void dispose() {
+    flickManager.dispose();
+    super.dispose();
   }
 
   Widget _buildInfoRow(String label, String value) {
@@ -91,25 +85,8 @@ class _DetailStudentState extends State<DetailStudent> {
     );
   }
 
-  // Future<void> _loadImage(Map<String, dynamic> student) async {
-  //   try {
-  //     await http.get(Uri.http(url, 'images/avatar/${student['avatar']}'));
-  //   } catch (e) {
-  //     // Xử lý lỗi
-  //     print("CHeckErrorImages" + e.toString());
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // Tìm sinh viên có studentId tương ứng trong danh sách students đã tải
-    // Map<String, dynamic> defaultStudent = {
-    //   'studentId': '',
-    //   'studentName': '',
-    //   'classCode': '',
-    //   'gender': '',
-    //   'birthDate': '',
-    // };
     Student defaultStudent = Student.fromMap({});
     students = context.watch<AppStateProvider>().appState!.students;
     Student student = students.firstWhere(
@@ -123,12 +100,7 @@ class _DetailStudentState extends State<DetailStudent> {
       orElse: () => defaultStudent,
     );
 
-    if (student == null) {
-      // Nếu không tìm thấy sinh viên, có thể thông báo hoặc hiển thị một widget thích hợp ở đây
-      return Center(child: Text('Student not found'));
-    }
-
-    print('${ULRNodeJSServer}/images/avatar/${student.avatar}');
+    print('${URLNodeJSServer}/images/avatar/${student.avatar}');
 
     return AlertDialog(
       title: Text('Detail student'),
@@ -136,7 +108,7 @@ class _DetailStudentState extends State<DetailStudent> {
         child: Column(
           children: [
             Row(
-              // mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -159,7 +131,7 @@ class _DetailStudentState extends State<DetailStudent> {
                 SizedBox(width: 50),
                 Container(
                   child: Image.network(
-                    '${ULRNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
+                    '${URLNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
                     width: 150, // Điều chỉnh chiều rộng nếu cần
                     height: 150, // Điều chỉnh chiều cao nếu cần
                     loadingBuilder: (BuildContext context, Widget child,
@@ -173,94 +145,82 @@ class _DetailStudentState extends State<DetailStudent> {
                     errorBuilder: (BuildContext context, Object error,
                         StackTrace? stackTrace) {
                       return Image.network(
-                        '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+                        '${URLNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
                         width: 150, // Điều chỉnh chiều rộng nếu cần
                         height: 150, // Điều chỉnh chiều cao nếu cần
                       );
                     },
                   ),
                 ),
-                // Container(
-                //   child: FutureBuilder<void>(
-                //     future: _loadImage(student),
-                //     builder: (context, snapshot) {
-                //       if (snapshot.connectionState == ConnectionState.waiting) {
-                //         return CircularProgressIndicator();
-                //       } else if (snapshot.connectionState ==
-                //           ConnectionState.done) {
-                //         if (snapshot.hasError) {
-                //           // Xử lý khi gặp lỗi
-                //           return Image.network(
-                //             '${ULRNodeJSServer}/images/avatar/avatar.jpg',
-                //             width: 150, // Điều chỉnh chiều rộng nếu cần
-                //             height: 150, // Điều chỉnh chiều cao nếu cần
-                //           );
-                //         } else {
-                //           // Xử lý khi tải hình ảnh thành công
-                //           return Image.network(
-                //             '${ULRNodeJSServer}/images/avatar/${student['avatar']}',
-                //             width: 150, // Điều chỉnh chiều rộng nếu cần
-                //             height: 150, // Điều chỉnh chiều cao nếu cần
-                //           );
-                //         }
-                //       } else {
-                //         return SizedBox(); // Trả về một widget trống nếu không thể xác định trạng thái
-                //       }
-                //     },
-                //   ),
-                // ),
               ],
             ),
             SingleChoice(option: SegmentButtonOption.image),
             SizedBox(height: 30),
-            SizedBox(
-              height: 450,
-              width: double.maxFinite,
-              child: GridView.builder(
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 10,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                ),
-                itemCount: 200,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(children: [
-                      Image.network(
-                        '${ULRNodeJSServer_RaspberryPi_Images}/${(Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView) == ShowImage.full ? 'full_images' : 'crop_images'}/${student.avatar.toString().substring(0, student.avatar.toString().indexOf('.'))}/${1}.jpg',
-                        width: 131, // Điều chỉnh chiều rộng nếu cần
-                        height: 131, // Điều chỉnh chiều cao nếu cần
-                        fit: BoxFit.contain,
-                        loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        },
-                        errorBuilder: (BuildContext context, Object error,
-                            StackTrace? stackTrace) {
-                          return Image.network(
-                            '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
-                            width: 131, // Điều chỉnh chiều rộng nếu cần
-                            height: 131, // Điều chỉnh chiều cao nếu cần
-                          );
-                        },
+            (Provider.of<AppStateProvider>(context, listen: false)
+                        .appState
+                        ?.imagesView) ==
+                    ShowImage.video
+                // ? flickManager != null
+                ? SizedBox(
+                    height: 405,
+                    width: 720,
+                    child: AspectRatio(
+                      // aspectRatio: _controller.value.aspectRatio,
+                      aspectRatio: 16 / 9,
+                      child: FlickVideoPlayer(
+                        flickManager: flickManager,
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Image ' + (index + 1).toString(),
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold),
-                      )
-                    ]),
-                  );
-                },
-              ),
-            )
+                    ),
+                  )
+                : SizedBox(
+                    height: 400,
+                    width: double.maxFinite,
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 10,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                      ),
+                      itemCount: 200,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: EdgeInsets.all(8.0),
+                          child: Column(children: [
+                            Image.network(
+                              '${URLNodeJSServer_RaspberryPi_Images}/${(Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView) == ShowImage.full ? 'full_images' : 'crop_images'}/${student.avatar.toString().substring(0, student.avatar.toString().indexOf('.'))}/${1}.jpg',
+                              width: 131, // Điều chỉnh chiều rộng nếu cần
+                              height: 131, // Điều chỉnh chiều cao nếu cần
+                              fit: BoxFit.contain,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
+                              errorBuilder: (BuildContext context, Object error,
+                                  StackTrace? stackTrace) {
+                                return Image.network(
+                                  '${URLNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+                                  width: 131, // Điều chỉnh chiều rộng nếu cần
+                                  height: 131, // Điều chỉnh chiều cao nếu cần
+                                );
+                              },
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              'Image ' + (index + 1).toString(),
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.bold),
+                            )
+                          ]),
+                        );
+                      },
+                    ),
+                  ),
           ],
         ),
       ),

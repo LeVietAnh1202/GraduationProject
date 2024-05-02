@@ -13,7 +13,9 @@ const String lecturerTerm = 'lecturerTerm';
 const String adminTerm = 'adminTerm';
 const String adminWeek = 'adminWeek';
 
-const String ULRNodeJSServer = 'http://${url}';
-const String ULRNodeJSServer_RaspberryPi = 'http://${url_ras}';
-const String ULRNodeJSServer_RaspberryPi_Images = 'http://${url_ras}/images/default';
-const String ULRNodeJSServer_RaspberryPi_Videos = 'http://${url_ras}/videos/default';
+const String URLNodeJSServer = 'http://${url}';
+const String URLNodeJSServer_RaspberryPi = 'http://${url_ras}';
+const String URLNodeJSServer_RaspberryPi_Images = 'http://${url_ras}/images/default';
+const String URLNodeJSServer_RaspberryPi_Videos = 'http://${url_ras}/videos/default';
+
+const String URLVideoPath = 'videos/default';

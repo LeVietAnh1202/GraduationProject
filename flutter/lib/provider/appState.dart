@@ -53,7 +53,7 @@ class AppState {
     required this.attendanceAdminWeeks,
     required this.attendanceAdminTerms,
   }) {
-    socket = IO.io(ULRNodeJSServer,
+    socket = IO.io(URLNodeJSServer,
         IO.OptionBuilder().setTransports(['websocket']).build());
   }
 }
@@ -82,7 +82,7 @@ class AppStateProvider with ChangeNotifier {
     _appState?.tableLength = tableLength;
     notifyListeners();
   }
-  
+
   void setCurrentPage(int currentPage) {
     _appState?.currentPage = currentPage;
     notifyListeners();
@@ -101,9 +101,10 @@ class AppStateProvider with ChangeNotifier {
         : (_appState!.tableLength / _appState!.rowsPerPage).ceil();
     notifyListeners();
   }
-  
+
   void goToLastPage() {
-    _appState?.currentPage = (_appState!.tableLength / _appState!.rowsPerPage).ceil();
+    _appState?.currentPage =
+        (_appState!.tableLength / _appState!.rowsPerPage).ceil();
     notifyListeners();
   }
 
@@ -374,7 +375,7 @@ class AppStateProvider with ChangeNotifier {
   //----------------------------------------------------------------
 
   List<Student> parseStudents(String studentsString) {
-  // List<Map<String, dynamic>> parseStudents(String studentsString) {
+    // List<Map<String, dynamic>> parseStudents(String studentsString) {
     // Thực hiện chuyển đổi chuỗi thành danh sách sinh viên phù hợp
     // Ví dụ:
     List<dynamic> studentsJson = jsonDecode(studentsString);

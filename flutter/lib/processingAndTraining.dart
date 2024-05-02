@@ -3,7 +3,6 @@ import 'package:flutter_todo_app/videoStream.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
-import 'package:fetch_client/fetch_client.dart';
 
 class ProcessingAndTraining extends StatefulWidget {
   String text = 'text';

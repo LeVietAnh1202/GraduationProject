@@ -7,7 +7,6 @@ import 'package:flutter_todo_app/processingAndTraining.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/singleChoice.dart';
-import 'package:flutter_todo_app/students/dataTableStudent.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable

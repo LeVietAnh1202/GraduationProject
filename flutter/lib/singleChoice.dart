@@ -26,6 +26,10 @@ class _SingleChoiceState extends State<SingleChoice> {
     return SegmentedButton<ShowImage>(
       segments: const <ButtonSegment<ShowImage>>[
         ButtonSegment<ShowImage>(
+            value: ShowImage.video,
+            label: Text('Show video'),
+            icon: Icon(Icons.video_camera_back_outlined)),
+        ButtonSegment<ShowImage>(
             value: ShowImage.full,
             label: Text('Show full image'),
             icon: Icon(Icons.calendar_view_week)),

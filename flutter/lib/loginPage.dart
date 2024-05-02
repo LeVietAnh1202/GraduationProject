@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/languages.dart';
 import 'package:flutter_todo_app/dashboard.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -148,7 +149,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   SizedBox(height: 20.0),
                   Text(
-                    'Login',
+                    E.login,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16.0),
@@ -179,7 +180,7 @@ class _SignInPageState extends State<SignInPage> {
                                   },
                             child: Padding(
                               padding: EdgeInsets.only(top: 10, bottom: 10),
-                              child: Text('Đăng Nhập'),
+                              child: Text('Login'),
                             ),
                           ),
                         ),

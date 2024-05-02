@@ -50,15 +50,16 @@ class _DashboardState extends State<Dashboard> {
       attendanceAdminTerms: [],
     );
     Future.delayed(Duration.zero, () {
-      Provider.of<AppStateProvider>(context, listen: false).setAppState(appState);
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setAppState(appState);
     });
-    
+
     // connectAndListen();
   }
 
   void connectAndListen() {
     print('Call func connectAndListen');
-    socket = IO.io(ULRNodeJSServer,
+    socket = IO.io(URLNodeJSServer,
         IO.OptionBuilder().setTransports(['websocket']).build());
 
     socket.onConnect((_) {

@@ -9,6 +9,8 @@ router.post("/create", StudentController.createStudent);
 
 router.post("/uploadAvatar", StudentController.uploadAvatar);
 
+router.post("/uploadVideo", StudentController.uploadVideo);
+
 router.get("/getAll", StudentController.getAllStudent);
 
 router.post("/getAllScheduleWeek", ScheduleStudentWeekController.getAllScheduleStudentWeek);

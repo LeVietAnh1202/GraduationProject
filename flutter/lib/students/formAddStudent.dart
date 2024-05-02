@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:html' as html;
 import 'dart:typed_data';
 import 'package:flutter_todo_app/constant/string.dart';
@@ -11,6 +11,7 @@ import 'package:flutter_todo_app/students/studentService.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
 
 class FromAddStudent extends StatefulWidget {
   const FromAddStudent({Key? key}) : super(key: key);
@@ -21,11 +22,6 @@ class FromAddStudent extends StatefulWidget {
 
 class _FromAddStudentState extends State<FromAddStudent> {
   // Define variables to store the form input values
-  TextEditingController _avatarController = TextEditingController();
-  TextEditingController _videoController = TextEditingController();
-  String? _videoUrl;
-
-  String? _avatarUrl;
   String? studentId;
   TextEditingController _studentIdController = TextEditingController();
   String? studentName;
@@ -37,9 +33,14 @@ class _FromAddStudentState extends State<FromAddStudent> {
   bool isAddingStudentSuccess = false;
   bool isFormValid = false;
 
-  Uint8List? _bytesData;
-  List<int>? _selectedFile;
-  String? fileExtension;
+  Uint8List? _bytesImage;
+  Uint8List? _bytesVideo;
+  List<int>? _selectedImage;
+  List<int>? _selectedVideo;
+  String? imageExtension;
+  String? videoExtension;
+  late VideoPlayerController _controller;
+  late String fileVideoName = '';
 
   final picker = ImagePicker();
 
@@ -78,11 +79,13 @@ class _FromAddStudentState extends State<FromAddStudent> {
     }
   }
 
-  Future<void> startFilePicker() async {
+  Future<String?> getFile(
+      void Function(String fe, html.FileReader reader) setFile) async {
     html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
     uploadInput.multiple = true;
     uploadInput.draggable = true;
     uploadInput.click();
+    final completer = Completer<String?>();
 
     uploadInput.onChange.listen((event) {
       final files = uploadInput.files;
@@ -91,47 +94,32 @@ class _FromAddStudentState extends State<FromAddStudent> {
 
       reader.onLoadEnd.listen((event) async {
         final fe = await getFileExtension(file.name);
-        setState(() {
-          fileExtension = fe;
-          _bytesData =
-              Base64Decoder().convert(reader.result.toString().split(",").last);
-          _selectedFile = _bytesData;
-        });
+        print("File name: ");
+        print(file.name);
+        setFile(fe, reader);
+        completer.complete(file.name);
       });
       reader.readAsDataUrl(file);
     });
+    return completer.future;
+  }
+  void setImage(String fe, html.FileReader reader) {
+    setState(() {
+      imageExtension = fe;
+      _bytesImage =
+          Base64Decoder().convert(reader.result.toString().split(",").last);
+      _selectedImage = _bytesImage;
+    });
   }
 
-//----------------------------------------------------------------
-  // final String uploadVideoUrl = '';
-  // Future<String?> uploadVideoToServer(File file) async {
-  //   final response = await http.post(uploadVideoUrl as Uri, body: {
-  //     'video': base64Encode(file.readAsBytesSync()),
-  //   });
-
-  //   if (response.statusCode == 200) {
-  //     final uploadedVideoUrl = response.body;
-  //     return uploadedVideoUrl;
-  //   } else {
-  //     print('Error uploading video: ${response.statusCode}');
-  //     return null;
-  //   }
-  // }
-
-  // void _addStudentVideo() async {
-  //   final pickedFile =
-  //       await ImagePicker().pickVideo(source: ImageSource.gallery);
-  //   if (pickedFile != null) {
-  //     final file = File(pickedFile.path);
-  //     final uploadedVideoUrl = await uploadVideoToServer(file);
-  //     if (uploadedVideoUrl != null) {
-  //       setState(() {
-  //         _videoUrl = uploadedVideoUrl;
-  //         _videoController.text = _videoUrl!;
-  //       });
-  //     }
-  //   }
-  // }
+  void setVideo(String fe, html.FileReader reader) {
+    setState(() {
+      videoExtension = fe;
+      _bytesVideo =
+          Base64Decoder().convert(reader.result.toString().split(",").last);
+      _selectedVideo = _bytesVideo;
+    });
+  }
 // ----------------------------------------------------------------
 
   Map<String, String> getInforStudent() {
@@ -144,7 +132,8 @@ class _FromAddStudentState extends State<FromAddStudent> {
       'classCode': classCode!,
       'gender': gender!,
       'birthDate': birthDate!.toIso8601String(),
-      'avatar': '${studentId}_${studentName}.${fileExtension}',
+      'avatar': '${studentId}_${studentName}.${imageExtension}',
+      'video': '${studentId}_${studentName}.${videoExtension}',
     };
   }
 
@@ -177,7 +166,8 @@ class _FromAddStudentState extends State<FromAddStudent> {
       birthDate = null;
       _birthDateController.text = '';
       isFormValid = false; // Đặt lại giá trị của isFormValid thành false
-      _bytesData = null;
+      _bytesImage = null;
+      fileVideoName = '';
     });
   }
 
@@ -196,9 +186,25 @@ class _FromAddStudentState extends State<FromAddStudent> {
   Future uploadImage(Map<String, String> inforStudent) async {
     var request = http.MultipartRequest('POST', Uri.http(url, uploadAvatarAPI));
     request.files.add(await http.MultipartFile.fromBytes(
-        'image', _selectedFile!,
+        'image', _selectedImage!,
         contentType: MediaType('application', 'json'),
         filename: '${inforStudent['avatar']}'));
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      print('Image uploaded successfully!');
+      print('Image URL: ${await response.stream.bytesToString()}');
+    } else {
+      print('Failed to upload image. Status code: ${response.statusCode}');
+    }
+  }
+
+  Future uploadVideo(Map<String, String> inforStudent) async {
+    var request = http.MultipartRequest('POST', Uri.http(url, uploadVideoAPI));
+    request.files.add(await http.MultipartFile.fromBytes(
+        'video', _selectedVideo!,
+        contentType: MediaType('application', 'json'),
+        filename: '${inforStudent['video']}'));
     var response = await request.send();
 
     if (response.statusCode == 200) {
@@ -214,127 +220,144 @@ class _FromAddStudentState extends State<FromAddStudent> {
     return AlertDialog(
       title: Text('Thêm sinh viên'),
       content: SingleChildScrollView(
-        child: Form(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Avatar sinh viên'),
-              SizedBox(height: 20),
-              _bytesData != null
-                  ? Image.memory(_bytesData!, height: 200, width: 200)
-                  : Image.network(
-                      '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
-                      height: 200,
-                      width: 200),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () async {
-                  await startFilePicker();
-                },
-                child: Text('Select Image'),
-              ),
-              SizedBox(height: 10),
-              Text('Video sinh viên'),
-              GestureDetector(
-                // onTap: _addStudentVideo,
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.video_library),
-                      SizedBox(width: 10),
-                      Text('Thêm video'),
-                    ],
-                  ),
+        child: SizedBox(
+          child: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Avatar sinh viên'),
+                SizedBox(height: 20),
+                _bytesImage != null
+                    ? Image.memory(_bytesImage!, height: 200, width: 200)
+                    : Image.network(
+                        '${URLNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+                        height: 200,
+                        width: 200,
+                        fit: BoxFit.cover,
+                      ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () async {
+                    await getFile(setImage);
+                  },
+                  child: Text('Select Image'),
                 ),
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Mã sinh viên'),
-                controller: _studentIdController,
-                onChanged: (value) {
-                  setState(() {
-                    studentId = value;
-                    isFormValid =
-                        _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
-                  });
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Tên sinh viên'),
-                controller: _studentNameController,
-                onChanged: (value) {
-                  setState(() {
-                    studentName = value;
-                    isFormValid =
-                        _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
-                  });
-                },
-              ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Mã lớp'),
-                value: classCode,
-                onChanged: (value) {
-                  setState(() {
-                    classCode = value;
-                    isFormValid =
-                        _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
-                  });
-                },
-                items: classCodes.map((String code) {
-                  return DropdownMenuItem(
-                    value: code,
-                    child: Text(code),
-                  );
-                }).toList(),
-              ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Giới tính'),
-                value: gender,
-                onChanged: (value) {
-                  setState(() {
-                    gender = value;
-                  });
-                },
-                items: [
-                  DropdownMenuItem(
-                    value: 'Nam',
-                    child: Text('Nam'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Nữ',
-                    child: Text('Nữ'),
-                  ),
-                ],
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Ngày tháng năm sinh',
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.calendar_today),
-                    onPressed: () async {
-                      final date = await showDatePicker(
-                        context: context,
-                        // locale: const Locale("vi", "VN"),
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime.now(),
-                      );
-                      if (date != null) {
+                SizedBox(height: 20),
+                Text('Video sinh viên'),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    // Text('Video sinh viên'),
+                    // SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () async {
+                        // fileVideo = await getVideo();
+                        String fileName = (await getFile(setVideo))!;
                         setState(() {
-                          birthDate = date;
-                          _birthDateController.text = DateFormat('dd/MM/yyyy')
-                              .format(date); // Update the displayed date format
-                          isFormValid = _checkFormValidity();
+                          fileVideoName = fileName;
                         });
-                      }
-                    },
-                  ),
+                      },
+                      child: Text('Select Video'),
+                    ),
+                    SizedBox(width: 20),
+                    fileVideoName != ''
+                        ? Text(fileVideoName, style: TextStyle(fontSize: 14))
+                        : Text(
+                            'No file video',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                    
+                  ],
                 ),
-                readOnly: true,
-                controller: _birthDateController,
-              ),
-            ],
+                SizedBox(height: 20),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Mã sinh viên'),
+                  controller: _studentIdController,
+                  onChanged: (value) {
+                    setState(() {
+                      studentId = value;
+                      isFormValid =
+                          _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
+                    });
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Tên sinh viên'),
+                  controller: _studentNameController,
+                  onChanged: (value) {
+                    setState(() {
+                      studentName = value;
+                      isFormValid =
+                          _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
+                    });
+                  },
+                ),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(labelText: 'Mã lớp'),
+                  value: classCode,
+                  onChanged: (value) {
+                    setState(() {
+                      classCode = value;
+                      isFormValid =
+                          _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
+                    });
+                  },
+                  items: classCodes.map((String code) {
+                    return DropdownMenuItem(
+                      value: code,
+                      child: Text(code),
+                    );
+                  }).toList(),
+                ),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(labelText: 'Giới tính'),
+                  value: gender,
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value;
+                    });
+                  },
+                  items: [
+                    DropdownMenuItem(
+                      value: 'Nam',
+                      child: Text('Nam'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Nữ',
+                      child: Text('Nữ'),
+                    ),
+                  ],
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Ngày tháng năm sinh',
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.calendar_today),
+                      onPressed: () async {
+                        final date = await showDatePicker(
+                          context: context,
+                          // locale: const Locale("vi", "VN"),
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                        if (date != null) {
+                          setState(() {
+                            birthDate = date;
+                            _birthDateController.text = DateFormat('dd/MM/yyyy')
+                                .format(
+                                    date); // Update the displayed date format
+                            isFormValid = _checkFormValidity();
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  readOnly: true,
+                  controller: _birthDateController,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -356,6 +379,7 @@ class _FromAddStudentState extends State<FromAddStudent> {
               final inforStudent = getInforStudent();
               await createStudent(inforStudent);
               await uploadImage(inforStudent);
+              await uploadVideo(inforStudent);
               // Perform form submission or validation
 
               if (isAddingStudentSuccess) {

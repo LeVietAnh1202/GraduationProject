@@ -3,7 +3,7 @@ import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/students/detailStudent.dart';
-import 'package:flutter_todo_app/students/formAddStudent.dart';
+import 'package:flutter_todo_app/students/editStudent.dart';
 import 'package:flutter_todo_app/students/studentService.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -134,7 +134,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
               Center(
                 child: ClipOval(
                   child: Image.network(
-                    '${ULRNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
+                    '${URLNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
                     width: 45, // Điều chỉnh chiều rộng nếu cần
                     height: 45, // Điều chỉnh chiều cao nếu cần
                     fit: BoxFit.cover,
@@ -149,7 +149,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
                     errorBuilder: (BuildContext context, Object error,
                         StackTrace? stackTrace) {
                       return Image.network(
-                        '${ULRNodeJSServer}/images/avatar/avatar.jpg',
+                        '${URLNodeJSServer}/images/avatar/avatar.jpg',
                         width: 150, // Điều chỉnh chiều rộng nếu cần
                         height: 150, // Điều chỉnh chiều cao nếu cần
                       );
@@ -193,8 +193,16 @@ class _DataTableStudentState extends State<DataTableStudent> {
                     icon: Icon(Icons.edit),
                     iconSize: iconSize,
                     onPressed: () {
-                      // Xử lý logic sửa sinh viên ở hàng tương ứng
-                      // Ví dụ: editStudent(index);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return EditStudent(
+                              studentId: student.studentId,
+                              initialStudentName: '',
+                              initialGender: '',
+                              initialBirthDate: DateTime.now(),
+                            );
+                          });
                     },
                   ),
                   IconButton(

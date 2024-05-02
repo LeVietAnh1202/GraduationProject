@@ -36,6 +36,11 @@ const studentSchema = new Schema({
         required: [true, "avatar is required"],
         unique: true,
     },
+    video: {
+        type: String,
+        required: [true, "video is required"],
+        unique: true,
+    },
 }, { timestamps: true });
 
 const Student = db.model('student', studentSchema);

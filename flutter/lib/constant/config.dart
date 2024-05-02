@@ -6,6 +6,7 @@ final login = 'user/login';
 
 final createStudentAPI = 'student/create';
 final uploadAvatarAPI = 'student/uploadAvatar';
+final uploadVideoAPI = 'student/uploadVideo';
 
 final getAllStudentAPI = 'student/getAll';
 

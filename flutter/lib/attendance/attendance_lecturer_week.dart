@@ -1,8 +1,5 @@
 import 'dart:collection';
-import 'dart:convert';
-import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
-import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/attendance/attendanceService.dart';
@@ -169,7 +166,7 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                                     child: Column(
                                       children: [
                                         Image.network(
-                                          '${ULRNodeJSServer}/images/attendance_images/${entry['attendanceImages'][index]}', // URL của ảnh
+                                          '${URLNodeJSServer}/images/attendance_images/${entry['attendanceImages'][index]}', // URL của ảnh
                                           width: 100, // Chiều rộng của ảnh
                                           height: 100, // Chiều cao của ảnh
                                         ),
@@ -197,7 +194,7 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                                 //         padding: EdgeInsets.all(8.0),
                                 //         child: Column(children: [
                                 //           Image.network(
-                                //             '${ULRNodeJSServer}/images/attendance_images/${entry.attendanceImages[0]}',
+                                //             '${URLNodeJSServer}/images/attendance_images/${entry.attendanceImages[0]}',
                                 //             width:
                                 //                 131, // Điều chỉnh chiều rộng nếu cần
                                 //             height:
@@ -216,7 +213,7 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                                 //                 Object error,
                                 //                 StackTrace? stackTrace) {
                                 //               return Image.network(
-                                //                 '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+                                //                 '${URLNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
                                 //                 width:
                                 //                     131, // Điều chỉnh chiều rộng nếu cần
                                 //                 height:

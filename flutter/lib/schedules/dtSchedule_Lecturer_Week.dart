@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/attendance/attendance_lecturer_term.dart';
 import 'package:flutter_todo_app/attendance/attendance_lecturer_week.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';

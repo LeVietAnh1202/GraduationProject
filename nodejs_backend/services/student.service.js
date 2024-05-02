@@ -3,9 +3,9 @@ const StudentModel = require("../models/student.model");
 const multer = require('multer');
 const path = require('path');
 class StudentService {
-    static async createStudent(studentId, studentName, classCode, gender, birthDate, avatar) {
+    static async createStudent(studentId, studentName, classCode, gender, birthDate, avatar, video) {
         try {
-            const createStudent = new StudentModel({ studentId, studentName, classCode, gender, birthDate, avatar });
+            const createStudent = new StudentModel({ studentId, studentName, classCode, gender, birthDate, avatar, video });
             return await createStudent.save();
         } catch (err) {
             throw err;
@@ -53,7 +53,7 @@ class StudentService {
                 },
                 filename: function (req, file, cb) {
                     const fileName = file.originalname;
-                    console.log(fileName);
+                    // console.log(fileName);
                     cb(null, fileName); // Sử dụng tên file gốc
                 }
             });
@@ -69,6 +69,32 @@ class StudentService {
             });
         });
     }
+
+    static uploadVideo(req) {
+        return new Promise((resolve, reject) => {
+            const storage = multer.diskStorage({
+                destination: function (req, file, cb) {
+                    cb(null, './public/videos/default'); // Thư mục lưu trữ video
+                },
+                filename: function (req, file, cb) {
+                    const fileName = file.originalname;
+                    // console.log(fileName);
+                    cb(null, fileName); // Sử dụng tên file gốc
+                }
+            });
+
+            const upload = multer({ storage: storage }).single('video');
+
+            upload(req, {}, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(req.file.filename); // Trả về tên file đã được đặt
+                }
+            });
+        });
+    }
+
 
 
 }
