@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
@@ -87,20 +86,21 @@ class _DetailStudentState extends State<DetailStudent> {
 
   @override
   Widget build(BuildContext context) {
-    Student defaultStudent = Student.fromMap({});
-    students = context.watch<AppStateProvider>().appState!.students;
-    Student student = students.firstWhere(
-      // Map<String, dynamic> student = students.firstWhere(
-      (student) {
-        print(student);
-        print("student['studentId']" + student.studentId);
-        print("widget.studentId" + widget.studentId);
-        return student.studentId == widget.studentId;
-      },
+    // Tìm sinh viên có studentId tương ứng trong danh sách students đã tải
+    // Map<String, dynamic> defaultStudent = {
+    //   'studentId': '',
+    //   'studentName': '',
+    //   'classCode': '',
+    //   'gender': '',
+    //   'birthDate': '',
+    // };
+    final defaultStudent = Student.fromMap({});
+    final students = context.watch<AppStateProvider>().appState!.students;
+    final student = students.firstWhere(
+    // Map<String, dynamic> student = students.firstWhere(
+      (student) => student.studentId == widget.studentId,
       orElse: () => defaultStudent,
     );
-
-    print('${URLNodeJSServer}/images/avatar/${student.avatar}');
 
     return AlertDialog(
       title: Text('Detail student'),
@@ -131,9 +131,9 @@ class _DetailStudentState extends State<DetailStudent> {
                 SizedBox(width: 50),
                 Container(
                   child: Image.network(
-                    '${URLNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
-                    width: 150, // Điều chỉnh chiều rộng nếu cần
-                    height: 150, // Điều chỉnh chiều cao nếu cần
+                    '${ULRNodeJSServer_RaspberryPi_Images}/avatar/${student.avatar}',
+                    width: 150,
+                    height: 150,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) {
@@ -145,9 +145,9 @@ class _DetailStudentState extends State<DetailStudent> {
                     errorBuilder: (BuildContext context, Object error,
                         StackTrace? stackTrace) {
                       return Image.network(
-                        '${URLNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
-                        width: 150, // Điều chỉnh chiều rộng nếu cần
-                        height: 150, // Điều chỉnh chiều cao nếu cần
+                        '${ULRNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+                        width: 150,
+                        height: 150,
                       );
                     },
                   ),

@@ -7,23 +7,23 @@ import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
 
 class StudentService {
-  static Future<List<dynamic>> fetchStudents(
+  static Future<List<Student>> fetchStudents(
       BuildContext context, ValueChanged<bool> isLoading) async {
     final response = await http.get(Uri.http(url, getAllStudentAPI));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final studentsList = data['data'] as List<dynamic>;
-      print("Student list: " + studentsList.toString());
+      // print("Student list: " + studentsList.toString());
 
       final students = studentsList.map((e) => Student.fromMap(e)).toList();
       print("Students: " + students.toString());
 
       Provider.of<AppStateProvider>(context, listen: false)
           .setStudents(students);
-          // .setStudents(studentsList.cast<Map<String, dynamic>>());
       isLoading(false);
-      return studentsList;
+
+      return students;
     } else {
       throw Exception('Failed to fetch students');
     }
