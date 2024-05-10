@@ -5,6 +5,8 @@ final register = "user/register";
 final login = 'user/login';
 
 final createStudentAPI = 'student/create';
+final editStudentAPI = 'student/edit';
+final deleteStudentAPI = 'student/delete';
 final uploadAvatarAPI = 'student/uploadAvatar';
 final uploadVideoAPI = 'student/uploadVideo';
 
@@ -12,6 +14,8 @@ final getAllStudentAPI = 'student/getAll';
 
 final createLecturerAPI = 'lecturer/createLecturer';
 final getAllLecturerAPI = 'lecturer/getAllLecturer';
+
+final getAllClassAPI = 'class/getAllClass';
 
 final getAllScheduleStudentWeekAPI = 'student/getAllScheduleWeek';
 final getAllScheduleStudentTermAPI = 'student/getAllScheduleTerm';

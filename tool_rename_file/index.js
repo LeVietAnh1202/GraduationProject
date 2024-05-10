@@ -1,30 +1,31 @@
 const fs = require('fs');
 const path = require('path');
 
-var index = 1;
-const directoryPath = 'D:/DHCQ-2020-2024/2023-2024_Ky 2/DATN/Project/Project_Flutter_NodeJS/nodejs_backend/public/images/full_images/10120056_LeNgocLanh';
+var index = 0;
+const directoryPath = 'G:/Ki_8/GraduationProject/nodejs_backend/public/videos/default';
 
 const arr = [
-    '10120603_DoQuynhAnh.jpg',
-    '12520088_LeVietAnh.jpg',
-    '10120766_NguyenMinhAnh.jpg',
-    '10120623_NguyenThaiDuong.jpg',
-    '10120626_LeHaiDang.jpg',
-    '10120635_PhamThanhHang.jpg',
-    '10120741_LuuHuyHoang.jpg',
-    '10120745_NguyenManhHung.jpg',
-    '10120056_LeNgocLanh.jpg',
-    '10120792_ThanThiMyLinh.jpg',
-    '10120748_TrinhThiLinh.jpg',
-    '10120669_DaoNgocLong.jpg',
-    '10120674_NguyenThiCamLy.jpg',
-    '10120678_VuNgocMinh.jpg',
-    '10120683_DangNgocNhan.jpg',
-    '10120773_NguyenThiNgocPhuong.jpg',
-    '10120701_LeHoangSon.jpg',
-    '10120707_NguyenVanThai.jpg',
-    '10120734_TranAnhTu.jpg',
-    '10120736_DoTrangTuan.jpg',
+    '10120603_DoQuynhAnh.mp4',
+    '12520088_LeVietAnh.mp4',
+    '10120766_NguyenMinhAnh.mp4',
+    '10120620_NguyenMinhDoanh.mp4',
+    '10120623_NguyenThaiDuong.mp4',
+    '10120626_LeHaiDang.mp4',
+    '10120635_PhamThanhHang.mp4',
+    '10120741_LuuHuyHoang.mp4',
+    '10120745_NguyenManhHung.mp4',
+    '10120056_LeNgocLanh.mp4',
+    '10120792_ThanThiMyLinh.mp4',
+    '10120748_TrinhThiLinh.mp4',
+    '10120669_DaoNgocLong.mp4',
+    '10120674_NguyenThiCamLy.mp4',
+    '10120678_VuNgocMinh.mp4',
+    '10120683_DangNgocNhan.mp4',
+    '10120773_NguyenThiNgocPhuong.mp4',
+    '10120701_LeHoangSon.mp4',
+    '10120707_NguyenVanThai.mp4',
+    '10120734_TranAnhTu.mp4',
+    '10120736_DoTrangTuan.mp4',
 ]
 
 fs.readdir(directoryPath, function (err, files) {
@@ -36,9 +37,9 @@ fs.readdir(directoryPath, function (err, files) {
         const oldPath = path.join(directoryPath, file);
         // const result = file.match(/_(.*?)\./);
         // const extractedString = result[1];
-        const newName = (index++).toString() + '.jpg'; // Tên mới của tệp
-
-
+        const newName = arr[index++]; // Tên mới của tệp
+        // console.log(newName);
+        // console.log(file)
         const newPath = path.join(directoryPath, newName);
 
         fs.rename(oldPath, newPath, function (err) {

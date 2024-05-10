@@ -15,7 +15,7 @@ class ScheduleService with ChangeNotifier {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final studentList = data['data'] as List<dynamic>;
-      print("Schedule list: " + studentList.toString());
+      print("fetchStudents: " + studentList.toString());
 
       // setState(() {
       //   students = studentList.cast<Map<String, dynamic>>();

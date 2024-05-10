@@ -18,6 +18,46 @@ exports.createStudent = async (req, res, next) => {
         next(err);
     }
 }
+exports.editStudent = async (req, res, next) => {
+    try {
+        const { studentId, studentName, classCode, gender, birthDate } = req.body;
+        const duplicate = await StudentService.getStudentByStudentID(studentId);
+        
+        if (!duplicate) {
+            // throw new Error(`Student ${studentId}, Already Registered`);
+            res.status(404).json({ status: false, error: 'Student not found' });
+        }
+        const response = await StudentService.editStudent(studentId, studentName, classCode, gender, birthDate);
+        
+        res.json({ status: true, success: 'Edit Student successfully' });
+        
+        
+    } catch (err) {
+        console.log("---> err -->", err);
+        next(err);
+    }
+}
+
+exports.deleteStudent = async (req, res, next) => {
+    try {
+        const { studentId } = req.params;
+        
+        const exist = await StudentService.getStudentByStudentID(studentId);
+        
+        if (!exist) {
+            return res.status(404).json({ status: false, error: 'Student not found' });
+        }
+
+        const deletedStudent = await StudentService.deleteStudent(studentId);
+        console.log(deletedStudent);
+
+        res.json({ status: true, data: deletedStudent, success: 'Delete Student successfully' });
+        
+    } catch (err) {
+        console.log("---> err -->", err);
+        next(err);
+    }
+}
 exports.uploadAvatar = async (req, res, next) => {
     try {
         // Truyền tên và mã sinh viên cho middleware uploadAvatar()

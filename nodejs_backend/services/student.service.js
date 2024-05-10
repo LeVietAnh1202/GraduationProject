@@ -1,6 +1,7 @@
 const StudentModel = require("../models/student.model");
 
 const multer = require('multer');
+const fs = require('fs');
 const path = require('path');
 class StudentService {
     static async createStudent(studentId, studentName, classCode, gender, birthDate, avatar, video) {
@@ -11,6 +12,51 @@ class StudentService {
             throw err;
         }
     }
+    static async editStudent(studentId, studentName, classCode, gender, birthDate) {
+        try {
+            // Tìm sinh viên cần cập nhật bằng studentId và cập nhật thông tin mới
+            return await StudentModel.findOneAndUpdate(
+                { studentId: studentId }, // Điều kiện tìm kiếm
+                { studentName: studentName, classCode: classCode, gender: gender, birthDate: birthDate }, // Thông tin cập nhật
+                { new: true } // Tùy chọn: Trả về bản ghi đã được cập nhật
+            );
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    static async deleteStudent(studentId) {
+        try {
+            // Tìm sinh viên cần xóa bằng studentId
+            const student = await StudentModel.findOneAndDelete({ studentId });
+
+            // Kiểm tra xem sinh viên có tồn tại không
+            // if (!student) {
+            //     throw new Error('Student not found');
+            // }
+            console.log(student)
+            // const student = await StudentService.getStudentByStudentID(studentId);
+            console.log(path.join(__dirname, `../public/images/default/avatar/${student.avatar}`));
+            // Xóa hình ảnh và video liên quan đến sinh viên
+            const imagePath = path.join(__dirname, `../public/images/default/avatar/${student.avatar}`);
+            const videoPath = path.join(__dirname, `../public/videos/default/${student.video}`);
+
+            // Xóa hình ảnh
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            }
+
+            // Xóa video
+            if (fs.existsSync(videoPath)) {
+                fs.unlinkSync(videoPath);
+            }
+
+            return student; // Trả về sinh viên đã bị xóa
+        } catch (err) {
+            throw err;
+        }
+    }
+
     static async getStudentByStudentID(studentId) {
         console.log('HTHI StudenID:', studentId);
         try {

@@ -68,6 +68,8 @@ class SidebarMap {
   }
 
   Widget? getSidebarMap() {
+    print('getSidebarMap');
+    print(sidebarMap[sidebarMapKey]);
     return sidebarMap[sidebarMapKey];
   }
 }

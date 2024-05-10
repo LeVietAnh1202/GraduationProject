@@ -7,6 +7,7 @@ class Student {
   final String fingerprintID;
   final DateTime birthDate;
   final String avatar;
+  final String video;
 
   // Student({
   //   required this.id,
@@ -41,6 +42,7 @@ class Student {
     this.fingerprintID = '',
     DateTime? birthDate, // Tham số tùy chọn
     this.avatar = '',
+    this.video = '',
   }) : birthDate = birthDate ?? DateTime(1990, 1, 1); // Gán giá trị mặc định nếu không có ngày sinh được cung cấp;
 
   factory Student.fromMap(Map<String, dynamic> json) {
@@ -53,6 +55,7 @@ class Student {
       fingerprintID: json['fingerprintID'] ?? '',
       birthDate: json['birthDate'] != null ? DateTime.parse(json['birthDate']) : null,
       avatar: json['avatar'] ?? '',
+      video: json['video'] ?? '',
     );
   }
 

@@ -1,18 +1,29 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/classes/classService.dart';
+import 'package:flutter_todo_app/constant/config.dart';
+import 'package:flutter_todo_app/model/studentModel.dart';
+import 'package:flutter_todo_app/provider/appState.dart';
+import 'package:flutter_todo_app/students/studentService.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class EditStudent extends StatefulWidget {
   final String studentId;
-  final String initialStudentName;
-  final String initialGender;
-  final DateTime initialBirthDate;
+  final String studentName;
+  final String classCode;
+  final String gender;
+  final DateTime birthDate;
 
   const EditStudent({
     Key? key,
     required this.studentId,
-    required this.initialStudentName,
-    required this.initialGender,
-    required this.initialBirthDate,
+    required this.studentName,
+    required this.classCode,
+    required this.gender,
+    required this.birthDate,
   }) : super(key: key);
 
   @override
@@ -20,18 +31,82 @@ class EditStudent extends StatefulWidget {
 }
 
 class _EditStudentState extends State<EditStudent> {
-  late TextEditingController _studentNameController;
+  // late TextEditingController _studentNameController;
+  late String studentId;
+  TextEditingController _studentIdController = TextEditingController();
+  String? studentName;
+  TextEditingController _studentNameController = TextEditingController();
+
+  TextEditingController _birthDateController = TextEditingController();
   late String gender;
   late DateTime birthDate;
+  String? classCode;
+  bool isFormValid = false;
+  bool isEditStudentSuccess = false;
 
   @override
   void initState() {
     super.initState();
-    _studentNameController = TextEditingController(text: widget.initialStudentName);
+    _studentNameController = TextEditingController(text: widget.studentName);
+    _birthDateController = TextEditingController(
+        text: DateFormat('dd/MM/yyyy').format(widget.birthDate));
     // Kiểm tra nếu giới tính ban đầu là null, đặt giới tính mặc định là "Nam"
-    gender = widget.initialGender ?? 'Nam';
-    birthDate = widget.initialBirthDate;
+    studentId = widget.studentId;
+    gender = widget.gender ?? 'Nam';
+    classCode = widget.classCode;
+    birthDate = widget.birthDate;
+    fetchClasses();
+  }
 
+  Future<void> fetchClasses() async {
+    final classes = await ClassService.fetchClasses(context, (value) => {});
+  }
+
+  bool _checkFormValidity() {
+    final studentIdPattern = RegExp(r'^\d{8}$');
+    final studentNamePattern = RegExp(r'^[a-zA-ZÀ-ỹ ]+$');
+    final dateFormat = DateFormat('dd/MM/yyyy');
+    final formattedDate = dateFormat.format(birthDate ?? DateTime.now());
+
+    print(studentIdPattern.hasMatch(studentId ?? ''));
+    print(studentNamePattern.hasMatch(studentName ?? ''));
+    print((formattedDate == _birthDateController.text));
+
+    return studentIdPattern.hasMatch(studentId ?? '') &&
+        studentNamePattern.hasMatch(studentName ?? '') &&
+        (formattedDate == _birthDateController.text);
+  }
+
+  Map<String, String> getInforStudent() {
+    // final studentId = widget.studentId;
+    final studentName = _studentNameController.text;
+
+    return {
+      'studentId': studentId,
+      'studentName': studentName,
+      'classCode': classCode!,
+      'gender': gender,
+      'birthDate': birthDate.toIso8601String(),
+    };
+  }
+
+  Future<void> editStudent(Map<String, String> inforStudent) async {
+    final response = await http.post(
+      Uri.http(url, editStudentAPI),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(inforStudent),
+    );
+
+    if (response.statusCode == 200) {
+      // Xử lý thành công
+      setState(() {
+        isEditStudentSuccess = true;
+      });
+    } else {
+      // Xử lý lỗi
+      print(
+          'Lỗi khi cập nhât thông tin sinh viên: ${response.statusCode} - ${response.body}');
+    }
   }
 
   @override
@@ -49,10 +124,42 @@ class _EditStudentState extends State<EditStudent> {
                   initialValue:
                       widget.studentId, // Hiển thị mã sinh viên ban đầu
                   readOnly: true, // Không cho phép chỉnh sửa
+                  enabled: false,
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Tên sinh viên'),
                   controller: _studentNameController,
+                  onChanged: (value) {
+                    setState(() {
+                      studentName = value;
+                      isFormValid =
+                          _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
+                    });
+                  },
+                ),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(labelText: 'Mã lớp'),
+                  value: classCode,
+                  onChanged: (value) {
+                    setState(() {
+                      classCode = value;
+                    });
+                  },
+                  items: context
+                      .watch<AppStateProvider>()
+                      .appState!
+                      .classes
+                      .asMap()
+                      .entries
+                      .map((entry) {
+                    final index = entry.key;
+                    final _class = entry.value;
+
+                    return DropdownMenuItem(
+                      value: _class.classCode,
+                      child: Text(_class.classCode),
+                    );
+                  }).toList(),
                 ),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(labelText: 'Giới tính'),
@@ -88,6 +195,10 @@ class _EditStudentState extends State<EditStudent> {
                         if (date != null) {
                           setState(() {
                             birthDate = date;
+                            _birthDateController.text = DateFormat('dd/MM/yyyy')
+                                .format(
+                                    date); // Update the displayed date format
+                            isFormValid = _checkFormValidity();
                           });
                         }
                       },
@@ -115,22 +226,44 @@ class _EditStudentState extends State<EditStudent> {
           child: Text('Hủy'),
         ),
         ElevatedButton(
-          onPressed: () {
-            // Perform update logic here
-            String updatedStudentName = _studentNameController.text;
-            String updatedGender = gender;
-            DateTime updatedBirthDate = birthDate;
+          onPressed: () async {
+            if (isFormValid) {
+              final inforStudent = getInforStudent();
+              await editStudent(inforStudent);
 
-            // Close the dialog and pass updated information back to parent widget
-            Navigator.of(context).pop({
-              'studentName': updatedStudentName,
-              'gender': updatedGender,
-              'birthDate': updatedBirthDate,
-            });
+              if (isEditStudentSuccess) {
+                StudentService.fetchStudents(context, (value) => {});
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Cập nhật sinh viên thành công'),
+                    backgroundColor:
+                        Colors.green, // Thay đổi màu nền thành màu xanh lá cây
+                  ),
+                );
+                Navigator.of(context).pop();
+              }
+            } else {
+              String errorMessage = 'Vui lòng nhập đầy đủ thông tin:';
+              if (!(studentName?.isNotEmpty ?? false)) {
+                errorMessage += '\n- Tên sinh viên không được để trống';
+              } else if (!RegExp(r'^[a-zA-ZÀ-ỹ ]+$').hasMatch(studentName!)) {
+                errorMessage += '\n- Tên sinh viên không đúng định dạng';
+              }
+
+              if (birthDate == null) {
+                errorMessage += '\n- Ngày tháng năm sinh không được để trống';
+              }
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(errorMessage),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green, // Change button color to green
-            padding: EdgeInsets.all(16.0), // Increase button size
+            backgroundColor: Colors.green, // Đổi màu xanh cho nút
+            padding: EdgeInsets.all(16.0), // Tăng kích thước của nút
           ),
           child: Text('Cập nhật'),
         ),

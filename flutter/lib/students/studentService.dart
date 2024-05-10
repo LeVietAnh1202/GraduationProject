@@ -10,13 +10,16 @@ class StudentService {
   static Future<List<Student>> fetchStudents(
       BuildContext context, ValueChanged<bool> isLoading) async {
     final response = await http.get(Uri.http(url, getAllStudentAPI));
-
+    print('fetchStudents function');
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
-      final studentsList = data['data'] as List<dynamic>;
+      final studentsList = (data['data']);
       // print("Student list: " + studentsList.toString());
-
-      final students = studentsList.map((e) => Student.fromMap(e)).toList();
+      print('studentsList');
+      print(studentsList);
+      final List<Student> students = (studentsList as List<dynamic>)
+          .map((e) => Student.fromMap(e))
+          .toList();
       print("Students: " + students.toString());
 
       Provider.of<AppStateProvider>(context, listen: false)
@@ -29,5 +32,48 @@ class StudentService {
     }
   }
 
-  static getStudentByStudentID(String? studentId) {}
+  static Future<String> createStudent(Map<String, String> inforStudent) async {
+    final response = await http.post(
+      Uri.http(url, createStudentAPI),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(inforStudent),
+    );
+    String message = '';
+    if (response.statusCode == 200) {
+      // Xử lý thành công
+      message = 'Thêm sinh viên thành công';
+    } else {
+      // Xử lý lỗi
+      message = 'Lỗi khi thêm sinh viên';
+    }
+    return json.encode({'message': message, 'statusCode': response.statusCode});
+  }
+
+  static Future<String> deleteStudent(String studentId) async {
+    try {
+      final response = await http.delete(
+        Uri.http(url_ras, '$deleteStudentAPI/$studentId'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          // Thêm các headers khác nếu cần
+        },
+      );
+      String message = '';
+      final body = json.decode(response.body);
+      if (response.statusCode == 200) {
+        // Xóa thành công, không cần thực hiện gì cả
+        message = 'Xóa thành công sinh viên: ${body['data']['studentName']}';
+      } else {
+        // Xử lý lỗi nếu cần
+        message = 'Lỗi khi xóa sinh viên: ${body['data']['studentName']}';
+      }
+      return json.encode({
+        'message': message,
+        'statusCode': response.statusCode,
+        'body': body
+      });
+    } catch (error) {
+      throw Exception('Error deleting student: $error');
+    }
+  }
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/model/classModel.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -17,6 +18,7 @@ class AppState {
   int currentPage;
   int rowsPerPage;
   List<Student> students;
+  List<Class> classes;
   // List<Map<String, dynamic>> students;
   List<Map<String, dynamic>> lecturers;
   List<Map<String, dynamic>> scheduleStudentWeeks;
@@ -42,6 +44,7 @@ class AppState {
     required this.currentPage,
     required this.rowsPerPage,
     required this.students,
+    required this.classes,
     required this.lecturers,
     required this.scheduleStudentWeeks,
     required this.scheduleStudentTerms,
@@ -81,9 +84,29 @@ class AppStateProvider with ChangeNotifier {
         .toList();
   }
 
+  // List<T> parseJsonList<T>(
+  //     String jsonString, T Function(Map<String, dynamic>) fromMap) {
+  //   // List<dynamic> jsonList = jsonDecode(jsonString);
+  //   List<Map<String, dynamic>> jsonList =
+  //       List<Map<String, dynamic>>.from(jsonDecode(jsonString));
+  //   // List<T> resultList = [];
+  //   // for (var jsonItem in jsonList) {
+  //   //   resultList.add(fromMap(jsonItem));
+  //   // }
+  //   // return resultList;
+  //   return jsonList.map((jsonObject) => fromMap(jsonObject)).toList();
+  // }
+
   List<T> parseJsonList<T>(
       String jsonString, T Function(Map<String, dynamic>) fromMap) {
-    List<dynamic> jsonList = jsonDecode(jsonString);
+    // List<dynamic> jsonList = jsonDecode(jsonString);
+    print(jsonDecode(jsonString).runtimeType);
+    List<Map<String, dynamic>> jsonList =
+        List<Map<String, dynamic>>.from(jsonDecode(jsonString));
+    print('jsonString');
+    print(jsonString);
+    print('jsonList');
+    print(jsonList);
     // List<T> resultList = [];
     // for (var jsonItem in jsonList) {
     //   resultList.add(fromMap(jsonItem));
@@ -144,6 +167,11 @@ class AppStateProvider with ChangeNotifier {
 
   void setStudents(List<Student> students) {
     _appState?.students = students;
+    notifyListeners();
+  }
+
+  void setClasses(List<Class> classes) {
+    _appState?.classes = classes;
     notifyListeners();
   }
 
@@ -248,6 +276,7 @@ class AppStateProvider with ChangeNotifier {
     String? currentPageString = prefs.getString('currentPage');
     String? rowsPerPageString = prefs.getString('rowsPerPage');
     String? studentsString = prefs.getString('students');
+    String? classesString = prefs.getString('classes');
     String? lecturersString = prefs.getString('lecturers');
     String? scheduleStudentWeeksString =
         prefs.getString('scheduleStudentWeeks');
@@ -278,6 +307,7 @@ class AppStateProvider with ChangeNotifier {
         currentPageString != null &&
         rowsPerPageString != null &&
         studentsString != null &&
+        classesString != null &&
         lecturersString != null &&
         scheduleStudentWeeksString != null &&
         scheduleStudentTermsString != null &&
@@ -299,6 +329,7 @@ class AppStateProvider with ChangeNotifier {
       int rowsPerPage = parseRowsPerPage(rowsPerPageString);
 
       List<Student> students = parseStudents(studentsString);
+      List<Class> classes = parseClasses(classesString);
       // List<Map<String, dynamic>> students = parseStudents(studentsString);
       List<Map<String, dynamic>> lecturers = parseLecturers(lecturersString);
       List<Map<String, dynamic>> scheduleStudentWeeks =
@@ -333,6 +364,7 @@ class AppStateProvider with ChangeNotifier {
         currentPage: currentPage,
         rowsPerPage: rowsPerPage,
         students: students,
+        classes: classes,
         lecturers: lecturers,
         scheduleStudentWeeks: scheduleStudentWeeks,
         scheduleStudentTerms: scheduleStudentTerms,
@@ -398,6 +430,10 @@ class AppStateProvider with ChangeNotifier {
     return parseJsonList(studentsString, (json) => Student.fromMap(json));
   }
 
+  List<Class> parseClasses(String classesString) {
+    return parseJsonList(classesString, (json) => Class.fromMap(json));
+  }
+
   List<Map<String, dynamic>> parseLecturers(String lecturersString) {
     return parseJsonListOld(lecturersString);
   }
@@ -437,14 +473,17 @@ class AppStateProvider with ChangeNotifier {
 //----------------------------------------------------------------
   Map<String, dynamic> parseAttendanceStudentTerms(
       String attendanceStudentTermsString) {
-    List<dynamic> attendanceStudentTermsJson =
+    Map<String, dynamic> attendanceStudentTermsJson =
         jsonDecode(attendanceStudentTermsString);
-    Map<String, dynamic> attendanceStudentTerms = {};
-    for (var attendanceStudentTermJson in attendanceStudentTermsJson) {
-      attendanceStudentTerms
-          .addAll(Map<String, dynamic>.from(attendanceStudentTermJson));
-    }
-    return attendanceStudentTerms;
+    return attendanceStudentTermsJson;
+    // List<dynamic> attendanceStudentTermsJson =
+    //     jsonDecode(attendanceStudentTermsString);
+    // Map<String, dynamic> attendanceStudentTerms = {};
+    // for (var attendanceStudentTermJson in attendanceStudentTermsJson) {
+    //   attendanceStudentTerms
+    //       .addAll(Map<String, dynamic>.from(attendanceStudentTermJson));
+    // }
+    // return attendanceStudentTerms;
   }
 
   // List<Map<String, dynamic>> parseAttendanceLecturerWeeks(
@@ -498,7 +537,9 @@ class AppStateProvider with ChangeNotifier {
     prefs.setString('tableLength', appState.tableLength.toString());
     prefs.setString('currentPage', appState.currentPage.toString());
     prefs.setString('rowsPerPage', appState.rowsPerPage.toString());
+    print('save to ' + appState.students.toString());
     prefs.setString('students', appState.students.toString());
+    prefs.setString('classes', appState.classes.toString());
     prefs.setString('lecturers', appState.lecturers.toString());
     // ----------------------------------------------------------------
     prefs.setString(
@@ -535,6 +576,7 @@ class AppStateProvider with ChangeNotifier {
     prefs.remove('currentPage');
     prefs.remove('rowsPerPage');
     prefs.remove('students');
+    prefs.remove('classes');
     prefs.remove('lecturers');
     //----------------------------------------------------------------
     prefs.remove('scheduleStudentWeeks');

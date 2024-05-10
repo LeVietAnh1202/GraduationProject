@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
@@ -22,19 +24,30 @@ class _DataTableStudentState extends State<DataTableStudent> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
+      print('initState dataTableStudent');
       fetchStudents(); // Gọi hàm setAppState sau khi initState hoàn thành
     });
   }
 
   Future<void> fetchStudents() async {
+    print('fetchStudent dataTableStudent');
     final students = await StudentService.fetchStudents(context, (value) => {});
     Provider.of<AppStateProvider>(context, listen: false)
         .setTableLength(students.length);
   }
 
-  void deleteStudent(int index) {
-    // Xử lý logic xóa sinh viên ở hàng tương ứng
-    // Ví dụ: students.removeAt(index);
+  void deleteStudent(String studentId) async {
+    final response = json.decode(await StudentService.deleteStudent(studentId));
+    if (response['statusCode'] == 200) {
+      StudentService.fetchStudents(context, (value) => {});
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response['message']),
+          backgroundColor:
+              Colors.green, // Thay đổi màu nền thành màu xanh lá cây
+        ),
+      );
+    }
   }
 
   @override
@@ -192,9 +205,10 @@ class _DataTableStudentState extends State<DataTableStudent> {
                           builder: (BuildContext context) {
                             return EditStudent(
                               studentId: student.studentId,
-                              initialStudentName: '',
-                              initialGender: '',
-                              initialBirthDate: DateTime.now(),
+                              studentName: student.studentName,
+                              classCode: student.classCode,
+                              gender: student.gender,
+                              birthDate: student.birthDate,
                             );
                           });
                     },
@@ -221,7 +235,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
                                 child: Text('Xóa'),
                                 onPressed: () {
                                   // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                  deleteStudent(index);
+                                  deleteStudent(student.studentId);
                                   Navigator.of(context).pop();
                                 },
                               ),

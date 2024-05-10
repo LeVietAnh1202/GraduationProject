@@ -7,6 +7,10 @@ const AttendanceStudentTermController = require('../controller/attendance/attend
 
 router.post("/create", StudentController.createStudent);
 
+router.post("/edit", StudentController.editStudent);
+
+router.delete("/delete/:studentId", StudentController.deleteStudent);
+
 router.post("/uploadAvatar", StudentController.uploadAvatar);
 
 router.post("/uploadVideo", StudentController.uploadVideo);

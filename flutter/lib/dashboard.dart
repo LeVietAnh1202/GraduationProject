@@ -28,11 +28,12 @@ class _DashboardState extends State<Dashboard> {
     // TODO: implement initState
     super.initState();
     AppState appState = AppState(
-      breadcrumbs: 'Quản lý lịch học',
+      breadcrumbs: 'Quản lý định danh',
       tableLength: 0,
       currentPage: 1,
       rowsPerPage: 10,
       students: [],
+      classes: [],
       lecturers: [],
       calendarView: Calendar.week,
       imagesView: ShowImage.full,

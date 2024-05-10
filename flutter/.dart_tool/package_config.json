@@ -9,25 +9,25 @@
     },
     {
       "name": "async",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.11.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "auto_size_text_pk",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/auto_size_text_pk-3.0.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/auto_size_text_pk-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "boolean_selector",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "characters",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/characters-1.3.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/characters-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -39,37 +39,37 @@
     },
     {
       "name": "clock",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "collection",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.17.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.17.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "convert",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "cross_file",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+7",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+7",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "crypto",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "csslib",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/csslib-1.0.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/csslib-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -87,7 +87,7 @@
     },
     {
       "name": "equatable",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/equatable-2.0.5",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/equatable-2.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -99,19 +99,19 @@
     },
     {
       "name": "fake_async",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/fake_async-1.3.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "fetch_api",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/fetch_api-1.0.3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/fetch_api-1.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "fetch_client",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/fetch_client-1.0.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/fetch_client-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -159,37 +159,37 @@
     },
     {
       "name": "file_selector_linux",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_linux-0.9.2+1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_linux-0.9.2+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "file_selector_macos",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_macos-0.9.3+3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_macos-0.9.3+3",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "file_selector_platform_interface",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_platform_interface-2.6.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_platform_interface-2.6.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "file_selector_web",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_web-0.9.2+1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_web-0.9.2+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "file_selector_windows",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_windows-0.9.3+1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_windows-0.9.3+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "flare_flutter",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/flare_flutter-3.0.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/flare_flutter-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -201,13 +201,13 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///C:/flutter/packages/flutter",
+      "rootUri": "file:///C:/src/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "flutter_hooks",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_hooks-0.20.5",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_hooks-0.20.5",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -231,97 +231,97 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///C:/flutter/packages/flutter_test",
+      "rootUri": "file:///C:/src/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///C:/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///C:/src/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "html",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/html-0.15.4",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/html-0.15.4",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.1.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-1.0.8",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-1.0.8",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.9+5",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.9+5",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "image_picker_for_web",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-3.0.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "image_picker_ios",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_ios-0.8.9+1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_ios-0.8.9+1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "image_picker_linux",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_linux-0.2.1+1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_linux-0.2.1+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "image_picker_macos",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_macos-0.2.1+1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_macos-0.2.1+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.9.3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.9.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "image_picker_windows",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_windows-0.2.1+1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_windows-0.2.1+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "intl",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "js",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.7",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "jwt_decoder",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/jwt_decoder-2.0.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/jwt_decoder-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -333,85 +333,85 @@
     },
     {
       "name": "logging",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "matcher",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.16",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.16",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/material_color_utilities-0.5.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/material_color_utilities-0.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "meta",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.9.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "mime",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "nested",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.8.3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.8.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider-2.1.3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider-2.1.3",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.3",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.3.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.3.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "path_provider_linux",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_linux-2.2.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_linux-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "path_provider_platform_interface",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_platform_interface-2.1.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_platform_interface-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.2.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "petitparser",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.4.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -423,7 +423,7 @@
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -483,55 +483,55 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///C:/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "socket_io_client",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_client-2.0.3+1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_client-2.0.3+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "socket_io_common",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_common-2.0.3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_common-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "source_span",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/stream_channel-2.1.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/stream_channel-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/string_scanner-1.2.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/string_scanner-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "term_glyph",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "test_api",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.6.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.6.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -555,49 +555,49 @@
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "velocity_x",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/velocity_x-4.1.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/velocity_x-4.1.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "video_player",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/video_player-2.8.5",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/video_player-2.8.5",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "video_player_android",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/video_player_android-2.4.12",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/video_player_android-2.4.12",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "video_player_avfoundation",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/video_player_avfoundation-2.5.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/video_player_avfoundation-2.5.2",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "video_player_platform_interface",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/video_player_platform_interface-6.2.2",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/video_player_platform_interface-6.2.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "video_player_web",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/video_player_web-2.1.3",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/video_player_web-2.1.3",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "vxstate",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/vxstate-2.3.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/vxstate-2.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -633,7 +633,7 @@
     },
     {
       "name": "web",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/web-0.1.4-beta",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/web-0.1.4-beta",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
@@ -651,7 +651,7 @@
     },
     {
       "name": "xml",
-      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.3.0",
+      "rootUri": "file:///C:/Users/MinhDoanh/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -662,7 +662,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2024-04-26T18:40:47.392067Z",
+  "generated": "2024-05-02T02:29:49.167859Z",
   "generator": "pub",
   "generatorVersion": "3.1.0"
 }

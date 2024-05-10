@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:html' as html;
 import 'dart:typed_data';
+import 'package:flutter_todo_app/classes/classService.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/model/classModel.dart';
+import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:http_parser/http_parser.dart';
 
 import 'package:flutter/material.dart';
@@ -11,6 +14,7 @@ import 'package:flutter_todo_app/students/studentService.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class FromAddStudent extends StatefulWidget {
@@ -47,27 +51,38 @@ class _FromAddStudentState extends State<FromAddStudent> {
   @override
   void initState() {
     super.initState();
-    classCode =
-        '10120TN'; // Set the initial value to the first item in the dropdown
-    gender = 'Nam'; // Set the initial value to the
+    classCode = '10120TN';
+    gender = 'Nam';
+    fetchClasses();
+  }
+
+  Future<void> fetchClasses() async {
+    final classes = await ClassService.fetchClasses(context, (value) => {});
+    print("classes formAdd: " + classes.toString());
+    print("provider: " +
+        Provider.of<AppStateProvider>(context, listen: false)
+            .appState!
+            .classes
+            .asMap()
+            .entries
+            .map((entry) {
+              final index = entry.key;
+              final _class = entry.value;
+
+              print(_class.classCode);
+              return DropdownMenuItem(
+                value: _class.classCode,
+                child: Text(_class.classCode),
+              );
+            })
+            .toList()
+            .toString());
   }
 
   void dispose() {
     _birthDateController.dispose();
     super.dispose();
   }
-
-  List<String> classCodes = [
-    '10120TN',
-    '101203',
-    '101201',
-    '101202',
-    '101204',
-    '101205',
-    '125201',
-    '125202',
-    // Add more class codes as needed
-  ];
   //----------------------------------------------------------------
 
   Future<String> getFileExtension(String fileName) {
@@ -103,6 +118,7 @@ class _FromAddStudentState extends State<FromAddStudent> {
     });
     return completer.future;
   }
+
   void setImage(String fe, html.FileReader reader) {
     setState(() {
       imageExtension = fe;
@@ -138,20 +154,28 @@ class _FromAddStudentState extends State<FromAddStudent> {
   }
 
   Future<void> createStudent(Map<String, String> inforStudent) async {
-    final response = await http.post(
-      Uri.http(url, createStudentAPI),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(inforStudent),
-    );
-
-    if (response.statusCode == 200) {
+    final response =
+        json.decode(await StudentService.createStudent(inforStudent));
+    if (response['statusCode'] == 200) {
       // Xử lý thành công
-      setState(() {
-        isAddingStudentSuccess = true;
-      });
+      StudentService.fetchStudents(context, (value) => {});
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response['message']),
+          backgroundColor:
+              Colors.green, // Thay đổi màu nền thành màu xanh lá cây
+        ),
+      );
+
+      clearForm();
     } else {
       // Xử lý lỗi
-      print('Lỗi khi thêm sinh viên: ${response.statusCode}');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("${response['message']}: ${response['statusCode']}"),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
@@ -266,7 +290,6 @@ class _FromAddStudentState extends State<FromAddStudent> {
                             'No file video',
                             style: TextStyle(fontSize: 14),
                           ),
-                    
                   ],
                 ),
                 SizedBox(height: 20),
@@ -302,10 +325,19 @@ class _FromAddStudentState extends State<FromAddStudent> {
                           _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
                     });
                   },
-                  items: classCodes.map((String code) {
+                  items: context
+                      .watch<AppStateProvider>()
+                      .appState!
+                      .classes
+                      .asMap()
+                      .entries
+                      .map((entry) {
+                    final index = entry.key;
+                    final _class = entry.value;
+
                     return DropdownMenuItem(
-                      value: code,
-                      child: Text(code),
+                      value: _class.classCode,
+                      child: Text(_class.classCode),
                     );
                   }).toList(),
                 ),
@@ -380,20 +412,6 @@ class _FromAddStudentState extends State<FromAddStudent> {
               await createStudent(inforStudent);
               await uploadImage(inforStudent);
               await uploadVideo(inforStudent);
-              // Perform form submission or validation
-
-              if (isAddingStudentSuccess) {
-                StudentService.fetchStudents(context, (value) => {});
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Thêm sinh viên thành công'),
-                    backgroundColor:
-                        Colors.green, // Thay đổi màu nền thành màu xanh lá cây
-                  ),
-                );
-
-                clearForm();
-              }
             } else {
               String errorMessage = 'Vui lòng nhập đầy đủ thông tin:';
               if (!(studentId?.isNotEmpty ?? false)) {
