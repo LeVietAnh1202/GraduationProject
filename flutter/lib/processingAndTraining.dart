@@ -206,7 +206,7 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
           ),
           SizedBox(height: 10),
           // VideoStreamWidget()
-          Container(width: 512, height: 256, child: VideoStreamWidget())
+          Container(width: 512, height: 256, child: VideoStream(title: "Video stream Python-Flutter",))
         ],
       ),
 

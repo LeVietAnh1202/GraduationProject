@@ -1,5 +1,5 @@
 from typing import Union
-from fastapi import FastAPI
+from fastapi import FastAPI, responses
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import StreamingResponse
@@ -13,6 +13,7 @@ import tensorflow.compat.v1 as tf
 import facenet
 import detect_face
 import pickle
+from uvicorn import run
 
 app = FastAPI()
 
@@ -228,8 +229,8 @@ def text2speech(fullname, rate=150):
     engine.say(f'Xin chào {fullname}')
     engine.runAndWait()
 
-@app.get("/connect_camera")
-async def connect_camera():
+# @app.get("/connect_camera")
+def connect_camera():
     with tf.Graph().as_default():
         sess = gpu_configuration()
         with sess.as_default():
@@ -239,14 +240,17 @@ async def connect_camera():
             images_placeholder, embeddings, phase_train_placeholder, embedding_size, classifier_filename_exp = load_model_tensor(classifier_filename=classifier_filename)
             with open(classifier_filename_exp, 'rb') as infile:
                 (model, class_names) = pickle.load(infile, encoding='latin1')
-            # cap = cv2.VideoCapture(0)
-            cap = cv2.VideoCapture('rtsp://192.168.1.162:1202/h264_ulaw.sdp')
+            # cap = cv2.VideoCapture('rtsp://192.168.1.162:1202/h264_ulaw.sdp')
+            cap = cv2.VideoCapture(0)
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
             # FRAME_WINDOWS = st.image([])
             while cap.isOpened():
+                if cv2.waitKey(1) == ord('q'):
+                    break
                 print('cap.isOpened')
                 ret, frame = cap.read()
+                cv2.imshow('frame', frame)
                 # if not ret:
                     # st.error('Đã có lỗi khi khởi động camera')
                     # st.error('Vui lòng tắt các ứng dụng khác đang sử dụng camera và khởi động lại ứng dụng')
@@ -266,27 +270,47 @@ async def connect_camera():
                 #     attendance_data = pd.concat([attendance_data, pd.DataFrame([new_mark_attendance])], ignore_index=True)
 
                 # attendance_data.to_excel(f'{datetime.datetime.now().date()}.xlsx', index=False)
-
+            cap.release()
+            cv2.destroyAllWindows()
     return {"success": True}
+# connect_camera()
+
+def _get_frame():
+    frame = np.random.randint(low=0, high=255, size=(480,640, 3), dtype='uint8')
+    return frame
 
 def generate_frames():
-    cap = cv2.VideoCapture(0)
-    if not cap.isOpened():
-        print("Error: Could not open camera.")
-        yield (b'--frame\r\nContent-Type: text/plain\r\n\r\nError: Could not open camera.\r\n')
+    # cap = cv2.VideoCapture(0)
+    # if not cap.isOpened():
+    #     print("Error: Could not open camera.")
+    #     yield (b'--frame\r\nContent-Type: text/plain\r\n\r\nError: Could not open camera.\r\n')
+    #     return
     
     while True:
-        ret, frame = cap.read()
-        if not ret:
-            print("Error: Could not read frame.")
-            break
+        # ret, frame = cap.read()
+        # if not ret:
+        #     print("Error: Could not read frame.")
+        #     break
         
-        frame = detect_faces(frame)
-        ret, buffer = cv2.imencode('.jpg', frame)
+        # frame = detect_face(frame)
+        ret, buffer = cv2.imencode('.png', _get_frame())
+        # ret, buffer = cv2.imencode('.jpg', frame)
+        if not ret:
+            print("Error: Could not encode frame.")
+            break
+        # cv2.imshow('frame', frame)
         frame_bytes = buffer.tobytes()
-        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+        # # yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+        yield (frame_bytes)
+    print('out')
+    # cap.release()
+    # cap.destroyAllWindows()
 
-@app.get('/video_feed')
-async def video_feed():
-    return StreamingResponse(generate_frames(), media_type='multipart/x-mixed-replace; boundary=frame')
+@app.get('/video_frame')
+async def video_frame():
+    return responses.StreamingResponse(generate_frames())
+    # return responses.StreamingResponse(generate_frames(), media_type='multipart/x-mixed-replace; boundary=frame')
+
+if __name__ == '__main__':
+    run("main:app", host="127.0.0.1", port=8001, reload=True)
 
