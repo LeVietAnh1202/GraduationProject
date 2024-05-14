@@ -414,6 +414,22 @@
     "$date": "2023-12-08T16:48:31.467Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6642e9b813f689d875045224"
+  },
+  "account": "1225",
+  "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+  "role": "aao",
+  "username": "Trần Đỗ Thu Hà",
+  "createdAt": {
+    "$date": "2023-12-08T16:48:31.467Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-08T16:48:31.467Z"
+  },
+  "__v": 0
 }
 
 ]

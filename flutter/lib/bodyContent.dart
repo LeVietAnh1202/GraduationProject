@@ -127,6 +127,7 @@ class _BodyContentState extends State<BodyContent> {
                 //   ),
           ),
           SizedBox(height: 16.0),
+          if (widget.sidebarKey == quanLyDinhDanh || widget.sidebarKey == danhMucSinhVien)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

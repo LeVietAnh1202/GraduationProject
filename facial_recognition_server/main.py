@@ -286,23 +286,29 @@ def generate_frames():
     #     yield (b'--frame\r\nContent-Type: text/plain\r\n\r\nError: Could not open camera.\r\n')
     #     return
     
-    while True:
-        # ret, frame = cap.read()
-        # if not ret:
-        #     print("Error: Could not read frame.")
-        #     break
+    # while True:
+    #     # ret, frame = cap.read()
+    #     # if not ret:
+    #     #     print("Error: Could not read frame.")
+    #     #     break
         
-        # frame = detect_face(frame)
-        ret, buffer = cv2.imencode('.png', _get_frame())
-        # ret, buffer = cv2.imencode('.jpg', frame)
-        if not ret:
-            print("Error: Could not encode frame.")
-            break
-        # cv2.imshow('frame', frame)
-        frame_bytes = buffer.tobytes()
-        # # yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-        yield (frame_bytes)
-    print('out')
+    #     # frame = detect_face(frame)
+    #     ret, buffer = cv2.imencode('.png', _get_frame())
+    #     # ret, buffer = cv2.imencode('.jpg', frame)
+    #     if not ret:
+    #         print("Error: Could not encode frame.")
+    #         break
+    #     # cv2.imshow('frame', frame)
+    #     frame_bytes = buffer.tobytes()
+    #     # # yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+    #     yield (frame_bytes)
+        
+    ret, buffer = cv2.imencode('.png', _get_frame())
+    if not ret:
+        print("Error: Could not encode frame.")
+        break
+    frame_bytes = buffer.tobytes()
+    yield (frame_bytes)
     # cap.release()
     # cap.destroyAllWindows()
 

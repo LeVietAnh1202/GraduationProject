@@ -129,7 +129,7 @@ class _VideoStreamState extends State<VideoStream> {
 
   final pollingRate = 10; // time between requests in ms
 
-  final url = 'http://127.0.0.1:8001/video_frame';
+  final url = 'http://192.168.1.6:8001/video_frame';
 
   bool _timeDifferenceBiggerThanSecond() {
     return DateTime.now().millisecondsSinceEpoch - lastTime > 1000;
@@ -145,8 +145,8 @@ class _VideoStreamState extends State<VideoStream> {
     } else {
       frameCounter++;
     }
-    print('response.bodyBytes: ');
-    print(response.bodyBytes);
+    // print('response.bodyBytes: ');
+    // print(response.bodyBytes);
     return Image.memory(
       response.bodyBytes,
       gaplessPlayback: true,

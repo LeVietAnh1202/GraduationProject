@@ -9,24 +9,8 @@
         "birthDate": {
           "$date": "2023-11-30T17:00:00.000Z"
         },
-        "createdAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "updatedAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "__v": 0
-      },
-      {
-        "_id": {
-          "$oid": "617985c56d8dd623d089ee97"
-        },
-        "lecturerId": "1224",
-        "lecturerName": "Phạm Minh Chuẩn",
-        "gender": "Nam",
-        "birthDate": {
-          "$date": "2023-11-30T17:00:00.000Z"
-        },
+        "specializationID": "201",
+        "position": "lecturer",
         "createdAt": {
           "$date": "2023-12-13T10:21:57.700Z"
         },
@@ -45,6 +29,8 @@
         "birthDate": {
           "$date": "2023-11-30T17:00:00.000Z"
         },
+        "specializationID": "301",
+        "position": "lecturer",
         "createdAt": {
           "$date": "2023-12-13T10:21:57.700Z"
         },
@@ -63,6 +49,88 @@
         "birthDate": {
           "$date": "2023-11-30T17:00:00.000Z"
         },
+        "specializationID": "201",
+        "position": "lecturer",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "617985c56d8dd623d089ee97"
+        },
+        "lecturerId": "1224",
+        "lecturerName": "Phạm Minh Chuẩn",
+        "gender": "Nam",
+        "birthDate": {
+          "$date": "2023-11-30T17:00:00.000Z"
+        },
+        "specializationID": "201",
+        "position": "lecturer",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "657985c56d8dd427d039ee98"
+        },
+        "lecturerId": "1225",
+        "lecturerName": "Trần Đỗ Thu Hà",
+        "gender": "Nữ",
+        "birthDate": {
+          "$date": "2023-11-30T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "position": "aao",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "657985c56d8dd427d039e100"
+        },
+        "lecturerId": "1321",
+        "lecturerName": "Nguyễn Quốc Phóng",
+        "gender": "Nam",
+        "birthDate": {
+          "$date": "2023-11-30T17:00:00.000Z"
+        },
+        "specializationID": "401",
+        "position": "lecturer",
+        "createdAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T10:21:57.700Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "657985c56d8dd427d039ee99"
+        },
+        "lecturerId": "1322",
+        "lecturerName": "Tạ Hữu Sang",
+        "gender": "Nam",
+        "birthDate": {
+          "$date": "2023-11-30T17:00:00.000Z"
+        },
+        "specializationID": "501",
+        "position": "aao",
         "createdAt": {
           "$date": "2023-12-13T10:21:57.700Z"
         },

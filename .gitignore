@@ -129,6 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-nodejs_backend/public/images/
+nodejs_backend/public/images/full_images
+nodejs_backend/public/images/crop_images
+nodejs_backend/public/images/avatar
 facial_recognition_server/train_img
 facial_recognition_server/aligned_img
