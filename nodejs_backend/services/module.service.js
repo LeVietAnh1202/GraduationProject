@@ -1,9 +1,9 @@
 const ModuleModel = require('../models/module.model');
 
 class ModuleService {
-  static async createModule(moduleID, subjectID, classCode, lecturerId) {
+  static async createModule(moduleID, subjectID, listStudentID, lecturerId) {
     try {
-      const createModule = new ModuleModel({ moduleID, subjectID, classCode, lecturerId });
+      const createModule = new ModuleModel({ moduleID, subjectID, listStudentID, lecturerId });
       return await createModule.save();
     } catch (err) {
       throw err;

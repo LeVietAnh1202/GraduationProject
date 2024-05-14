@@ -136,7 +136,7 @@ class _VideoStreamState extends State<VideoStream> {
   }
 
   Future<Image> _fetchVideoFrame() async {
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.http('127.0.0.1:8001', 'video_frame'));
 
     if (_timeDifferenceBiggerThanSecond()) {
       fpsValueNotifier.value = frameCounter;

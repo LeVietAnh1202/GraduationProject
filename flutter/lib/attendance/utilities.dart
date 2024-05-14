@@ -11,7 +11,7 @@ class Utilities {
 
     return outputFormat.format(inputFormat.parse(inputDate));
   }
-  
+
   static String formatDateString(DateTime inputDate) {
     // ignore: unused_local_variable
     final inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -64,5 +64,62 @@ class Utilities {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: onPressFunction);
+  }
+
+  // Hàm tìm vị trí của dấu \ thứ n trong chuỗi
+  static int nthIndexOf(String str, String char, int n) {
+    int count = 0;
+    for (int i = 0; i < str.length; i++) {
+      print('str[${i}]: ${str[i]} --- char: ${char}');
+      if (str[i] == char) {
+        count++;
+        if (count == n) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+
+  static String formatImageTime(String imageTime) {
+    // Tìm vị trí của dấu \ thứ tư
+    int fourthBackslashIndex = nthIndexOf(imageTime, '\\', 2);
+    if (fourthBackslashIndex == -1) {
+      print("Không tìm thấy dấu \\ thứ tư.");
+      return '';
+    }
+
+    // Tìm vị trí của dấu . đầu tiên sau dấu \ thứ tư
+    int dotIndex = imageTime.indexOf('.', fourthBackslashIndex);
+    if (dotIndex == -1) {
+      print("Không tìm thấy dấu . sau dấu \\ thứ tư.");
+      return '';
+    }
+
+    // Cắt chuỗi từ dấu \ thứ tư đến trước dấu .
+    String stringSplited =
+        imageTime.substring(fourthBackslashIndex + 1, dotIndex);
+
+    // Tìm vị trí của dấu - thứ ba
+    int thirdDashIndex = nthIndexOf(stringSplited, '-', 3);
+    if (thirdDashIndex == -1) {
+      print("Không tìm thấy dấu - thứ ba.");
+      return '';
+    }
+
+    // Thay thế dấu - thứ ba bằng dấu :
+    String result = stringSplited.substring(0, thirdDashIndex) +
+        ':' +
+        stringSplited.substring(thirdDashIndex + 1);
+
+    print('result');
+    print(result);
+
+    // Chuyển đổi từ chuỗi sang đối tượng DateTime
+    DateTime dateTime = DateTime.parse(result.replaceAll('_', 'T'));
+
+    // Định dạng lại ngày giờ theo yêu cầu
+    String formattedDate = DateFormat('dd-MM-yyyy HH:mm').format(dateTime);
+    return formattedDate;
   }
 }

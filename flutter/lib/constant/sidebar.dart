@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/faculties/dataTableFaculty.dart';
+import 'package:flutter_todo_app/faculties/dataTableMajor.dart';
+import 'package:flutter_todo_app/faculties/dataTableSpecialization.dart';
 import 'package:flutter_todo_app/lecturers/dataTableLecturer.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
@@ -38,6 +41,9 @@ class SidebarMap {
       quanLyDinhDanh: DataTableStudent(),
       '$quanLyDanhMuc > $danhMucSinhVien': DataTableStudent(),
       '$quanLyDanhMuc > $danhMucGiangVien': DataTableLecturer(),
+      '$quanLyDanhMuc > $danhMucKhoa': DataTableFaculty(),
+      '$quanLyDanhMuc > $danhMucNganh': DataTableMajor(),
+      '$quanLyDanhMuc > $danhMucChuyenNganh': DataTableSpecialization(),
     };
   }
 
@@ -50,6 +56,7 @@ class SidebarMap {
         Provider.of<AccountProvider>(context, listen: false).account!.role;
     Map<String, String> roleMap = {
       "admin": "admin",
+      "aao": "aao",
       "sinhvien": "student",
       "giangvien": "lecturer"
     };

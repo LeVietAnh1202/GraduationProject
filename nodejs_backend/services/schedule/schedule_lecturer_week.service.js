@@ -3,6 +3,7 @@ const ModuleModel = require("../../models/module.model");
 const LecturerModel = require("../../models/lecturer.model");
 const SubjectModel = require("../../models/subject.model");
 const RoomModel = require("../../models/room.model");
+const StudentModel = require("../../models/student.model");
 
 
 const ScheduleLecturerWeekModel = require("../../models/schedule/schedule_lecturer_week.model");
@@ -49,20 +50,22 @@ const ScheduleLecturerWeekModel = require("../../models/schedule/schedule_lectur
 class ScheduleLecturerWeekService {
   static async getAllScheduleLecturerWeek(lecturerId) {
     try {
-      const lecturer = await LecturerModel.findOne({ lecturerId: lecturerId });
-      console.log("lecturerId get :" + lecturerId);
-
+      // const lecturer = await LecturerModel.findOne({ lecturerId: lecturerId });
       const modules = await ModuleModel.find({ lecturerId });
       // const classCode = modules.classCode;
 
       const scheduleLecturerWeeks = [];
 
       for (const module of modules) {
-        console.log("module get :" + module);
-        const { moduleID, classCode } = module;
+        const { moduleID, listStudentID } = module;
+
+        const students = await StudentModel.find(
+          { studentId: { $in: listStudentID } },
+          'avatar studentId studentName classCode specializationID gender birthDate'
+        );
+
 
         const scheduleModels = await ScheduleModel.find({ moduleID });
-        console.log("lecturer get :" + lecturerId);
 
         for (const scheduleModel of scheduleModels) {
           const { details, classRoomID } = scheduleModel;
@@ -80,7 +83,7 @@ class ScheduleLecturerWeekService {
               const subject = await SubjectModel.findOne({ subjectID });
               const subjectName = subject.subjectName;
 
-              const scheduleLecturerWeek = new ScheduleLecturerWeekModel(day, time, moduleID, subjectName, roomName.roomName, classCode, week.week, weekTimeStart, weekTimeEnd, dayID);
+              const scheduleLecturerWeek = new ScheduleLecturerWeekModel(day, time, moduleID, subjectName, roomName.roomName, students, week.week, weekTimeStart, weekTimeEnd, dayID);
               scheduleLecturerWeeks.push(scheduleLecturerWeek);
             }
           }

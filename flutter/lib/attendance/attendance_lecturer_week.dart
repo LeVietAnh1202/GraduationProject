@@ -43,8 +43,6 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
         // attendances = context.watch<AppStateProvider>()
         .appState!
         .attendanceLecturerWeeks;
-    print('attendances: ');
-    print(attendances);
     // if (attendances.isEmpty) {
     AttendanceService.fetchAttendanceLecturerWeeks(
         context,
@@ -52,7 +50,6 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
               _isLoading = value;
             }),
         widget.dayID);
-    print('fetchAttendanceLecturerWeeks');
     // } else {
     //   setState(() {
     //     _isLoading = false;
@@ -104,7 +101,34 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                     DataColumn(
                       label: Expanded(
                         child: Text(
+                          'Mã sinh viên',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
                           'Họ và tên',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Giới tính',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Lớp',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -137,6 +161,7 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                         print('entry attendance lecturer week datacell');
                         // print(entry);
                         // final index = entry.keys.first;
+                        print('entry');
                         print(entry);
                         // final studentAttendance = entry.value['studentAttendance'];
                         return DataRow(
@@ -148,10 +173,13 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                                 textAlign: TextAlign.right,
                               ),
                             )), // Thêm cột số thứ tự
-                            DataCell(Text(entry.keys.first)),
+                            DataCell(Center(child: Text(entry['studentId']))),
+                            DataCell(Text(entry['studentName'])),
+                            DataCell(Center(child: Text(entry['gender']))),
+                            DataCell(Center(child: Text(entry['classCode']))),
                             DataCell(Container(
                               height: 200,
-                              width: 450,
+                              width: 630,
                               child: ListView.builder(
                                 scrollDirection: Axis
                                     .horizontal, // Hiển thị ảnh theo chiều ngang
@@ -162,7 +190,8 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                                   return Padding(
                                     padding: EdgeInsets.symmetric(
                                         horizontal:
-                                            5), // Khoảng cách giữa các ảnh
+                                            10), // Khoảng cách giữa các ảnh
+
                                     child: Column(
                                       children: [
                                         Image.network(
@@ -170,7 +199,11 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                                           width: 100, // Chiều rộng của ảnh
                                           height: 100, // Chiều cao của ảnh
                                         ),
-                                        Text('2023-11-21 07:15'),
+                                        Text(
+                                          Utilities.formatImageTime(
+                                              entry['attendanceImages'][index]),
+                                          style: TextStyle(fontSize: 13),
+                                        ),
                                       ],
                                     ),
                                   );
@@ -234,8 +267,10 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                                 //   ),
                                 // )
                                 ),
-                            DataCell(
-                                Utilities.attendanceIcon(entry.values.first)),
+                            DataCell(Center(
+                              child: Utilities.attendanceIcon(
+                                  entry['attendanceValue']),
+                            )),
                           ],
                         );
                       })

@@ -10,8 +10,6 @@ class ScheduleLecturerTermService {
   static async getAllScheduleLecturerTerm(lecturerId) {
     try {
       const lecturer = await LecturerModel.findOne({ lecturerId: lecturerId })
-      console.log("lecturer get :" + lecturer);
-      console.log("global.currentTime: " + global.currentTime)
 
       const modules = await ModuleModel.find({ lecturerId });
       // const classCode = modules.classCode;
@@ -27,11 +25,9 @@ class ScheduleLecturerTermService {
         for (const scheduleModel of scheduleModels) {
           const { dateStart, dateEnd, classRoomID, dayTerm } = scheduleModel;
           const roomName = await RoomModel.findOne({ classRoomID });
-          console.log("dayTerm.day: " + dayTerm)
+          
           const day = dayTerm[0].day;
           const time = dayTerm[0].time;
-          console.log("dayTerm.day: " + day)
-          console.log("dayTerm.Time: " + time)
 
           const subjectID = module.subjectID;
           const subject = await SubjectModel.findOne({ subjectID });

@@ -20,28 +20,7 @@ class _DataTableLecturerState extends State<DataTableLecturer> {
     LecturerService.fetchLecturers(context);
   }
 
-  // Future<void> fetchStudents() async {
-  //   final response = await http.get(Uri.http(url, getAllStudentAPI));
-
-  //   if (response.statusCode == 200) {
-  //     final data = jsonDecode(response.body) as Map<String, dynamic>;
-  //     final studentList = data['data'] as List<dynamic>;
-  //     print("Student list: " + studentList.toString());
-
-  //     // setState(() {
-  //     //   students = studentList.cast<Map<String, dynamic>>();
-  //     // });
-
-  //     Provider.of<AppStateProvider>(context, listen: false)
-  //         .setStudents(studentList.cast<Map<String, dynamic>>());
-  //   } else {
-  //     throw Exception('Failed to fetch students');
-  //   }
-  // }
-
   void deleteLecturer(int index) {
-    // Xử lý logic xóa sinh viên ở hàng tương ứng
-    // Ví dụ: students.removeAt(index);
   }
 
   @override

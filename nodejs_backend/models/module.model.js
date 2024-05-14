@@ -12,9 +12,9 @@ const moduleSchema = new Schema({
     type: String,
     required: true,
   },
-  classCode: {
-    type: String,
-    required: true,
+  listStudentID: {
+    type: [String],  
+    required: true,  
   },
   lecturerId: {
     type: String,

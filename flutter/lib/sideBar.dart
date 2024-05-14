@@ -48,7 +48,7 @@ class _SidebarState extends State<Sidebar> {
                 context.read<AppStateProvider>().setBreadcrumbs(quanLyDinhDanh);
               },
             ),
-            if (role == 'admin')
+            if (role == 'admin' || role == 'aao')
               ListTile(
                 leading: Icon(Icons.book),
                 title: Text('Quản lý học phần'),
@@ -58,13 +58,42 @@ class _SidebarState extends State<Sidebar> {
                       .setBreadcrumbs('Quản lý học phần');
                 },
               ),
-            if (role == 'admin')
+
+            if (role == 'admin' || role == 'aao')
               ExpansionTile(
                 leading: Icon(Icons.menu),
                 title: Text('$quanLyDanhMuc'),
                 children: [
+                  if (role == 'admin')
+                    ListTile(
+                      // leading: Icon(Icons.account_balance),
+                      title: Text(danhMucKhoa),
+                      onTap: () {
+                        context
+                            .read<AppStateProvider>()
+                            .setBreadcrumbs('$quanLyDanhMuc > $danhMucKhoa');
+                      },
+                    ),
+                    ListTile(
+                      // leading: Icon(Icons.account_balance),
+                      title: Text(danhMucNganh),
+                      onTap: () {
+                        context
+                            .read<AppStateProvider>()
+                            .setBreadcrumbs('$quanLyDanhMuc > $danhMucNganh');
+                      },
+                    ),
+                    ListTile(
+                      // leading: Icon(Icons.account_balance),
+                      title: Text(danhMucChuyenNganh),
+                      onTap: () {
+                        context
+                            .read<AppStateProvider>()
+                            .setBreadcrumbs('$quanLyDanhMuc > $danhMucChuyenNganh');
+                      },
+                    ),
                   ListTile(
-                    title: Text('$danhMucSinhVien'),
+                    title: Text(danhMucSinhVien),
                     onTap: () {
                       context
                           .read<AppStateProvider>()
@@ -72,7 +101,7 @@ class _SidebarState extends State<Sidebar> {
                     },
                   ),
                   ListTile(
-                    title: Text('Danh mục giảng viên'),
+                    title: Text(danhMucGiangVien),
                     onTap: () {
                       context
                           .read<AppStateProvider>()

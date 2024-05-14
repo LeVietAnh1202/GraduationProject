@@ -21,7 +21,7 @@ class DetailStudent extends StatefulWidget {
 
 class _DetailStudentState extends State<DetailStudent> {
   List<Student> students = [];
-  late VideoPlayerController _controller;
+  // late VideoPlayerController _controller;
 
   bool isVideoPlaying = false;
   bool isVideoEnded = false;

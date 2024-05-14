@@ -73,53 +73,57 @@ class _DtScheduleLecturerWeekState extends State<DtScheduleLecturerWeek> {
     ]; // Danh sách tuần
     schedules =
         context.watch<AppStateProvider>().appState!.scheduleLecturerWeeks;
-    print(schedules);
 
-    return !schedules.isEmpty ? DropdownButton<String>(
-      value: selectedWeek,
-      onChanged: onWeekSelected,
-      items: weeks
-          .map((week) {
-            final schedule = schedules.firstWhere(
-              (schedule) => schedule['week'] == week,
-              orElse: () => {'weekTimeStart': '', 'weekTimeEnd': ''},
-            );
-            final weekTimeStart = schedule['weekTimeStart'];
-            final weekTimeEnd = schedule['weekTimeEnd'];
+    return !schedules.isEmpty
+        ? DropdownButton<String>(
+            value: selectedWeek,
+            onChanged: onWeekSelected,
+            items: weeks
+                .map((week) {
+                  final schedule = schedules.firstWhere(
+                    (schedule) => schedule['week'] == week,
+                    orElse: () => {'weekTimeStart': '', 'weekTimeEnd': ''},
+                  );
+                  final weekTimeStart = schedule['weekTimeStart'];
+                  final weekTimeEnd = schedule['weekTimeEnd'];
 
-            print('weekTimeStart: $weekTimeStart');
-            print('weekTimeEnd: $weekTimeEnd');
-            String formattedStart = '';
-            String formattedEnd = '';
+                  print('weekTimeStart: $weekTimeStart');
+                  print('weekTimeEnd: $weekTimeEnd');
+                  String formattedStart = '';
+                  String formattedEnd = '';
 
-            if (weekTimeStart != '' && weekTimeEnd != '') {
-              final inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-              final outputFormat = DateFormat('dd/MM/yyyy');
+                  if (weekTimeStart != '' && weekTimeEnd != '') {
+                    final inputFormat =
+                        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    final outputFormat = DateFormat('dd/MM/yyyy');
 
-              formattedStart =
-                  outputFormat.format(inputFormat.parse(weekTimeStart));
-              formattedEnd =
-                  outputFormat.format(inputFormat.parse(weekTimeEnd));
+                    formattedStart =
+                        outputFormat.format(inputFormat.parse(weekTimeStart));
+                    formattedEnd =
+                        outputFormat.format(inputFormat.parse(weekTimeEnd));
 
-              return DropdownMenuItem<String>(
-                value: week,
-                child: Row(
-                  children: [
-                    Text('Tuần $week'),
-                    SizedBox(width: 8), // Khoảng cách giữa tuần và ngày bắt đầu
-                    Text(
-                        '(Từ $formattedStart - Đến $formattedEnd)'), // Hiển thị ngày bắt đầu và ngày kết thúc
-                  ],
-                ),
-              );
-            } else {
-              return null;
-            }
-          })
-          .where((item) => item != null)
-          .toList()
-          .cast<DropdownMenuItem<String>>(),
-    ) : DropdownButton<String>(value: '', onChanged: (value) {}, items: []);
+                    return DropdownMenuItem<String>(
+                      value: week,
+                      child: Row(
+                        children: [
+                          Text('Tuần $week'),
+                          SizedBox(
+                              width:
+                                  8), // Khoảng cách giữa tuần và ngày bắt đầu
+                          Text(
+                              '(Từ $formattedStart - Đến $formattedEnd)'), // Hiển thị ngày bắt đầu và ngày kết thúc
+                        ],
+                      ),
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+                .where((item) => item != null)
+                .toList()
+                .cast<DropdownMenuItem<String>>(),
+          )
+        : DropdownButton<String>(value: '', onChanged: (value) {}, items: []);
   }
 
   @override
@@ -177,14 +181,6 @@ class _DtScheduleLecturerWeekState extends State<DtScheduleLecturerWeek> {
                             ),
                           ),
                         ),
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Tên lớp',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
 
                         DataColumn(
                           label: Expanded(
@@ -203,7 +199,6 @@ class _DtScheduleLecturerWeekState extends State<DtScheduleLecturerWeek> {
                           .asMap()
                           .entries
                           .map((entry) {
-                            final index = entry.key;
                             final schedule = entry.value;
 
                             if (schedule['week'] == selectedWeek) {
@@ -219,8 +214,6 @@ class _DtScheduleLecturerWeekState extends State<DtScheduleLecturerWeek> {
                                       child: Text(schedule['subjectName']))),
                                   DataCell(Center(
                                       child: Text(schedule['roomName']))),
-                                  DataCell(Center(
-                                      child: Text(schedule['classCode']))),
                                   DataCell(
                                     Row(
                                       mainAxisAlignment:
@@ -241,9 +234,6 @@ class _DtScheduleLecturerWeekState extends State<DtScheduleLecturerWeek> {
                                                       children: [
                                                         Row(
                                                           children: [
-                                                            Text("Lớp: " +
-                                                                schedule[
-                                                                    'classCode']),
                                                             SizedBox(width: 20),
                                                             Text("Tiết: " +
                                                                 schedule[

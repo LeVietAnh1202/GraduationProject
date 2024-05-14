@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/classes/classService.dart';
 import 'package:flutter_todo_app/constant/config.dart';
-import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/students/studentService.dart';
 import 'package:intl/intl.dart';
@@ -33,7 +32,6 @@ class EditStudent extends StatefulWidget {
 class _EditStudentState extends State<EditStudent> {
   // late TextEditingController _studentNameController;
   late String studentId;
-  TextEditingController _studentIdController = TextEditingController();
   String? studentName;
   TextEditingController _studentNameController = TextEditingController();
 
@@ -52,27 +50,23 @@ class _EditStudentState extends State<EditStudent> {
         text: DateFormat('dd/MM/yyyy').format(widget.birthDate));
     // Kiểm tra nếu giới tính ban đầu là null, đặt giới tính mặc định là "Nam"
     studentId = widget.studentId;
-    gender = widget.gender ?? 'Nam';
+    gender = widget.gender;
     classCode = widget.classCode;
     birthDate = widget.birthDate;
     fetchClasses();
   }
 
   Future<void> fetchClasses() async {
-    final classes = await ClassService.fetchClasses(context, (value) => {});
+    await ClassService.fetchClasses(context, (value) => {});
   }
 
   bool _checkFormValidity() {
     final studentIdPattern = RegExp(r'^\d{8}$');
     final studentNamePattern = RegExp(r'^[a-zA-ZÀ-ỹ ]+$');
     final dateFormat = DateFormat('dd/MM/yyyy');
-    final formattedDate = dateFormat.format(birthDate ?? DateTime.now());
+    final formattedDate = dateFormat.format(birthDate);
 
-    print(studentIdPattern.hasMatch(studentId ?? ''));
-    print(studentNamePattern.hasMatch(studentName ?? ''));
-    print((formattedDate == _birthDateController.text));
-
-    return studentIdPattern.hasMatch(studentId ?? '') &&
+    return studentIdPattern.hasMatch(studentId) &&
         studentNamePattern.hasMatch(studentName ?? '') &&
         (formattedDate == _birthDateController.text);
   }
@@ -105,7 +99,7 @@ class _EditStudentState extends State<EditStudent> {
     } else {
       // Xử lý lỗi
       print(
-          'Lỗi khi cập nhât thông tin sinh viên: ${response.statusCode} - ${response.body}');
+          'Lỗi khi cập nhật thông tin sinh viên: ${response.statusCode} - ${response.body}');
     }
   }
 
@@ -152,7 +146,6 @@ class _EditStudentState extends State<EditStudent> {
                       .asMap()
                       .entries
                       .map((entry) {
-                    final index = entry.key;
                     final _class = entry.value;
 
                     return DropdownMenuItem(

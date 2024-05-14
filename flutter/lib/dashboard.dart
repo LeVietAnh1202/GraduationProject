@@ -31,9 +31,10 @@ class _DashboardState extends State<Dashboard> {
       breadcrumbs: 'Quản lý định danh',
       tableLength: 0,
       currentPage: 1,
-      rowsPerPage: 10,
+      rowsPerPage: rowsPerPage,
       students: [],
       classes: [],
+      faculties: [],
       lecturers: [],
       calendarView: Calendar.week,
       imagesView: ShowImage.full,
@@ -43,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
       scheduleLecturerTerms: [],
       scheduleAdminWeeks: [],
       scheduleAdminTerms: [],
-      // - - - - - - - - - - - - - - - -
+      // - - - - - - - - - - - - - - - -y7xs
       attendanceStudentTerms: {},
       attendanceLecturerWeeks: {},
       attendanceLecturerTerms: [],

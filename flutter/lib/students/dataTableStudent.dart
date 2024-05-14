@@ -24,13 +24,11 @@ class _DataTableStudentState extends State<DataTableStudent> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      print('initState dataTableStudent');
       fetchStudents(); // Gọi hàm setAppState sau khi initState hoàn thành
     });
   }
 
   Future<void> fetchStudents() async {
-    print('fetchStudent dataTableStudent');
     final students = await StudentService.fetchStudents(context, (value) => {});
     Provider.of<AppStateProvider>(context, listen: false)
         .setTableLength(students.length);
@@ -132,7 +130,6 @@ class _DataTableStudentState extends State<DataTableStudent> {
         // Add other columns as needed
       ],
       rows: currentPageStudents.asMap().entries.map((entry) {
-        final index = entry.key;
         final student = entry.value;
 
         return DataRow(

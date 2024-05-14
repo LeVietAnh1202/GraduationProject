@@ -31,11 +31,12 @@ class AttendanceLecturerWeekService {
         const { studentId, date, time } = attendanceItem;
         const student = await StudentModel.findOne({ studentId }).exec();;
         const studentName = student.studentName;
+        const classCode = student.classCode;
+        const gender = student.gender;
 
         const studentImagePath = path.join(__dirname, '..', '..', 'public', 'images', 'attendance_images', dayID, `${studentId}`);
 
         const studentImages = [];
-        console.log(studentImagePath)
         // "G:\\Ki_8\\GraduationProject\\nodejs_backend\\public\\images\\attendance_images\\1008\\10120620"
 
         // Kiểm tra xem thư mục tồn tại hay không
@@ -48,12 +49,11 @@ class AttendanceLecturerWeekService {
           files.forEach(file => {
             const imagePath = path.join(dayID, `${studentId}`, file);
             studentImages.push(imagePath);
-            console.log(studentImagePath)
           });
         }
         else { console.log('Student no exists') }
 
-        studentAttendances.push({ [studentName]: attendanceValue, 'attendanceImages': studentImages });
+        studentAttendances.push({ 'studentId': studentId, 'studentName': studentName, 'classCode': classCode, 'gender': gender, 'attendanceValue': attendanceValue, 'attendanceImages': studentImages });
       }
 
       const attendanceLecturerTerm = new AttendanceLecturerWeekModel(studentAttendances, numberOfOnTimeSessions, numberOfLateSessions, numberOfBreaksSessions);

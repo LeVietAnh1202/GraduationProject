@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/classModel.dart';
+import 'package:flutter_todo_app/model/facultyModel.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class AppState {
-  Map<String, dynamic>? _parsedSharedPreferencesData;
+  // Map<String, dynamic>? _parsedSharedPreferencesData;
 
   String breadcrumbs;
   Calendar calendarView;
@@ -19,6 +20,7 @@ class AppState {
   int rowsPerPage;
   List<Student> students;
   List<Class> classes;
+  List<Faculty> faculties;
   // List<Map<String, dynamic>> students;
   List<Map<String, dynamic>> lecturers;
   List<Map<String, dynamic>> scheduleStudentWeeks;
@@ -45,6 +47,7 @@ class AppState {
     required this.rowsPerPage,
     required this.students,
     required this.classes,
+    required this.faculties,
     required this.lecturers,
     required this.scheduleStudentWeeks,
     required this.scheduleStudentTerms,
@@ -175,6 +178,11 @@ class AppStateProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setFaculties(List<Faculty> faculties) {
+    _appState?.faculties = faculties;
+    notifyListeners();
+  }
+
   // void setStudents(List<Map<String, dynamic>> students) {
   //   _appState?.students = students;
   //   notifyListeners();
@@ -277,6 +285,7 @@ class AppStateProvider with ChangeNotifier {
     String? rowsPerPageString = prefs.getString('rowsPerPage');
     String? studentsString = prefs.getString('students');
     String? classesString = prefs.getString('classes');
+    String? facultiesString = prefs.getString('faculties');
     String? lecturersString = prefs.getString('lecturers');
     String? scheduleStudentWeeksString =
         prefs.getString('scheduleStudentWeeks');
@@ -308,6 +317,7 @@ class AppStateProvider with ChangeNotifier {
         rowsPerPageString != null &&
         studentsString != null &&
         classesString != null &&
+        facultiesString != null &&
         lecturersString != null &&
         scheduleStudentWeeksString != null &&
         scheduleStudentTermsString != null &&
@@ -330,6 +340,7 @@ class AppStateProvider with ChangeNotifier {
 
       List<Student> students = parseStudents(studentsString);
       List<Class> classes = parseClasses(classesString);
+      List<Faculty> faculties = parseFaculties(facultiesString);
       // List<Map<String, dynamic>> students = parseStudents(studentsString);
       List<Map<String, dynamic>> lecturers = parseLecturers(lecturersString);
       List<Map<String, dynamic>> scheduleStudentWeeks =
@@ -365,6 +376,7 @@ class AppStateProvider with ChangeNotifier {
         rowsPerPage: rowsPerPage,
         students: students,
         classes: classes,
+        faculties: faculties,
         lecturers: lecturers,
         scheduleStudentWeeks: scheduleStudentWeeks,
         scheduleStudentTerms: scheduleStudentTerms,
@@ -432,6 +444,10 @@ class AppStateProvider with ChangeNotifier {
 
   List<Class> parseClasses(String classesString) {
     return parseJsonList(classesString, (json) => Class.fromMap(json));
+  }
+
+  List<Faculty> parseFaculties(String facultiesString) {
+    return parseJsonList(facultiesString, (json) => Faculty.fromMap(json));
   }
 
   List<Map<String, dynamic>> parseLecturers(String lecturersString) {
@@ -540,6 +556,7 @@ class AppStateProvider with ChangeNotifier {
     print('save to ' + appState.students.toString());
     prefs.setString('students', appState.students.toString());
     prefs.setString('classes', appState.classes.toString());
+    prefs.setString('faculties', appState.faculties.toString());
     prefs.setString('lecturers', appState.lecturers.toString());
     // ----------------------------------------------------------------
     prefs.setString(
@@ -577,6 +594,7 @@ class AppStateProvider with ChangeNotifier {
     prefs.remove('rowsPerPage');
     prefs.remove('students');
     prefs.remove('classes');
+    prefs.remove('faculties');
     prefs.remove('lecturers');
     //----------------------------------------------------------------
     prefs.remove('scheduleStudentWeeks');

@@ -229,7 +229,6 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
                           .asMap()
                           .entries
                           .map((entry) {
-                            final index = entry.key;
                             final schedule = entry.value;
 
                             if (schedule['week'] == selectedWeek) {

@@ -23,8 +23,6 @@ class BodyContent extends StatefulWidget {
 
 class _BodyContentState extends State<BodyContent> {
   int currentPage = 1;
-  int rowsPerPage = 10; // Số lượng hàng mỗi trang
-
   // late String dataTableScheduleKey;
   // String getDataTableScheduleKey(BuildContext context) {
 
@@ -72,7 +70,8 @@ class _BodyContentState extends State<BodyContent> {
     print('sidebarMap: ');
     print(sidebarMap);
 
-    int numberOfPages = Provider.of<AppStateProvider>(context, listen: false).getNumberOfPages();
+    int numberOfPages = Provider.of<AppStateProvider>(context, listen: false)
+        .getNumberOfPages();
 
     return Container(
       width: MediaQuery.of(context).size.width - sideBarWidth,
@@ -86,46 +85,45 @@ class _BodyContentState extends State<BodyContent> {
             SingleChoice(option: SegmentButtonOption.calendar),
           if (widget.sidebarKey == quanLyLichHoc) SizedBox(height: 16.0),
           Container(
-            width: MediaQuery.of(context).size.width - sideBarWidth,
-            // child: DtScheduleStudentTerm(),
-            // child: DtScheduleLecturerTerm(),
+              width: MediaQuery.of(context).size.width - sideBarWidth,
+              // child: DtScheduleStudentTerm(),
+              // child: DtScheduleLecturerTerm(),
 
-            child: sidebarMap.containsKey()
-                ? Container(
-                    child: sidebarMap.getSidebarMap(),
-                  )
-                // ? DtScheduleStudentWeek()
-                : 
-                ProcessingAndTraining()
-                // DataTable(
-                //     columns: [
-                //       DataColumn(
-                //         label: Expanded(
-                //           child: Text(
-                //             'Column 1',
-                //             textAlign: TextAlign.center,
-                //           ),
-                //         ),
-                //       ),
-                //       DataColumn(
-                //         label: Expanded(
-                //           child: Text(
-                //             'Column 2',
-                //             textAlign: TextAlign.center,
-                //           ),
-                //         ),
-                //       )
-                //     ],
-                //     rows: [
-                //       DataRow(
-                //         cells: [
-                //           DataCell(Center(child: Text("234324242"))),
-                //           DataCell(Center(child: Text("31111114"))),
-                //         ],
-                //       ),
-                //     ],
-                //   ),
-          ),
+              child: sidebarMap.containsKey()
+                  ? Container(
+                      child: sidebarMap.getSidebarMap(),
+                    )
+                  // ? DtScheduleStudentWeek()
+                  : ProcessingAndTraining()
+              // DataTable(
+              //     columns: [
+              //       DataColumn(
+              //         label: Expanded(
+              //           child: Text(
+              //             'Column 1',
+              //             textAlign: TextAlign.center,
+              //           ),
+              //         ),
+              //       ),
+              //       DataColumn(
+              //         label: Expanded(
+              //           child: Text(
+              //             'Column 2',
+              //             textAlign: TextAlign.center,
+              //           ),
+              //         ),
+              //       )
+              //     ],
+              //     rows: [
+              //       DataRow(
+              //         cells: [
+              //           DataCell(Center(child: Text("234324242"))),
+              //           DataCell(Center(child: Text("31111114"))),
+              //         ],
+              //       ),
+              //     ],
+              //   ),
+              ),
           SizedBox(height: 16.0),
           if (widget.sidebarKey == quanLyDinhDanh || widget.sidebarKey == danhMucSinhVien)
           Row(
@@ -148,7 +146,9 @@ class _BodyContentState extends State<BodyContent> {
                 },
               ),
               SizedBox(width: 10),
-              for (int currentPage = 1; currentPage <= numberOfPages; currentPage++)
+              for (int currentPage = 1;
+                  currentPage <= numberOfPages;
+                  currentPage++)
                 InkWell(
                     onTap: () {
                       // Handle pagination: Go to page i

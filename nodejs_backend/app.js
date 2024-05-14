@@ -5,6 +5,8 @@ const UserRoute = require("./routes/user.routes");
 const StudentRoute = require('./routes/student.router');
 const LecturerRoute = require('./routes/lecturer.router');
 const ClassRoute = require('./routes/class.router');
+const FacultyRoute = require('./routes/faculty.router');
+const ScheduleRoute = require('./routes/schedule.router');
 const LoadImageRoute = require('./routes/load_image.router');
 const path = require('path');
 
@@ -35,6 +37,9 @@ app.use("/user", UserRoute);
 app.use("/student", StudentRoute);
 app.use("/lecturer", LecturerRoute);
 app.use("/class", ClassRoute);
+app.use("/faculty", FacultyRoute);
+app.use("/schedule", ScheduleRoute);
+app.use("/schedule", ScheduleRoute);
 
 app.use('/images', LoadImageRoute);
 

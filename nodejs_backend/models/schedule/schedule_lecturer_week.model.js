@@ -46,13 +46,13 @@ const db = require('../../config/db');
 
 
 class ScheduleLecturerWeek {
-    constructor(day, time, moduleID, subjectName, roomName, classCode, week, weekTimeStart, weekTimeEnd, dayID) {
+    constructor(day, time, moduleID, subjectName, roomName, listStudents, week, weekTimeStart, weekTimeEnd, dayID) {
         this.day = day;
         this.time = time;
         this.moduleID = moduleID;
         this.subjectName = subjectName;
         this.roomName = roomName;
-        this.classCode = classCode;
+        this.listStudents = listStudents;
         this.week = week;
         this.weekTimeStart = weekTimeStart;
         this.weekTimeEnd = weekTimeEnd;
