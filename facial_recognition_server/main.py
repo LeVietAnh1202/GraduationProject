@@ -1,10 +1,11 @@
 from typing import Union
-from fastapi import FastAPI, responses
+from fastapi import FastAPI, responses, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import StreamingResponse
 
 from preprocess import preprocesses
+from service.video_process import video_process
 from classifier import training
 import os
 import cv2
@@ -14,6 +15,8 @@ import facenet
 import detect_face
 import pickle
 from uvicorn import run
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 
@@ -31,6 +34,7 @@ static_directory = "train_img"
 
 # Mount thư mục tĩnh vào đường dẫn /train_img
 app.mount("/train_img", StaticFiles(directory=static_directory), name="train_img")
+app.mount("/public", StaticFiles(directory='public'), name="public")
 
 @app.get("/")
 def read_root():
@@ -39,6 +43,18 @@ def read_root():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
+
+class Video(BaseModel):
+    video_path: str
+
+@app.post("/crop_video")
+async def crop_video(video: Video):
+    images_path = './public/images/full_images'
+    print(video.video_path)
+    obj = video_process(video.video_path, images_path)
+    image_count = -1
+    image_count = obj.auto_capture_save_images(300, 200)
+    return {"image_count": image_count}
 
 @app.get("/process")
 async def process_images():
@@ -279,44 +295,44 @@ def _get_frame():
     frame = np.random.randint(low=0, high=255, size=(480,640, 3), dtype='uint8')
     return frame
 
-def generate_frames():
-    # cap = cv2.VideoCapture(0)
-    # if not cap.isOpened():
-    #     print("Error: Could not open camera.")
-    #     yield (b'--frame\r\nContent-Type: text/plain\r\n\r\nError: Could not open camera.\r\n')
-    #     return
+# def generate_frames():
+#     # cap = cv2.VideoCapture(0)
+#     # if not cap.isOpened():
+#     #     print("Error: Could not open camera.")
+#     #     yield (b'--frame\r\nContent-Type: text/plain\r\n\r\nError: Could not open camera.\r\n')
+#     #     return
     
-    # while True:
-    #     # ret, frame = cap.read()
-    #     # if not ret:
-    #     #     print("Error: Could not read frame.")
-    #     #     break
+#     # while True:
+#     #     # ret, frame = cap.read()
+#     #     # if not ret:
+#     #     #     print("Error: Could not read frame.")
+#     #     #     break
         
-    #     # frame = detect_face(frame)
-    #     ret, buffer = cv2.imencode('.png', _get_frame())
-    #     # ret, buffer = cv2.imencode('.jpg', frame)
-    #     if not ret:
-    #         print("Error: Could not encode frame.")
-    #         break
-    #     # cv2.imshow('frame', frame)
-    #     frame_bytes = buffer.tobytes()
-    #     # # yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-    #     yield (frame_bytes)
+#     #     # frame = detect_face(frame)
+#     #     ret, buffer = cv2.imencode('.png', _get_frame())
+#     #     # ret, buffer = cv2.imencode('.jpg', frame)
+#     #     if not ret:
+#     #         print("Error: Could not encode frame.")
+#     #         break
+#     #     # cv2.imshow('frame', frame)
+#     #     frame_bytes = buffer.tobytes()
+#     #     # # yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+#     #     yield (frame_bytes)
         
-    ret, buffer = cv2.imencode('.png', _get_frame())
-    if not ret:
-        print("Error: Could not encode frame.")
-        break
-    frame_bytes = buffer.tobytes()
-    yield (frame_bytes)
-    # cap.release()
-    # cap.destroyAllWindows()
+#     ret, buffer = cv2.imencode('.png', _get_frame())
+#     if not ret:
+#         print("Error: Could not encode frame.")
+#         break
+#     frame_bytes = buffer.tobytes()
+#     yield (frame_bytes)
+#     # cap.release()
+#     # cap.destroyAllWindows()
 
-@app.get('/video_frame')
-async def video_frame():
-    return responses.StreamingResponse(generate_frames())
-    # return responses.StreamingResponse(generate_frames(), media_type='multipart/x-mixed-replace; boundary=frame')
+# @app.get('/video_frame')
+# async def video_frame():
+#     return responses.StreamingResponse(generate_frames())
+#     # return responses.StreamingResponse(generate_frames(), media_type='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
-    run("main:app", host="127.0.0.1", port=8001, reload=True)
+    run("main:app", host="192.168.1.4", port=8001, reload=True)
 
