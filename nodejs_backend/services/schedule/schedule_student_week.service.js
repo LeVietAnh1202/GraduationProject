@@ -62,10 +62,9 @@ class ScheduleStudentWeekService {
 
       for (const module of modules) {
         console.log("module get :" + module);
-        const { moduleID, lecturerId } = module;
-
+        const { moduleID, lecturerID } = module;
         const scheduleModels = await ScheduleModel.find({ moduleID });
-        const lecturer = await LecturerModel.findOne({ lecturerId });
+        const lecturer = await LecturerModel.findOne({ lecturerID });
         console.log("lecturer get :" + lecturer);
 
         for (const scheduleModel of scheduleModels) {

@@ -48,6 +48,13 @@ class _SidebarState extends State<Sidebar> {
                 context.read<AppStateProvider>().setBreadcrumbs(quanLyDinhDanh);
               },
             ),
+            ListTile(
+              leading: Icon(Icons.task),
+              title: Text(quanLyDiemDanh),
+              onTap: () {
+                context.read<AppStateProvider>().setBreadcrumbs(quanLyDiemDanh);
+              },
+            ),
             if (role == 'admin' || role == 'aao')
               ListTile(
                 leading: Icon(Icons.book),

@@ -7,7 +7,7 @@ const path = require('path');
 const fs = require('fs');
 
 class AttendanceLecturerWeekService {
-  static async getAllAttendanceLecturerWeek(lecturerId, dayID) {
+  static async getAllAttendanceLecturerWeek(lecturerID, dayID) {
     try {
       const studentAttendances = [];
 

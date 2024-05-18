@@ -13,11 +13,10 @@ class FacultyService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final facultiesList = (data['data']);
-      print("facultiesList list: " + facultiesList.toString());
+      
       final List<Faculty> faculties = (facultiesList as List<dynamic>)
           .map((e) => Faculty.fromMap(e))
           .toList();
-      print("Faculties: " + faculties.toString());
 
       Provider.of<AppStateProvider>(context, listen: false)
           .setFaculties(faculties);
@@ -25,7 +24,7 @@ class FacultyService {
 
       return faculties;
     } else {
-      throw Exception('Failed to fetch students');
+      throw Exception('Failed to fetch faculties');
     }
   }
 }

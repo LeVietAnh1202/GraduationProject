@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/model/scheduleAdminTermModel.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:http/http.dart' as http;
@@ -96,10 +97,9 @@ class ScheduleService with ChangeNotifier {
 
   static Future<void> fetchScheduleLecturerWeeks(
       BuildContext context, ValueChanged<bool> isLoading) async {
-    final lecturerId =
+    final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('lecturerId: ' + lecturerId!);
-    final bodyData = {'lecturerId': lecturerId};
+    final bodyData = {'lecturerID': lecturerID};
     http
         .post(
       Uri.http(url, getAllScheduleLecturerWeekAPI),
@@ -131,10 +131,10 @@ class ScheduleService with ChangeNotifier {
 
   static Future<void> fetchScheduleLecturerTerms(
       BuildContext context, ValueChanged<bool> isLoading) async {
-    final lecturerId =
+    final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('lecturerId: ' + lecturerId!);
-    final bodyData = {'lecturerId': lecturerId};
+    print('lecturerID: ' + lecturerID!);
+    final bodyData = {'lecturerID': lecturerID};
     http
         .post(
       Uri.http(url, getAllScheduleLecturerTermAPI),
@@ -160,6 +160,41 @@ class ScheduleService with ChangeNotifier {
     }).catchError((error) {
       // Xử lý lỗi nếu có
       print('Error: $error');
+    });
+  }
+
+  static Future<List<ScheduleAdminTerm>> fetchScheduleAdminTerms(
+      BuildContext context,
+      ValueChanged<bool> isLoading,
+      String lecturerID,
+      String subjectID,
+      String semesterID) async {
+    final bodyData = {
+      'lecturerID': lecturerID,
+      'subjectID': subjectID,
+      'semesterID': semesterID
+    };
+    isLoading(true);
+    return http
+        .post(
+      Uri.http(url, getAllScheduleAdminTermAPI),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(bodyData),
+    )
+        .then((response) {
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body) as Map<String, dynamic>;
+        final scheduleAdminTermsList = data['data'] as List<dynamic>;
+        final scheduleAdminTerms = scheduleAdminTermsList
+            .map((e) => ScheduleAdminTerm.fromMap(e))
+            .toList();
+        Provider.of<AppStateProvider>(context, listen: false)
+            .setScheduleAdminTerms(scheduleAdminTerms);
+        isLoading(false);
+        return scheduleAdminTerms;
+      } else {
+        throw Exception('Failed to fetch scheduleAdminTerms');
+      }
     });
   }
 }

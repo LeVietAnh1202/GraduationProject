@@ -1,17 +1,17 @@
 const LecturerModel = require("../models/lecturer.model");
 class LecturerService {
-    static async createLecturer(lecturerId, lecturerName, gender, birthDate) {
+    static async createLecturer(lecturerID, lecturerName, gender, birthDate) {
         try {
-            const createLecturer = new StudentModel({ lecturerId, lecturerName, gender, birthDate });
+            const createLecturer = new StudentModel({ lecturerID, lecturerName, gender, birthDate });
             return await createLecturer.save();
         } catch (err) {
             throw err;
         }
     }
-    static async getLecturerByLecturerID(lecturerId) {
-        console.log('HTHI LecturerID:', lecturerId);
+    static async getLecturerByLecturerID(lecturerID) {
+        console.log('HTHI LecturerID:', lecturerID);
         try {
-            return await LecturerModel.findOne({ lecturerId });
+            return await LecturerModel.findOne({ lecturerID });
         } catch (err) {
             console.log(err);
         }

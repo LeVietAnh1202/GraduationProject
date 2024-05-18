@@ -15,8 +15,8 @@ class FromAddLecturer extends StatefulWidget {
 
 class _FromAddLecturerState extends State<FromAddLecturer> {
   // Define variables to store the form input values
-  String? lecturerId;
-  TextEditingController _lecturerIdController = TextEditingController();
+  String? lecturerID;
+  TextEditingController _lecturerIDController = TextEditingController();
   String? lecturerName;
   TextEditingController _lecturerNameController = TextEditingController();
   String? gender;
@@ -38,7 +38,7 @@ class _FromAddLecturerState extends State<FromAddLecturer> {
 
   Future<void> createLecturer() async {
     final data = {
-      'lecturerId': _lecturerIdController.text,
+      'lecturerID': _lecturerIDController.text,
       'lecturerName': _lecturerNameController.text,
       'gender': gender,
       'birthDate': birthDate?.toIso8601String(),
@@ -63,8 +63,8 @@ class _FromAddLecturerState extends State<FromAddLecturer> {
 
   void clearForm() {
     setState(() {
-      lecturerId = null;
-      _lecturerIdController.text = '';
+      lecturerID = null;
+      _lecturerIDController.text = '';
       lecturerName = null;
       _lecturerNameController.text = '';
       gender = 'Nam';
@@ -75,12 +75,12 @@ class _FromAddLecturerState extends State<FromAddLecturer> {
   }
 
   bool _checkFormValidity() {
-    final lecturerIdPattern = RegExp(r'^\d{8}$');
+    final lecturerIDPattern = RegExp(r'^\d{8}$');
     final lecturerNamePattern = RegExp(r'^[a-zA-Z ]+$');
     final dateFormat = DateFormat('dd/MM/yyyy');
     final formattedDate = dateFormat.format(birthDate ?? DateTime.now());
 
-    return lecturerIdPattern.hasMatch(lecturerId ?? '') &&
+    return lecturerIDPattern.hasMatch(lecturerID ?? '') &&
         lecturerNamePattern.hasMatch(lecturerName ?? '') &&
         (birthDate != null) &&
         (formattedDate == _birthDateController.text);
@@ -97,10 +97,10 @@ class _FromAddLecturerState extends State<FromAddLecturer> {
             children: [
               TextFormField(
                 decoration: InputDecoration(labelText: 'Mã giảng viên'),
-                controller: _lecturerIdController,
+                controller: _lecturerIDController,
                 onChanged: (value) {
                   setState(() {
-                    lecturerId = value;
+                    lecturerID = value;
                     isFormValid =
                         _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
                   });
@@ -198,9 +198,9 @@ class _FromAddLecturerState extends State<FromAddLecturer> {
               }
             } else {
               String errorMessage = 'Vui lòng nhập đầy đủ thông tin:';
-              if (!(lecturerId?.isNotEmpty ?? false)) {
+              if (!(lecturerID?.isNotEmpty ?? false)) {
                 errorMessage += '\n- Mã giảng viên không được để trống';
-              } else if (!RegExp(r'^\d{8}$').hasMatch(lecturerId!)) {
+              } else if (!RegExp(r'^\d{8}$').hasMatch(lecturerID!)) {
                 errorMessage +=
                     '\n- Mã giảng viên không đúng định dạng số hoặc không đủ 8 số';
               }

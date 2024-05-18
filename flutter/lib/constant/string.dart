@@ -5,6 +5,7 @@ const String danhMucSinhVien = 'Danh mục sinh viên';
 const String danhMucGiangVien = 'Danh mục giảng viên';
 const String quanLyLichHoc = 'Quản lý lịch học';
 const String quanLyDinhDanh = 'Quản lý định danh';
+const String quanLyDiemDanh = 'Quản lý điểm danh';
 const String danhMucKhoa = 'Danh mục khoa';
 const String danhMucNganh = 'Danh mục ngành';
 const String danhMucChuyenNganh = 'Danh mục chuyên ngành';
@@ -14,7 +15,6 @@ const String studentTerm = 'studentTerm';
 const String lecturerWeek = 'lecturerWeek';
 const String lecturerTerm = 'lecturerTerm';
 const String adminTerm = 'adminTerm';
-const String adminWeek = 'adminWeek';
 
 const String URLNodeJSServer = 'http://${url}';
 const String URLNodeJSServer_RaspberryPi = 'http://${url_ras}';

@@ -13,10 +13,14 @@ const moduleSchema = new Schema({
     required: true,
   },
   listStudentID: {
-    type: [String],  
-    required: true,  
+    type: [String],
+    required: true,
   },
-  lecturerId: {
+  lecturerID: {
+    type: String,
+    required: true,
+  },
+  semesterID: {
     type: String,
     required: true,
   },

@@ -81,7 +81,7 @@ class _BodyContentState extends State<BodyContent> {
         children: [
           Breadcrumb(),
           SizedBox(height: 16.0),
-          if (widget.sidebarKey == quanLyLichHoc)
+          if (widget.sidebarKey == quanLyLichHoc && role != 'admin')
             SingleChoice(option: SegmentButtonOption.calendar),
           if (widget.sidebarKey == quanLyLichHoc) SizedBox(height: 16.0),
           Container(
@@ -125,64 +125,69 @@ class _BodyContentState extends State<BodyContent> {
               //   ),
               ),
           SizedBox(height: 16.0),
-          if (widget.sidebarKey == quanLyDinhDanh || widget.sidebarKey == danhMucSinhVien)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(Icons.first_page),
-                onPressed: () {
-                  // Handle pagination: Go to the first page
-                  Provider.of<AppStateProvider>(context, listen: false)
-                      .setCurrentPage(1);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  // Handle pagination: Go to the previous page
-                  Provider.of<AppStateProvider>(context, listen: false)
-                      .goToPreviousPage();
-                },
-              ),
-              SizedBox(width: 10),
-              for (int currentPage = 1;
-                  currentPage <= numberOfPages;
-                  currentPage++)
-                InkWell(
-                    onTap: () {
-                      // Handle pagination: Go to page i
-                      Provider.of<AppStateProvider>(context, listen: false)
-                          .setCurrentPage(currentPage);
-                    },
-                    child: currentPage ==
-                            Provider.of<AppStateProvider>(context,
-                                    listen: false)
-                                .appState!
-                                .currentPage
-                        ? pageNumberBlock(
-                            currentPage, Colors.blue, Colors.white)
-                        : pageNumberBlock(
-                            currentPage, Colors.white, Colors.black)),
-              SizedBox(width: 10),
-              IconButton(
-                icon: Icon(Icons.arrow_forward),
-                onPressed: () {
-                  // Handle pagination: Go to the next page
-                  Provider.of<AppStateProvider>(context, listen: false)
-                      .goToNextPage();
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.last_page),
-                onPressed: () {
-                  // Handle pagination: Go to the last page
-                  Provider.of<AppStateProvider>(context, listen: false)
-                      .goToLastPage();
-                },
-              ),
-            ],
-          ),
+          if (widget.sidebarKey == quanLyDinhDanh ||
+              widget.sidebarKey == '$quanLyDanhMuc > $danhMucSinhVien' ||
+              widget.sidebarKey == '$quanLyDanhMuc > $danhMucKhoa' ||
+              widget.sidebarKey == '$quanLyDanhMuc > $danhMucNganh' ||
+              widget.sidebarKey == '$quanLyDanhMuc > $danhMucChuyenNganh' ||
+              widget.sidebarKey == '$quanLyDanhMuc > $danhMucGiangVien')
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.first_page),
+                  onPressed: () {
+                    // Handle pagination: Go to the first page
+                    Provider.of<AppStateProvider>(context, listen: false)
+                        .setCurrentPage(1);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    // Handle pagination: Go to the previous page
+                    Provider.of<AppStateProvider>(context, listen: false)
+                        .goToPreviousPage();
+                  },
+                ),
+                SizedBox(width: 10),
+                for (int currentPage = 1;
+                    currentPage <= numberOfPages;
+                    currentPage++)
+                  InkWell(
+                      onTap: () {
+                        // Handle pagination: Go to page i
+                        Provider.of<AppStateProvider>(context, listen: false)
+                            .setCurrentPage(currentPage);
+                      },
+                      child: currentPage ==
+                              Provider.of<AppStateProvider>(context,
+                                      listen: false)
+                                  .appState!
+                                  .currentPage
+                          ? pageNumberBlock(
+                              currentPage, Colors.blue, Colors.white)
+                          : pageNumberBlock(
+                              currentPage, Colors.white, Colors.black)),
+                SizedBox(width: 10),
+                IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  onPressed: () {
+                    // Handle pagination: Go to the next page
+                    Provider.of<AppStateProvider>(context, listen: false)
+                        .goToNextPage();
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.last_page),
+                  onPressed: () {
+                    // Handle pagination: Go to the last page
+                    Provider.of<AppStateProvider>(context, listen: false)
+                        .goToLastPage();
+                  },
+                ),
+              ],
+            ),
         ],
       ),
     );

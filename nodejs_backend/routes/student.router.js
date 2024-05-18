@@ -23,6 +23,10 @@ router.post("/getAllScheduleTerm", ScheduleStudentTermController.getAllScheduleS
 
 router.post("/getAllAttendanceTerm", AttendanceStudentTermController.getAllAttendanceStudentTerm);
 
+router.post("/getStudentByModuleID", StudentController.getStudentByModuleID);
+
+
+
 
 
 

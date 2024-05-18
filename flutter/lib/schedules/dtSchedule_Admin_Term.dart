@@ -1,517 +1,241 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_todo_app/attendance/attendance_student_term.dart';
+import 'package:flutter_todo_app/model/scheduleAdminTermModel.dart';
+import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
+import 'package:flutter_todo_app/students/dataTableStudentbyModule.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class DtScheduleAdminTerm extends StatefulWidget {
-  const DtScheduleAdminTerm({Key? key});
+  String lecturerID;
+  String subjectID;
+  String semesterID;
+  DtScheduleAdminTerm(
+      {Key? key,
+      required this.lecturerID,
+      required this.subjectID,
+      required this.semesterID});
 
   @override
   State<DtScheduleAdminTerm> createState() => _DtScheduleAdminTermState();
 }
 
 class _DtScheduleAdminTermState extends State<DtScheduleAdminTerm> {
-  List<Map<String, dynamic>> schedules = [];
+  List<ScheduleAdminTerm> scheduleAdminTerms = [];
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    ScheduleService.fetchStudents(context);
+    Future.delayed(Duration.zero, () {
+      fetchScheduleAdminTerms(); // Gọi hàm setAppState sau khi initState hoàn thành
+    });
+    print(
+        'initState DtScheduleAdminTerm ${widget.lecturerID}, ${widget.semesterID}, ${widget.subjectID}');
   }
 
-  // Future<void> fetchStudents() async {
-  //   final response = await http.get(Uri.http(url, getAllStudentAPI));
-
-  //   if (response.statusCode == 200) {
-  //     final data = jsonDecode(response.body) as Map<String, dynamic>;
-  //     final studentList = data['data'] as List<dynamic>;
-  //     print("Student list: " + studentList.toString());
-
-  //     // setState(() {
-  //     //   students = studentList.cast<Map<String, dynamic>>();
-  //     // });
-
-  //     Provider.of<AppStateProvider>(context, listen: false)
-  //         .setStudents(studentList.cast<Map<String, dynamic>>());
-  //   } else {
-  //     throw Exception('Failed to fetch students');
-  //   }
-  // }
+  Future<void> fetchScheduleAdminTerms() async {
+    final scheduleAdminTerms =
+        await ScheduleService.fetchScheduleAdminTerms(context, (bool value) {
+      setState(() {
+        _isLoading = value;
+      });
+    }, widget.lecturerID, widget.subjectID, widget.semesterID);
+    Provider.of<AppStateProvider>(context, listen: false)
+        .setTableLength(scheduleAdminTerms.length);
+  }
 
   void deleteSchedule(int index) {
     // Xử lý logic xóa sinh viên ở hàng tương ứng
     // Ví dụ: students.removeAt(index);
   }
 
+  int scheduleDayComparator(String a, String b) {
+    return a.compareTo(b);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: [
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'STT',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Mã Lịch học',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Mã học phần',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Tên môn',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Thời gian học',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Phòng học',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Tác vụ',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        // Add other columns as needed
-      ],
-      rows: [
-        DataRow(
-          cells: [
-            DataCell(Center(child: Text("2"))),
-            DataCell(Center(child: Text("31111114"))),
-            DataCell(Center(child: Text("20000001"))),
-            DataCell(Center(child: Text("Môn 1"))),
-            DataCell(Center(child: Text("1-4"))),
-            DataCell(Center(child: Text("P302"))),
-
-            DataCell(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Xử lý logic sửa sinh viên ở hàng tương ứng
-                      // Ví dụ: editStudent(index);
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Xóa sinh viên'),
-                            content: Text(
-                                'Bạn có chắc chắn muốn xóa sinh viên này?'),
-                            actions: [
-                              TextButton(
-                                child: Text('Hủy'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text('Xóa'),
-                                onPressed: () {
-                                  // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                  // deleteSchedule(index);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
+    // fetchScheduleAdminTerms();
+    print(
+        'DtScheduleAdminTerm ${widget.lecturerID}, ${widget.semesterID}, ${widget.subjectID}');
+    return Container(
+      child: _isLoading
+          ? Container(
+              alignment: Alignment.center,
+              width: 60,
+              height: 60,
+              child: Container(
+                child: CircularProgressIndicator(),
+                margin: EdgeInsets.only(bottom: 5, top: 10),
               ),
-            ),
-            // Add other cells as needed
-          ],
-        ),
-        DataRow(
-          cells: [
-            DataCell(Center(child: Text("3"))),
-            DataCell(Center(child: Text("31111114"))),
-            DataCell(Center(child: Text("20000001"))),
-            DataCell(Center(child: Text("Môn 1"))),
-
-            DataCell(Center(child: Text("1-5"))),
-            DataCell(Center(child: Text("P302"))),
-
-            DataCell(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Xử lý logic sửa sinh viên ở hàng tương ứng
-                      // Ví dụ: editStudent(index);
-                    },
+            )
+          : DataTable(
+              columns: [
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Thứ',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Xóa sinh viên'),
-                            content: Text(
-                                'Bạn có chắc chắn muốn xóa sinh viên này?'),
-                            actions: [
-                              TextButton(
-                                child: Text('Hủy'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text('Xóa'),
-                                onPressed: () {
-                                  // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                  // deleteSchedule(index);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Tiết',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Mã học phần',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Tên môn',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Số tín chỉ',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Phòng học',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Thời gian',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Tên giảng viên',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Tác vụ',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  // Add other columns as needed
                 ],
-              ),
-            ),
-            // Add other cells as needed
-          ],
-        ),
-        DataRow(
-          cells: [
-            DataCell(Center(child: Text("3"))),
-            DataCell(Center(child: Text("31111115"))),
-            DataCell(Center(child: Text("20000002"))),
-            DataCell(Center(child: Text("Môn 1"))),
+              rows: context
+                  .watch<AppStateProvider>()
+                  .appState!
+                  .scheduleAdminTerms
+                  .asMap()
+                  .entries
+                  .map((entry) {
+                    final schedule = entry.value;
+                    final dateStart = schedule.dateStart;
+                    final dateEnd = schedule.dateEnd;
 
-            DataCell(Center(child: Text("9-11"))),
-            DataCell(Center(child: Text("P503"))),
+                    // final inputFormat =
+                    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    final outputFormat = DateFormat('dd/MM/yyyy');
 
-            DataCell(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Xử lý logic sửa sinh viên ở hàng tương ứng
-                      // Ví dụ: editStudent(index);
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Xóa sinh viên'),
-                            content: Text(
-                                'Bạn có chắc chắn muốn xóa sinh viên này?'),
-                            actions: [
-                              TextButton(
-                                child: Text('Hủy'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text('Xóa'),
-                                onPressed: () {
-                                  // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                  // deleteSchedule(index);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
+                    final formattedStart = outputFormat.format(dateStart);
+                    final formattedEnd = outputFormat.format(dateEnd);
+
+                    return DataRow(
+                      cells: [
+                        DataCell(Center(child: Text(schedule.day))),
+                        DataCell(Center(child: Text(schedule.time))),
+                        DataCell(Center(child: Text(schedule.moduleID))),
+                        DataCell(Center(child: Text(schedule.subjectName))),
+                        DataCell(Center(
+                            child: Text(schedule.numberOfCredits.toString()))),
+                        DataCell(Center(child: Text(schedule.roomName))),
+                        DataCell(Center(
+                            child:
+                                Text('${formattedStart} - ${formattedEnd}'))),
+                        DataCell(Center(child: Text(schedule.lecturerName))),
+                        DataCell(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _isLoading
+                                  ? Container(
+                                      child: CircularProgressIndicator(),
+                                      margin:
+                                          EdgeInsets.only(bottom: 5, top: 10),
+                                    )
+                                  : IconButton(
+                                      icon: Icon(Icons.library_books),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(schedule.subjectName),
+                                              content: DataTableStudentByModule(
+                                                  moduleID: schedule.moduleID),
+                                              actions: [
+                                                TextButton(
+                                                  child: Text('Hủy'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                                // TextButton(
+                                                //   child: Text('Xem'),
+                                                //   onPressed: () {
+                                                //     // Xử lý logic xóa sinh viên ở hàng tương ứng
+                                                //     // deleteStudent(index);
+                                                //     Navigator.of(context).pop();
+                                                //   },
+                                                // ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
                             ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-            // Add other cells as needed
-          ],
-        ),
-        DataRow(
-          cells: [
-            DataCell(Center(child: Text("5"))),
-            DataCell(Center(child: Text("31111112"))),
-            DataCell(Center(child: Text("20000004"))),
-            DataCell(Center(child: Text("Môn 1"))),
-
-            DataCell(Center(child: Text("2-5"))),
-            DataCell(Center(child: Text("P304"))),
-
-            DataCell(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Xử lý logic sửa sinh viên ở hàng tương ứng
-                      // Ví dụ: editStudent(index);
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Xóa sinh viên'),
-                            content: Text(
-                                'Bạn có chắc chắn muốn xóa sinh viên này?'),
-                            actions: [
-                              TextButton(
-                                child: Text('Hủy'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text('Xóa'),
-                                onPressed: () {
-                                  // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                  // deleteSchedule(index);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-            // Add other cells as needed
-          ],
-        ),
-        DataRow(
-          cells: [
-            DataCell(Center(child: Text("6"))),
-            DataCell(Center(child: Text("31111113"))),
-            DataCell(Center(child: Text("20000002"))),
-            DataCell(Center(child: Text("Môn 1"))),
-
-            DataCell(Center(child: Text("8-11"))),
-            DataCell(Center(child: Text("P206"))),
-
-            DataCell(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Xử lý logic sửa sinh viên ở hàng tương ứng
-                      // Ví dụ: editStudent(index);
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Xóa sinh viên'),
-                            content: Text(
-                                'Bạn có chắc chắn muốn xóa sinh viên này?'),
-                            actions: [
-                              TextButton(
-                                child: Text('Hủy'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text('Xóa'),
-                                onPressed: () {
-                                  // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                  // deleteSchedule(index);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-            // Add other cells as needed
-          ],
-        ),
-        DataRow(
-          cells: [
-            DataCell(Center(child: Text("6"))),
-            DataCell(Center(child: Text("31111112"))),
-            DataCell(Center(child: Text("20000001"))),
-            DataCell(Center(child: Text("Môn 1"))),
-
-            DataCell(Center(child: Text("9-11"))),
-            DataCell(Center(child: Text("P503"))),
-
-            DataCell(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Xử lý logic sửa sinh viên ở hàng tương ứng
-                      // Ví dụ: editStudent(index);
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Xóa sinh viên'),
-                            content: Text(
-                                'Bạn có chắc chắn muốn xóa sinh viên này?'),
-                            actions: [
-                              TextButton(
-                                child: Text('Hủy'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text('Xóa'),
-                                onPressed: () {
-                                  // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                  // deleteSchedule(index);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-            // Add other cells as needed
-          ],
-        ),
-        DataRow(
-          cells: [
-            DataCell(Center(child: Text("7"))),
-            DataCell(Center(child: Text("31111118"))),
-            DataCell(Center(child: Text("20000003"))),
-            DataCell(Center(child: Text("Môn 1"))),
-
-            DataCell(Center(child: Text("1-4"))),
-            DataCell(Center(child: Text("P208"))),
-
-            DataCell(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Xử lý logic sửa sinh viên ở hàng tương ứng
-                      // Ví dụ: editStudent(index);
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Xóa sinh viên'),
-                            content: Text(
-                                'Bạn có chắc chắn muốn xóa sinh viên này?'),
-                            actions: [
-                              TextButton(
-                                child: Text('Hủy'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text('Xóa'),
-                                onPressed: () {
-                                  // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                  // deleteSchedule(index);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-            // Add other cells as needed
-          ],
-        ),
-      ],
+                          ),
+                        ),
+                      ],
+                    );
+                  })
+                  .whereType<DataRow>()
+                  .toList(growable: false)
+                ..sort((a, b) => scheduleDayComparator(
+                    ((a.cells[0].child as Center).child as Text)
+                        .data
+                        .toString(),
+                    ((b.cells[0].child as Center).child as Text)
+                        .data
+                        .toString()))),
     );
   }
 }

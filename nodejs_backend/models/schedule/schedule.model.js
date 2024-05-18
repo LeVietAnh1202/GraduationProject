@@ -2,13 +2,21 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const db = require('../../config/db');
 
-const dayTermSchema = new Schema({
+const dayTermsSchema = new Schema({
     day: {
         type: String,
         required: true,
     },
     time: {
         type: String,
+        required: true,
+    },
+    weekTimeStart: {
+        type: Date,
+        required: true,
+    },
+    weekTimeEnd: {
+        type: Date,
         required: true,
     },
 });
@@ -55,7 +63,7 @@ const scheduleSchema = new Schema({
 
         required: true,
     },
-    dayTerm: [dayTermSchema
+    dayTerms: [dayTermsSchema
     ],
     dateStart: {
         type: Date,

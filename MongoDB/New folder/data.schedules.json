@@ -6,10 +6,18 @@
         
         "scheduleID": "411111",
         "moduleID": "211263",
-        "dayTerm":[
+        "dayTerms":[
 {
   "day":"2",
-                "time":"1-4"
+                "time":"1-4",
+                "weekTimeStart": "2023-11-27T00:00:00Z",
+                "weekTimeEnd": "2023-12-17T00:00:00Z"
+},
+{
+  "day":"4",
+                "time":"8-11",
+                "weekTimeStart": "2023-12-18T00:00:00Z",
+                "weekTimeEnd": "2023-12-31T00:00:00Z"
 }
         ],
         "dateStart":"2023-11-27T00:00:00.000Z",
@@ -60,8 +68,8 @@
             "weekTimeEnd": "2023-12-24T00:00:00Z",
             "weekDetails": [
               {
-                "day":"2",
-                "time":"1-4",
+                "day":"4",
+                "time":"8-11",
                 "dayID":"1004"
               }
 
@@ -73,8 +81,8 @@
             "weekTimeEnd": "2023-12-31T00:00:00Z",
             "weekDetails": [
               {
-                "day":"2",
-                "time":"1-4",
+                "day":"4",
+                "time":"8-11",
                 "dayID":"1005"
               }
 
@@ -99,10 +107,12 @@
         
         "scheduleID": "411112",
         "moduleID": "231129",
-        "dayTerm":[
+        "dayTerms":[
 {
   "day":"3",
-                "time":"1-4"
+                "time":"1-4",
+                "weekTimeStart": "2023-11-06T00:00:00Z",
+                "weekTimeEnd": "2023-12-31T00:00:00Z"
 }],
         "dateStart":"2023-11-06T00:00:00.000Z",
         "dateEnd":"2023-12-31T00:00:00.000Z",
@@ -228,10 +238,12 @@
         
         "scheduleID": "411113",
         "moduleID": "221167",
-        "dayTerm":[
+        "dayTerms":[
 {
   "day":"7",
-                "time":"1-4"
+                "time":"1-4",
+                "weekTimeStart": "2023-11-06T00:00:00Z",
+                "weekTimeEnd": "2023-12-31T00:00:00Z"
 }],
         "dateStart":"2023-11-06T00:00:00.000Z",
         "dateEnd":"2023-12-31T00:00:00.000Z",
@@ -358,10 +370,12 @@
         
         "scheduleID": "411114",
         "moduleID": "211011",
-        "dayTerm":[
+        "dayTerms":[
 {
   "day":"5",
-                "time":"1-4"
+                "time":"1-4",
+                "weekTimeStart": "2023-10-16T00:00:00Z",
+                "weekTimeEnd": "2023-12-31T00:00:00Z"
 }],
         "dateStart":"2023-10-16T00:00:00.000Z",
         "dateEnd":"2023-12-31T00:00:00.000Z",
@@ -527,10 +541,12 @@
         
         "scheduleID": "411115",
         "moduleID": "215667",
-        "dayTerm":[
+        "dayTerms":[
 {
   "day":"4",
-                "time":"8-11"
+                "time":"8-11",
+                "weekTimeStart": "2023-11-06T00:00:00Z",
+                "weekTimeEnd": "2023-12-31T00:00:00Z"
 }],
         "dateStart":"2023-11-06T00:00:00.000Z",
         "dateEnd":"2023-12-31T00:00:00.000Z",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/attendance/attendance_select_lecturer_term.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/faculties/dataTableFaculty.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_todo_app/schedules/dtSchedule_Lecturer_Term.dart';
 import 'package:flutter_todo_app/schedules/dtSchedule_Lecturer_Week.dart';
 import 'package:flutter_todo_app/schedules/dtSchedule_Student_Term.dart';
 import 'package:flutter_todo_app/schedules/dtSchedule_Student_Week.dart';
+import 'package:flutter_todo_app/schedules/schedule_Admin_Widget.dart';
 import 'package:flutter_todo_app/students/dataTableStudent.dart';
 import 'package:provider/provider.dart';
 
@@ -32,13 +34,13 @@ class SidebarMap {
       studentTerm: DtScheduleStudentTerm(),
       lecturerTerm: DtScheduleLecturerTerm(),
       lecturerWeek: DtScheduleLecturerWeek(),
-      adminTerm: DtScheduleAdminTerm(),
-      adminWeek: DtScheduleAdminWeek(),
+      adminTerm: ScheduleAdminWidget(),
     };
 
     sidebarMap = {
       quanLyLichHoc: getDataTableSchedule(context),
       quanLyDinhDanh: DataTableStudent(),
+      quanLyDiemDanh: ScheduleSelection(),
       '$quanLyDanhMuc > $danhMucSinhVien': DataTableStudent(),
       '$quanLyDanhMuc > $danhMucGiangVien': DataTableLecturer(),
       '$quanLyDanhMuc > $danhMucKhoa': DataTableFaculty(),
@@ -62,7 +64,7 @@ class SidebarMap {
     };
 
     dataTableScheduleKey =
-        "${roleMap[role] ?? ''}${calendarView == Calendar.week ? 'Week' : 'Term'}";
+        "${roleMap[role] ?? ''}${(roleMap[role] == 'admin' ? 'Term' : (calendarView == Calendar.week ? 'Week' : 'Term'))}";
 
     print('dataTableScheduleKey: ' + dataTableScheduleKey);
 

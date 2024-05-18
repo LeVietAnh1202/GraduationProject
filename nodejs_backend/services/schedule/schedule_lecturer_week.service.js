@@ -48,10 +48,10 @@ const ScheduleLecturerWeekModel = require("../../models/schedule/schedule_lectur
 
 
 class ScheduleLecturerWeekService {
-  static async getAllScheduleLecturerWeek(lecturerId) {
+  static async getAllScheduleLecturerWeek(lecturerID) {
     try {
-      // const lecturer = await LecturerModel.findOne({ lecturerId: lecturerId });
-      const modules = await ModuleModel.find({ lecturerId });
+      // const lecturer = await LecturerModel.findOne({ lecturerID: lecturerID });
+      const modules = await ModuleModel.find({ lecturerID });
       // const classCode = modules.classCode;
 
       const scheduleLecturerWeeks = [];

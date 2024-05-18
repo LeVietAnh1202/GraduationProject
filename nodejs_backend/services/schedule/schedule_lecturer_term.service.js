@@ -7,11 +7,11 @@ const RoomModel = require("../../models/room.model");
 const ScheduleLecturerTermModel = require("../../models/schedule/schedule_lecturer_term.model");
 
 class ScheduleLecturerTermService {
-  static async getAllScheduleLecturerTerm(lecturerId) {
+  static async getAllScheduleLecturerTerm(lecturerID) {
     try {
-      const lecturer = await LecturerModel.findOne({ lecturerId: lecturerId })
+      const lecturer = await LecturerModel.findOne({ lecturerID: lecturerID })
 
-      const modules = await ModuleModel.find({ lecturerId });
+      const modules = await ModuleModel.find({ lecturerID });
       // const classCode = modules.classCode;
 
       const scheduleLecturerTerms = [];

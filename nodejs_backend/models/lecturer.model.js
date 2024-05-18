@@ -4,7 +4,7 @@ const db = require('../config/db');
 
 // Định nghĩa schema và model cho sinh viên
 const lecturerSchema = new Schema({
-    lecturerId: {
+    lecturerID: {
         type: String,
         required: [true, "Student ID is required"],
         unique: true,

@@ -13,7 +13,7 @@ class StudentService {
     print('fetchStudents function');
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
-      final studentsList = (data['data']);
+      final studentsList = data['data'];
       // print("Student list: " + studentsList.toString());
       print('studentsList');
       print(studentsList);
@@ -30,6 +30,34 @@ class StudentService {
     } else {
       throw Exception('Failed to fetch students');
     }
+  }
+
+  static Future<List<Student>> fetchStudentByModuleID(BuildContext context,
+      ValueChanged<bool> isLoading, String moduleID) async {
+    final bodyData = {'moduleID': moduleID};
+    return http
+        .post(
+      Uri.http(url, getStudentByModuleIDAPI),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(bodyData),
+    )
+        .then((response) {
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body) as Map<String, dynamic>;
+        final studentList = data['data'] as List<dynamic>;
+        final students = studentList.map((e) => Student.fromMap(e)).toList();
+        print("fetchStudentByModuleIDs: " + students.toString());
+        Provider.of<AppStateProvider>(context, listen: false)
+            .setStudents(students);
+        isLoading(false);
+        return students;
+      } else {
+        throw Exception('Failed to fetchStudentByModuleID');
+      }
+    }).catchError((error) {
+      // Xử lý lỗi nếu có
+      print('Error: $error');
+    });
   }
 
   static Future<String> createStudent(Map<String, String> inforStudent) async {

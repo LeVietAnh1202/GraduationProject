@@ -1,4 +1,5 @@
 const StudentModel = require("../models/student.model");
+const ModuleModel = require("../models/module.model");
 
 const multer = require('multer');
 const fs = require('fs');
@@ -73,6 +74,45 @@ class StudentService {
         }
     }
 
+
+    static async getStudentByFaculty(lecturerID) {
+        try {
+            // Bước 1: Lấy facultyID từ lecturerID
+            const lecturer = await LecturerModel.findOne({ lecturerID });
+            if (!lecturer) {
+                throw new Error("Lecturer not found");
+            }
+            const facultyID = lecturer.facultyID;
+
+            // Bước 2: Lấy danh sách các chuyên ngành từ facultyID
+            const faculty = await FacultyModel.findOne({ facultyID });
+            if (!faculty) {
+                throw new Error("Faculty not found");
+            }
+            // Duyệt qua các ngành để lấy danh sách các chuyên ngành
+            const specializationIDs = [];
+            for (const major of faculty.majors) {
+                for (const specialization of major.specializations) {
+                    specializationIDs.push(specialization.specializationID);
+                }
+            }
+
+            if (specializationIDs.length === 0) {
+                throw new Error("No specializations found for the given facultyID");
+            }
+
+            // Bước 3: Lấy danh sách sinh viên từ danh sách specializationIDs
+            const students = await StudentModel.find({ specializationID: { $in: specializationIDs } });
+
+            return students;
+        } catch (err) {
+            console.log(err);
+            throw err;  // Ném lỗi ra để có thể xử lý ở nơi khác nếu cần
+        }
+    }
+
+
+
     static uploadAvatar(req) {
         // // Cấu hình Multer để tải lên avatar
         // const storage = multer.diskStorage({
@@ -140,6 +180,29 @@ class StudentService {
             });
         });
     }
+
+    static async getStudentByModuleID(moduleID) {
+        try {
+            // const { listStudentID } = await ModuleModel.findOne({ moduleID: moduleID });
+            const module = await ModuleModel.findOne({ moduleID: moduleID });
+            console.log(moduleID)
+            
+            if (!module) {
+                throw new Error(`Module with ID ${moduleID} not found`);
+            }
+            
+            // Extract the list of student IDs
+            const listStudentID = module.listStudentID;
+            console.log(listStudentID)
+            const students = await StudentModel.find({ studentId: { $in: listStudentID } });
+            // console.log(students)
+            return students;
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
 
 
 

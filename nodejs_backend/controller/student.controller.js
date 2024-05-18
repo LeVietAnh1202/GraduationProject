@@ -99,3 +99,16 @@ exports.getAllStudent = async (req, res, next) => {
         next(err);
     }
 }
+
+exports.getStudentByModuleID = async (req, res, next) => {
+    try {
+        const { moduleID } = req.body;
+        const studentList = await StudentService.getStudentByModuleID(moduleID);
+
+        res.json({ status: true, success: 'getStudentByModuleID successfully', data: studentList });
+
+    } catch (err) {
+        console.log("---> err -->", err);
+        next(err);
+    }
+}

@@ -2,9 +2,9 @@ const AttendanceLecturerTermService = require('../../services/attendance/attenda
 
 exports.getAllAttendanceLecturerTerm = async (req, res, next) => {
     try {
-        const { lecturerId, moduleID } = req.body;
+        const { lecturerID, moduleID } = req.body;
 
-        const attendanceList = await AttendanceLecturerTermService.getAllAttendanceLecturerTerm(lecturerId, moduleID);
+        const attendanceList = await AttendanceLecturerTermService.getAllAttendanceLecturerTerm(lecturerID, moduleID);
         res.json({ status: true, success: 'Get all attendanceList successfully', data: attendanceList });
     } catch (err) {
         console.log("---> err -->", err);

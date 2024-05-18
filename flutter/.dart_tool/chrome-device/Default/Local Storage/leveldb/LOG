@@ -1,30 +1,19 @@
-<<<<<<< Updated upstream
-2024/05/12-16:53:59.491 1ed4 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.1934ccdf\flutter_tools_chrome_device.10ff4fce\Default\Local Storage\leveldb/MANIFEST-000001
-2024/05/12-16:53:59.494 1ed4 Recovering log #29
-2024/05/12-16:53:59.497 1ed4 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.1934ccdf\flutter_tools_chrome_device.10ff4fce\Default\Local Storage\leveldb/000029.log 
-2024/05/12-16:53:59.498 1ed4 Delete type=0 #3
-2024/05/12-16:53:59.498 1ed4 Delete type=0 #4
-2024/05/12-16:53:59.498 1ed4 Delete type=2 #8
-2024/05/12-16:53:59.498 1ed4 Delete type=0 #8
-2024/05/12-16:53:59.499 1ed4 Delete type=0 #10
-2024/05/12-16:53:59.499 1ed4 Delete type=2 #11
-2024/05/12-16:53:59.499 1ed4 Delete type=0 #13
-2024/05/12-16:53:59.499 1ed4 Delete type=2 #14
-2024/05/12-16:53:59.499 1ed4 Delete type=2 #17
-2024/05/12-16:53:59.499 1ed4 Delete type=0 #17
-=======
-2024/05/13-14:34:57.319 6e7c Reusing MANIFEST C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.21aeb33e\flutter_tools_chrome_device.4dcd281a\Default\Local Storage\leveldb/MANIFEST-000001
-2024/05/13-14:34:57.321 6e7c Recovering log #29
-2024/05/13-14:34:57.323 6e7c Reusing old log C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.21aeb33e\flutter_tools_chrome_device.4dcd281a\Default\Local Storage\leveldb/000029.log 
-2024/05/13-14:34:57.325 6e7c Delete type=0 #7
-2024/05/13-14:34:57.325 6e7c Delete type=2 #8
-2024/05/13-14:34:57.325 6e7c Delete type=0 #10
-2024/05/13-14:34:57.325 6e7c Delete type=2 #11
-2024/05/13-14:34:57.325 6e7c Delete type=0 #13
-2024/05/13-14:34:57.325 6e7c Delete type=2 #14
-2024/05/13-14:34:57.325 6e7c Delete type=0 #16
-2024/05/13-14:34:57.325 6e7c Delete type=2 #17
-2024/05/13-14:34:57.325 6e7c Delete type=0 #19
-2024/05/13-14:34:57.325 6e7c Delete type=0 #23
-2024/05/13-14:34:57.325 6e7c Delete type=0 #27
->>>>>>> Stashed changes
+2024/05/18-00:45:16.152 3c80 Reusing MANIFEST C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.520adec6\flutter_tools_chrome_device.240aab3a\Default\Local Storage\leveldb/MANIFEST-000001
+2024/05/18-00:45:16.157 3c80 Recovering log #32
+2024/05/18-00:45:16.159 3c80 Reusing old log C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.520adec6\flutter_tools_chrome_device.240aab3a\Default\Local Storage\leveldb/000032.log 
+2024/05/18-00:45:16.160 3c80 Delete type=0 #7
+2024/05/18-00:45:16.160 3c80 Delete type=2 #8
+2024/05/18-00:45:16.160 3c80 Delete type=0 #10
+2024/05/18-00:45:16.160 3c80 Delete type=2 #11
+2024/05/18-00:45:16.160 3c80 Delete type=0 #13
+2024/05/18-00:45:16.160 3c80 Delete type=2 #14
+2024/05/18-00:45:16.160 3c80 Delete type=0 #16
+2024/05/18-00:45:16.161 3c80 Delete type=2 #17
+2024/05/18-00:45:16.161 3c80 Delete type=0 #19
+2024/05/18-00:45:16.161 3c80 Delete type=2 #21
+2024/05/18-00:45:16.161 3c80 Delete type=0 #23
+2024/05/18-00:45:16.161 3c80 Delete type=2 #24
+2024/05/18-00:45:16.161 3c80 Delete type=2 #26
+2024/05/18-00:45:16.161 3c80 Delete type=0 #27
+2024/05/18-00:45:16.161 3c80 Delete type=0 #29
+2024/05/18-00:45:16.161 3c80 Delete type=2 #30

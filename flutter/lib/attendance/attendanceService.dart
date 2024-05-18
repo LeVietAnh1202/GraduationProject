@@ -10,10 +10,10 @@ import 'package:http/http.dart' as http;
 class AttendanceService with ChangeNotifier {
   static Future<void> fetchAttendanceLecturerTerms(BuildContext context,
       ValueChanged<bool> isLoading, String moduleID) async {
-    final lecturerId =
+    final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('lecturerId: ' + lecturerId!);
-    final bodyData = {'lecturerId': lecturerId, 'moduleID': moduleID};
+    print('lecturerID: ' + lecturerID!);
+    final bodyData = {'lecturerID': lecturerID, 'moduleID': moduleID};
 
     http
         .post(
@@ -45,10 +45,10 @@ class AttendanceService with ChangeNotifier {
 
   static Future<void> fetchAttendanceLecturerWeeks(
       BuildContext context, ValueChanged<bool> isLoading, String dayID) async {
-    final lecturerId =
+    final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('lecturerId: ' + lecturerId!);
-    final bodyData = {'lecturerId': lecturerId, 'dayID': dayID};
+    print('lecturerID: ' + lecturerID!);
+    final bodyData = {'lecturerID': lecturerID, 'dayID': dayID};
     print('dayID: ' + dayID);
     http
         .post(

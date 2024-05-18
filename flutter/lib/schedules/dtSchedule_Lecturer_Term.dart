@@ -192,8 +192,7 @@ class _DtScheduleLecturerTermState extends State<DtScheduleLecturerTerm> {
                                         content: SingleChildScrollView(
                                           child: Column(
                                             children: [
-                                              Text("Lớp: " +
-                                                  schedule['classCode']),
+                                              
                                               SizedBox(height: 20),
                                               AttendanceLecturerTerm(
                                                   moduleID:
@@ -211,11 +210,6 @@ class _DtScheduleLecturerTermState extends State<DtScheduleLecturerTerm> {
                                           Utilities.exportFileButton(() {
                                             ExportExcel
                                                 .exportAttendanceLecturerTermToExcel(
-                                                    // context
-                                                    //     .watch<
-                                                    //         AppStateProvider>()
-                                                    //     .appState!
-                                                    //     .attendanceLecturerTerms
                                                     Provider.of<AppStateProvider>(
                                                             context,
                                                             listen: false)
@@ -225,34 +219,6 @@ class _DtScheduleLecturerTermState extends State<DtScheduleLecturerTerm> {
                                                     schedule['classCode']);
                                             Navigator.of(context).pop();
                                           }),
-                                          // TextButton(
-                                          //   style: ElevatedButton.styleFrom(
-                                          //     backgroundColor: Colors
-                                          //         .green, // Đổi màu xanh cho nút
-                                          //     padding: EdgeInsets.all(
-                                          //         16.0), // Tăng kích thước của nút
-                                          //   ),
-                                          //   child: Text(
-                                          //     'Xuất file',
-                                          //     style: TextStyle(
-                                          //         color: Colors.white),
-                                          //   ),
-                                          //   onPressed: () {
-                                          //     ExportExcel
-                                          //         .exportAttendanceLecturerTermToExcel(
-                                          //             // context
-                                          //             //     .watch<
-                                          //             //         AppStateProvider>()
-                                          //             //     .appState!
-                                          //             //     .attendanceLecturerTerms
-                                          //             Provider.of<AppStateProvider>(
-                                          //                     context,
-                                          //                     listen: false)
-                                          //                 .appState!
-                                          //                 .attendanceLecturerTerms);
-                                          //     Navigator.of(context).pop();
-                                          //   },
-                                          // ),
                                         ],
                                       );
                                     },

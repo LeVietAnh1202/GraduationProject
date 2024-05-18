@@ -8,10 +8,10 @@ const StudentModel = require("../../models/student.model");
 const AttendanceLecturerTermModel = require("../../models/attendance/attendance_lecturer_term.model");
 
 class AttendanceLecturerTermService {
-  static async getAllAttendanceLecturerTerm(lecturerId, moduleID) {
+  static async getAllAttendanceLecturerTerm(lecturerID, moduleID) {
 
     try {
-      const modulePromise = ModuleModel.findOne({ lecturerId, moduleID }).exec();
+      const modulePromise = ModuleModel.findOne({ lecturerID, moduleID }).exec();
       const classCodePromise = modulePromise.then(module => module.classCode);
       const studentsPromise = classCodePromise.then(classCode => StudentModel.find({ classCode }).exec());
       const scheduleModelsPromise = ScheduleModel.find({ moduleID }).exec();
