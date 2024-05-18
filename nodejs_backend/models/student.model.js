@@ -17,6 +17,11 @@ const studentSchema = new Schema({
         type: String,
         required: [true, "Class Code is required"],
     },
+    specializationID: {
+        type: String,
+        required: [true, "specializationID is required"],
+        unique: true,
+    },
     gender: {
         type: String,
         required: [true, "Gender is required"],

@@ -2,13 +2,13 @@ const StudentService = require('../services/student.service');
 
 exports.createStudent = async (req, res, next) => {
     try {
-        const { studentId, studentName, classCode, gender, birthDate, avatar, video } = req.body;
+        const { studentId, studentName, classCode, specializationID, gender, birthDate, avatar, video } = req.body;
         const duplicate = await StudentService.getStudentByStudentID(studentId);
         if (duplicate) {
             // throw new Error(`Student ${studentId}, Already Registered`);
             res.json({ status: true, success: 'StudentID Already' });
         }
-        const response = await StudentService.createStudent(studentId, studentName, classCode, gender, birthDate, avatar, video);
+        const response = await StudentService.createStudent(studentId, studentName, classCode, specializationID, gender, birthDate, avatar, video);
 
         res.json({ status: true, success: 'Create Student successfully' });
 
@@ -20,14 +20,14 @@ exports.createStudent = async (req, res, next) => {
 }
 exports.editStudent = async (req, res, next) => {
     try {
-        const { studentId, studentName, classCode, gender, birthDate } = req.body;
+        const { studentId, studentName, classCode, specializationID, gender,  birthDate } = req.body;
         const duplicate = await StudentService.getStudentByStudentID(studentId);
 
         if (!duplicate) {
             // throw new Error(`Student ${studentId}, Already Registered`);
             res.status(404).json({ status: false, error: 'Student not found' });
         }
-        const response = await StudentService.editStudent(studentId, studentName, classCode, gender, birthDate);
+        const response = await StudentService.editStudent(studentId, studentName, classCode, specializationID,  gender, birthDate);
 
         res.json({ status: true, success: 'Edit Student successfully' });
 

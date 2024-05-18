@@ -4,6 +4,7 @@ class Student {
   final String studentName;
   final String classCode;
   final String gender;
+  final String specializationID;
   final String fingerprintID;
   final DateTime birthDate;
   final String avatar;
@@ -39,6 +40,7 @@ class Student {
     this.studentName = '',
     this.classCode = '',
     this.gender = '',
+    this.specializationID = '',
     this.fingerprintID = '',
     DateTime? birthDate, // Tham số tùy chọn
     this.avatar = '',
@@ -52,6 +54,7 @@ class Student {
       studentName: json['studentName'] ?? '',
       classCode: json['classCode'] ?? '',
       gender: json['gender'] ?? '',
+      specializationID: json['specializationID'] ?? '',
       fingerprintID: json['fingerprintID'] ?? '',
       birthDate: json['birthDate'] != null ? DateTime.parse(json['birthDate']) : null,
       avatar: json['avatar'] ?? '',

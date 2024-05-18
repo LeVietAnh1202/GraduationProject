@@ -1,6 +1,8 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/attendance/attendanceService.dart';
+import 'package:flutter_todo_app/attendance/attendance_lecturer_term.dart';
 import 'package:flutter_todo_app/lecturers/lecturerService.dart';
 import 'package:flutter_todo_app/model/lecturerModel.dart';
 import 'package:flutter_todo_app/model/schoolyearModel.dart';
@@ -12,6 +14,8 @@ import 'package:flutter_todo_app/subjects/subjectService.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleSelection extends StatefulWidget {
+  // final String moduleID;
+  // const ScheduleSelection({Key? key, required this.moduleID});
   @override
   _ScheduleSelectionState createState() => _ScheduleSelectionState();
 }
@@ -34,6 +38,12 @@ class _ScheduleSelectionState extends State<ScheduleSelection> {
     await SchoolyearService.fetchSchoolyears(context, (value) => {});
     await LecturerService.fetchLecturers(context);
     await SubjectService.fetchSubjects(context);
+    // await AttendanceService.fetchAttendanceLecturerTerms(
+    //     context,
+    //     (bool value) => setState(() {
+    //           _isLoading = value;
+    //         }),
+    //     widget.moduleID);
   }
 
   String? selectedSchoolYear;
@@ -206,7 +216,11 @@ class _ScheduleSelectionState extends State<ScheduleSelection> {
                       height: 60,
                       child: CircularProgressIndicator(),
                     )
-                  : Expanded(
+                  :
+                  // AttendanceLecturerTerm(
+                  //     moduleID: 'moduleID',
+                  //   ),
+                  Expanded(
                       child: DataTable(
                         columns: const <DataColumn>[
                           DataColumn(label: Text('Header 1')),

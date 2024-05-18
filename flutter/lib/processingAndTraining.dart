@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/videoStream.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -144,6 +145,80 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
     });
   }
 
+  void _callAPICropVideo() async {
+    setState(() {
+      _loading = true;
+    });
+
+    try {
+      var response = await http.post(
+        Uri.http('192.168.1.4:8001', 'crop_video'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "video_path":
+              '${URLNodeJSServer_RaspberryPi_Videos}/10120620_NguyenMinhDoanh.mp4',
+        }),
+      );
+
+      // var response = await http.get(
+      //   Uri.http('192.168.1.4:8001', ''),
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // );
+
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        setState(() {
+          _result = jsonResponse.toString();
+          _loading = false;
+        });
+
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text('API Response'),
+            content:
+                Text("Images_count: " + jsonResponse['image_count'].toString()),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+      } else {
+        throw Exception('Failed to crop video');
+      }
+    } catch (error) {
+      setState(() {
+        _loading = false;
+      });
+
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text('Error'),
+          content: Text('An error occurred: $error'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+      print(error);
+    } finally {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
+
   void _callAPIConnectCamera() async {
     setState(() {
       _loading = true;
@@ -205,11 +280,24 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
             child: Text('Call API connect camera'),
           ),
           SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: _loading ? null : _callAPICropVideo,
+            child: _loading
+                ? SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 2.0,
+                    ),
+                  )
+                : Text('Call API crop video'),
+          )
+
           // VideoStreamWidget()
 
           //Container(width: 512, height: 456, child: VideoStream(title: "Video stream Python-Flutter",))
           // Container(width: 512, height: 256, child: VideoStream(title: "Video stream Python-Flutter",))
-
         ],
       ),
 

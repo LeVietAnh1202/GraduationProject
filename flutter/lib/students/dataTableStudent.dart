@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/faculties/facultyService.dart';
+import 'package:flutter_todo_app/model/facultyModel.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/students/detailStudent.dart';
@@ -34,6 +37,13 @@ class _DataTableStudentState extends State<DataTableStudent> {
         .setTableLength(students.length);
   }
 
+  // Future<void> fetchFaculties() async {
+  //   final faculties =
+  //       await FacultyService.fetchFaculties(context, (value) => {});
+  //   Provider.of<AppStateProvider>(context, listen: false)
+  //       .setTableLength(faculties.length);
+  // }
+
   void deleteStudent(String studentId) async {
     final response = json.decode(await StudentService.deleteStudent(studentId));
     if (response['statusCode'] == 200) {
@@ -54,6 +64,9 @@ class _DataTableStudentState extends State<DataTableStudent> {
     final currentPage = appState.currentPage;
     final rowsPerPage = appState.rowsPerPage;
     final students = appState.students;
+    // int currentPage = context.watch<AppStateProvider>().appState!.currentPage;
+    // Faculty faculty =
+    //     context.watch<AppStateProvider>().appState!.faculties[currentPage - 1];
 
     // Calculate the start and end index of the current page
     int startIndex = (currentPage - 1) * rowsPerPage;
@@ -74,7 +87,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
         DataColumn(
           label: Expanded(
             child: Text(
-              'Avatar',
+              'Ảnh',
               textAlign: TextAlign.center,
             ),
           ),
@@ -82,7 +95,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
         DataColumn(
           label: Expanded(
             child: Text(
-              'ID',
+              'Mã sinh viên',
               textAlign: TextAlign.center,
             ),
           ),
@@ -90,7 +103,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
         DataColumn(
           label: Expanded(
             child: Text(
-              'Full Name',
+              'Họ tên',
               textAlign: TextAlign.center,
             ),
           ),
@@ -98,7 +111,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
         DataColumn(
           label: Expanded(
             child: Text(
-              'Class code',
+              'Lớp',
               textAlign: TextAlign.center,
             ),
           ),
@@ -106,7 +119,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
         DataColumn(
           label: Expanded(
             child: Text(
-              'Gender',
+              'Chuyên ngành',
               textAlign: TextAlign.center,
             ),
           ),
@@ -114,7 +127,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
         DataColumn(
           label: Expanded(
             child: Text(
-              'Birth date',
+              'Giới tính',
               textAlign: TextAlign.center,
             ),
           ),
@@ -122,7 +135,15 @@ class _DataTableStudentState extends State<DataTableStudent> {
         DataColumn(
           label: Expanded(
             child: Text(
-              'Actions',
+              'Ngày sinh',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        DataColumn(
+          label: Expanded(
+            child: Text(
+              'Tác vụ',
               textAlign: TextAlign.center,
             ),
           ),
@@ -172,6 +193,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
               student.classCode,
               textAlign: TextAlign.left,
             )),
+            DataCell(Center(child: Text(student.specializationID))),
             DataCell(Center(child: Text(student.gender))),
             DataCell(Center(
               child: Text(DateFormat('dd/MM/yyyy').format(student.birthDate)),

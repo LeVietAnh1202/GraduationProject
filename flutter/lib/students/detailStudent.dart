@@ -157,7 +157,7 @@ class _DetailStudentState extends State<DetailStudent> {
     );
 
     return AlertDialog(
-      title: Text('Detail student'),
+      title: Text('Chi tiết sinh viên'),
       content: SingleChildScrollView(
         child: Column(
           children: [
@@ -166,17 +166,18 @@ class _DetailStudentState extends State<DetailStudent> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 200,
-                  width: 300,
+                  height: 240,
+                  width: 350,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildInfoRow('ID:', student.studentId),
-                      _buildInfoRow('Full name:', student.studentName),
-                      _buildInfoRow('Class code:', student.classCode),
-                      _buildInfoRow('Gender:', student.gender),
+                      _buildInfoRow('Mã sinh viên:', student.studentId),
+                      _buildInfoRow('Họ tên:', student.studentName),
+                      _buildInfoRow('Lớp:', student.classCode),
+                      _buildInfoRow('Chuyên ngành:', student.specializationID),
+                      _buildInfoRow('Giới tính:', student.gender),
                       _buildInfoRow(
-                        'Birth date:',
+                        'Ngày sinh:',
                         DateFormat('dd/MM/yyyy').format(student.birthDate),
                       ),
                     ],
@@ -208,6 +209,7 @@ class _DetailStudentState extends State<DetailStudent> {
                 ),
               ],
             ),
+            SizedBox(height: 20),
             SingleChoice(option: SegmentButtonOption.image),
             SizedBox(height: 30),
             (Provider.of<AppStateProvider>(context, listen: false)

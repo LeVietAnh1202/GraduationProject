@@ -5,20 +5,20 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 class StudentService {
-    static async createStudent(studentId, studentName, classCode, gender, birthDate, avatar, video) {
+    static async createStudent(studentId, studentName, classCode, specializationID, gender, birthDate, avatar, video) {
         try {
-            const createStudent = new StudentModel({ studentId, studentName, classCode, gender, birthDate, avatar, video });
+            const createStudent = new StudentModel({ studentId, studentName, classCode, specializationID, gender, birthDate, avatar, video });
             return await createStudent.save();
         } catch (err) {
             throw err;
         }
     }
-    static async editStudent(studentId, studentName, classCode, gender, birthDate) {
+    static async editStudent(studentId, studentName, classCode, specializationID, gender, birthDate) {
         try {
             // Tìm sinh viên cần cập nhật bằng studentId và cập nhật thông tin mới
             return await StudentModel.findOneAndUpdate(
                 { studentId: studentId }, // Điều kiện tìm kiếm
-                { studentName: studentName, classCode: classCode, gender: gender, birthDate: birthDate }, // Thông tin cập nhật
+                { studentName: studentName, classCode: classCode, specializationID: specializationID, gender: gender, birthDate: birthDate }, // Thông tin cập nhật
                 { new: true } // Tùy chọn: Trả về bản ghi đã được cập nhật
             );
         } catch (err) {
