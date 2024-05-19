@@ -1,16 +1,28 @@
-2024/05/12-16:53:59.561 572c Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.1934ccdf\flutter_tools_chrome_device.10ff4fce\Default\shared_proto_db/MANIFEST-000001
-2024/05/12-16:53:59.562 572c Recovering log #29
-2024/05/12-16:53:59.563 572c Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.1934ccdf\flutter_tools_chrome_device.10ff4fce\Default\shared_proto_db/000029.log 
-2024/05/12-16:53:59.563 572c Delete type=0 #3
-2024/05/12-16:53:59.563 572c Delete type=0 #4
-2024/05/12-16:53:59.563 572c Delete type=0 #7
-2024/05/12-16:53:59.563 572c Delete type=2 #8
-2024/05/12-16:53:59.563 572c Delete type=0 #10
-2024/05/12-16:53:59.563 572c Delete type=2 #11
-2024/05/12-16:53:59.563 572c Delete type=0 #13
-2024/05/12-16:53:59.563 572c Delete type=2 #14
-2024/05/12-16:53:59.564 572c Delete type=0 #16
-2024/05/12-16:53:59.564 572c Delete type=2 #17
-2024/05/12-16:53:59.564 572c Delete type=0 #19
-2024/05/12-16:53:59.564 572c Delete type=0 #23
-2024/05/12-16:53:59.564 572c Delete type=0 #26
+2024/05/18-14:38:23.777 2d78 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.e60018ac\flutter_tools_chrome_device.201186c5\Default\shared_proto_db/MANIFEST-000001
+2024/05/18-14:38:23.778 2d78 Recovering log #29
+2024/05/18-14:38:23.779 2d78 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.e60018ac\flutter_tools_chrome_device.201186c5\Default\shared_proto_db/000029.log 
+2024/05/18-14:38:23.780 2d78 Delete type=0 #3
+2024/05/18-14:38:23.780 2d78 Delete type=0 #4
+2024/05/18-14:38:23.780 2d78 Delete type=0 #7
+2024/05/18-14:38:23.780 2d78 Delete type=2 #8
+2024/05/18-14:38:23.780 2d78 Delete type=0 #10
+2024/05/18-14:38:23.780 2d78 Delete type=2 #11
+2024/05/18-14:38:23.780 2d78 Delete type=0 #13
+2024/05/18-14:38:23.780 2d78 Delete type=2 #14
+2024/05/18-14:38:23.780 2d78 Delete type=0 #16
+2024/05/18-14:38:23.780 2d78 Delete type=2 #17
+2024/05/18-14:38:23.780 2d78 Delete type=0 #19
+2024/05/18-14:38:23.780 2d78 Delete type=0 #23
+2024/05/18-14:38:23.780 2d78 Delete type=0 #26
+2024/05/18-14:39:59.224 37a0 Level-0 table #33: started
+2024/05/18-14:39:59.228 37a0 Level-0 table #33: 135095 bytes OK
+2024/05/18-14:39:59.233 37a0 Delete type=0 #29
+2024/05/18-14:39:59.235 2d78 Compacting 4@0 + 1@1 files
+2024/05/18-14:39:59.242 2d78 Generated table #34@0: 1984 keys, 110341 bytes
+2024/05/18-14:39:59.242 2d78 Compacted 4@0 + 1@1 files => 110341 bytes
+2024/05/18-14:39:59.242 2d78 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/05/18-14:39:59.243 2d78 Delete type=2 #21
+2024/05/18-14:39:59.243 2d78 Delete type=2 #24
+2024/05/18-14:39:59.243 2d78 Delete type=2 #27
+2024/05/18-14:39:59.243 2d78 Delete type=2 #30
+2024/05/18-14:39:59.243 2d78 Delete type=2 #33

@@ -24,7 +24,7 @@ class video_process:
             face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')      # Tải pretrain classifier để phát hiện khuôn mặt
             while True:
                 ret, frame = video.read()
-                if frame is not None:
+                if ret:
                     frame_copy = frame.copy()                                                                            # Tạo một bản sao của khung hình gốc để vẽ bounding box và hiển thị
                     gray_frame = cv2.cvtColor(frame_copy, cv2.COLOR_BGR2GRAY)
                     faces = face_cascade.detectMultiScale(gray_frame, scaleFactor=1.3, minNeighbors=5)

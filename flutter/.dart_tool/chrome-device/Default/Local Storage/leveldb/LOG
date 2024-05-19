@@ -1,19 +1,18 @@
-2024/05/18-12:04:25.163 1048 Reusing MANIFEST C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.c31dbd08\flutter_tools_chrome_device.746bbe8a\Default\Local Storage\leveldb/MANIFEST-000001
-2024/05/18-12:04:25.169 1048 Recovering log #32
-2024/05/18-12:04:25.171 1048 Reusing old log C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.c31dbd08\flutter_tools_chrome_device.746bbe8a\Default\Local Storage\leveldb/000032.log 
-2024/05/18-12:04:25.172 1048 Delete type=0 #7
-2024/05/18-12:04:25.172 1048 Delete type=2 #8
-2024/05/18-12:04:25.172 1048 Delete type=0 #10
-2024/05/18-12:04:25.172 1048 Delete type=2 #11
-2024/05/18-12:04:25.172 1048 Delete type=0 #13
-2024/05/18-12:04:25.172 1048 Delete type=2 #14
-2024/05/18-12:04:25.172 1048 Delete type=0 #16
-2024/05/18-12:04:25.172 1048 Delete type=2 #17
-2024/05/18-12:04:25.172 1048 Delete type=0 #19
-2024/05/18-12:04:25.172 1048 Delete type=2 #21
-2024/05/18-12:04:25.172 1048 Delete type=0 #23
-2024/05/18-12:04:25.172 1048 Delete type=2 #24
-2024/05/18-12:04:25.172 1048 Delete type=2 #26
-2024/05/18-12:04:25.172 1048 Delete type=0 #27
-2024/05/18-12:04:25.172 1048 Delete type=0 #29
-2024/05/18-12:04:25.172 1048 Delete type=2 #30
+2024/05/18-14:38:23.729 2c6c Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.e60018ac\flutter_tools_chrome_device.201186c5\Default\Local Storage\leveldb/MANIFEST-000001
+2024/05/18-14:38:23.732 2c6c Recovering log #36
+2024/05/18-14:38:23.734 2c6c Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.e60018ac\flutter_tools_chrome_device.201186c5\Default\Local Storage\leveldb/000036.log 
+2024/05/18-14:38:23.736 2c6c Delete type=0 #3
+2024/05/18-14:38:23.736 2c6c Delete type=0 #4
+2024/05/18-14:38:23.736 2c6c Delete type=2 #8
+2024/05/18-14:38:23.736 2c6c Delete type=0 #8
+2024/05/18-14:38:23.736 2c6c Delete type=0 #10
+2024/05/18-14:38:23.736 2c6c Delete type=2 #11
+2024/05/18-14:38:23.736 2c6c Delete type=0 #13
+2024/05/18-14:38:23.736 2c6c Delete type=2 #14
+2024/05/18-14:38:23.736 2c6c Delete type=2 #17
+2024/05/18-14:38:23.736 2c6c Delete type=0 #17
+2024/05/18-14:38:23.736 2c6c Delete type=2 #21
+2024/05/18-14:38:23.736 2c6c Delete type=2 #24
+2024/05/18-14:38:23.736 2c6c Delete type=2 #26
+2024/05/18-14:38:23.737 2c6c Delete type=0 #29
+2024/05/18-14:38:23.737 2c6c Delete type=2 #30

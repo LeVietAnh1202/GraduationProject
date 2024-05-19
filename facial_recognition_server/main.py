@@ -53,7 +53,7 @@ async def crop_video(video: Video):
     print(video.video_path)
     obj = video_process(video.video_path, images_path)
     image_count = -1
-    image_count = obj.auto_capture_save_images(300, 200)
+    image_count = obj.auto_capture_save_images(100, 200)
     return {"image_count": image_count}
 
 @app.get("/process")

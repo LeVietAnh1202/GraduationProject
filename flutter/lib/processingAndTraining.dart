@@ -152,7 +152,7 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
 
     try {
       var response = await http.post(
-        Uri.http('192.168.1.4:8001', 'crop_video'),
+        Uri.http('192.168.1.3:8001', 'crop_video'),
         headers: {
           'Content-Type': 'application/json',
         },
