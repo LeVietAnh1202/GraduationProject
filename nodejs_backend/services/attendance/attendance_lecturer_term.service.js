@@ -11,12 +11,19 @@ class AttendanceLecturerTermService {
   static async getAllAttendanceLecturerTerm(lecturerID, moduleID) {
 
     try {
-      const modulePromise = ModuleModel.findOne({ lecturerID, moduleID }).exec();
-      const classCodePromise = modulePromise.then(module => module.classCode);
-      const studentsPromise = classCodePromise.then(classCode => StudentModel.find({ classCode }).exec());
+      // const modulePromise = ModuleModel.findOne({ lecturerID, moduleID }).exec();
+      // const classCodePromise = modulePromise.then(module => module.classCode);
+      // const studentsPromise = classCodePromise.then(classCode => StudentModel.find({ classCode }).exec());
+      // const scheduleModelsPromise = ScheduleModel.find({ moduleID }).exec();
+
+      // const [students, scheduleModels] = await Promise.all([studentsPromise, scheduleModelsPromise]);
+
+      const module = await ModuleModel.findOne({ moduleID: moduleID });
+      const listStudentID = module.listStudentID;
+      const students = await StudentModel.find({ studentId: { $in: listStudentID } });
       const scheduleModelsPromise = ScheduleModel.find({ moduleID }).exec();
 
-      const [students, scheduleModels] = await Promise.all([studentsPromise, scheduleModelsPromise]);
+      const [scheduleModels] = await Promise.all([scheduleModelsPromise]);
       const attendanceLecturerTerms = [];
 
       for (const student of students) {
@@ -52,11 +59,11 @@ class AttendanceLecturerTermService {
               attendances.push(
                 attendancePromise.then(attendance => {
 
-                  console.log(studentName + ' ' + dayID + ' currentTime' + currentTime);
-                  console.log(studentName + ' ' + dayID + ' afterTimeStartSession' + afterTimeStartSession);
-                  console.log(studentName + ' ' + dayID + ' (currentTime > afterTimeStartSession)' + (currentTime > afterTimeStartSession));
+                  // console.log(studentName + ' ' + dayID + ' currentTime' + currentTime);
+                  // console.log(studentName + ' ' + dayID + ' afterTimeStartSession' + afterTimeStartSession);
+                  // console.log(studentName + ' ' + dayID + ' (currentTime > afterTimeStartSession)' + (currentTime > afterTimeStartSession));
                   const attendanceValue = attendance ? attendance.attendance : ((currentTime > afterTimeStartSession) ? 0 : null);
-                  console.log(studentName + ' ' + dayID + ' attendanceValue' + attendanceValue);
+                  // console.log(studentName + ' ' + dayID + ' attendanceValue' + attendanceValue);
                   if (attendanceValue === 0) {
                     numberOfBreaksSessions++;
                   } else if (attendanceValue === 1) {
@@ -68,37 +75,6 @@ class AttendanceLecturerTermService {
                   return { [weekTimeStartStr]: attendanceValue };
                 })
               );
-              // attendances.push(
-              //   attendancePromise.then(attendance => {
-              //     const sessionStartTime = new Date(schedule['sessionStartTime']);
-              //     const sessionEndTime = new Date(schedule['sessionEndTime']);
-              //     const sessionEndTimePlus30Min = new Date(sessionEndTime.getTime() + 30 * 60000); // Add 30 minutes to sessionEndTime
-
-              //     // Compare current time with sessionEndTimePlus30Min and handle attendance value accordingly
-              //     const currentTime = new Date();
-              //     let attendanceValue;
-
-              //     if (attendance === null) {
-              //       if (currentTime > sessionEndTimePlus30Min) {
-              //         attendanceValue = 0; // Attendance value is 0 if current time is greater than sessionEndTimePlus30Min
-              //       } else {
-              //         attendanceValue = null; // Attendance value remains null if current time is less than or equal to sessionEndTimePlus30Min
-              //       }
-              //     } else {
-              //       attendanceValue = attendance.attendance;
-
-              //       if (attendanceValue === 0) {
-              //         numberOfBreaksSessions++;
-              //       } else if (attendanceValue === 1) {
-              //         numberOfLateSessions++;
-              //       } else if (attendanceValue === 2) {
-              //         numberOfOnTimeSessions++;
-              //       }
-              //     }
-
-              //     return { [weekTimeStartStr]: attendanceValue };
-              //   })
-              // );
             }
           }
         }
