@@ -1,5 +1,6 @@
 const StudentModel = require("../models/student.model");
 const ModuleModel = require("../models/module.model");
+const FacultyModel = require("../models/faculty.model");
 
 const multer = require('multer');
 const fs = require('fs');
@@ -75,21 +76,10 @@ class StudentService {
     }
 
 
-    static async getStudentByFaculty(lecturerID) {
+    static async getStudentsByFacultyID(facultyID) {
         try {
-            // Bước 1: Lấy facultyID từ lecturerID
-            const lecturer = await LecturerModel.findOne({ lecturerID });
-            if (!lecturer) {
-                throw new Error("Lecturer not found");
-            }
-            const facultyID = lecturer.facultyID;
-
-            // Bước 2: Lấy danh sách các chuyên ngành từ facultyID
             const faculty = await FacultyModel.findOne({ facultyID });
-            if (!faculty) {
-                throw new Error("Faculty not found");
-            }
-            // Duyệt qua các ngành để lấy danh sách các chuyên ngành
+
             const specializationIDs = [];
             for (const major of faculty.majors) {
                 for (const specialization of major.specializations) {
@@ -97,11 +87,6 @@ class StudentService {
                 }
             }
 
-            if (specializationIDs.length === 0) {
-                throw new Error("No specializations found for the given facultyID");
-            }
-
-            // Bước 3: Lấy danh sách sinh viên từ danh sách specializationIDs
             const students = await StudentModel.find({ specializationID: { $in: specializationIDs } });
 
             return students;

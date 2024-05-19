@@ -17,17 +17,14 @@ router.post("/uploadVideo", StudentController.uploadVideo);
 
 router.get("/getAll", StudentController.getAllStudent);
 
+router.post("/getStudentsByFacultyID", StudentController.getStudentsByFacultyID);
+
+router.post("/getStudentByModuleID", StudentController.getStudentByModuleID);
+
 router.post("/getAllScheduleWeek", ScheduleStudentWeekController.getAllScheduleStudentWeek);
 
 router.post("/getAllScheduleTerm", ScheduleStudentTermController.getAllScheduleStudentTerm);
 
 router.post("/getAllAttendanceTerm", AttendanceStudentTermController.getAllAttendanceStudentTerm);
-
-router.post("/getStudentByModuleID", StudentController.getStudentByModuleID);
-
-
-
-
-
 
 module.exports = router;

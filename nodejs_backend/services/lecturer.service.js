@@ -8,6 +8,15 @@ class LecturerService {
             throw err;
         }
     }
+
+    static async getAllLecturer() {
+        try {
+            return await LecturerModel.find();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     static async getLecturerByLecturerID(lecturerID) {
         console.log('HTHI LecturerID:', lecturerID);
         try {
@@ -16,9 +25,11 @@ class LecturerService {
             console.log(err);
         }
     }
-    static async getAllLecturer() {
+
+    static async getLecturersByFacultyID(facultyID) {
         try {
-            return await LecturerModel.find();
+            const lecturers = await LecturerModel.find({facultyID: facultyID});
+            return lecturers;
         } catch (err) {
             console.log(err);
         }

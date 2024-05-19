@@ -50,7 +50,4 @@ app.use("/subject", SubjectRoute);
 
 app.use('/images', LoadImageRoute);
 
-
-
-
 module.exports = app;

@@ -11,6 +11,7 @@ router.post("/createLecturer", LecturerController.createLecturer);
 
 router.get("/getAllLecturer", LecturerController.getAllLecturer);
 
+router.post("/getLecturersByFacultyID", LecturerController.getLecturersByFacultyID);
 
 router.post("/getAllScheduleWeek", ScheduleLecturerWeekController.getAllScheduleLecturerWeek);
 

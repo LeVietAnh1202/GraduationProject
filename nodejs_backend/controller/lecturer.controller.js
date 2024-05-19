@@ -31,3 +31,17 @@ exports.getAllLecturer = async (req, res, next) => {
         next(err);
     }
 }
+
+exports.getLecturersByFacultyID = async (req, res, next) => {
+    try {
+        const { facultyID } = req.body;
+        const lecturerList = await LecturerService.getLecturersByFacultyID(facultyID);
+
+        res.json({ status: true, success: 'Get lecturers by facultyID successfully', data: lecturerList });
+
+
+    } catch (err) {
+        console.log("---> err -->", err);
+        next(err);
+    }
+}
