@@ -1,107 +1,58 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_todo_app/dashboard.dart';
+import 'package:flutter_todo_app/provider/account.dart';
+import 'package:flutter_todo_app/provider/appState.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'loginPage.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(
+    token: prefs.getString('token'),
+  ));
 }
 
-Image base64ToImage(String base64String) {
-  return Image.memory(
-    base64Decode(base64String),
-    gaplessPlayback: true,
-  );
+class MyApp extends StatefulWidget {
+  final token;
+
+  const MyApp({
+    @required this.token,
+    Key? key,
+  }) : super(key: key);
+
+  // static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
+  @override
+  _MyAppState createState() => _MyAppState();
 }
 
-class MyApp extends StatelessWidget {
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AccountProvider>(
+            create: (_) => AccountProvider()),
+        ChangeNotifierProvider<AppStateProvider>(
+            create: (_) => AppStateProvider())
+      ],
+      child: MaterialApp(
+          // key: UniqueKey(),
+          // navigatorKey: MyApp.navigatorKey,
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: Colors.black,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)
+          ),
+          home: (widget.token != null &&
+                  JwtDecoder.isExpired(widget.token) == false)
+              ? Dashboard(token: widget.token)
+              : SignInPage()),
     );
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int frameCounter = 0;
-  int lastTime = DateTime.now().millisecondsSinceEpoch;
-  int fps = 0;
-
-  final fpsValueNotifier = ValueNotifier(0);
-
-  final pollingRate = 10; // time between requests in ms
-
-  final url = 'http://127.0.0.1:8001/video_frame';
-
-  bool _timeDifferenceBiggerThanSecond() {
-    return DateTime.now().millisecondsSinceEpoch - lastTime > 1000;
-  }
-
-  Future<Image> _fetchVideoFrame() async {
-    final response = await http.get(Uri.parse(url));
-
-    if (_timeDifferenceBiggerThanSecond()) {
-      fpsValueNotifier.value = frameCounter;
-      lastTime = DateTime.now().millisecondsSinceEpoch;
-      frameCounter = 0;
-    } else {
-      frameCounter++;
-    }
-    return Image.memory(
-      response.bodyBytes,
-      gaplessPlayback: true,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ValueListenableBuilder(
-                valueListenable: fpsValueNotifier,
-                builder: (context, value, child) {
-                  return Text('FPS $value');
-                }),
-            StreamBuilder<Image>(
-              stream: getVideoFrame(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return snapshot.data!;
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                return CircularProgressIndicator();
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Stream<Image> getVideoFrame() =>
-      Stream.periodic(Duration(milliseconds: pollingRate))
-          .asyncMap((_) => _fetchVideoFrame());
 }

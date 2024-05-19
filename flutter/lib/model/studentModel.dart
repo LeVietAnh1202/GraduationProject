@@ -9,6 +9,10 @@ class Student {
   final DateTime birthDate;
   final String avatar;
   final String video;
+  final int NoAvatar;
+  final int NoFullImage;
+  final int NoCropImage;
+  final int NoVideo;
 
   // Student({
   //   required this.id,
@@ -45,7 +49,13 @@ class Student {
     DateTime? birthDate, // Tham số tùy chọn
     this.avatar = '',
     this.video = '',
-  }) : birthDate = birthDate ?? DateTime(1990, 1, 1); // Gán giá trị mặc định nếu không có ngày sinh được cung cấp;
+    this.NoAvatar = 0,
+    this.NoFullImage = 0,
+    this.NoCropImage = 0,
+    this.NoVideo = 0,
+  }) : birthDate = birthDate ??
+            DateTime(1990, 1,
+                1); // Gán giá trị mặc định nếu không có ngày sinh được cung cấp;
 
   factory Student.fromMap(Map<String, dynamic> json) {
     return Student(
@@ -56,9 +66,14 @@ class Student {
       gender: json['gender'] ?? '',
       specializationID: json['specializationID'] ?? '',
       fingerprintID: json['fingerprintID'] ?? '',
-      birthDate: json['birthDate'] != null ? DateTime.parse(json['birthDate']) : null,
+      birthDate:
+          json['birthDate'] != null ? DateTime.parse(json['birthDate']) : null,
       avatar: json['avatar'] ?? '',
       video: json['video'] ?? '',
+      NoAvatar: json['NoAvatar'] ?? 0,
+      NoFullImage: json['NoFullImage'] ?? 0,
+      NoCropImage: json['NoCropImage'] ?? 0,
+      NoVideo: json['NoVideo'] ?? 0,
     );
   }
 

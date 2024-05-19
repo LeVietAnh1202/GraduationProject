@@ -334,5 +334,5 @@ def _get_frame():
 #     # return responses.StreamingResponse(generate_frames(), media_type='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
-    run("main:app", host="192.168.1.4", port=8001, reload=True)
+    run("main:app", host="192.168.1.3", port=8001, reload=True)
 
