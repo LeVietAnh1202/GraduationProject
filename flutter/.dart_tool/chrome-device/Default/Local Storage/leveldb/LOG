@@ -1,19 +1,25 @@
-2024/05/18-12:04:25.163 1048 Reusing MANIFEST C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.c31dbd08\flutter_tools_chrome_device.746bbe8a\Default\Local Storage\leveldb/MANIFEST-000001
-2024/05/18-12:04:25.169 1048 Recovering log #32
-2024/05/18-12:04:25.171 1048 Reusing old log C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.c31dbd08\flutter_tools_chrome_device.746bbe8a\Default\Local Storage\leveldb/000032.log 
-2024/05/18-12:04:25.172 1048 Delete type=0 #7
-2024/05/18-12:04:25.172 1048 Delete type=2 #8
-2024/05/18-12:04:25.172 1048 Delete type=0 #10
-2024/05/18-12:04:25.172 1048 Delete type=2 #11
-2024/05/18-12:04:25.172 1048 Delete type=0 #13
-2024/05/18-12:04:25.172 1048 Delete type=2 #14
-2024/05/18-12:04:25.172 1048 Delete type=0 #16
-2024/05/18-12:04:25.172 1048 Delete type=2 #17
-2024/05/18-12:04:25.172 1048 Delete type=0 #19
-2024/05/18-12:04:25.172 1048 Delete type=2 #21
-2024/05/18-12:04:25.172 1048 Delete type=0 #23
-2024/05/18-12:04:25.172 1048 Delete type=2 #24
-2024/05/18-12:04:25.172 1048 Delete type=2 #26
-2024/05/18-12:04:25.172 1048 Delete type=0 #27
-2024/05/18-12:04:25.172 1048 Delete type=0 #29
-2024/05/18-12:04:25.172 1048 Delete type=2 #30
+2024/05/19-19:25:21.322 1a24 Reusing MANIFEST C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.b3f9dfe6\flutter_tools_chrome_device.beae86d7\Default\Local Storage\leveldb/MANIFEST-000001
+2024/05/19-19:25:21.327 1a24 Recovering log #44
+2024/05/19-19:25:21.329 1a24 Reusing old log C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.b3f9dfe6\flutter_tools_chrome_device.beae86d7\Default\Local Storage\leveldb/000044.log 
+2024/05/19-19:25:21.330 1a24 Delete type=0 #7
+2024/05/19-19:25:21.330 1a24 Delete type=2 #8
+2024/05/19-19:25:21.330 1a24 Delete type=0 #10
+2024/05/19-19:25:21.330 1a24 Delete type=2 #11
+2024/05/19-19:25:21.330 1a24 Delete type=0 #13
+2024/05/19-19:25:21.330 1a24 Delete type=2 #14
+2024/05/19-19:25:21.330 1a24 Delete type=0 #16
+2024/05/19-19:25:21.330 1a24 Delete type=2 #17
+2024/05/19-19:25:21.331 1a24 Delete type=0 #19
+2024/05/19-19:25:21.331 1a24 Delete type=2 #21
+2024/05/19-19:25:21.331 1a24 Delete type=0 #23
+2024/05/19-19:25:21.331 1a24 Delete type=2 #24
+2024/05/19-19:25:21.331 1a24 Delete type=2 #26
+2024/05/19-19:25:21.331 1a24 Delete type=0 #27
+2024/05/19-19:25:21.331 1a24 Delete type=0 #29
+2024/05/19-19:25:21.331 1a24 Delete type=2 #30
+2024/05/19-19:25:21.331 1a24 Delete type=0 #32
+2024/05/19-19:25:21.331 1a24 Delete type=2 #34
+2024/05/19-19:25:21.331 1a24 Delete type=0 #36
+2024/05/19-19:25:21.331 1a24 Delete type=2 #37
+2024/05/19-19:25:21.331 1a24 Delete type=0 #39
+2024/05/19-19:25:21.331 1a24 Delete type=2 #40

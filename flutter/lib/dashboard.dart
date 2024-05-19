@@ -39,7 +39,7 @@ class _DashboardState extends State<Dashboard> {
       lecturers: [],
       subjects: [],
       calendarView: Calendar.week,
-      imagesView: ShowImage.full,
+      imagesView: ShowImage.video,
       scheduleStudentWeeks: [],
       scheduleStudentTerms: [],
       scheduleLecturerWeeks: [],

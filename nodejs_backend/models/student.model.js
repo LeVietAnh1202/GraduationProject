@@ -46,6 +46,22 @@ const studentSchema = new Schema({
         required: [true, "video is required"],
         unique: true,
     },
+    NoAvatar: {
+        type: Number,
+        required: [true, "NoAvatar is required"],
+    },
+    NoFullImage: {
+        type: Number,
+        required: [true, "NoFullImage is required"],
+    },
+    NoCropImage: {
+        type: Number,
+        required: [true, "NoCropImage is required"],
+    },
+    NoVideo: {
+        type: Number,
+        required: [true, "NoVideo is required"],
+    },
 }, { timestamps: true });
 
 const Student = db.model('student', studentSchema);

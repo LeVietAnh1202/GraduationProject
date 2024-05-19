@@ -18,9 +18,15 @@ const String adminTerm = 'adminTerm';
 
 const String URLNodeJSServer = 'http://${url}';
 const String URLNodeJSServer_RaspberryPi = 'http://${url_ras}';
+
 const String URLNodeJSServer_RaspberryPi_Images =
     'http://${url_ras}/images/default';
 const String URLNodeJSServer_RaspberryPi_Videos =
     'http://${url_ras}/videos/default';
+
+const String URLNodeJSServer_Python_Images =
+    'http://${url_python}/public/images';
+const String URLNodeJSServer_Python_Videos =
+    'http://${url_python}/public/videos';
 
 const String URLVideoPath = 'videos/default';

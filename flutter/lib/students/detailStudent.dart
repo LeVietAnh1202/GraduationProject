@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/constant/number.dart';
@@ -21,21 +23,22 @@ class DetailStudent extends StatefulWidget {
 
 class _DetailStudentState extends State<DetailStudent> {
   List<Student> students = [];
+  Key _imageKey = UniqueKey();
   // late VideoPlayerController _controller;
 
-  bool isVideoPlaying = false;
+  bool hasVideo = false;
   bool isVideoEnded = false;
   double videoPosition = 0.0;
   double videoDuration = 0.0;
 
+  late Student student;
   late FlickManager flickManager;
-
+  late VideoPlayerController _videoPlayerController;
   // List<Map<String, dynamic>> students = [];
 
   @override
   void initState() {
     super.initState();
-
     // flickManager = FlickManager(
     //     videoPlayerController: VideoPlayerController.networkUrl(
     //         Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'))
@@ -43,15 +46,32 @@ class _DetailStudentState extends State<DetailStudent> {
     //         setState(() {});
     //       }));
 
-    Provider.of<AppStateProvider>(context, listen: false)
-        .setCalendarView(Calendar.week);
+    // Provider.of<AppStateProvider>(context, listen: false)
+    //     .setCalendarView(Calendar.week);
     // Gọi hàm fetchStudents để tải dữ liệu sinh viên
-    StudentService.fetchStudents(context, (value) {});
+    // StudentService.fetchStudents(context, (value) {});
+
+    initVideo();
+
+    // final defaultStudent = Student.fromMap({});
+    // final students = Provider.of<AppStateProvider>(context, listen: false)
+    //     .appState!
+    //     .students;
+    // student = students.firstWhere(
+    //   (student) => student.studentId == widget.studentId,
+    //   orElse: () => defaultStudent,
+    // );
+    // print("Student: ");
+    // print(student);
+    // Future.delayed(Duration.zero, () async {
+    //   flickManager = await getVideo(student);
+    // });
   }
 
   @override
   void dispose() {
     flickManager.dispose();
+    _videoPlayerController.dispose();
     super.dispose();
   }
 
@@ -133,10 +153,66 @@ class _DetailStudentState extends State<DetailStudent> {
   // }
 
   FlickManager getVideo(Student student) {
+    VideoPlayerController videoPlayerController =
+        VideoPlayerController.networkUrl(
+            Uri.http(url_ras, '${URLVideoPath}/${student.video}'));
     return FlickManager(
-        videoPlayerController: VideoPlayerController.networkUrl(
-            Uri.http(url_ras, '${URLVideoPath}/${student.video}')));
+        videoPlayerController: videoPlayerController
+          ..initialize().then((_) {
+            videoPlayerController.play();
+            setState(() {
+              hasVideo = true;
+              print(hasVideo);
+            });
+            print('Video initialized successfully');
+          }).catchError((error) {
+            // Xử lý lỗi khi không thể khởi tạo video
+            print('Error initializing video: $error');
+          }));
   }
+
+  void initVideo() {
+    // try {
+    final defaultStudent = Student.fromMap({});
+    final students = Provider.of<AppStateProvider>(context, listen: false)
+        .appState!
+        .students;
+    student = students.firstWhere(
+      (student) => student.studentId == widget.studentId,
+      orElse: () => defaultStudent,
+    );
+
+    _videoPlayerController = VideoPlayerController.networkUrl(
+        Uri.http(url_ras, '${URLVideoPath}/${student.video}'))
+      // Uri.parse('http://' + url_ras + '/${URLVideoPath}/${student.video}'))
+      ..initialize().then((value) {
+        _videoPlayerController.play();
+        // _videoPlayerController.setLooping(true);
+        setState(() {});
+      });
+    // Future.delayed(Duration(milliseconds: 200), () {});
+    flickManager = FlickManager(videoPlayerController: _videoPlayerController);
+    // } catch (e) {
+    //   print('catch ' + e.toString());
+    // }
+  }
+
+  // Future<FlickManager> getVideo(Student student) async {
+  //   try {
+  //     final controller = VideoPlayerController.networkUrl(
+  //       Uri.http(url_ras, '${URLVideoPath}/${student.video}'),
+  //     );
+  //     await controller.initialize();
+  //     // Thực hiện các bước khác nếu cần thiết sau khi video được khởi tạo thành công
+  //     hasVideo = true;
+  //     print('Video initialized successfully');
+  //     return FlickManager(videoPlayerController: controller);
+  //   } catch (error) {
+  //     // Xử lý lỗi khi không thể khởi tạo video
+  //     print('Error initializing video: $error');
+  //     throw error; // Re-throw lỗi để nó có thể được bắt ở nơi gọi
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -151,10 +227,15 @@ class _DetailStudentState extends State<DetailStudent> {
 
     final defaultStudent = Student.fromMap({});
     final students = context.watch<AppStateProvider>().appState!.students;
-    final student = students.firstWhere(
+    student = students.firstWhere(
       (student) => student.studentId == widget.studentId,
       orElse: () => defaultStudent,
     );
+
+    ShowImage imagesView = Provider.of<AppStateProvider>(context, listen: false)
+        .appState!
+        .imagesView;
+    print(imagesView);
 
     return AlertDialog(
       title: Text('Chi tiết sinh viên'),
@@ -220,85 +301,115 @@ class _DetailStudentState extends State<DetailStudent> {
                 ? SizedBox(
                     height: 405,
                     width: 720,
-                    child: AspectRatio(
-                      // aspectRatio: _controller.value.aspectRatio,
-                      aspectRatio: 16 / 9,
-                      child: FlickVideoPlayer(flickManager: getVideo(student)),
+                    child: Container(
+                        child: _videoPlayerController.value.isInitialized
+                            // ? AspectRatio(
+                            //     aspectRatio:
+                            //         _videoPlayerController.value.aspectRatio,
+                            //     child: VideoPlayer(_videoPlayerController),
+                            //   )
+                            // : Container(),
+                            ? FlickVideoPlayer(flickManager: flickManager)
+                            : Container())
 
-                      // child: FlickVideoPlayer(
-                      //   flickManager: FlickManager(
-                      //     videoPlayerController:
-                      //         VideoPlayerController.networkUrl(
-                      //       Uri.http(
-                      //           url_ras, '${URLVideoPath}/${student.video}'),
-                      //     )..initialize().then(
-                      //             (_) {},
-                      //             onError: (error) {
-                      //               // Xử lý lỗi khi không thể khởi tạo video từ URL
-                      //               print('Error initializing video: $error');
-                      //               // Trả về video mặc định khi không lấy được video từ URL
-                      //               VideoPlayerController.networkUrl(Uri.http(
-                      //                   url_ras,
-                      //                   '${URLVideoPath}/video_default.mp4'));
-                      //             },
-                      //           ),
-                      //   ),
-                      // ),
+                    // AspectRatio(
+                    //     // aspectRatio: _controller.value.aspectRatio,
+                    //     aspectRatio: 16 / 9,
+                    //     child:
+                    //         //  (hasVideo)
+                    //         //     ? Center(child: CircularProgressIndicator())
+                    //         //     :
+                    //         // FlickVideoPlayer(flickManager: getVideo(student))
 
-                      //               child: FlickVideoPlayer(
-                      //                 flickManager: FlickManager(
-                      // videoPlayerController: VideoPlayerController.networkUrl(
-                      //     Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'))),
-                      //               ),
-                    ),
-                  )
+                    //         //     FutureBuilder(
+                    //         //   future: _initializeVideoPlayerFuture,
+                    //         //   builder: (context, snapshot) {
+                    //         //     if (snapshot.connectionState ==
+                    //         //         ConnectionState.done) {
+                    //         //       return AspectRatio(
+                    //         //         aspectRatio:
+                    //         //             _videoPlayerController.value.aspectRatio,
+                    //         //         child: VideoPlayer(_videoPlayerController),
+                    //         //       );
+                    //         //     } else {
+                    //         //       return Center(child: CircularProgressIndicator());
+                    //         //     }
+                    //         //   },
+                    //         // )
+
+                    //     //     FutureBuilder<VideoPlayerController>(
+                    //     //   future: VideoPlayerController.networkUrl(
+                    //     //           Uri.http(url_ras, '${URLVideoPath}/${student.video}'))
+                    //     //       ..initialize().then((value) => null),
+                    //     //   builder: (context, snapshot) {
+                    //     //     if (snapshot.hasData) {
+                    //     //       return VideoPlayer(snapshot.data!);
+                    //     //     } else if (snapshot.hasError) {
+                    //     //       return Text('Lỗi: ${snapshot.error}');
+                    //     //     } else {
+                    //     //       return CircularProgressIndicator();
+                    //     //     }
+                    //     //   },
+                    //     // )
+
+                    //     // child: FlickVideoPlayer(
+                    //     //   flickManager: FlickManager(
+                    //     //     videoPlayerController:
+                    //     //         VideoPlayerController.networkUrl(
+                    //     //       Uri.http(
+                    //     //           url_ras, '${URLVideoPath}/${student.video}'),
+                    //     //     )..initialize().then(
+                    //     //             (_) {},
+                    //     //             onError: (error) {
+                    //     //               // Xử lý lỗi khi không thể khởi tạo video từ URL
+                    //     //               print('Error initializing video: $error');
+                    //     //               // Trả về video mặc định khi không lấy được video từ URL
+                    //     //               VideoPlayerController.networkUrl(Uri.http(
+                    //     //                   url_ras,
+                    //     //                   '${URLVideoPath}/video_default.mp4'));
+                    //     //             },
+                    //     //           ),
+                    //     //   ),
+                    //     // ),
+
+                    //     //               child: FlickVideoPlayer(
+                    //     //                 flickManager: FlickManager(
+                    //     // videoPlayerController: VideoPlayerController.networkUrl(
+                    //     //     Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'))),
+                    //     //               ),
+                    //     ),
+                    )
                 : SizedBox(
                     height: 400,
                     width: double.maxFinite,
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 10,
-                        crossAxisSpacing: 8.0,
-                        mainAxisSpacing: 8.0,
-                      ),
-                      itemCount: 200,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: EdgeInsets.all(8.0),
-                          child: Column(children: [
-                            Image.network(
-                              '${URLNodeJSServer_RaspberryPi_Images}/${(Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView) == ShowImage.full ? 'full_images' : 'crop_images'}/${student.avatar.toString().substring(0, student.avatar.toString().indexOf('.'))}/${1}.jpg',
-                              width: 131, // Điều chỉnh chiều rộng nếu cần
-                              height: 131, // Điều chỉnh chiều cao nếu cần
-                              fit: BoxFit.contain,
-                              loadingBuilder: (BuildContext context,
-                                  Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                } else {
-                                  return CircularProgressIndicator();
-                                }
-                              },
-                              errorBuilder: (BuildContext context, Object error,
-                                  StackTrace? stackTrace) {
-                                return Image.network(
-                                  '${URLNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
-                                  width: 131,
-                                  height: 131,
-                                );
-                              },
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              'Image ' + (index + 1).toString(),
-                              style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.bold),
-                            )
-                          ]),
-                        );
-                      },
+                    child: Center(
+                      child: (imagesView == ShowImage.full &&
+                              student.NoFullImage == 0)
+                          ? Text("Không có ảnh chưa tiền xử lý.")
+                          : (imagesView == ShowImage.crop &&
+                                  student.NoCropImage == 0)
+                              ? Text("Không có ảnh đã tiền xử lý.")
+                              : GridView.builder(
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 10,
+                                    crossAxisSpacing: 8.0,
+                                    mainAxisSpacing: 8.0,
+                                  ),
+                                  itemCount: imagesView == ShowImage.full
+                                      ? student.NoFullImage
+                                      : student.NoCropImage,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: ImagesView(
+                                          student: student,
+                                          index: index,
+                                          imageKey: _imageKey),
+                                    );
+                                  },
+                                ),
                     ),
                   ),
           ],
@@ -313,5 +424,83 @@ class _DetailStudentState extends State<DetailStudent> {
         ),
       ],
     );
+  }
+}
+
+class ImagesView extends StatefulWidget {
+  final Student student;
+  final int index;
+  final Key imageKey;
+  const ImagesView(
+      {super.key,
+      required this.student,
+      required this.index,
+      required this.imageKey});
+
+  @override
+  State<ImagesView> createState() => _ImagesViewState();
+}
+
+class _ImagesViewState extends State<ImagesView> {
+  Widget getImage(AppStateProvider appStateProvider, Key _imageKey,
+      NetworkImage imageProvider) {
+    try {
+      return Image(
+        // Sử dụng giá trị mới của imagesView từ appState
+        image: imageProvider,
+        key: _imageKey,
+        width: 131,
+        height: 131,
+        fit: BoxFit.contain,
+        loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          } else {
+            return CircularProgressIndicator();
+          }
+        },
+        errorBuilder:
+            (BuildContext context, Object error, StackTrace? stackTrace) {
+          return Image.network(
+            '${URLNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
+            width: 131,
+            height: 131,
+          );
+        },
+      );
+    } catch (e) {
+      // Xử lý ngoại lệ ở đây, ví dụ: in ra thông báo lỗi và trả về một widget khác
+      print('Error loading image: $e');
+      return Placeholder(); // Hoặc bạn có thể trả về một widget khác để hiển thị thông báo lỗi
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Xóa cache của hình ảnh cũ
+    final imageProvider = NetworkImage(
+      '${URLNodeJSServer_Python_Images}/${Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView == ShowImage.full ? 'full_images' : 'crop_images'}/${widget.student.avatar.toString().substring(0, widget.student.avatar.toString().indexOf('.'))}/${widget.index + 1}.jpg',
+    );
+    imageProvider.evict().then((bool success) {
+      if (success) {
+        print('Image cache cleared.');
+      } else {
+        print('Failed to clear image cache.');
+      }
+    });
+
+    return Consumer<AppStateProvider>(builder: (context, appStateProvider, _) {
+      return Column(
+        children: [
+          getImage(appStateProvider, widget.imageKey, imageProvider),
+          Text(
+            'Image ' + (widget.index + 1).toString(),
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+          // SizedBox(height: 10),
+        ],
+      );
+    });
   }
 }
