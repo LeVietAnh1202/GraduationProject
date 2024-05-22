@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/attendance/attendance_student_term.dart';
 import 'package:flutter_todo_app/model/scheduleAdminTermModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
@@ -8,21 +7,21 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class DtScheduleAdminTerm extends StatefulWidget {
+class DtScheduleTerm extends StatefulWidget {
   String lecturerID;
-  String subjectID;
+  // String subjectID;
   String semesterID;
-  DtScheduleAdminTerm(
+  DtScheduleTerm(
       {Key? key,
       required this.lecturerID,
-      required this.subjectID,
+      // required this.subjectID,
       required this.semesterID});
 
   @override
-  State<DtScheduleAdminTerm> createState() => _DtScheduleAdminTermState();
+  State<DtScheduleTerm> createState() => _DtScheduleTermState();
 }
 
-class _DtScheduleAdminTermState extends State<DtScheduleAdminTerm> {
+class _DtScheduleTermState extends State<DtScheduleTerm> {
   List<ScheduleAdminTerm> scheduleAdminTerms = [];
   bool _isLoading = true;
 
@@ -33,16 +32,17 @@ class _DtScheduleAdminTermState extends State<DtScheduleAdminTerm> {
       fetchScheduleAdminTerms(); // Gọi hàm setAppState sau khi initState hoàn thành
     });
     print(
-        'initState DtScheduleAdminTerm ${widget.lecturerID}, ${widget.semesterID}, ${widget.subjectID}');
+        'initState DtScheduleTerm ${widget.lecturerID}, ${widget.semesterID}');
   }
 
   Future<void> fetchScheduleAdminTerms() async {
     final scheduleAdminTerms =
-        await ScheduleService.fetchScheduleAdminTerms(context, (bool value) {
+        await ScheduleService.fetchAllModuleTermByLecturerIDs(context,
+            (bool value) {
       setState(() {
         _isLoading = value;
       });
-    }, widget.lecturerID, widget.subjectID, widget.semesterID);
+    }, widget.lecturerID, widget.semesterID);
     Provider.of<AppStateProvider>(context, listen: false)
         .setTableLength(scheduleAdminTerms.length);
   }
@@ -59,8 +59,7 @@ class _DtScheduleAdminTermState extends State<DtScheduleAdminTerm> {
   @override
   Widget build(BuildContext context) {
     // fetchScheduleAdminTerms();
-    print(
-        'DtScheduleAdminTerm ${widget.lecturerID}, ${widget.semesterID}, ${widget.subjectID}');
+    print('DtScheduleTerm ${widget.lecturerID}, ${widget.semesterID}');
     return Container(
       child: _isLoading
           ? Container(
@@ -74,22 +73,22 @@ class _DtScheduleAdminTermState extends State<DtScheduleAdminTerm> {
             )
           : DataTable(
               columns: [
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Thứ',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Tiết',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+                  // DataColumn(
+                  //   label: Expanded(
+                  //     child: Text(
+                  //       'Thứ',
+                  //       textAlign: TextAlign.center,
+                  //     ),
+                  //   ),
+                  // ),
+                  // DataColumn(
+                  //   label: Expanded(
+                  //     child: Text(
+                  //       'Tiết',
+                  //       textAlign: TextAlign.center,
+                  //     ),
+                  //   ),
+                  // ),
                   DataColumn(
                     label: Expanded(
                       child: Text(
@@ -130,15 +129,6 @@ class _DtScheduleAdminTermState extends State<DtScheduleAdminTerm> {
                       ),
                     ),
                   ),
-
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Tên giảng viên',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
                   DataColumn(
                     label: Expanded(
                       child: Text(
@@ -169,8 +159,6 @@ class _DtScheduleAdminTermState extends State<DtScheduleAdminTerm> {
 
                     return DataRow(
                       cells: [
-                        DataCell(Center(child: Text(schedule.day))),
-                        DataCell(Center(child: Text(schedule.time))),
                         DataCell(Center(child: Text(schedule.moduleID))),
                         DataCell(Center(child: Text(schedule.subjectName))),
                         DataCell(Center(
@@ -179,7 +167,6 @@ class _DtScheduleAdminTermState extends State<DtScheduleAdminTerm> {
                         DataCell(Center(
                             child:
                                 Text('${formattedStart} - ${formattedEnd}'))),
-                        DataCell(Center(child: Text(schedule.lecturerName))),
                         DataCell(
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

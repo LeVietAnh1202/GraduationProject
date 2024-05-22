@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/number.dart';
+import 'package:flutter_todo_app/constant/string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Account {
@@ -6,8 +8,15 @@ class Account {
   String username;
   String role;
   String token;
+  // String facultyID;
 
-  Account({required this.account, required this.username, required this.role, required this.token});
+  Account(
+      {required this.account,
+      required this.username,
+      required this.role,
+      required this.token,
+      // required this.facultyID
+      });
 }
 
 class AccountProvider with ChangeNotifier {
@@ -19,13 +28,17 @@ class AccountProvider with ChangeNotifier {
     return _account?.account;
   }
 
-  String? getRole() {
-    return _account?.role;
+  Role? getRole() {
+    return roleMap[_account?.role];
   }
 
   String? getUsername() {
     return _account?.username;
   }
+
+  // String? getFacultyID() {
+  //   return _account?.facultyID;
+  // }
 
   AccountProvider() {
     print('Khởi tạo AccountProvider');
@@ -38,13 +51,18 @@ class AccountProvider with ChangeNotifier {
     String? role = prefs.getString('accountRole');
     String? username = prefs.getString('accountUsername');
     String? token = prefs.getString('token');
+    // String? facultyID = prefs.getString('facultyID');
 
-    if (account != null && role != null && username != null && token != null) {
-      _account = Account(account: account, role: role, username: username, token: token);
+    if (account != null && role != null && username != null && token != null 
+    // && facultyID != null
+    ) {
+      _account = Account(
+          account: account, role: role, username: username, token: token,
+          // facultyID: facultyID
+          );
       print('Khởi tạo thành công account');
       notifyListeners();
-    }
-    else {
+    } else {
       print('restore false');
     }
   }
@@ -62,6 +80,7 @@ class AccountProvider with ChangeNotifier {
     prefs.setString('accountRole', account.role);
     prefs.setString('accountUsername', account.username);
     prefs.setString('token', account.token);
+    // prefs.setString('facultyID', account.facultyID);
     // Lưu các trường khác nếu cần
   }
 
@@ -71,5 +90,6 @@ class AccountProvider with ChangeNotifier {
     prefs.remove('accountRole');
     prefs.remove('accountUsername');
     prefs.remove('token');
+    // prefs.remove('facultyID');
   }
 }

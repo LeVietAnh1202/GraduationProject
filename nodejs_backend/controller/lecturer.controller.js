@@ -34,8 +34,8 @@ exports.getAllLecturer = async (req, res, next) => {
 
 exports.getLecturersByFacultyID = async (req, res, next) => {
     try {
-        const { facultyID } = req.body;
-        const lecturerList = await LecturerService.getLecturersByFacultyID(facultyID);
+        const { lecturerID } = req.body;
+        const lecturerList = await LecturerService.getLecturersByFacultyID(lecturerID);
 
         res.json({ status: true, success: 'Get lecturers by facultyID successfully', data: lecturerList });
 

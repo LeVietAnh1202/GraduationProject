@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
           // key: UniqueKey(),
           // navigatorKey: MyApp.navigatorKey,
-          title: 'Flutter Demo',
+          title: 'Attendance student using facial recognition',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primaryColor: Colors.black,

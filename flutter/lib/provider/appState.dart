@@ -6,6 +6,7 @@ import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/classModel.dart';
 import 'package:flutter_todo_app/model/facultyModel.dart';
 import 'package:flutter_todo_app/model/lecturerModel.dart';
+import 'package:flutter_todo_app/model/moduleTermByLecturerIDModel.dart';
 import 'package:flutter_todo_app/model/scheduleAdminTermModel.dart';
 import 'package:flutter_todo_app/model/schoolyearModel.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
@@ -29,6 +30,7 @@ class AppState {
   List<Lecturer> lecturers;
   List<Subject> subjects;
   List<ScheduleAdminTerm> scheduleAdminTerms;
+  List<ModuleTermByLecturerID> moduleTermByLecturerIDs;
   List<Map<String, dynamic>> scheduleStudentWeeks;
   List<Map<String, dynamic>> scheduleStudentTerms;
   List<Map<String, dynamic>> scheduleLecturerWeeks;
@@ -60,6 +62,7 @@ class AppState {
     required this.scheduleLecturerWeeks,
     required this.scheduleLecturerTerms,
     required this.scheduleAdminTerms,
+    required this.moduleTermByLecturerIDs,
     required this.attendanceStudentTerms,
     required this.attendanceLecturerWeeks,
     required this.attendanceLecturerTerms,
@@ -202,7 +205,7 @@ class AppStateProvider with ChangeNotifier {
     _appState?.lecturers = lecturers;
     notifyListeners();
   }
-  
+
   void setSubjects(List<Subject> subjects) {
     _appState?.subjects = subjects;
     notifyListeners();
@@ -235,6 +238,12 @@ class AppStateProvider with ChangeNotifier {
 
   void setScheduleAdminTerms(List<ScheduleAdminTerm> scheduleAdminTerms) {
     _appState?.scheduleAdminTerms = scheduleAdminTerms;
+    notifyListeners();
+  }
+
+  void setModuleTermByLecturerIDs(
+      List<ModuleTermByLecturerID> moduleTermByLecturerIDs) {
+    _appState?.moduleTermByLecturerIDs = moduleTermByLecturerIDs;
     notifyListeners();
   }
 
@@ -308,6 +317,8 @@ class AppStateProvider with ChangeNotifier {
     String? scheduleLecturerTermsString =
         prefs.getString('scheduleLecturerTerms');
     String? scheduleAdminTermsString = prefs.getString('scheduleAdminTerms');
+    String? moduleTermByLecturerIDsString =
+        prefs.getString('moduleTermByLecturerIDs');
 // ----------------------------------------------------------------
     String? attendanceStudentTermsString =
         prefs.getString('attendanceStudentTerms');
@@ -337,6 +348,7 @@ class AppStateProvider with ChangeNotifier {
         scheduleLecturerWeeksString != null &&
         scheduleLecturerTermsString != null &&
         scheduleAdminTermsString != null &&
+        moduleTermByLecturerIDsString != null &&
         //----------------------------------------------------------------
         attendanceStudentTermsString != null &&
         attendanceLecturerWeeksString != null &&
@@ -366,6 +378,8 @@ class AppStateProvider with ChangeNotifier {
           parseScheduleLecturerTerms(scheduleLecturerTermsString);
       List<ScheduleAdminTerm> scheduleAdminTerms =
           parseScheduleAdminTerms(scheduleAdminTermsString);
+      List<ModuleTermByLecturerID> moduleTermByLecturerIDs =
+          parseModuleTermByLecturerIDs(moduleTermByLecturerIDsString);
 // ----------------------------------------------------------------
       Map<String, dynamic> attendanceStudentTerms =
           parseAttendanceStudentTerms(attendanceStudentTermsString);
@@ -396,6 +410,7 @@ class AppStateProvider with ChangeNotifier {
         scheduleLecturerWeeks: scheduleLecturerWeeks,
         scheduleLecturerTerms: scheduleLecturerTerms,
         scheduleAdminTerms: scheduleAdminTerms,
+        moduleTermByLecturerIDs: moduleTermByLecturerIDs,
         // ----------------------------------------------------------------
         attendanceStudentTerms: attendanceStudentTerms,
         attendanceLecturerWeeks: attendanceLecturerWeeks,
@@ -498,7 +513,14 @@ class AppStateProvider with ChangeNotifier {
 
   List<ScheduleAdminTerm> parseScheduleAdminTerms(
       String scheduleAdminTermsString) {
-    return parseJsonList(scheduleAdminTermsString, (json) => ScheduleAdminTerm.fromMap(json));
+    return parseJsonList(
+        scheduleAdminTermsString, (json) => ScheduleAdminTerm.fromMap(json));
+  }
+
+  List<ModuleTermByLecturerID> parseModuleTermByLecturerIDs(
+      String moduleTermByLecturerIDsString) {
+    return parseJsonList(moduleTermByLecturerIDsString,
+        (json) => ModuleTermByLecturerID.fromMap(json));
   }
 
 //----------------------------------------------------------------
@@ -586,6 +608,8 @@ class AppStateProvider with ChangeNotifier {
         'scheduleLecturerTerms', appState.scheduleLecturerTerms.toString());
     prefs.setString(
         'scheduleAdminTerms', appState.scheduleAdminTerms.toString());
+    prefs.setString(
+        'moduleTermByLecturerIDs', appState.moduleTermByLecturerIDs.toString());
 // --------------------------------------------------------------
     prefs.setString(
         'attendanceStudentTerms', appState.attendanceStudentTerms.toString());
@@ -620,6 +644,7 @@ class AppStateProvider with ChangeNotifier {
     prefs.remove('scheduleLecturerTerms');
     prefs.remove('scheduleAdminWeeks');
     prefs.remove('scheduleAdminTerms');
+    prefs.remove('moduleTermByLecturerIDs');
     // ----------------------------------------------------------------
     prefs.remove('attendanceStudentTerms');
     prefs.remove('attendanceLecturerWeeks');

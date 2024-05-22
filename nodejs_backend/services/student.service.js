@@ -1,10 +1,12 @@
 const StudentModel = require("../models/student.model");
 const ModuleModel = require("../models/module.model");
 const FacultyModel = require("../models/faculty.model");
+const LecturerModel = require("../models/lecturer.model");
 
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const Lecturer = require("../models/lecturer.model");
 class StudentService {
     static async createStudent(studentId, studentName, classCode, specializationID, gender, birthDate, avatar, video) {
         try {
@@ -69,16 +71,43 @@ class StudentService {
     }
     static async getAllStudent() {
         try {
-            return await StudentModel.find();
+            // Lấy tất cả sinh viên
+            const students = await StudentModel.find();
+
+            // Lấy tất cả dữ liệu từ FacultyModel
+            const faculties = await FacultyModel.find();
+
+            // Tạo một bản đồ (map) để nhanh chóng tra cứu specializationID -> specializationName
+            const specializationMap = new Map();
+            faculties.forEach(faculty => {
+                faculty.majors.forEach(major => {
+                    major.specializations.forEach(specialization => {
+                        specializationMap.set(specialization.specializationID, specialization.specializationName);
+                    });
+                });
+            });
+
+            // Thêm specializationName cho mỗi sinh viên dựa trên specializationID
+            const studentsWithSpecialization = students.map(student => {
+                const specializationName = specializationMap.get(student.specializationID) || 'Unknown';
+                return {
+                    ...student.toObject(), // Chuyển đổi document MongoDB thành object JS
+                    specializationName: specializationName
+                };
+            });
+
+            return studentsWithSpecialization;
         } catch (err) {
-            console.log(err);
+            console.error(err);
+            throw err; // Ném lỗi để xử lý ở cấp cao hơn nếu cần
         }
     }
 
 
-    static async getStudentsByFacultyID(facultyID) {
+    static async getStudentsByFacultyID(lecturerID) {
         try {
-            const faculty = await FacultyModel.findOne({ facultyID });
+            const lecturer = await LecturerModel.findOne({ lecturerID });
+            const faculty = await FacultyModel.findOne({ facultyID: lecturer.facultyID });
 
             const specializationIDs = [];
             for (const major of faculty.majors) {
@@ -89,7 +118,27 @@ class StudentService {
 
             const students = await StudentModel.find({ specializationID: { $in: specializationIDs } });
 
-            return students;
+            const specializationMap = new Map();
+
+            const faculties = await FacultyModel.find();
+            faculties.forEach(faculty => {
+                faculty.majors.forEach(major => {
+                    major.specializations.forEach(specialization => {
+                        specializationMap.set(specialization.specializationID, specialization.specializationName);
+                    });
+                });
+            });
+
+            const studentsWithSpecialization = students.map(student => {
+                const specializationName = specializationMap.get(student.specializationID) || 'Unknown';
+                return {
+                    ...student.toObject(), // Chuyển đổi document MongoDB thành object JS
+                    specializationName: specializationName
+                };
+            });
+
+
+            return studentsWithSpecialization;
         } catch (err) {
             console.log(err);
             throw err;  // Ném lỗi ra để có thể xử lý ở nơi khác nếu cần
@@ -171,11 +220,11 @@ class StudentService {
             // const { listStudentID } = await ModuleModel.findOne({ moduleID: moduleID });
             const module = await ModuleModel.findOne({ moduleID: moduleID });
             console.log(moduleID)
-            
+
             if (!module) {
                 throw new Error(`Module with ID ${moduleID} not found`);
             }
-            
+
             // Extract the list of student IDs
             const listStudentID = module.listStudentID;
             console.log(listStudentID)

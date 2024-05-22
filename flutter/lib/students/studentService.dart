@@ -1,17 +1,31 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class StudentService {
   static Future<List<Student>> fetchStudents(
       BuildContext context, ValueChanged<bool> isLoading) async {
-    final response = await http.get(Uri.http(url, getAllStudentAPI));
+    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
+    Response? response;
+    if (role == Role.aao) {
+      final lecturerID =
+          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final bodyData = {'lecturerID': lecturerID};
+      response = await http.post(Uri.http(url, getStudentsByFacultyIDAPI),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(bodyData));
+    }
+    if (role == Role.admin)
+      response = await http.get(Uri.http(url, getAllStudentAPI));
     print('fetchStudents function');
-    if (response.statusCode == 200) {
+    if (response!.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final studentsList = data['data'];
       // print("Student list: " + studentsList.toString());

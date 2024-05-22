@@ -21,16 +21,7 @@ class AttendanceLecturerWeek extends StatefulWidget {
 
 class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
   Map<String, dynamic> attendances = {};
-  // List<String> dateList = ["21/12/2023", "22/12/2023", "23/12/2023"];
   bool _isLoading = true;
-  // String selectedWeek = '19'; // Tuần được chọn mặc định
-
-  // void onWeekSelected(String? week) {
-  //   setState(() {
-  //     selectedWeek = week!;
-  //   });
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -210,62 +201,6 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                                 },
                               ),
                             )
-                                //   SizedBox(
-                                //   height: 50,
-                                //   width: 50,
-                                //   child: GridView.builder(
-                                //     shrinkWrap: true,
-                                //     gridDelegate:
-                                //         SliverGridDelegateWithFixedCrossAxisCount(
-                                //       crossAxisCount: 10,
-                                //       crossAxisSpacing: 8.0,
-                                //       mainAxisSpacing: 8.0,
-                                //     ),
-                                //     itemCount: 1,
-                                //     itemBuilder: (context, index) {
-                                //       return Container(
-                                //         padding: EdgeInsets.all(8.0),
-                                //         child: Column(children: [
-                                //           Image.network(
-                                //             '${URLNodeJSServer}/images/attendance_images/${entry.attendanceImages[0]}',
-                                //             width:
-                                //                 131, // Điều chỉnh chiều rộng nếu cần
-                                //             height:
-                                //                 131, // Điều chỉnh chiều cao nếu cần
-                                //             fit: BoxFit.contain,
-                                //             loadingBuilder: (BuildContext context,
-                                //                 Widget child,
-                                //                 ImageChunkEvent? loadingProgress) {
-                                //               if (loadingProgress == null) {
-                                //                 return child;
-                                //               } else {
-                                //                 return CircularProgressIndicator();
-                                //               }
-                                //             },
-                                //             errorBuilder: (BuildContext context,
-                                //                 Object error,
-                                //                 StackTrace? stackTrace) {
-                                //               return Image.network(
-                                //                 '${URLNodeJSServer_RaspberryPi_Images}/avatar/avatar.jpg',
-                                //                 width:
-                                //                     131, // Điều chỉnh chiều rộng nếu cần
-                                //                 height:
-                                //                     131, // Điều chỉnh chiều cao nếu cần
-                                //               );
-                                //             },
-                                //           ),
-                                //           SizedBox(height: 10),
-                                //           Text(
-                                //             'Image ' + (index + 1).toString(),
-                                //             style: TextStyle(
-                                //                 fontSize: 12,
-                                //                 fontWeight: FontWeight.bold),
-                                //           )
-                                //         ]),
-                                //       );
-                                //     },
-                                //   ),
-                                // )
                                 ),
                             DataCell(Center(
                               child: Utilities.attendanceIcon(

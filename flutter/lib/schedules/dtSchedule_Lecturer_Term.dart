@@ -1,44 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/attendance/attendance_lecturer_term.dart';
-import 'package:flutter_todo_app/attendance/utilities.dart';
-import 'package:flutter_todo_app/export/exxport_attendance_lecturer_term.dart';
-
+import 'package:flutter_todo_app/model/scheduleAdminTermModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
+import 'package:flutter_todo_app/students/dataTableStudentByModule.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class DtScheduleLecturerTerm extends StatefulWidget {
-  const DtScheduleLecturerTerm({Key? key});
+// ignore: must_be_immutable
+class DtScheduleTerm extends StatefulWidget {
+  Function(String, int) onPress;
+  String lecturerID;
+  // String subjectID;
+  String semesterID;
+  DtScheduleTerm(
+      {Key? key,
+      required this.lecturerID,
+      required this.semesterID,
+      required this.onPress});
 
   @override
-  State<DtScheduleLecturerTerm> createState() => _DtScheduleLecturerTermState();
+  State<DtScheduleTerm> createState() => _DtScheduleTermState();
 }
 
-class _DtScheduleLecturerTermState extends State<DtScheduleLecturerTerm> {
-  List<Map<String, dynamic>> schedules = [];
+class _DtScheduleTermState extends State<DtScheduleTerm> {
+  List<ScheduleAdminTerm> scheduleAdminTerms = [];
   bool _isLoading = true;
+  String moduleID = "";
+
   @override
   void initState() {
     super.initState();
-    init();
+    Future.delayed(Duration.zero, () {
+      fetchScheduleTerms(); // Gọi hàm setAppState sau khi initState hoàn thành
+    });
+    print(
+        'initState DtAttendanceTerm ${widget.lecturerID}, ${widget.semesterID}');
   }
 
-  void init() async {
-    schedules = Provider.of<AppStateProvider>(context, listen: false)
-        .appState!
-        .scheduleLecturerTerms;
-    if (schedules.isEmpty) {
-      ScheduleService.fetchScheduleLecturerTerms(
-          context,
-          (bool value) => setState(() {
-                _isLoading = value;
-              }));
-    } else {
+  Future<void> fetchScheduleTerms() async {
+    scheduleAdminTerms =
+        await ScheduleService.fetchScheduleTerms(context, (bool value) {
       setState(() {
-        _isLoading = false;
+        _isLoading = value;
       });
-    }
+    }, widget.lecturerID, widget.semesterID);
+    Provider.of<AppStateProvider>(context, listen: false)
+        .setTableLength(scheduleAdminTerms.length);
   }
 
   void deleteSchedule(int index) {
@@ -64,167 +71,150 @@ class _DtScheduleLecturerTermState extends State<DtScheduleLecturerTerm> {
               ),
             )
           : DataTable(
+              dividerThickness: 2.0, // Độ dày của đường kẻ
+              border: TableBorder.all(color: Colors.grey),
               columns: [
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Thứ',
-                        textAlign: TextAlign.center,
-                      ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Thứ',
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Tiết',
-                        textAlign: TextAlign.center,
-                      ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Tiết',
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Mã học phần',
-                        textAlign: TextAlign.center,
-                      ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Mã học phần',
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Tên môn',
-                        textAlign: TextAlign.center,
-                      ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Tên môn',
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Số tín chỉ',
-                        textAlign: TextAlign.center,
-                      ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Số tín chỉ',
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Phòng học',
-                        textAlign: TextAlign.center,
-                      ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Phòng học',
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Thời gian',
-                        textAlign: TextAlign.center,
-                      ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Thời gian',
+                      textAlign: TextAlign.center,
                     ),
                   ),
-
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Tên lớp',
-                        textAlign: TextAlign.center,
-                      ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Tác vụ',
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Tác vụ',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                  // Add other columns as needed
-                ],
+                ),
+                // Add other columns as needed
+              ],
               rows: context
                   .watch<AppStateProvider>()
                   .appState!
-                  .scheduleLecturerTerms
+                  .scheduleAdminTerms
                   .asMap()
                   .entries
                   .map((entry) {
                     final schedule = entry.value;
-                    final dateStart = schedule['dateStart'];
-                    final dateEnd = schedule['dateEnd'];
+                    final dateStart = schedule.dateStart;
+                    final dateEnd = schedule.dateEnd;
 
-                    print('dateStart: $dateStart');
-                    print('dateEnd: $dateEnd');
-
-                    final inputFormat =
-                        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    // final inputFormat =
+                    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                     final outputFormat = DateFormat('dd/MM/yyyy');
 
-                    final formattedStart =
-                        outputFormat.format(inputFormat.parse(dateStart));
-                    final formattedEnd =
-                        outputFormat.format(inputFormat.parse(dateEnd));
+                    final formattedStart = outputFormat.format(dateStart);
+                    final formattedEnd = outputFormat.format(dateEnd);
 
                     return DataRow(
                       cells: [
-                        DataCell(Center(child: Text(schedule['day']))),
-                        DataCell(Center(child: Text(schedule['time']))),
-                        DataCell(Center(child: Text(schedule['moduleID']))),
-                        DataCell(Center(child: Text(schedule['subjectName']))),
+                        DataCell(Center(child: Text(schedule.day))),
+                        DataCell(Center(child: Text(schedule.time))),
+                        DataCell(Center(child: Text(schedule.moduleID))),
+                        DataCell(Center(child: Text(schedule.subjectName))),
                         DataCell(Center(
-                            child:
-                                Text(schedule['numberOfCredits'].toString()))),
-                        DataCell(Center(child: Text(schedule['roomName']))),
+                            child: Text(schedule.numberOfCredits.toString()))),
+                        DataCell(Center(child: Text(schedule.roomName))),
                         DataCell(Center(
                             child:
                                 Text('${formattedStart} - ${formattedEnd}'))),
-                        DataCell(Center(child: Text(schedule['classCode']))),
                         DataCell(
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              IconButton(
-                                icon: Icon(Icons.library_books),
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text(schedule['subjectName']),
-                                        content: SingleChildScrollView(
-                                          child: Column(
-                                            children: [
-                                              
-                                              SizedBox(height: 20),
-                                              AttendanceLecturerTerm(
-                                                  moduleID:
-                                                      schedule['moduleID']),
-                                            ],
-                                          ),
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('Hủy'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          Utilities.exportFileButton(() {
-                                            ExportExcel
-                                                .exportAttendanceLecturerTermToExcel(
-                                                    Provider.of<AppStateProvider>(
-                                                            context,
-                                                            listen: false)
-                                                        .appState!
-                                                        .attendanceLecturerTerms,
-                                                    schedule['subjectName'],
-                                                    schedule['classCode']);
-                                            Navigator.of(context).pop();
-                                          }),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
+                              _isLoading
+                                  ? Container(
+                                      child: CircularProgressIndicator(),
+                                      margin:
+                                          EdgeInsets.only(bottom: 5, top: 10),
+                                    )
+                                  : IconButton(
+                                      icon: Icon(Icons.library_books),
+                                      onPressed: () async {
+                                        scheduleAdminTerms =
+                                            Provider.of<AppStateProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .appState!
+                                                .scheduleAdminTerms;
+                                        print('scheduleAdminTerms.length: ' +
+                                            scheduleAdminTerms.length
+                                                .toString());
+                                        widget.onPress(schedule.moduleID,
+                                            scheduleAdminTerms.length);
+
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(schedule.subjectName),
+                                              content: DataTableStudentByModule(
+                                                  moduleID: schedule.moduleID),
+                                              actions: [
+                                                TextButton(
+                                                  child: Text('Hủy'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                    )
                             ],
                           ),
                         ),

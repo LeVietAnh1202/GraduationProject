@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/lecturers/lecturerService.dart';
+import 'package:flutter_todo_app/model/lecturerModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -17,14 +18,33 @@ class _DataTableLecturerState extends State<DataTableLecturer> {
   @override
   void initState() {
     super.initState();
-    LecturerService.fetchLecturers(context);
+
+    Future.delayed(Duration.zero, () {
+      fetchLecturers(); // Gọi hàm setAppState sau khi initState hoàn thành
+    });
   }
 
-  void deleteLecturer(int index) {
+  Future<void> fetchLecturers() async {
+    final lecturers = await LecturerService.fetchLecturers(context);
+    Provider.of<AppStateProvider>(context, listen: false)
+        .setTableLength(lecturers.length);
   }
+
+  void deleteLecturer(int index) {}
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.watch<AppStateProvider>().appState!;
+    final currentPage = appState.currentPage;
+    final rowsPerPage = appState.rowsPerPage;
+    final lecturers = appState.lecturers;
+
+    int startIndex = (currentPage - 1) * rowsPerPage;
+    int endIndex = startIndex + rowsPerPage;
+
+    List<Lecturer> currentPageLecturers = lecturers.sublist(
+        startIndex, endIndex > lecturers.length ? lecturers.length : endIndex);
+
     return DataTable(
       columns: [
         DataColumn(
@@ -69,13 +89,7 @@ class _DataTableLecturerState extends State<DataTableLecturer> {
         ),
         // Add other columns as needed
       ],
-      rows: context
-          .watch<AppStateProvider>()
-          .appState!
-          .lecturers
-          .asMap()
-          .entries
-          .map((entry) {
+      rows: currentPageLecturers.asMap().entries.map((entry) {
         final index = entry.key;
         final lecturer = entry.value;
 
@@ -85,8 +99,7 @@ class _DataTableLecturerState extends State<DataTableLecturer> {
             DataCell(Center(child: Text(lecturer.lecturerName))),
             DataCell(Center(child: Text(lecturer.gender))),
             DataCell(Center(
-              child: Text(DateFormat('dd/MM/yyyy')
-                  .format(lecturer.birthDate)),
+              child: Text(DateFormat('dd/MM/yyyy').format(lecturer.birthDate)),
             )),
             DataCell(
               Row(

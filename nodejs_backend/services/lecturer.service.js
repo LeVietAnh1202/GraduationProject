@@ -26,9 +26,12 @@ class LecturerService {
         }
     }
 
-    static async getLecturersByFacultyID(facultyID) {
+    static async getLecturersByFacultyID(lecturerID) {
         try {
-            const lecturers = await LecturerModel.find({facultyID: facultyID});
+            console.log(lecturerID)
+            const lecturer = await LecturerModel.findOne({ lecturerID });
+            console.log(lecturer.facultyID)
+            const lecturers = await LecturerModel.find({ facultyID: lecturer.facultyID });
             return lecturers;
         } catch (err) {
             console.log(err);

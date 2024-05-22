@@ -1,6 +1,6 @@
-const url = '192.168.1.4:3000';
+const url = '192.168.1.5:3000';
 // const url = '192.168.1.3:3000';
-const url_ras = '192.168.1.3:3000';
+const url_ras = '192.168.1.5:3000';
 const url_python = '192.168.1.4:8001';
 final register = "user/register";
 final login = 'user/login';
@@ -13,9 +13,11 @@ final uploadVideoAPI = 'student/uploadVideo';
 
 final getAllStudentAPI = 'student/getAll';
 final getStudentByModuleIDAPI = 'student/getStudentByModuleID';
+final getStudentsByFacultyIDAPI = 'student/getStudentsByFacultyID';
 
 final createLecturerAPI = 'lecturer/createLecturer';
 final getAllLecturerAPI = 'lecturer/getAllLecturer';
+final getAllLecturerByFacultyIDAPI = 'lecturer/getLecturersByFacultyID';
 
 final getAllSubjectAPI = 'subject/getAll';
 
@@ -31,7 +33,10 @@ final getAllScheduleStudentTermAPI = 'student/getAllScheduleTerm';
 final getAllScheduleLecturerWeekAPI = 'lecturer/getAllScheduleWeek';
 final getAllScheduleLecturerTermAPI = 'lecturer/getAllScheduleTerm';
 
-final getAllScheduleAdminTermAPI = 'admin/getAllScheduleAdminTerm';
+final getAllScheduleTermAPI = 'admin/getAllScheduleTerm';
+
+final getAllModuleTermByLecturerIDAPI = 'module/getAllModuleTermByLecturerID';
+
 //----------------------------------------------------------------
 
 final getAllAttendanceStudentTermAPI = 'student/getAllAttendanceTerm';

@@ -4,7 +4,7 @@ const db = require('../../config/db');
 
 
 class ScheduleAdminTerm {
-    constructor(day, time, moduleID, subjectName, lecturerName, roomName, dateStart, dateEnd, numberOfCredits) {
+    constructor(day, time, moduleID, subjectName, lecturerName, roomName, dateStart, dateEnd, numberOfCredits, weekTimeStart, weekTimeEnd) {
         this.day = day;
         this.time = time;
         this.moduleID = moduleID;
@@ -14,6 +14,8 @@ class ScheduleAdminTerm {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.numberOfCredits = numberOfCredits;
+        this.weekTimeStart = weekTimeStart;
+        this.weekTimeEnd = weekTimeEnd;
     }
 }
 

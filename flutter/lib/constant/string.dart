@@ -1,5 +1,7 @@
 import 'package:flutter_todo_app/constant/config.dart';
+import 'package:flutter_todo_app/constant/number.dart';
 
+const String trangChu = 'Trang chủ';
 const String quanLyDanhMuc = 'Quản lý danh mục';
 const String danhMucSinhVien = 'Danh mục sinh viên';
 const String danhMucGiangVien = 'Danh mục giảng viên';
@@ -10,11 +12,10 @@ const String danhMucKhoa = 'Danh mục khoa';
 const String danhMucNganh = 'Danh mục ngành';
 const String danhMucChuyenNganh = 'Danh mục chuyên ngành';
 
-const String studentWeek = 'studentWeek';
-const String studentTerm = 'studentTerm';
-const String lecturerWeek = 'lecturerWeek';
-const String lecturerTerm = 'lecturerTerm';
-const String adminTerm = 'adminTerm';
+String studentWeek = '${Role.student.toString()}Week';
+String studentTerm = '${Role.student.toString()}Term';
+String lecturerTerm = '${Role.lecturer.toString()}Term';
+String adminTerm = '${Role.admin.toString()}Term';
 
 const String URLNodeJSServer = 'http://${url}';
 const String URLNodeJSServer_RaspberryPi = 'http://${url_ras}';
@@ -30,3 +31,15 @@ const String URLNodeJSServer_Python_Videos =
     'http://${url_python}/public/videos';
 
 const String URLVideoPath = 'videos/default';
+
+Map<String, Role> roleMap = {
+  "admin": Role.admin,
+  "aao": Role.aao,
+  "sinhvien": Role.student,
+  "giangvien": Role.lecturer
+};
+    
+// const roleAdmin = "admin";
+// const roleAao = "aao";
+// const roleLecturer = "lecturer";
+// const roleStudent = "student";

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/constant/number.dart';
@@ -23,55 +21,46 @@ class DetailStudent extends StatefulWidget {
 
 class _DetailStudentState extends State<DetailStudent> {
   List<Student> students = [];
-  Key _imageKey = UniqueKey();
-  // late VideoPlayerController _controller;
 
-  bool hasVideo = false;
+  bool hasVideo = true;
   bool isVideoEnded = false;
   double videoPosition = 0.0;
   double videoDuration = 0.0;
 
+  ShowImage option = ShowImage.video;
+
   late Student student;
   late FlickManager flickManager;
   late VideoPlayerController _videoPlayerController;
-  // List<Map<String, dynamic>> students = [];
+  Key _imageKey = UniqueKey();
 
   @override
   void initState() {
     super.initState();
-    // flickManager = FlickManager(
-    //     videoPlayerController: VideoPlayerController.networkUrl(
-    //         Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'))
-    //       ..initialize().then((_) {
-    //         setState(() {});
-    //       }));
+    StudentService.fetchStudents(context, (value) {});
 
-    // Provider.of<AppStateProvider>(context, listen: false)
-    //     .setCalendarView(Calendar.week);
-    // Gọi hàm fetchStudents để tải dữ liệu sinh viên
-    // StudentService.fetchStudents(context, (value) {});
+    flickManager = FlickManager(
+        videoPlayerController: VideoPlayerController.networkUrl(Uri.http(
+            "192.168.1.3:3000",
+            "videos/default/10120620_NguyenMinhDoanh.mp4")));
+  }
 
-    initVideo();
-
-    // final defaultStudent = Student.fromMap({});
-    // final students = Provider.of<AppStateProvider>(context, listen: false)
-    //     .appState!
-    //     .students;
-    // student = students.firstWhere(
-    //   (student) => student.studentId == widget.studentId,
-    //   orElse: () => defaultStudent,
-    // );
-    // print("Student: ");
-    // print(student);
-    // Future.delayed(Duration.zero, () async {
-    //   flickManager = await getVideo(student);
-    // });
+  Future<void> initVideo() async {
+    // try {
+    final defaultStudent = Student.fromMap({});
+    final students = Provider.of<AppStateProvider>(context, listen: false)
+        .appState!
+        .students;
+    student = students.firstWhere(
+      (student) => student.studentId == widget.studentId,
+      orElse: () => defaultStudent,
+    );
   }
 
   @override
   void dispose() {
-    flickManager.dispose();
     _videoPlayerController.dispose();
+    flickManager.dispose();
     super.dispose();
   }
 
@@ -81,7 +70,7 @@ class _DetailStudentState extends State<DetailStudent> {
       child: Row(
         children: [
           SizedBox(
-            width: 100, // Độ rộng cố định cho nhãn
+            width: 140, // Độ rộng cố định cho nhãn
             child: Text(
               label,
               style: TextStyle(
@@ -104,130 +93,38 @@ class _DetailStudentState extends State<DetailStudent> {
     );
   }
 
-  // FlickManager getVideo(Student student) {
-  //   try {
-  //     flickManager = FlickManager(
-  //         videoPlayerController: VideoPlayerController.networkUrl(
-  //             Uri.http(url_ras, '${URLVideoPath}/${student.video}'))
-  //           ..initialize().then((_) {
-  //             // setState(() {});
-  //           }));
-  //     print('try');
-  //   } catch (e) {
-  //     print('catch');
-  //     flickManager = FlickManager(
-  //         videoPlayerController: VideoPlayerController.networkUrl(
-  //             Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'))
-  //           ..initialize().then((_) {
-  //             // setState(() {});
-  //           }));
-  //     print(flickManager);
-  //   }
-  //   print('fliclManager');
-  //   return flickManager;
-  // }
+  Future<FlickManager> getVideo(Student student) async {
+    try {
+      VideoPlayerController videoPlayerController =
+          VideoPlayerController.networkUrl(
+              Uri.http(url_ras, '${URLVideoPath}/${student.video}'));
+      print('getVideo');
+      await videoPlayerController.initialize();
+      return FlickManager(videoPlayerController: videoPlayerController);
+    } catch (e) {
+      print('Error initializing video player: $e');
+      rethrow; // Re-throw the error to handle it in the FutureBuilder
+    }
+  }
 
-  // FlickManager getVideo(Student student) {
+  // Container showVideo() {
   //   flickManager = FlickManager(
-  //     videoPlayerController: VideoPlayerController.networkUrl(
-  //       Uri.http(url_ras, '${URLVideoPath}/${student.video}'),
-  //     )..initialize().then(
-  //         (_) {
-  //           // setState(() {});
-  //         },
-  //       ).catchError((error) {
-  //         print('Error initializing video: $error');
-  //         flickManager = FlickManager(
-  //           videoPlayerController: VideoPlayerController.networkUrl(
-  //             Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'),
-  //           )..initialize().then(
-  //               (_) {
-  //                 // setState(() {});
-  //               },
-  //             ),
-  //         );
-  //       }),
+  //       videoPlayerController: VideoPlayerController.networkUrl(Uri.http(
+  //           "192.168.1.3:3000",
+  //           "videos/default/10120620_NguyenMinhDoanh.mp4")));
+
+  //   return Container(
+  //     width: 400,
+  //     height: 400,
+  //     child: FlickVideoPlayer(flickManager: flickManager),
   //   );
-
-  //   return flickManager;
-  // }
-
-  FlickManager getVideo(Student student) {
-    VideoPlayerController videoPlayerController =
-        VideoPlayerController.networkUrl(
-            Uri.http(url_ras, '${URLVideoPath}/${student.video}'));
-    return FlickManager(
-        videoPlayerController: videoPlayerController
-          ..initialize().then((_) {
-            videoPlayerController.play();
-            setState(() {
-              hasVideo = true;
-              print(hasVideo);
-            });
-            print('Video initialized successfully');
-          }).catchError((error) {
-            // Xử lý lỗi khi không thể khởi tạo video
-            print('Error initializing video: $error');
-          }));
-  }
-
-  void initVideo() {
-    // try {
-    final defaultStudent = Student.fromMap({});
-    final students = Provider.of<AppStateProvider>(context, listen: false)
-        .appState!
-        .students;
-    student = students.firstWhere(
-      (student) => student.studentId == widget.studentId,
-      orElse: () => defaultStudent,
-    );
-
-    _videoPlayerController = VideoPlayerController.networkUrl(
-        Uri.http(url_ras, '${URLVideoPath}/${student.video}'))
-      // Uri.parse('http://' + url_ras + '/${URLVideoPath}/${student.video}'))
-      ..initialize().then((value) {
-        _videoPlayerController.play();
-        // _videoPlayerController.setLooping(true);
-        setState(() {});
-      });
-    // Future.delayed(Duration(milliseconds: 200), () {});
-    flickManager = FlickManager(videoPlayerController: _videoPlayerController);
-    // } catch (e) {
-    //   print('catch ' + e.toString());
-    // }
-  }
-
-  // Future<FlickManager> getVideo(Student student) async {
-  //   try {
-  //     final controller = VideoPlayerController.networkUrl(
-  //       Uri.http(url_ras, '${URLVideoPath}/${student.video}'),
-  //     );
-  //     await controller.initialize();
-  //     // Thực hiện các bước khác nếu cần thiết sau khi video được khởi tạo thành công
-  //     hasVideo = true;
-  //     print('Video initialized successfully');
-  //     return FlickManager(videoPlayerController: controller);
-  //   } catch (error) {
-  //     // Xử lý lỗi khi không thể khởi tạo video
-  //     print('Error initializing video: $error');
-  //     throw error; // Re-throw lỗi để nó có thể được bắt ở nơi gọi
-  //   }
   // }
 
   @override
   Widget build(BuildContext context) {
-    // Tìm sinh viên có studentId tương ứng trong danh sách students đã tải
-    // Map<String, dynamic> defaultStudent = {
-    //   'studentId': '',
-    //   'studentName': '',
-    //   'classCode': '',
-    //   'gender': '',
-    //   'birthDate': '',
-    // };
-
     final defaultStudent = Student.fromMap({});
     final students = context.watch<AppStateProvider>().appState!.students;
-    student = students.firstWhere(
+    final student = students.firstWhere(
       (student) => student.studentId == widget.studentId,
       orElse: () => defaultStudent,
     );
@@ -239,7 +136,14 @@ class _DetailStudentState extends State<DetailStudent> {
 
     return AlertDialog(
       title: Text('Chi tiết sinh viên'),
-      content: SingleChildScrollView(
+      content:
+          // Container(
+          //   width: 400,
+          //   height: 400,
+          //   child: FlickVideoPlayer(flickManager: flickManager),
+          // ),
+
+          SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -248,14 +152,15 @@ class _DetailStudentState extends State<DetailStudent> {
               children: [
                 Container(
                   height: 240,
-                  width: 350,
+                  width: 390,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildInfoRow('Mã sinh viên:', student.studentId),
                       _buildInfoRow('Họ tên:', student.studentName),
                       _buildInfoRow('Lớp:', student.classCode),
-                      _buildInfoRow('Chuyên ngành:', student.specializationID),
+                      _buildInfoRow(
+                          'Chuyên ngành:', student.specializationName),
                       _buildInfoRow('Giới tính:', student.gender),
                       _buildInfoRow(
                         'Ngày sinh:',
@@ -291,94 +196,34 @@ class _DetailStudentState extends State<DetailStudent> {
               ],
             ),
             SizedBox(height: 20),
-            SingleChoice(option: SegmentButtonOption.image),
+            SingleChoice(
+              option: SegmentButtonOption.image,
+              changeImageOption: (selectedOption) {
+                setState(() {
+                  option = selectedOption;
+                });
+              },
+            ),
             SizedBox(height: 30),
+            // showVideo()
+            // option == ShowImage.video
             (Provider.of<AppStateProvider>(context, listen: false)
                         .appState
                         ?.imagesView) ==
                     ShowImage.video
-                // ? flickManager != null
                 ? SizedBox(
                     height: 405,
                     width: 720,
+                    // child: Container(),
                     child: Container(
-                        child: _videoPlayerController.value.isInitialized
-                            // ? AspectRatio(
-                            //     aspectRatio:
-                            //         _videoPlayerController.value.aspectRatio,
-                            //     child: VideoPlayer(_videoPlayerController),
-                            //   )
-                            // : Container(),
-                            ? FlickVideoPlayer(flickManager: flickManager)
-                            : Container())
-
-                    // AspectRatio(
-                    //     // aspectRatio: _controller.value.aspectRatio,
-                    //     aspectRatio: 16 / 9,
-                    //     child:
-                    //         //  (hasVideo)
-                    //         //     ? Center(child: CircularProgressIndicator())
-                    //         //     :
-                    //         // FlickVideoPlayer(flickManager: getVideo(student))
-
-                    //         //     FutureBuilder(
-                    //         //   future: _initializeVideoPlayerFuture,
-                    //         //   builder: (context, snapshot) {
-                    //         //     if (snapshot.connectionState ==
-                    //         //         ConnectionState.done) {
-                    //         //       return AspectRatio(
-                    //         //         aspectRatio:
-                    //         //             _videoPlayerController.value.aspectRatio,
-                    //         //         child: VideoPlayer(_videoPlayerController),
-                    //         //       );
-                    //         //     } else {
-                    //         //       return Center(child: CircularProgressIndicator());
-                    //         //     }
-                    //         //   },
-                    //         // )
-
-                    //     //     FutureBuilder<VideoPlayerController>(
-                    //     //   future: VideoPlayerController.networkUrl(
-                    //     //           Uri.http(url_ras, '${URLVideoPath}/${student.video}'))
-                    //     //       ..initialize().then((value) => null),
-                    //     //   builder: (context, snapshot) {
-                    //     //     if (snapshot.hasData) {
-                    //     //       return VideoPlayer(snapshot.data!);
-                    //     //     } else if (snapshot.hasError) {
-                    //     //       return Text('Lỗi: ${snapshot.error}');
-                    //     //     } else {
-                    //     //       return CircularProgressIndicator();
-                    //     //     }
-                    //     //   },
-                    //     // )
-
-                    //     // child: FlickVideoPlayer(
-                    //     //   flickManager: FlickManager(
-                    //     //     videoPlayerController:
-                    //     //         VideoPlayerController.networkUrl(
-                    //     //       Uri.http(
-                    //     //           url_ras, '${URLVideoPath}/${student.video}'),
-                    //     //     )..initialize().then(
-                    //     //             (_) {},
-                    //     //             onError: (error) {
-                    //     //               // Xử lý lỗi khi không thể khởi tạo video từ URL
-                    //     //               print('Error initializing video: $error');
-                    //     //               // Trả về video mặc định khi không lấy được video từ URL
-                    //     //               VideoPlayerController.networkUrl(Uri.http(
-                    //     //                   url_ras,
-                    //     //                   '${URLVideoPath}/video_default.mp4'));
-                    //     //             },
-                    //     //           ),
-                    //     //   ),
-                    //     // ),
-
-                    //     //               child: FlickVideoPlayer(
-                    //     //                 flickManager: FlickManager(
-                    //     // videoPlayerController: VideoPlayerController.networkUrl(
-                    //     //     Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'))),
-                    //     //               ),
-                    //     ),
-                    )
+                      width: 400,
+                      height: 400,
+                      child: FlickVideoPlayer(flickManager: flickManager),
+                    ))
+                // : SizedBox(
+                //     child: Container(
+                //     child: Text("Video"),
+                //   )),
                 : SizedBox(
                     height: 400,
                     width: double.maxFinite,
@@ -394,19 +239,20 @@ class _DetailStudentState extends State<DetailStudent> {
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 10,
-                                    crossAxisSpacing: 8.0,
-                                    mainAxisSpacing: 8.0,
+                                    crossAxisSpacing: 5.0,
+                                    mainAxisSpacing: 2.0,
                                   ),
                                   itemCount: imagesView == ShowImage.full
                                       ? student.NoFullImage
                                       : student.NoCropImage,
                                   itemBuilder: (context, index) {
                                     return Container(
-                                      padding: EdgeInsets.all(8.0),
+                                      // padding: EdgeInsets.all(8.0),
                                       child: ImagesView(
                                           student: student,
                                           index: index,
                                           imageKey: _imageKey),
+                                      // child: Text('hình'),
                                     );
                                   },
                                 ),
@@ -418,6 +264,8 @@ class _DetailStudentState extends State<DetailStudent> {
       actions: <Widget>[
         TextButton(
           onPressed: () {
+            Provider.of<AppStateProvider>(context, listen: false)
+                .setImagesView(ShowImage.video);
             Navigator.of(context).pop();
           },
           child: Text('Close'),
@@ -449,8 +297,8 @@ class _ImagesViewState extends State<ImagesView> {
         // Sử dụng giá trị mới của imagesView từ appState
         image: imageProvider,
         key: _imageKey,
-        width: 131,
-        height: 131,
+        width: 160,
+        height: 150,
         fit: BoxFit.contain,
         loadingBuilder: (BuildContext context, Widget child,
             ImageChunkEvent? loadingProgress) {

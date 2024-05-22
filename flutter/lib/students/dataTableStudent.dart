@@ -1,10 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
-import 'package:flutter_todo_app/faculties/facultyService.dart';
-import 'package:flutter_todo_app/model/facultyModel.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/students/detailStudent.dart';
@@ -193,7 +190,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
               student.classCode,
               textAlign: TextAlign.left,
             )),
-            DataCell(Center(child: Text(student.specializationID))),
+            DataCell(Center(child: Text(student.specializationName))),
             DataCell(Center(child: Text(student.gender))),
             DataCell(Center(
               child: Text(DateFormat('dd/MM/yyyy').format(student.birthDate)),
@@ -208,6 +205,7 @@ class _DataTableStudentState extends State<DataTableStudent> {
                     onPressed: () {
                       showDialog(
                           context: context,
+                          barrierDismissible: false,
                           builder: (BuildContext context) {
                             return DetailStudent(
                               studentId: student.studentId,

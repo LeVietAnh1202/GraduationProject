@@ -38,7 +38,7 @@ exports.login = async (req, res, next) => {
         if (isPasswordCorrect === false) {
             // throw new Error(`Username or Password does not match`);
             // return res.status(401).json({ status: false, error: 'Username or Password does not match' });
-            return res.status(401).json({ status: false, error: 'Tài khoản hoặc mật khẩu không đúng' });
+            return res.status(401).json({ status: false, error: 'Mật khẩu không đúng' });
         }
 
         // Creating Token
@@ -49,7 +49,7 @@ exports.login = async (req, res, next) => {
 
         const token = await UserServices.generateAccessToken(tokenData, "secret", "1h")
         console.log("token: " + token)
-        res.status(200).json({ status: true, success: "sendData", token: token });
+        res.status(200).json({ status: true, success: "sendData", token: token, message: "Đăng nhập thành công"});
     } catch (error) {
         console.log(error, 'err---->');
         next(error);

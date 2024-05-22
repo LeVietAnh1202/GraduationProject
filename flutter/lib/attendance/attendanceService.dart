@@ -8,14 +8,16 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class AttendanceService with ChangeNotifier {
-  static Future<void> fetchAttendanceLecturerTerms(BuildContext context,
-      ValueChanged<bool> isLoading, String moduleID) async {
+  static Future<List<dynamic>> fetchAttendanceLecturerTerms(
+      BuildContext context,
+      ValueChanged<bool> isLoading,
+      String moduleID) async {
     final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
     print('lecturerID: ' + lecturerID!);
     final bodyData = {'lecturerID': lecturerID, 'moduleID': moduleID};
 
-    http
+    return http
         .post(
       Uri.http(url, getAllAttendanceLecturerTermAPI),
       headers: {'Content-Type': 'application/json'},
@@ -34,6 +36,7 @@ class AttendanceService with ChangeNotifier {
                 attendanceList.cast<Map<String, dynamic>>());
 
         isLoading(false);
+        return attendanceList;
       } else {
         throw Exception('Failed to fetchAttendanceStudentWeeks');
       }

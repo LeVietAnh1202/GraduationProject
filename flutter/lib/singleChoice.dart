@@ -3,9 +3,11 @@ import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SingleChoice extends StatefulWidget {
   late SegmentButtonOption option;
-  SingleChoice({required this.option});
+  Function(ShowImage) changeImageOption;
+  SingleChoice({required this.option, required this.changeImageOption});
 
   @override
   State<SingleChoice> createState() => _SingleChoiceState();
@@ -19,7 +21,7 @@ class _SingleChoiceState extends State<SingleChoice> {
     Provider.of<AppStateProvider>(context, listen: false)
         .setCalendarView(Calendar.week);
     Provider.of<AppStateProvider>(context, listen: false)
-        .setImagesView(ShowImage.full);
+        .setImagesView(ShowImage.video);
   }
 
   Widget segmentedButtonImage(BuildContext context) {
@@ -27,15 +29,15 @@ class _SingleChoiceState extends State<SingleChoice> {
       segments: const <ButtonSegment<ShowImage>>[
         ButtonSegment<ShowImage>(
             value: ShowImage.video,
-            label: Text('Show video'),
+            label: Text('Video'),
             icon: Icon(Icons.video_camera_back_outlined)),
         ButtonSegment<ShowImage>(
             value: ShowImage.full,
-            label: Text('Show full image'),
+            label: Text('Ảnh ban đầu'),
             icon: Icon(Icons.calendar_view_week)),
         ButtonSegment<ShowImage>(
             value: ShowImage.crop,
-            label: Text('Image face cropped'),
+            label: Text('Ảnh đã xử lý'),
             icon: Icon(Icons.calendar_view_month)),
       ],
       selected: <ShowImage>{
@@ -46,6 +48,8 @@ class _SingleChoiceState extends State<SingleChoice> {
           Provider.of<AppStateProvider>(context, listen: false)
               .setImagesView(newSelection.first);
         });
+
+        widget.changeImageOption(newSelection.first);
       },
     );
   }
@@ -67,9 +71,6 @@ class _SingleChoiceState extends State<SingleChoice> {
       },
       onSelectionChanged: (Set<Calendar> newSelection) {
         setState(() {
-          // By default there is only a single segment that can be
-          // selected at one time, so its value is always the first
-          // item in the selected set.
           Provider.of<AppStateProvider>(context, listen: false)
               .setCalendarView(newSelection.first);
           print('newSelection.first: ');

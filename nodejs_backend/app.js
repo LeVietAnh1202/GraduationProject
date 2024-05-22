@@ -11,6 +11,7 @@ const SchoolyearRoute = require('./routes/schoolyear.router');
 const FacultyRoute = require('./routes/faculty.router');
 const ScheduleRoute = require('./routes/schedule.router');
 const SubjectRoute = require('./routes/subject.router');
+const ModuleRoute = require('./routes/module.router');
 const LoadImageRoute = require('./routes/load_image.router');
 const path = require('path');
 
@@ -47,6 +48,7 @@ app.use("/schoolyear", SchoolyearRoute);
 app.use("/faculty", FacultyRoute);
 app.use("/schedule", ScheduleRoute);
 app.use("/subject", SubjectRoute);
+app.use("/module", ModuleRoute);
 
 app.use('/images', LoadImageRoute);
 

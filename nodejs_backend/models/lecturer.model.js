@@ -22,6 +22,10 @@ const lecturerSchema = new Schema({
         type: Date,
         required: [true, "Birth Date is required"],
     },
+    facultyID: {
+        type: String,
+        required: [true, "facultyID is required"],
+    },
 }, { timestamps: true });
 
 const Lecturer = db.model('lecturer', lecturerSchema);

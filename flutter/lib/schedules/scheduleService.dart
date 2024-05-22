@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/model/moduleTermByLecturerIDModel.dart';
 import 'package:flutter_todo_app/model/scheduleAdminTermModel.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
 import 'package:flutter_todo_app/provider/account.dart';
@@ -163,21 +164,53 @@ class ScheduleService with ChangeNotifier {
     });
   }
 
-  static Future<List<ScheduleAdminTerm>> fetchScheduleAdminTerms(
+  static Future<List<ModuleTermByLecturerID>> fetchAllModuleTermByLecturerIDs(
       BuildContext context,
       ValueChanged<bool> isLoading,
       String lecturerID,
-      String subjectID,
+      // String subjectID,
       String semesterID) async {
     final bodyData = {
       'lecturerID': lecturerID,
-      'subjectID': subjectID,
+      // 'subjectID': subjectID,
       'semesterID': semesterID
     };
     isLoading(true);
     return http
         .post(
-      Uri.http(url, getAllScheduleAdminTermAPI),
+      Uri.http(url, getAllModuleTermByLecturerIDAPI),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(bodyData),
+    )
+        .then((response) {
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body) as Map<String, dynamic>;
+        final attendanceTermsList = data['data'] as List<dynamic>;
+        print('attendanceTermsList: ');
+        print(attendanceTermsList);
+        final attendanceTerms = attendanceTermsList
+            .map((e) => ModuleTermByLecturerID.fromMap(e))
+            .toList();
+        Provider.of<AppStateProvider>(context, listen: false)
+            .setModuleTermByLecturerIDs(attendanceTerms);
+        isLoading(false);
+        return attendanceTerms;
+      } else {
+        throw Exception('Failed to fetch scheduleAdminTerms');
+      }
+    });
+  }
+
+  static Future<List<ScheduleAdminTerm>> fetchScheduleTerms(
+      BuildContext context,
+      ValueChanged<bool> isLoading,
+      String lecturerID,
+      String semesterID) async {
+    final bodyData = {'lecturerID': lecturerID, 'semesterID': semesterID};
+    isLoading(true);
+    return http
+        .post(
+      Uri.http(url, getAllScheduleTermAPI),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(bodyData),
     )

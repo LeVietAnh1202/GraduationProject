@@ -57,7 +57,7 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
+    // int index = 0;
     attendances =
         context.watch<AppStateProvider>().appState!.attendanceStudentTerms;
     return _isLoading

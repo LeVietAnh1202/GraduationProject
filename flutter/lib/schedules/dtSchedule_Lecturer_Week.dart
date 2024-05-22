@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/attendance/attendance_lecturer_week.dart';
+import 'package:flutter_todo_app/attendance/detailAttendance.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/export/exxport_attendance_lecturer_week.dart';
@@ -245,10 +245,13 @@ class _DtScheduleLecturerWeekState extends State<DtScheduleLecturerWeek> {
                                                           ],
                                                         ),
                                                         SizedBox(height: 20),
-                                                        AttendanceLecturerWeek(
-                                                          dayID:
-                                                              schedule['dayID'],
-                                                        ),
+                                                        // AttendanceLecturerWeek(
+                                                        //   dayID:
+                                                        //       schedule['dayID'],
+                                                        // ),
+                                                        DetailAttendance(
+                                                            dayID: schedule[
+                                                                'dayID'])
                                                       ],
                                                     ),
                                                   ),

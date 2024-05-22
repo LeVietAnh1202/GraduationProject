@@ -115,8 +115,8 @@ exports.getStudentByModuleID = async (req, res, next) => {
 
 exports.getStudentsByFacultyID = async (req, res, next) => {
     try {
-        const { facultyID } = req.body;
-        const studentList = await StudentService.getStudentsByFacultyID(facultyID);
+        const { lecturerID } = req.body;
+        const studentList = await StudentService.getStudentsByFacultyID(lecturerID);
 
         res.json({ status: true, success: 'get students by facultyID successfully', data: studentList });
 

@@ -1,7 +1,6 @@
 const router = require("express").Router();
-const ScheduleAdminController = require('../controller/schedule/schedule_admin_term.controller');
+const ScheduleController = require('../controller/schedule/schedule_admin_term.controller');
 
-router.post("/getAllScheduleAdminTerm", ScheduleAdminController.getAllScheduleAdminTerm);
-
+router.post("/getAllScheduleTerm", ScheduleController.getAllScheduleTerm);
 
 module.exports = router;

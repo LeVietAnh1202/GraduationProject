@@ -24,3 +24,15 @@ exports.getAllModule = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.getAllModuleTermByLecturerID = async (req, res, next) => {
+    try {
+        const { lecturerID, semesterID } = req.body;
+        console.log(lecturerID, semesterID);
+        const attendanceList = await ModuleService.getAllModuleTermByLecturerID(lecturerID, semesterID);
+        res.json({ status: true, success: 'getAllModuleTermByLecturerID successfully', data: attendanceList });
+    } catch (err) {
+        console.log("---> err -->", err);
+        next(err);
+    }
+};

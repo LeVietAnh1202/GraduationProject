@@ -23,6 +23,7 @@ class _BreadcrumbState extends State<Breadcrumb> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            
             Text(
               'Trang chủ > ${context.watch<AppStateProvider>().appState?.breadcrumbs}',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),

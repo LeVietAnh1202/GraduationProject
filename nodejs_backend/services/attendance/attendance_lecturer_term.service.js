@@ -49,7 +49,6 @@ class AttendanceLecturerTermService {
               weekTimeStart.setMinutes(minutes);
 
               const weekTimeStartStr = weekTimeStart.toISOString();
-
               const timeStartSession = new Date(weekTimeStart);
               const afterTimeStartSession = new Date(timeStartSession.getTime() + 30 * 60000);
               const currentTime = new Date(global.currentTime)
@@ -72,7 +71,7 @@ class AttendanceLecturerTermService {
                     numberOfOnTimeSessions++;
                   }
 
-                  return { [weekTimeStartStr]: attendanceValue };
+                  return { [weekTimeStartStr]: attendanceValue, "time": time, "dayID": dayID };
                 })
               );
             }

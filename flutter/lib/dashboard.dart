@@ -28,7 +28,7 @@ class _DashboardState extends State<Dashboard> {
     // TODO: implement initState
     super.initState();
     AppState appState = AppState(
-      breadcrumbs: 'Quản lý định danh',
+      breadcrumbs: trangChu,
       tableLength: 0,
       currentPage: 1,
       rowsPerPage: rowsPerPage,
@@ -45,6 +45,7 @@ class _DashboardState extends State<Dashboard> {
       scheduleLecturerWeeks: [],
       scheduleLecturerTerms: [],
       scheduleAdminTerms: [],
+      moduleTermByLecturerIDs: [],
       // - - - - - - - - - - - - - - - -
       attendanceStudentTerms: {},
       attendanceLecturerWeeks: {},
@@ -55,6 +56,7 @@ class _DashboardState extends State<Dashboard> {
     Future.delayed(Duration.zero, () {
       Provider.of<AppStateProvider>(context, listen: false)
           .setAppState(appState);
+          
     });
 
     // connectAndListen();

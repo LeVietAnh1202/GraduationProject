@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
@@ -34,6 +35,14 @@ class _SidebarState extends State<Sidebar> {
             //     ),
             //   ),
             // ),
+            
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text(trangChu),
+              onTap: () {
+                context.read<AppStateProvider>().setBreadcrumbs(trangChu);
+              },
+            ),
             ListTile(
               leading: Icon(Icons.schedule),
               title: Text(quanLyLichHoc),
@@ -43,19 +52,22 @@ class _SidebarState extends State<Sidebar> {
             ),
             ListTile(
               leading: Icon(Icons.task),
-              title: Text(quanLyDinhDanh),
-              onTap: () {
-                context.read<AppStateProvider>().setBreadcrumbs(quanLyDinhDanh);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.task),
               title: Text(quanLyDiemDanh),
               onTap: () {
                 context.read<AppStateProvider>().setBreadcrumbs(quanLyDiemDanh);
               },
             ),
-            if (role == 'admin' || role == 'aao')
+            if (role == Role.admin || role == Role.aao)
+              ListTile(
+                leading: Icon(Icons.task),
+                title: Text(quanLyDinhDanh),
+                onTap: () {
+                  context
+                      .read<AppStateProvider>()
+                      .setBreadcrumbs(quanLyDinhDanh);
+                },
+              ),
+            if (role == Role.admin)
               ListTile(
                 leading: Icon(Icons.book),
                 title: Text('Quản lý học phần'),
@@ -66,12 +78,12 @@ class _SidebarState extends State<Sidebar> {
                 },
               ),
 
-            if (role == 'admin' || role == 'aao')
+            if (role == Role.admin || role == Role.aao)
               ExpansionTile(
                 leading: Icon(Icons.menu),
                 title: Text('$quanLyDanhMuc'),
                 children: [
-                  if (role == 'admin')
+                  if (role == Role.admin)
                     ListTile(
                       // leading: Icon(Icons.account_balance),
                       title: Text(danhMucKhoa),
@@ -81,24 +93,23 @@ class _SidebarState extends State<Sidebar> {
                             .setBreadcrumbs('$quanLyDanhMuc > $danhMucKhoa');
                       },
                     ),
-                    ListTile(
-                      // leading: Icon(Icons.account_balance),
-                      title: Text(danhMucNganh),
-                      onTap: () {
-                        context
-                            .read<AppStateProvider>()
-                            .setBreadcrumbs('$quanLyDanhMuc > $danhMucNganh');
-                      },
-                    ),
-                    ListTile(
-                      // leading: Icon(Icons.account_balance),
-                      title: Text(danhMucChuyenNganh),
-                      onTap: () {
-                        context
-                            .read<AppStateProvider>()
-                            .setBreadcrumbs('$quanLyDanhMuc > $danhMucChuyenNganh');
-                      },
-                    ),
+                  ListTile(
+                    // leading: Icon(Icons.account_balance),
+                    title: Text(danhMucNganh),
+                    onTap: () {
+                      context
+                          .read<AppStateProvider>()
+                          .setBreadcrumbs('$quanLyDanhMuc > $danhMucNganh');
+                    },
+                  ),
+                  ListTile(
+                    // leading: Icon(Icons.account_balance),
+                    title: Text(danhMucChuyenNganh),
+                    onTap: () {
+                      context.read<AppStateProvider>().setBreadcrumbs(
+                          '$quanLyDanhMuc > $danhMucChuyenNganh');
+                    },
+                  ),
                   ListTile(
                     title: Text(danhMucSinhVien),
                     onTap: () {

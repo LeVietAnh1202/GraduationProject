@@ -3,6 +3,7 @@ import 'package:flutter_todo_app/breadcrumb.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/sidebar.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/homepage.dart';
 import 'package:flutter_todo_app/processingAndTraining.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
@@ -64,7 +65,7 @@ class _BodyContentState extends State<BodyContent> {
     widget.sidebarKey = context.watch<AppStateProvider>().appState!.breadcrumbs;
     print(widget.sidebarKey);
 
-    String role = context.watch<AccountProvider>().account!.role;
+    Role? role = context.watch<AccountProvider>().getRole();
     SidebarMap sidebarMap =
         new SidebarMap(widget.calendarView, role, widget.sidebarKey, context);
     print('sidebarMap: ');
@@ -81,8 +82,12 @@ class _BodyContentState extends State<BodyContent> {
         children: [
           Breadcrumb(),
           SizedBox(height: 16.0),
-          if (widget.sidebarKey == quanLyLichHoc && role != 'admin')
-            SingleChoice(option: SegmentButtonOption.calendar),
+          if (widget.sidebarKey == quanLyLichHoc &&
+              role != Role.admin &&
+              role != Role.lecturer)
+            SingleChoice(
+                option: SegmentButtonOption.calendar,
+                changeImageOption: (_) {}),
           if (widget.sidebarKey == quanLyLichHoc) SizedBox(height: 16.0),
           Container(
               width: MediaQuery.of(context).size.width - sideBarWidth,

@@ -61,14 +61,25 @@ class _SignInPageState extends State<SignInPage> {
           prefs.setString('token', myToken);
           print('In ra:' + myToken);
 
+          String successMessage = jsonResponse["message"];
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(successMessage),
+              backgroundColor: Colors.green,
+            ),
+          );
+
           Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(myToken);
           print(jwtDecodedToken);
           Account account = Account(
-              username: jwtDecodedToken['username'],
-              role: jwtDecodedToken['role'],
-              account: jwtDecodedToken['account'],
-              token: myToken);
+            username: jwtDecodedToken['username'],
+            role: jwtDecodedToken['role'],
+            account: jwtDecodedToken['account'],
+            token: myToken,
+            // facultyID: jwtDecodedToken['facultyID']
+          );
           // context.read<AccountProvider>().setAccount(account);
+
           Provider.of<AccountProvider>(context, listen: false)
               .setAccount(account);
 
@@ -102,7 +113,18 @@ class _SignInPageState extends State<SignInPage> {
           );
         }
       } else {
-        throw Exception('Failed to login');
+        if (response.statusCode == 404 || response.statusCode == 401) {
+          var jsonResponse = jsonDecode(response.body);
+          String errorMessage = jsonResponse["error"];
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(errorMessage),
+              backgroundColor: Colors.red,
+            ),
+          );
+        } else {
+          throw Exception('Failed to login');
+        }
       }
     }
 
@@ -127,8 +149,8 @@ class _SignInPageState extends State<SignInPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
+            Colors.yellow,
             Colors.blue,
-            Colors.red,
           ],
         )),
         child: Center(
@@ -149,20 +171,20 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   SizedBox(height: 20.0),
                   Text(
-                    E.login,
+                    V.login,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16.0),
                   _buildTextField(
                     controller: _accountController,
-                    labelText: 'Account',
+                    labelText: 'Tài khoản',
                     obscureText: false,
                     isClicked: _accountClicked,
                   ),
                   SizedBox(height: 16.0),
                   _buildTextField(
                     controller: _passwordController,
-                    labelText: 'Password',
+                    labelText: 'Mật khẩu',
                     obscureText: true,
                     isClicked: _passwordClicked,
                   ),
@@ -180,7 +202,7 @@ class _SignInPageState extends State<SignInPage> {
                                   },
                             child: Padding(
                               padding: EdgeInsets.only(top: 10, bottom: 10),
-                              child: Text('Login'),
+                              child: Text('Đăng nhập'),
                             ),
                           ),
                         ),
