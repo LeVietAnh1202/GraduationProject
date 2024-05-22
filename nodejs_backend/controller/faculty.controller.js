@@ -9,3 +9,14 @@ exports.getAllFaculty = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getSpecializationsByLecturerID = async (req, res, next) => {
+  try {
+    const {lecturerID} = req.body;
+    const specializationList = await FacultyService.getSpecializationsByLecturerID(lecturerID);
+    res.json({ status: true, success: 'getSpecializationsByLecturerID successfully', data: specializationList });
+  } catch (err) {
+    console.log("---> err -->", err);
+    next(err);
+  }
+};
