@@ -9,6 +9,16 @@ class FacultyService {
             console.log(err);
         }
     }
+    
+    static async getFacultyByLecturerID(lecturerID) {
+        try {
+            const lecturer = await LecturerModel.findOne({ lecturerID });
+            const facultyID = lecturer.facultyID
+            return await FacultyModel.findOne({ facultyID });
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     static async getSpecializationsByLecturerID(lecturerID) {
         try {

@@ -10,6 +10,17 @@ exports.getAllFaculty = async (req, res, next) => {
   }
 };
 
+exports.getFacultyByLecturerID = async (req, res, next) => {
+  try {
+    const {lecturerID} = req.body;
+    const facultyList = await FacultyService.getFacultyByLecturerID(lecturerID);
+    res.json({ status: true, success: 'getFacultyByLecturerID successfully', data: facultyList });
+  } catch (err) {
+    console.log("---> err -->", err);
+    next(err);
+  }
+};
+
 exports.getSpecializationsByLecturerID = async (req, res, next) => {
   try {
     const {lecturerID} = req.body;
