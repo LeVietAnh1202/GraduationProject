@@ -1,0 +1,400 @@
+./aligned_img\10120620_NguyenMinhDoanh\1.png 250 226 411 426
+./aligned_img\10120620_NguyenMinhDoanh\10.png 207 214 364 398
+./aligned_img\10120620_NguyenMinhDoanh\100.png 148 162 351 408
+./aligned_img\10120620_NguyenMinhDoanh\101.png 178 150 373 387
+./aligned_img\10120620_NguyenMinhDoanh\102.png 170 145 368 386
+./aligned_img\10120620_NguyenMinhDoanh\103.png 175 153 387 399
+./aligned_img\10120620_NguyenMinhDoanh\104.png 172 145 386 405
+./aligned_img\10120620_NguyenMinhDoanh\105.png 154 145 388 421
+./aligned_img\10120620_NguyenMinhDoanh\106.png 145 143 375 417
+./aligned_img\10120620_NguyenMinhDoanh\107.png 154 147 381 408
+./aligned_img\10120620_NguyenMinhDoanh\108.png 153 145 378 410
+./aligned_img\10120620_NguyenMinhDoanh\109.png 151 143 379 411
+./aligned_img\10120620_NguyenMinhDoanh\11.png 211 213 371 401
+./aligned_img\10120620_NguyenMinhDoanh\110.png 148 146 370 411
+./aligned_img\10120620_NguyenMinhDoanh\111.png 155 149 377 416
+./aligned_img\10120620_NguyenMinhDoanh\112.png 191 149 405 409
+./aligned_img\10120620_NguyenMinhDoanh\113.png 189 153 406 416
+./aligned_img\10120620_NguyenMinhDoanh\114.png 178 153 398 416
+./aligned_img\10120620_NguyenMinhDoanh\115.png 168 150 394 409
+./aligned_img\10120620_NguyenMinhDoanh\116.png 167 150 388 408
+./aligned_img\10120620_NguyenMinhDoanh\117.png 173 149 394 405
+./aligned_img\10120620_NguyenMinhDoanh\118.png 173 150 394 410
+./aligned_img\10120620_NguyenMinhDoanh\119.png 155 153 377 415
+./aligned_img\10120620_NguyenMinhDoanh\12.png 212 209 373 401
+./aligned_img\10120620_NguyenMinhDoanh\120.png 154 152 376 411
+./aligned_img\10120620_NguyenMinhDoanh\121.png 173 156 384 400
+./aligned_img\10120620_NguyenMinhDoanh\122.png 179 164 384 401
+./aligned_img\10120620_NguyenMinhDoanh\123.png 161 154 373 410
+./aligned_img\10120620_NguyenMinhDoanh\124.png 162 152 370 401
+./aligned_img\10120620_NguyenMinhDoanh\125.png 165 151 370 397
+./aligned_img\10120620_NguyenMinhDoanh\126.png 164 154 377 400
+./aligned_img\10120620_NguyenMinhDoanh\127.png 158 156 369 406
+./aligned_img\10120620_NguyenMinhDoanh\128.png 148 157 359 411
+./aligned_img\10120620_NguyenMinhDoanh\129.png 167 152 368 391
+./aligned_img\10120620_NguyenMinhDoanh\13.png 215 214 373 399
+./aligned_img\10120620_NguyenMinhDoanh\130.png 176 150 386 401
+./aligned_img\10120620_NguyenMinhDoanh\131.png 196 182 406 431
+./aligned_img\10120620_NguyenMinhDoanh\132.png 208 179 400 403
+./aligned_img\10120620_NguyenMinhDoanh\133.png 191 163 380 392
+./aligned_img\10120620_NguyenMinhDoanh\134.png 177 156 369 389
+./aligned_img\10120620_NguyenMinhDoanh\135.png 168 161 375 399
+./aligned_img\10120620_NguyenMinhDoanh\136.png 172 159 375 403
+./aligned_img\10120620_NguyenMinhDoanh\137.png 168 163 370 411
+./aligned_img\10120620_NguyenMinhDoanh\138.png 157 151 361 402
+./aligned_img\10120620_NguyenMinhDoanh\139.png 172 158 370 397
+./aligned_img\10120620_NguyenMinhDoanh\14.png 213 212 374 401
+./aligned_img\10120620_NguyenMinhDoanh\140.png 201 156 401 399
+./aligned_img\10120620_NguyenMinhDoanh\141.png 207 153 403 385
+./aligned_img\10120620_NguyenMinhDoanh\142.png 206 158 401 387
+./aligned_img\10120620_NguyenMinhDoanh\143.png 192 171 383 404
+./aligned_img\10120620_NguyenMinhDoanh\144.png 208 132 394 399
+./aligned_img\10120620_NguyenMinhDoanh\145.png 187 150 390 398
+./aligned_img\10120620_NguyenMinhDoanh\146.png 191 154 389 393
+./aligned_img\10120620_NguyenMinhDoanh\147.png 198 151 388 389
+./aligned_img\10120620_NguyenMinhDoanh\148.png 184 150 377 389
+./aligned_img\10120620_NguyenMinhDoanh\149.png 174 165 371 414
+./aligned_img\10120620_NguyenMinhDoanh\15.png 215 215 372 398
+./aligned_img\10120620_NguyenMinhDoanh\150.png 190 151 395 411
+./aligned_img\10120620_NguyenMinhDoanh\151.png 196 159 384 396
+./aligned_img\10120620_NguyenMinhDoanh\152.png 196 155 394 404
+./aligned_img\10120620_NguyenMinhDoanh\153.png 206 149 405 395
+./aligned_img\10120620_NguyenMinhDoanh\154.png 199 151 406 406
+./aligned_img\10120620_NguyenMinhDoanh\155.png 198 154 403 408
+./aligned_img\10120620_NguyenMinhDoanh\156.png 202 150 398 393
+./aligned_img\10120620_NguyenMinhDoanh\157.png 202 148 395 389
+./aligned_img\10120620_NguyenMinhDoanh\158.png 215 151 414 392
+./aligned_img\10120620_NguyenMinhDoanh\159.png 211 146 410 391
+./aligned_img\10120620_NguyenMinhDoanh\16.png 213 214 372 400
+./aligned_img\10120620_NguyenMinhDoanh\160.png 199 148 393 390
+./aligned_img\10120620_NguyenMinhDoanh\161.png 208 141 393 364
+./aligned_img\10120620_NguyenMinhDoanh\162.png 193 173 389 410
+./aligned_img\10120620_NguyenMinhDoanh\163.png 201 160 391 394
+./aligned_img\10120620_NguyenMinhDoanh\164.png 200 141 394 374
+./aligned_img\10120620_NguyenMinhDoanh\165.png 190 151 393 397
+./aligned_img\10120620_NguyenMinhDoanh\166.png 193 175 395 415
+./aligned_img\10120620_NguyenMinhDoanh\167.png 199 161 399 400
+./aligned_img\10120620_NguyenMinhDoanh\168.png 206 147 397 380
+./aligned_img\10120620_NguyenMinhDoanh\169.png 204 151 390 380
+./aligned_img\10120620_NguyenMinhDoanh\17.png 210 213 373 402
+./aligned_img\10120620_NguyenMinhDoanh\170.png 208 158 396 383
+./aligned_img\10120620_NguyenMinhDoanh\171.png 207 151 397 382
+./aligned_img\10120620_NguyenMinhDoanh\172.png 194 151 386 385
+./aligned_img\10120620_NguyenMinhDoanh\173.png 193 149 389 383
+./aligned_img\10120620_NguyenMinhDoanh\174.png 191 147 388 388
+./aligned_img\10120620_NguyenMinhDoanh\175.png 189 151 385 393
+./aligned_img\10120620_NguyenMinhDoanh\176.png 189 162 385 398
+./aligned_img\10120620_NguyenMinhDoanh\177.png 187 157 381 396
+./aligned_img\10120620_NguyenMinhDoanh\178.png 192 152 386 385
+./aligned_img\10120620_NguyenMinhDoanh\179.png 190 152 384 382
+./aligned_img\10120620_NguyenMinhDoanh\18.png 213 211 375 402
+./aligned_img\10120620_NguyenMinhDoanh\180.png 188 157 379 380
+./aligned_img\10120620_NguyenMinhDoanh\181.png 191 176 384 409
+./aligned_img\10120620_NguyenMinhDoanh\182.png 185 161 387 406
+./aligned_img\10120620_NguyenMinhDoanh\183.png 182 151 382 394
+./aligned_img\10120620_NguyenMinhDoanh\184.png 183 153 375 389
+./aligned_img\10120620_NguyenMinhDoanh\185.png 186 154 381 390
+./aligned_img\10120620_NguyenMinhDoanh\186.png 181 151 379 392
+./aligned_img\10120620_NguyenMinhDoanh\187.png 183 155 380 393
+./aligned_img\10120620_NguyenMinhDoanh\188.png 181 152 369 394
+./aligned_img\10120620_NguyenMinhDoanh\189.png 182 150 384 393
+./aligned_img\10120620_NguyenMinhDoanh\19.png 212 208 373 404
+./aligned_img\10120620_NguyenMinhDoanh\190.png 182 158 376 395
+./aligned_img\10120620_NguyenMinhDoanh\191.png 182 156 373 392
+./aligned_img\10120620_NguyenMinhDoanh\192.png 182 156 379 398
+./aligned_img\10120620_NguyenMinhDoanh\193.png 183 153 376 391
+./aligned_img\10120620_NguyenMinhDoanh\194.png 184 152 379 388
+./aligned_img\10120620_NguyenMinhDoanh\195.png 181 153 374 393
+./aligned_img\10120620_NguyenMinhDoanh\196.png 179 154 378 395
+./aligned_img\10120620_NguyenMinhDoanh\197.png 183 151 380 395
+./aligned_img\10120620_NguyenMinhDoanh\198.png 181 152 379 395
+./aligned_img\10120620_NguyenMinhDoanh\199.png 181 156 376 393
+./aligned_img\10120620_NguyenMinhDoanh\2.png 244 234 405 427
+./aligned_img\10120620_NguyenMinhDoanh\20.png 211 213 371 402
+./aligned_img\10120620_NguyenMinhDoanh\200.png 181 149 391 403
+./aligned_img\10120620_NguyenMinhDoanh\21.png 210 216 372 406
+./aligned_img\10120620_NguyenMinhDoanh\22.png 200 213 364 410
+./aligned_img\10120620_NguyenMinhDoanh\23.png 157 195 352 427
+./aligned_img\10120620_NguyenMinhDoanh\24.png 76 219 341 493
+./aligned_img\10120620_NguyenMinhDoanh\25.png 180 169 406 445
+./aligned_img\10120620_NguyenMinhDoanh\26.png 179 174 410 456
+./aligned_img\10120620_NguyenMinhDoanh\27.png 170 176 395 457
+./aligned_img\10120620_NguyenMinhDoanh\28.png 165 183 388 452
+./aligned_img\10120620_NguyenMinhDoanh\29.png 166 184 389 451
+./aligned_img\10120620_NguyenMinhDoanh\3.png 242 230 403 426
+./aligned_img\10120620_NguyenMinhDoanh\30.png 163 176 388 449
+./aligned_img\10120620_NguyenMinhDoanh\31.png 164 178 392 454
+./aligned_img\10120620_NguyenMinhDoanh\32.png 167 182 394 459
+./aligned_img\10120620_NguyenMinhDoanh\33.png 165 181 395 471
+./aligned_img\10120620_NguyenMinhDoanh\34.png 168 181 389 450
+./aligned_img\10120620_NguyenMinhDoanh\35.png 163 146 380 396
+./aligned_img\10120620_NguyenMinhDoanh\36.png 167 143 378 382
+./aligned_img\10120620_NguyenMinhDoanh\37.png 183 144 378 362
+./aligned_img\10120620_NguyenMinhDoanh\38.png 162 144 369 380
+./aligned_img\10120620_NguyenMinhDoanh\39.png 128 146 340 391
+./aligned_img\10120620_NguyenMinhDoanh\4.png 219 212 376 395
+./aligned_img\10120620_NguyenMinhDoanh\40.png 162 153 375 401
+./aligned_img\10120620_NguyenMinhDoanh\41.png 210 174 422 426
+./aligned_img\10120620_NguyenMinhDoanh\42.png 203 174 410 420
+./aligned_img\10120620_NguyenMinhDoanh\43.png 175 164 398 443
+./aligned_img\10120620_NguyenMinhDoanh\44.png 170 175 395 452
+./aligned_img\10120620_NguyenMinhDoanh\45.png 178 182 395 442
+./aligned_img\10120620_NguyenMinhDoanh\46.png 170 178 390 448
+./aligned_img\10120620_NguyenMinhDoanh\47.png 171 173 393 445
+./aligned_img\10120620_NguyenMinhDoanh\48.png 169 181 382 450
+./aligned_img\10120620_NguyenMinhDoanh\49.png 166 175 391 445
+./aligned_img\10120620_NguyenMinhDoanh\5.png 200 216 359 402
+./aligned_img\10120620_NguyenMinhDoanh\50.png 167 181 380 451
+./aligned_img\10120620_NguyenMinhDoanh\51.png 177 184 391 446
+./aligned_img\10120620_NguyenMinhDoanh\52.png 178 172 398 436
+./aligned_img\10120620_NguyenMinhDoanh\53.png 177 168 389 429
+./aligned_img\10120620_NguyenMinhDoanh\54.png 174 157 393 421
+./aligned_img\10120620_NguyenMinhDoanh\55.png 178 170 390 427
+./aligned_img\10120620_NguyenMinhDoanh\56.png 184 168 398 420
+./aligned_img\10120620_NguyenMinhDoanh\57.png 174 165 392 433
+./aligned_img\10120620_NguyenMinhDoanh\58.png 172 168 390 434
+./aligned_img\10120620_NguyenMinhDoanh\59.png 177 168 385 422
+./aligned_img\10120620_NguyenMinhDoanh\6.png 204 213 365 401
+./aligned_img\10120620_NguyenMinhDoanh\60.png 177 171 388 429
+./aligned_img\10120620_NguyenMinhDoanh\61.png 181 174 392 430
+./aligned_img\10120620_NguyenMinhDoanh\62.png 180 167 392 426
+./aligned_img\10120620_NguyenMinhDoanh\63.png 178 174 393 435
+./aligned_img\10120620_NguyenMinhDoanh\64.png 178 172 391 431
+./aligned_img\10120620_NguyenMinhDoanh\65.png 176 173 390 440
+./aligned_img\10120620_NguyenMinhDoanh\66.png 171 182 399 460
+./aligned_img\10120620_NguyenMinhDoanh\67.png 169 183 389 456
+./aligned_img\10120620_NguyenMinhDoanh\68.png 196 178 419 442
+./aligned_img\10120620_NguyenMinhDoanh\69.png 170 182 392 455
+./aligned_img\10120620_NguyenMinhDoanh\7.png 201 214 365 404
+./aligned_img\10120620_NguyenMinhDoanh\70.png 179 175 402 448
+./aligned_img\10120620_NguyenMinhDoanh\71.png 177 170 402 451
+./aligned_img\10120620_NguyenMinhDoanh\72.png 176 174 401 454
+./aligned_img\10120620_NguyenMinhDoanh\73.png 176 168 400 447
+./aligned_img\10120620_NguyenMinhDoanh\74.png 170 165 397 450
+./aligned_img\10120620_NguyenMinhDoanh\75.png 197 178 411 438
+./aligned_img\10120620_NguyenMinhDoanh\76.png 186 171 409 451
+./aligned_img\10120620_NguyenMinhDoanh\77.png 184 175 405 447
+./aligned_img\10120620_NguyenMinhDoanh\78.png 177 170 401 450
+./aligned_img\10120620_NguyenMinhDoanh\79.png 188 171 413 444
+./aligned_img\10120620_NguyenMinhDoanh\8.png 206 212 367 405
+./aligned_img\10120620_NguyenMinhDoanh\80.png 167 177 390 445
+./aligned_img\10120620_NguyenMinhDoanh\81.png 179 170 402 445
+./aligned_img\10120620_NguyenMinhDoanh\82.png 172 173 392 448
+./aligned_img\10120620_NguyenMinhDoanh\83.png 177 176 396 445
+./aligned_img\10120620_NguyenMinhDoanh\84.png 167 168 394 448
+./aligned_img\10120620_NguyenMinhDoanh\85.png 175 170 395 442
+./aligned_img\10120620_NguyenMinhDoanh\86.png 171 166 394 438
+./aligned_img\10120620_NguyenMinhDoanh\87.png 173 170 394 441
+./aligned_img\10120620_NguyenMinhDoanh\88.png 171 166 392 439
+./aligned_img\10120620_NguyenMinhDoanh\89.png 171 164 390 433
+./aligned_img\10120620_NguyenMinhDoanh\9.png 203 209 368 407
+./aligned_img\10120620_NguyenMinhDoanh\90.png 192 176 409 441
+./aligned_img\10120620_NguyenMinhDoanh\91.png 179 169 398 432
+./aligned_img\10120620_NguyenMinhDoanh\92.png 182 168 400 429
+./aligned_img\10120620_NguyenMinhDoanh\93.png 175 162 398 436
+./aligned_img\10120620_NguyenMinhDoanh\94.png 173 170 388 435
+./aligned_img\10120620_NguyenMinhDoanh\95.png 173 161 396 431
+./aligned_img\10120620_NguyenMinhDoanh\96.png 158 172 390 452
+./aligned_img\10120620_NguyenMinhDoanh\97.png 172 176 373 419
+./aligned_img\10120620_NguyenMinhDoanh\98.png 150 164 357 421
+./aligned_img\10120620_NguyenMinhDoanh\99.png 154 159 364 412
+./aligned_img\10120766_Nguyen Minh Anh\1.png 231 110 355 270
+./aligned_img\10120766_Nguyen Minh Anh\10.png 242 113 367 275
+./aligned_img\10120766_Nguyen Minh Anh\100.png 234 114 362 279
+./aligned_img\10120766_Nguyen Minh Anh\101.png 232 114 365 282
+./aligned_img\10120766_Nguyen Minh Anh\102.png 231 112 363 282
+./aligned_img\10120766_Nguyen Minh Anh\103.png 233 114 362 280
+./aligned_img\10120766_Nguyen Minh Anh\104.png 231 95 360 261
+./aligned_img\10120766_Nguyen Minh Anh\105.png 230 92 357 263
+./aligned_img\10120766_Nguyen Minh Anh\106.png 234 99 364 267
+./aligned_img\10120766_Nguyen Minh Anh\107.png 236 103 368 271
+./aligned_img\10120766_Nguyen Minh Anh\108.png 238 105 365 270
+./aligned_img\10120766_Nguyen Minh Anh\109.png 238 101 369 270
+./aligned_img\10120766_Nguyen Minh Anh\11.png 243 112 367 275
+./aligned_img\10120766_Nguyen Minh Anh\110.png 234 101 367 270
+./aligned_img\10120766_Nguyen Minh Anh\111.png 226 100 361 275
+./aligned_img\10120766_Nguyen Minh Anh\112.png 224 101 355 274
+./aligned_img\10120766_Nguyen Minh Anh\113.png 224 101 358 275
+./aligned_img\10120766_Nguyen Minh Anh\114.png 221 97 346 268
+./aligned_img\10120766_Nguyen Minh Anh\115.png 228 104 356 273
+./aligned_img\10120766_Nguyen Minh Anh\116.png 231 103 361 277
+./aligned_img\10120766_Nguyen Minh Anh\117.png 228 103 361 276
+./aligned_img\10120766_Nguyen Minh Anh\118.png 229 98 364 272
+./aligned_img\10120766_Nguyen Minh Anh\119.png 231 100 361 265
+./aligned_img\10120766_Nguyen Minh Anh\12.png 239 113 364 276
+./aligned_img\10120766_Nguyen Minh Anh\120.png 238 109 366 269
+./aligned_img\10120766_Nguyen Minh Anh\121.png 240 108 368 269
+./aligned_img\10120766_Nguyen Minh Anh\122.png 238 107 368 278
+./aligned_img\10120766_Nguyen Minh Anh\123.png 233 101 361 268
+./aligned_img\10120766_Nguyen Minh Anh\124.png 216 100 354 275
+./aligned_img\10120766_Nguyen Minh Anh\125.png 222 106 352 275
+./aligned_img\10120766_Nguyen Minh Anh\126.png 219 101 352 274
+./aligned_img\10120766_Nguyen Minh Anh\127.png 224 101 358 277
+./aligned_img\10120766_Nguyen Minh Anh\128.png 227 102 359 273
+./aligned_img\10120766_Nguyen Minh Anh\129.png 224 106 357 277
+./aligned_img\10120766_Nguyen Minh Anh\13.png 244 106 371 272
+./aligned_img\10120766_Nguyen Minh Anh\130.png 219 107 351 274
+./aligned_img\10120766_Nguyen Minh Anh\131.png 238 107 367 277
+./aligned_img\10120766_Nguyen Minh Anh\132.png 244 108 373 276
+./aligned_img\10120766_Nguyen Minh Anh\133.png 238 109 364 276
+./aligned_img\10120766_Nguyen Minh Anh\134.png 227 106 355 274
+./aligned_img\10120766_Nguyen Minh Anh\135.png 250 103 378 271
+./aligned_img\10120766_Nguyen Minh Anh\136.png 257 106 386 276
+./aligned_img\10120766_Nguyen Minh Anh\137.png 240 101 376 276
+./aligned_img\10120766_Nguyen Minh Anh\138.png 229 105 359 279
+./aligned_img\10120766_Nguyen Minh Anh\139.png 231 104 364 277
+./aligned_img\10120766_Nguyen Minh Anh\14.png 245 87 370 253
+./aligned_img\10120766_Nguyen Minh Anh\140.png 233 104 365 277
+./aligned_img\10120766_Nguyen Minh Anh\141.png 232 103 363 276
+./aligned_img\10120766_Nguyen Minh Anh\142.png 231 110 359 280
+./aligned_img\10120766_Nguyen Minh Anh\143.png 223 104 355 276
+./aligned_img\10120766_Nguyen Minh Anh\144.png 240 106 366 279
+./aligned_img\10120766_Nguyen Minh Anh\145.png 232 106 363 277
+./aligned_img\10120766_Nguyen Minh Anh\146.png 230 105 360 271
+./aligned_img\10120766_Nguyen Minh Anh\147.png 231 101 357 265
+./aligned_img\10120766_Nguyen Minh Anh\148.png 233 100 362 267
+./aligned_img\10120766_Nguyen Minh Anh\149.png 227 98 359 270
+./aligned_img\10120766_Nguyen Minh Anh\15.png 246 100 370 263
+./aligned_img\10120766_Nguyen Minh Anh\150.png 217 96 347 273
+./aligned_img\10120766_Nguyen Minh Anh\151.png 211 89 343 277
+./aligned_img\10120766_Nguyen Minh Anh\152.png 224 97 350 271
+./aligned_img\10120766_Nguyen Minh Anh\153.png 226 94 360 269
+./aligned_img\10120766_Nguyen Minh Anh\154.png 229 95 361 267
+./aligned_img\10120766_Nguyen Minh Anh\155.png 240 99 370 264
+./aligned_img\10120766_Nguyen Minh Anh\156.png 263 86 386 255
+./aligned_img\10120766_Nguyen Minh Anh\157.png 250 115 367 273
+./aligned_img\10120766_Nguyen Minh Anh\158.png 235 104 365 274
+./aligned_img\10120766_Nguyen Minh Anh\159.png 246 96 378 268
+./aligned_img\10120766_Nguyen Minh Anh\16.png 242 102 368 268
+./aligned_img\10120766_Nguyen Minh Anh\160.png 275 107 393 267
+./aligned_img\10120766_Nguyen Minh Anh\161.png 239 105 369 270
+./aligned_img\10120766_Nguyen Minh Anh\162.png 231 105 358 271
+./aligned_img\10120766_Nguyen Minh Anh\163.png 234 101 362 270
+./aligned_img\10120766_Nguyen Minh Anh\164.png 233 100 361 270
+./aligned_img\10120766_Nguyen Minh Anh\165.png 228 104 359 274
+./aligned_img\10120766_Nguyen Minh Anh\166.png 223 115 355 284
+./aligned_img\10120766_Nguyen Minh Anh\167.png 223 108 354 284
+./aligned_img\10120766_Nguyen Minh Anh\168.png 222 114 355 287
+./aligned_img\10120766_Nguyen Minh Anh\169.png 227 109 359 281
+./aligned_img\10120766_Nguyen Minh Anh\17.png 244 99 370 265
+./aligned_img\10120766_Nguyen Minh Anh\170.png 221 107 353 277
+./aligned_img\10120766_Nguyen Minh Anh\171.png 223 108 354 279
+./aligned_img\10120766_Nguyen Minh Anh\172.png 225 109 357 280
+./aligned_img\10120766_Nguyen Minh Anh\173.png 234 105 364 275
+./aligned_img\10120766_Nguyen Minh Anh\174.png 243 108 373 274
+./aligned_img\10120766_Nguyen Minh Anh\175.png 243 109 368 273
+./aligned_img\10120766_Nguyen Minh Anh\176.png 240 106 367 272
+./aligned_img\10120766_Nguyen Minh Anh\177.png 236 104 365 275
+./aligned_img\10120766_Nguyen Minh Anh\178.png 236 108 366 273
+./aligned_img\10120766_Nguyen Minh Anh\179.png 235 103 366 273
+./aligned_img\10120766_Nguyen Minh Anh\18.png 264 94 390 264
+./aligned_img\10120766_Nguyen Minh Anh\180.png 234 108 365 274
+./aligned_img\10120766_Nguyen Minh Anh\181.png 236 105 367 274
+./aligned_img\10120766_Nguyen Minh Anh\182.png 235 103 367 274
+./aligned_img\10120766_Nguyen Minh Anh\183.png 230 107 360 274
+./aligned_img\10120766_Nguyen Minh Anh\184.png 226 106 359 276
+./aligned_img\10120766_Nguyen Minh Anh\185.png 229 101 360 275
+./aligned_img\10120766_Nguyen Minh Anh\186.png 234 99 365 274
+./aligned_img\10120766_Nguyen Minh Anh\187.png 235 101 364 274
+./aligned_img\10120766_Nguyen Minh Anh\188.png 232 96 358 263
+./aligned_img\10120766_Nguyen Minh Anh\189.png 238 97 367 270
+./aligned_img\10120766_Nguyen Minh Anh\19.png 244 96 378 268
+./aligned_img\10120766_Nguyen Minh Anh\190.png 229 101 369 284
+./aligned_img\10120766_Nguyen Minh Anh\191.png 236 102 365 277
+./aligned_img\10120766_Nguyen Minh Anh\192.png 233 107 367 281
+./aligned_img\10120766_Nguyen Minh Anh\193.png 231 106 368 281
+./aligned_img\10120766_Nguyen Minh Anh\194.png 232 108 363 281
+./aligned_img\10120766_Nguyen Minh Anh\195.png 235 108 363 278
+./aligned_img\10120766_Nguyen Minh Anh\196.png 235 111 369 285
+./aligned_img\10120766_Nguyen Minh Anh\197.png 233 112 367 285
+./aligned_img\10120766_Nguyen Minh Anh\198.png 228 113 360 282
+./aligned_img\10120766_Nguyen Minh Anh\199.png 237 113 363 276
+./aligned_img\10120766_Nguyen Minh Anh\2.png 237 112 363 276
+./aligned_img\10120766_Nguyen Minh Anh\20.png 246 92 372 260
+./aligned_img\10120766_Nguyen Minh Anh\200.png 248 107 378 277
+./aligned_img\10120766_Nguyen Minh Anh\21.png 234 96 353 264
+./aligned_img\10120766_Nguyen Minh Anh\22.png 225 97 347 257
+./aligned_img\10120766_Nguyen Minh Anh\23.png 239 102 374 272
+./aligned_img\10120766_Nguyen Minh Anh\24.png 247 100 377 278
+./aligned_img\10120766_Nguyen Minh Anh\25.png 241 103 374 277
+./aligned_img\10120766_Nguyen Minh Anh\26.png 241 101 372 275
+./aligned_img\10120766_Nguyen Minh Anh\27.png 242 102 372 274
+./aligned_img\10120766_Nguyen Minh Anh\28.png 241 105 373 272
+./aligned_img\10120766_Nguyen Minh Anh\29.png 241 90 371 262
+./aligned_img\10120766_Nguyen Minh Anh\3.png 238 107 366 274
+./aligned_img\10120766_Nguyen Minh Anh\30.png 242 92 368 258
+./aligned_img\10120766_Nguyen Minh Anh\31.png 240 95 370 265
+./aligned_img\10120766_Nguyen Minh Anh\32.png 241 103 374 276
+./aligned_img\10120766_Nguyen Minh Anh\33.png 242 112 371 281
+./aligned_img\10120766_Nguyen Minh Anh\34.png 234 116 372 295
+./aligned_img\10120766_Nguyen Minh Anh\35.png 237 107 370 276
+./aligned_img\10120766_Nguyen Minh Anh\36.png 238 105 370 279
+./aligned_img\10120766_Nguyen Minh Anh\37.png 241 103 371 274
+./aligned_img\10120766_Nguyen Minh Anh\38.png 250 95 373 256
+./aligned_img\10120766_Nguyen Minh Anh\39.png 241 81 368 246
+./aligned_img\10120766_Nguyen Minh Anh\4.png 244 111 370 276
+./aligned_img\10120766_Nguyen Minh Anh\40.png 242 86 365 237
+./aligned_img\10120766_Nguyen Minh Anh\41.png 238 81 364 240
+./aligned_img\10120766_Nguyen Minh Anh\42.png 240 92 366 254
+./aligned_img\10120766_Nguyen Minh Anh\43.png 239 99 365 263
+./aligned_img\10120766_Nguyen Minh Anh\44.png 239 101 364 266
+./aligned_img\10120766_Nguyen Minh Anh\45.png 241 97 368 265
+./aligned_img\10120766_Nguyen Minh Anh\46.png 250 99 381 272
+./aligned_img\10120766_Nguyen Minh Anh\47.png 245 98 374 265
+./aligned_img\10120766_Nguyen Minh Anh\48.png 238 100 366 267
+./aligned_img\10120766_Nguyen Minh Anh\49.png 231 101 355 269
+./aligned_img\10120766_Nguyen Minh Anh\5.png 245 110 370 271
+./aligned_img\10120766_Nguyen Minh Anh\50.png 227 98 347 268
+./aligned_img\10120766_Nguyen Minh Anh\51.png 223 100 346 266
+./aligned_img\10120766_Nguyen Minh Anh\52.png 234 101 359 265
+./aligned_img\10120766_Nguyen Minh Anh\53.png 239 100 366 266
+./aligned_img\10120766_Nguyen Minh Anh\54.png 243 104 370 270
+./aligned_img\10120766_Nguyen Minh Anh\55.png 241 107 369 275
+./aligned_img\10120766_Nguyen Minh Anh\56.png 239 108 372 287
+./aligned_img\10120766_Nguyen Minh Anh\57.png 239 112 373 289
+./aligned_img\10120766_Nguyen Minh Anh\58.png 237 121 368 294
+./aligned_img\10120766_Nguyen Minh Anh\59.png 238 108 369 278
+./aligned_img\10120766_Nguyen Minh Anh\6.png 245 109 370 271
+./aligned_img\10120766_Nguyen Minh Anh\60.png 244 102 375 277
+./aligned_img\10120766_Nguyen Minh Anh\61.png 244 102 375 273
+./aligned_img\10120766_Nguyen Minh Anh\62.png 234 102 362 273
+./aligned_img\10120766_Nguyen Minh Anh\63.png 235 95 361 260
+./aligned_img\10120766_Nguyen Minh Anh\64.png 227 100 353 268
+./aligned_img\10120766_Nguyen Minh Anh\65.png 226 108 356 278
+./aligned_img\10120766_Nguyen Minh Anh\66.png 232 102 362 272
+./aligned_img\10120766_Nguyen Minh Anh\67.png 236 97 364 260
+./aligned_img\10120766_Nguyen Minh Anh\68.png 235 104 359 266
+./aligned_img\10120766_Nguyen Minh Anh\69.png 232 101 364 271
+./aligned_img\10120766_Nguyen Minh Anh\7.png 246 110 372 275
+./aligned_img\10120766_Nguyen Minh Anh\70.png 235 96 366 261
+./aligned_img\10120766_Nguyen Minh Anh\71.png 235 108 364 273
+./aligned_img\10120766_Nguyen Minh Anh\72.png 245 107 371 268
+./aligned_img\10120766_Nguyen Minh Anh\73.png 254 101 382 266
+./aligned_img\10120766_Nguyen Minh Anh\74.png 238 100 365 265
+./aligned_img\10120766_Nguyen Minh Anh\75.png 236 103 364 266
+./aligned_img\10120766_Nguyen Minh Anh\76.png 229 101 360 273
+./aligned_img\10120766_Nguyen Minh Anh\77.png 224 103 347 268
+./aligned_img\10120766_Nguyen Minh Anh\78.png 218 99 341 265
+./aligned_img\10120766_Nguyen Minh Anh\79.png 227 104 353 265
+./aligned_img\10120766_Nguyen Minh Anh\8.png 243 111 367 273
+./aligned_img\10120766_Nguyen Minh Anh\80.png 233 100 355 262
+./aligned_img\10120766_Nguyen Minh Anh\81.png 243 100 371 267
+./aligned_img\10120766_Nguyen Minh Anh\82.png 238 97 365 260
+./aligned_img\10120766_Nguyen Minh Anh\83.png 238 101 365 262
+./aligned_img\10120766_Nguyen Minh Anh\84.png 238 103 367 268
+./aligned_img\10120766_Nguyen Minh Anh\85.png 238 103 366 267
+./aligned_img\10120766_Nguyen Minh Anh\86.png 234 108 363 274
+./aligned_img\10120766_Nguyen Minh Anh\87.png 229 105 358 274
+./aligned_img\10120766_Nguyen Minh Anh\88.png 230 105 359 276
+./aligned_img\10120766_Nguyen Minh Anh\89.png 231 102 360 272
+./aligned_img\10120766_Nguyen Minh Anh\9.png 243 113 365 275
+./aligned_img\10120766_Nguyen Minh Anh\90.png 244 89 373 257
+./aligned_img\10120766_Nguyen Minh Anh\91.png 244 94 368 256
+./aligned_img\10120766_Nguyen Minh Anh\92.png 229 100 355 262
+./aligned_img\10120766_Nguyen Minh Anh\93.png 230 97 357 261
+./aligned_img\10120766_Nguyen Minh Anh\94.png 225 96 355 267
+./aligned_img\10120766_Nguyen Minh Anh\95.png 219 90 350 266
+./aligned_img\10120766_Nguyen Minh Anh\96.png 220 92 352 264
+./aligned_img\10120766_Nguyen Minh Anh\97.png 221 92 351 262
+./aligned_img\10120766_Nguyen Minh Anh\98.png 221 95 352 266
+./aligned_img\10120766_Nguyen Minh Anh\99.png 237 107 363 273

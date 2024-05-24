@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 2024/05/21-22:09:45.976 487c Reusing MANIFEST C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.ce9784f5\flutter_tools_chrome_device.4ce95b8e\Default\Local Storage\leveldb/MANIFEST-000001
 2024/05/21-22:09:45.981 487c Recovering log #57
 2024/05/21-22:09:45.983 487c Reusing old log C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.ce9784f5\flutter_tools_chrome_device.4ce95b8e\Default\Local Storage\leveldb/000057.log 
@@ -31,3 +32,27 @@
 2024/05/21-22:09:45.985 487c Delete type=2 #52
 2024/05/21-22:09:45.985 487c Delete type=0 #54
 2024/05/21-22:09:45.985 487c Delete type=2 #55
+=======
+2024/05/21-12:06:42.542 2364 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.cb62d141\flutter_tools_chrome_device.87f5b5a1\Default\Local Storage\leveldb/MANIFEST-000001
+2024/05/21-12:06:42.544 2364 Recovering log #48
+2024/05/21-12:06:42.547 2364 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.cb62d141\flutter_tools_chrome_device.87f5b5a1\Default\Local Storage\leveldb/000048.log 
+2024/05/21-12:06:42.548 2364 Delete type=0 #3
+2024/05/21-12:06:42.548 2364 Delete type=0 #4
+2024/05/21-12:06:42.548 2364 Delete type=2 #8
+2024/05/21-12:06:42.548 2364 Delete type=0 #8
+2024/05/21-12:06:42.548 2364 Delete type=0 #10
+2024/05/21-12:06:42.548 2364 Delete type=2 #11
+2024/05/21-12:06:42.548 2364 Delete type=0 #13
+2024/05/21-12:06:42.548 2364 Delete type=2 #14
+2024/05/21-12:06:42.548 2364 Delete type=2 #17
+2024/05/21-12:06:42.548 2364 Delete type=0 #17
+2024/05/21-12:06:42.548 2364 Delete type=2 #21
+2024/05/21-12:06:42.548 2364 Delete type=2 #24
+2024/05/21-12:06:42.548 2364 Delete type=2 #26
+2024/05/21-12:06:42.548 2364 Delete type=0 #29
+2024/05/21-12:06:42.548 2364 Delete type=2 #30
+2024/05/21-12:06:42.549 2364 Delete type=2 #34
+2024/05/21-12:06:42.549 2364 Delete type=0 #36
+2024/05/21-12:06:42.549 2364 Delete type=2 #37
+2024/05/21-12:06:42.549 2364 Delete type=2 #40
+>>>>>>> Stashed changes

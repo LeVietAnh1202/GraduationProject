@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 2024/05/21-22:09:46.181 944 Reusing MANIFEST C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.ce9784f5\flutter_tools_chrome_device.4ce95b8e\Default\File System\Origins/MANIFEST-000001
 2024/05/21-22:09:46.182 944 Recovering log #2
 2024/05/21-22:09:46.182 944 Recovering log #5
 2024/05/21-22:09:46.183 944 Reusing old log C:\Users\MinhDoanh\AppData\Local\Temp\flutter_tools.ce9784f5\flutter_tools_chrome_device.4ce95b8e\Default\File System\Origins/000005.log 
+=======
+2024/05/21-12:06:42.742 20cc Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.cb62d141\flutter_tools_chrome_device.87f5b5a1\Default\File System\Origins/MANIFEST-000001
+2024/05/21-12:06:42.743 20cc Recovering log #3
+2024/05/21-12:06:42.744 20cc Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.cb62d141\flutter_tools_chrome_device.87f5b5a1\Default\File System\Origins/000003.log 
+>>>>>>> Stashed changes

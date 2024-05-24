@@ -1,9 +1,12 @@
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/videoStream.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
+
+import 'package:video_player/video_player.dart';
 
 class ProcessingAndTraining extends StatefulWidget {
   String text = 'text';
@@ -18,8 +21,20 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
   StreamController<String> _streamController = StreamController<String>();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // flickManager = FlickManager(
+    //     videoPlayerController: VideoPlayerController.networkUrl(
+    //   Uri.parse(
+    //       "http://192.168.1.3:3000/videos/default/12520088_LeVietAnh.mp4"),
+    // ));
+  }
+
+  @override
   void dispose() {
     _streamController.close();
+    // flickManager.dispose();
     super.dispose();
   }
 
@@ -104,6 +119,47 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
   //   });
   // }
 
+  void _callAPIProcess() async {
+    setState(() {
+      _loading = true;
+    });
+
+    try {
+      var response = await http.get(
+        Uri.http('127.0.0.1:8001', 'process'),
+      );
+
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        // Handle your response data here
+        setState(() {
+          _result = jsonResponse.toString();
+        });
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text('API Response'),
+            content: Text(_result),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (error) {
+      print(error);
+    }
+
+    setState(() {
+      _loading = false;
+    });
+  }
+
   void _callAPITrainModel() async {
     setState(() {
       _loading = true;
@@ -111,7 +167,7 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
 
     try {
       var response = await http.get(
-        Uri.http('127.0.0.1:8000', 'train_model'),
+        Uri.http('127.0.0.1:8001', 'train_model'),
       );
 
       if (response.statusCode == 200) {
@@ -152,7 +208,7 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
 
     try {
       var response = await http.post(
-        Uri.http('192.168.1.3:8001', 'crop_video'),
+        Uri.http('192.168.1.4:8001', 'crop_video'),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -226,7 +282,7 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
 
     try {
       var response = await http.get(
-        Uri.http('127.0.0.1:8000', 'connect_camera'),
+        Uri.http('127.0.0.1:8001', 'connect_camera'),
       );
 
       if (response.statusCode == 200) {
@@ -272,6 +328,11 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
           SizedBox(height: 10),
           ElevatedButton(
             onPressed: _callAPITrainModel,
+            child: Text('Call API process'),
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: _callAPITrainModel,
             child: Text('Call API train model'),
           ),
           SizedBox(height: 10),
@@ -292,7 +353,18 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
                     ),
                   )
                 : Text('Call API crop video'),
-          )
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (_) {
+                    return ShowVideo();
+                  });
+            },
+            child: Text('Show video'),
+          ),
 
           // VideoStreamWidget()
 
@@ -361,6 +433,55 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
       //     // ),
       //   ],
       // ),
+    );
+  }
+}
+
+class ShowVideo extends StatefulWidget {
+  const ShowVideo({super.key});
+
+  @override
+  State<ShowVideo> createState() => _ShowVideoState();
+}
+
+class _ShowVideoState extends State<ShowVideo> {
+  late FlickManager flickManager;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    flickManager = FlickManager(
+        videoPlayerController: VideoPlayerController.networkUrl(
+      // Uri.parse(
+      //     "http://192.168.1.3:3000/videos/default/12520088_LeVietAnh.mp4"),
+      Uri.http("192.168.1.3:3000", "videos/default/12520088_LeVietAnh.mp4")
+    ));
+  }
+
+  @override void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    flickManager.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('API Response'),
+      content: Container(
+          width: 500,
+          height: 500,
+          child: FlickVideoPlayer(flickManager: flickManager)),
+      actions: [
+        TextButton(
+          onPressed: () {
+            flickManager.dispose();
+            Navigator.pop(context);
+          },
+          child: Text('OK'),
+        ),
+      ],
     );
   }
 }

@@ -1,0 +1,395 @@
+{
+    "L45776549": {
+        "serial": "L45776549",
+        "name": "C6N(L45776549)",
+        "version": "V5.3.8 build 240312",
+        "upgrade_available": false,
+        "status": 1,
+        "device_category": "IPC",
+        "device_sub_category": "C6N",
+        "upgrade_percent": 0,
+        "upgrade_in_progress": false,
+        "latest_firmware_info": null,
+        "alarm_notify": false,
+        "alarm_schedules_enabled": false,
+        "alarm_sound_mod": "SOFT",
+        "encrypted": false,
+        "encrypted_pwd_hash": "1c4d692c022253a14aea1ac5079f118d",
+        "local_ip": "192.168.1.2",
+        "wan_ip": "222.255.165.162",
+        "mac_address": "78c1ae793125",
+        "local_rtsp_port": "554",
+        "supported_channels": 1,
+        "battery_level": null,
+        "PIR_Status": 0,
+        "Motion_Trigger": false,
+        "Seconds_Last_Trigger": null,
+        "last_alarm_time": null,
+        "last_alarm_pic": "https: //eustatics.ezvizlife.com/ovs_mall/web/img/index/EZVIZ_logo.png?ver=3007907502",
+        "last_alarm_type_code": "0000",
+        "last_alarm_type_name": "NoAlarm",
+        "cam_timezone": "UTC+07:00",
+        "push_notify_alarm": true,
+        "push_notify_call": true,
+        "alarm_light_luminance": 100,
+        "Alarm_DetectHumanCar": 3,
+        "diskCapacity": [
+            "30436",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1",
+            "-1"
+        ],
+        "NightVision_Model": {
+            "graphicType": 0,
+            "luminance": 100,
+            "duration": 90
+        },
+        "battery_camera_work_mode": "UNKNOWN",
+        "Alarm_AdvancedDetect": 4,
+        "wifiInfos": {
+            "netName": "e0",
+            "netType": "wire",
+            "address": "192.168.1.2",
+            "mask": "255.255.255.0",
+            "gateway": "192.168.1.1",
+            "signal": 100,
+            "ssid": "VINH HIEP"
+        },
+        "switches": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "7": false,
+            "8": false,
+            "10": true,
+            "15": false,
+            "21": false,
+            "22": true,
+            "25": false,
+            "29": false,
+            "31": true,
+            "32": false,
+            "38": true,
+            "39": false,
+            "41": false,
+            "200": false,
+            "202": false,
+            "300": false,
+            "301": false,
+            "302": false,
+            "303": false,
+            "304": false,
+            "305": false,
+            "306": false,
+            "451": false,
+            "602": false,
+            "603": false,
+            "604": false,
+            "613": false,
+            "614": false,
+            "615": false,
+            "617": false,
+            "650": false,
+            "651": false,
+            "652": false,
+            "700": true,
+            "701": false,
+            "702": true
+        },
+        "optionals": {
+            "updateCode": 0,
+            "BodyDetectTimeInterval": -1,
+            "talk_speaker_volume": 9,
+            "language": "ENG",
+            "StorageFirstRecordTime": "2024-05-08T09: 00: 42",
+            "DB_Chime_ConnInfo": {
+                "Conn": "-1",
+                "Name": "",
+                "Address": "",
+                "Mask": "",
+                "Gateway": "",
+                "Signal": "0",
+                "SSID": "",
+                "Dbserial": ""
+            },
+            "Record_Mode": {
+                "mode": 0
+            },
+            "Auto_night_vision": 0,
+            "wanIp": "222.255.165.162",
+            "hfullViewURL": "",
+            "Battery_WorkStatus": {
+                "KeepAlive": 0,
+                "WorkTime": 0,
+                "SpecialBusiness": 0
+            },
+            "inverse_mode": {
+                "mode": 1,
+                "enable": 0,
+                "position": 0
+            },
+            "OnlineStatus": 1,
+            "timeZone": "UTC+07: 00",
+            "video_pae": 1
+        },
+        "4G_Info": {
+            "status": 0,
+            "sigal": 0,
+            "type": 0,
+            "network": "",
+            "ICCID": "",
+            "IMEI": ""
+        },
+        "PresetEffect": {
+            "channel": 0,
+            "index": ""
+        },
+        "RecordCoverStorage": 1,
+        "image_para": {
+            "brightness": 50,
+            "contrast": 50,
+            "saturation": 50,
+            "sharpness": 50
+        },
+        "superState": 0,
+        "voiceIndex": 0,
+        "latestUnbindTime": 1716180751433,
+        "latestUnbandTime": 1716180751433,
+        "gesture_remind_type": 0,
+        "diskCid": "035344534233324780b90bf01c013783,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-",
+        "display_mode": {
+            "mode": 1
+        },
+        "AlgorithmInfo": [
+            {
+                "SubType": "0",
+                "channel": 1,
+                "Value": "3"
+            }
+        ],
+        "preset": 0,
+        "device_wifi_mode": -1,
+        "device_ICR_DSS": {
+            "mode": 0,
+            "sensitivity": 2,
+            "autoTimeBegin": "00: 00",
+            "autoTimeEnd": "00: 00"
+        },
+        "device_static_DNS": -1,
+        "CustomVoice": [],
+        "Route_LinkageStatus": 0,
+        "daylightSavingTime": 0,
+        "Alarm_DetectHumanCar": {
+            "type": 3
+        },
+        "tzCode": 56,
+        "ChimeMusic": {
+            "doorbell": 0,
+            "pir": 0,
+            "volume": 80
+        },
+        "Alarm_AdvancedDetect": {
+            "type": 4
+        },
+        "lightcamera_delay_off": {
+            "custom": false,
+            "delay": -1
+        },
+        "updateProcessExtend": "",
+        "OSD": [
+            {
+                "name": "",
+                "channel": "0"
+            }
+        ],
+        "CustomVoice_Volume": {
+            "volume": 80,
+            "microphone_volume": 80
+        },
+        "diskHealth": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+        ],
+        "returnToPoint": 0,
+        "cloudChannelList": [
+            {
+                "status": 0,
+                "compression": 0,
+                "channel": 0
+            },
+            {
+                "status": 0,
+                "compression": 0,
+                "channel": 1
+            }
+        ],
+        "pri_cover_area": {
+            "cover_num": 0,
+            "cover_data": [
+                {
+                    "ltop_x": 0,
+                    "ltop_y": 0,
+                    "rlow_x": 0,
+                    "rlow_y": 0
+                },
+                {
+                    "ltop_x": 0,
+                    "ltop_y": 0,
+                    "rlow_x": 0,
+                    "rlow_y": 0
+                },
+                {
+                    "ltop_x": 0,
+                    "ltop_y": 0,
+                    "rlow_x": 0,
+                    "rlow_y": 0
+                },
+                {
+                    "ltop_x": 0,
+                    "ltop_y": 0,
+                    "rlow_x": 0,
+                    "rlow_y": 0
+                }
+            ]
+        },
+        "diskCapacity": [
+            30436,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+        ],
+        "kms_version": 100,
+        "talkMode": {
+            "mode": 1
+        },
+        "timeFormat": 2,
+        "NightVision_Model": {
+            "graphicType": 0,
+            "luminance": 100,
+            "duration": 90
+        },
+        "sound_detect_type": {
+            "type": 0,
+            "db": 75
+        },
+        "ICR": 0,
+        "lastUpgradeTime": 1715834036943
+    },
+    "supportExt": {
+        "88": "1",
+        "46": "1",
+        "48": "1",
+        "152": "1",
+        "670": "1",
+        "154": "1",
+        "232": "1",
+        "233": "1",
+        "234": 1,
+        "159": "1",
+        "236": "1",
+        "632": "1",
+        "237": "1",
+        "93": "0",
+        "519": "1,2,3",
+        "97": "1",
+        "10": "1",
+        "11": "1",
+        "12": "1",
+        "13": "3",
+        "14": "1",
+        "15": "1",
+        "16": "16-9",
+        "1": "1",
+        "287": "1",
+        "2": "1",
+        "3": "1",
+        "4": "1",
+        "169": "1",
+        "367": "1",
+        "6": "0",
+        "7": "1",
+        "9": "1",
+        "769": "1,2,5",
+        "61": "1",
+        "605": "1",
+        "62": "1",
+        "63": "1",
+        "26": "0",
+        "28": "1",
+        "452": "1",
+        "256": "2",
+        "338": "1",
+        "339": "1",
+        "72": "1",
+        "73": "1",
+        "30": "1",
+        "31": "1",
+        "34": "1",
+        "37": "1",
+        "140": "0",
+        "141": "1",
+        "142": "1",
+        "582": "1",
+        "225": "1",
+        "149": "1",
+        "303": "1",
+        "106": "2",
+        "107": "1",
+        "81": "1",
+        "505": "1"
+    },
+    "ezDeviceCapability": {
+        "262": "1",
+        "175": "1",
+        "263": "0",
+        "264": "1",
+        "232": "0",
+        "265": "1",
+        "551": "1",
+        "233": "0",
+        "266": "0",
+        "234": 1,
+        "267": "1",
+        "289": "1",
+        "30": "0",
+        "31": "0"
+    }
+}
