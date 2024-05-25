@@ -17,7 +17,7 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   final token;
-
+  
   const MyApp({
     @required this.token,
     Key? key,

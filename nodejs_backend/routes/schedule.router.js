@@ -5,6 +5,8 @@ router.post("/createSchedule", ScheduleController.createSchedule);
 
 router.get("/getAllSchedule", ScheduleController.getAllSchedule);
 
+router.get("/getCheckSchedule", ScheduleController.getCheckSchedule);
+
 // router.get("/getAllScheduleStudentTerm", ScheduleController.getAllSchedule);
 
 

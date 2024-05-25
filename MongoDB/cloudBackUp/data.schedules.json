@@ -1,0 +1,897 @@
+[{
+  "_id": {
+    "$oid": "657985c56d8dd423d059ee97"
+  },
+  "scheduleID": "411111",
+  "moduleID": "211263",
+  "dayTerms": [
+    {
+      "day": "2",
+      "time": "1-4",
+      "weekTimeStart": "2023-11-27T00:00:00Z",
+      "weekTimeEnd": "2023-12-17T00:00:00Z"
+    },
+    {
+      "day": "4",
+      "time": "8-11",
+      "weekTimeStart": "2023-12-18T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z"
+    }
+  ],
+  "dateStart": "2023-11-27T00:00:00.000Z",
+  "dateEnd": "2023-12-31T00:00:00.000Z",
+  "details": [
+    {
+      "week": "15",
+      "weekTimeStart": "2023-11-27T00:00:00Z",
+      "weekTimeEnd": "2023-12-03T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "1-4",
+          "dayID": "1001"
+        }
+      ]
+    },
+    {
+      "week": "16",
+      "weekTimeStart": "2023-12-04T00:00:00Z",
+      "weekTimeEnd": "2023-12-10T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "1-4",
+          "dayID": "1002"
+        }
+      ]
+    },
+    {
+      "week": "17",
+      "weekTimeStart": "2023-12-11T00:00:00Z",
+      "weekTimeEnd": "2023-12-17T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "1-4",
+          "dayID": "1003"
+        }
+      ]
+    },
+    {
+      "week": "18",
+      "weekTimeStart": "2023-12-18T00:00:00Z",
+      "weekTimeEnd": "2023-12-24T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1004"
+        }
+      ]
+    },
+    {
+      "week": "19",
+      "weekTimeStart": "2023-12-25T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1005"
+        }
+      ]
+    }
+  ],
+  "classRoomID": "P206",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd423d059ee94"
+  },
+  "scheduleID": "411112",
+  "moduleID": "231129",
+  "dayTerms": [
+    {
+      "day": "3",
+      "time": "1-4",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z"
+    }
+  ],
+  "dateStart": "2023-11-06T00:00:00.000Z",
+  "dateEnd": "2023-12-31T00:00:00.000Z",
+  "details": [
+    {
+      "week": "12",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-11-12T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "3",
+          "time": "1-4",
+          "dayID": "1006"
+        }
+      ]
+    },
+    {
+      "week": "13",
+      "weekTimeStart": "2023-11-13T00:00:00Z",
+      "weekTimeEnd": "2023-11-19T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "3",
+          "time": "1-4",
+          "dayID": "1007"
+        }
+      ]
+    },
+    {
+      "week": "14",
+      "weekTimeStart": "2023-11-20T00:00:00Z",
+      "weekTimeEnd": "2023-11-26T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "3",
+          "time": "1-4",
+          "dayID": "1008"
+        }
+      ]
+    },
+    {
+      "week": "15",
+      "weekTimeStart": "2023-11-27T00:00:00Z",
+      "weekTimeEnd": "2023-12-03T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "3",
+          "time": "1-4",
+          "dayID": "1009"
+        }
+      ]
+    },
+    {
+      "week": "16",
+      "weekTimeStart": "2023-12-04T00:00:00Z",
+      "weekTimeEnd": "2023-12-10T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "3",
+          "time": "1-4",
+          "dayID": "1040"
+        }
+      ]
+    },
+    {
+      "week": "17",
+      "weekTimeStart": "2023-12-11T00:00:00Z",
+      "weekTimeEnd": "2023-12-17T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "3",
+          "time": "1-4",
+          "dayID": "1010"
+        }
+      ]
+    },
+    {
+      "week": "18",
+      "weekTimeStart": "2023-12-18T00:00:00Z",
+      "weekTimeEnd": "2023-12-24T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "3",
+          "time": "1-4",
+          "dayID": "1011"
+        }
+      ]
+    },
+    {
+      "week": "19",
+      "weekTimeStart": "2023-12-25T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "3",
+          "time": "1-4",
+          "dayID": "1012"
+        }
+      ]
+    }
+  ],
+  "classRoomID": "P302",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd423d059ee95"
+  },
+  "scheduleID": "411113",
+  "moduleID": "221167",
+  "dayTerms": [
+    {
+      "day": "7",
+      "time": "1-4",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z"
+    }
+  ],
+  "dateStart": "2023-11-06T00:00:00.000Z",
+  "dateEnd": "2023-12-31T00:00:00.000Z",
+  "details": [
+    {
+      "week": "12",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-11-12T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "7",
+          "time": "1-4",
+          "dayID": "1013"
+        }
+      ]
+    },
+    {
+      "week": "13",
+      "weekTimeStart": "2023-11-13T00:00:00Z",
+      "weekTimeEnd": "2023-11-19T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "7",
+          "time": "1-4",
+          "dayID": "1014"
+        }
+      ]
+    },
+    {
+      "week": "14",
+      "weekTimeStart": "2023-11-20T00:00:00Z",
+      "weekTimeEnd": "2023-11-26T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "7",
+          "time": "1-4",
+          "dayID": "1015"
+        }
+      ]
+    },
+    {
+      "week": "15",
+      "weekTimeStart": "2023-11-27T00:00:00Z",
+      "weekTimeEnd": "2023-12-03T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "7",
+          "time": "1-4",
+          "dayID": "1016"
+        }
+      ]
+    },
+    {
+      "week": "16",
+      "weekTimeStart": "2023-12-04T00:00:00Z",
+      "weekTimeEnd": "2023-12-10T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "7",
+          "time": "1-4",
+          "dayID": "1017"
+        }
+      ]
+    },
+    {
+      "week": "17",
+      "weekTimeStart": "2023-12-11T00:00:00Z",
+      "weekTimeEnd": "2023-12-17T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "7",
+          "time": "1-4",
+          "dayID": "1018"
+        }
+      ]
+    },
+    {
+      "week": "18",
+      "weekTimeStart": "2023-12-18T00:00:00Z",
+      "weekTimeEnd": "2023-12-24T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "7",
+          "time": "1-4",
+          "dayID": "1019"
+        }
+      ]
+    },
+    {
+      "week": "19",
+      "weekTimeStart": "2023-12-25T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "7",
+          "time": "1-4",
+          "dayID": "1020"
+        }
+      ]
+    }
+  ],
+  "classRoomID": "P304",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd423d059ee90"
+  },
+  "scheduleID": "411114",
+  "moduleID": "211011",
+  "dayTerms": [
+    {
+      "day": "5",
+      "time": "1-4",
+      "weekTimeStart": "2023-10-16T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z"
+    }
+  ],
+  "dateStart": "2023-10-16T00:00:00.000Z",
+  "dateEnd": "2023-12-31T00:00:00.000Z",
+  "details": [
+    {
+      "week": "09",
+      "weekTimeStart": "2023-10-16T00:00:00Z",
+      "weekTimeEnd": "2023-10-22T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1021"
+        }
+      ]
+    },
+    {
+      "week": "10",
+      "weekTimeStart": "2023-10-23T00:00:00Z",
+      "weekTimeEnd": "2023-11-29T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1022"
+        }
+      ]
+    },
+    {
+      "week": "11",
+      "weekTimeStart": "2023-10-30T00:00:00Z",
+      "weekTimeEnd": "2023-11-05T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1023"
+        }
+      ]
+    },
+    {
+      "week": "12",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-11-12T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1024"
+        }
+      ]
+    },
+    {
+      "week": "13",
+      "weekTimeStart": "2023-11-13T00:00:00Z",
+      "weekTimeEnd": "2023-11-19T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1025"
+        }
+      ]
+    },
+    {
+      "week": "14",
+      "weekTimeStart": "2023-11-20T00:00:00Z",
+      "weekTimeEnd": "2023-11-26T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1026"
+        }
+      ]
+    },
+    {
+      "week": "15",
+      "weekTimeStart": "2023-11-27T00:00:00Z",
+      "weekTimeEnd": "2023-12-03T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1027"
+        }
+      ]
+    },
+    {
+      "week": "16",
+      "weekTimeStart": "2023-12-04T00:00:00Z",
+      "weekTimeEnd": "2023-12-10T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1028"
+        }
+      ]
+    },
+    {
+      "week": "17",
+      "weekTimeStart": "2023-12-11T00:00:00Z",
+      "weekTimeEnd": "2023-12-17T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1029"
+        }
+      ]
+    },
+    {
+      "week": "18",
+      "weekTimeStart": "2023-12-18T00:00:00Z",
+      "weekTimeEnd": "2023-12-24T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1030"
+        }
+      ]
+    },
+    {
+      "week": "19",
+      "weekTimeStart": "2023-12-25T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "5",
+          "time": "1-4",
+          "dayID": "1031"
+        }
+      ]
+    }
+  ],
+  "classRoomID": "P205",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd423d059ee99"
+  },
+  "scheduleID": "411115",
+  "moduleID": "215667",
+  "dayTerms": [
+    {
+      "day": "4",
+      "time": "8-11",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z"
+    }
+  ],
+  "dateStart": "2023-11-06T00:00:00.000Z",
+  "dateEnd": "2023-12-31T00:00:00.000Z",
+  "details": [
+    {
+      "week": "12",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-11-12T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1032"
+        }
+      ]
+    },
+    {
+      "week": "13",
+      "weekTimeStart": "2023-11-13T00:00:00Z",
+      "weekTimeEnd": "2023-11-19T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1033"
+        }
+      ]
+    },
+    {
+      "week": "14",
+      "weekTimeStart": "2023-11-20T00:00:00Z",
+      "weekTimeEnd": "2023-11-26T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1034"
+        }
+      ]
+    },
+    {
+      "week": "15",
+      "weekTimeStart": "2023-11-27T00:00:00Z",
+      "weekTimeEnd": "2023-12-03T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1035"
+        }
+      ]
+    },
+    {
+      "week": "16",
+      "weekTimeStart": "2023-12-04T00:00:00Z",
+      "weekTimeEnd": "2023-12-10T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1036"
+        }
+      ]
+    },
+    {
+      "week": "17",
+      "weekTimeStart": "2023-12-11T00:00:00Z",
+      "weekTimeEnd": "2023-12-17T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1037"
+        }
+      ]
+    },
+    {
+      "week": "18",
+      "weekTimeStart": "2023-12-18T00:00:00Z",
+      "weekTimeEnd": "2023-12-24T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1038"
+        }
+      ]
+    },
+    {
+      "week": "19",
+      "weekTimeStart": "2023-12-25T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "4",
+          "time": "8-11",
+          "dayID": "1039"
+        }
+      ]
+    }
+  ],
+  "classRoomID": "P208",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655985c56d8dd423d059ee90"
+  },
+  "scheduleID": "411116",
+  "moduleID": "211560",
+  "dayTerms": [
+    {
+      "day": "2",
+      "time": "8-11",
+      "weekTimeStart": "2023-10-16T00:00:00Z",
+      "weekTimeEnd": "2023-12-03T00:00:00Z"
+    },
+    {
+      "day": "6",
+      "time": "8-11",
+      "weekTimeEnd": "2023-12-31T00:00:00Z",
+      "weekTimeStart": "2023-12-04T00:00:00Z"
+    }
+  ],
+  "dateStart": "2023-10-16T00:00:00.000Z",
+  "dateEnd": "2023-12-31T00:00:00.000Z",
+  "details": [
+    {
+      "week": "09",
+      "weekTimeStart": "2023-10-16T00:00:00Z",
+      "weekTimeEnd": "2023-10-22T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "8-11",
+          "dayID": "1040"
+        }
+      ]
+    },
+    {
+      "week": "10",
+      "weekTimeStart": "2023-10-23T00:00:00Z",
+      "weekTimeEnd": "2023-11-29T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "8-11",
+          "dayID": "1041"
+        }
+      ]
+    },
+    {
+      "week": "11",
+      "weekTimeStart": "2023-10-30T00:00:00Z",
+      "weekTimeEnd": "2023-11-05T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "8-11",
+          "dayID": "1042"
+        }
+      ]
+    },
+    {
+      "week": "12",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-11-12T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "8-11",
+          "dayID": "1043"
+        }
+      ]
+    },
+    {
+      "week": "13",
+      "weekTimeStart": "2023-11-13T00:00:00Z",
+      "weekTimeEnd": "2023-11-19T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "8-11",
+          "dayID": "1044"
+        }
+      ]
+    },
+    {
+      "week": "14",
+      "weekTimeStart": "2023-11-20T00:00:00Z",
+      "weekTimeEnd": "2023-11-26T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "8-11",
+          "dayID": "1045"
+        }
+      ]
+    },
+    {
+      "week": "15",
+      "weekTimeStart": "2023-11-27T00:00:00Z",
+      "weekTimeEnd": "2023-12-03T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "2",
+          "time": "8-11",
+          "dayID": "1046"
+        }
+      ]
+    },
+    {
+      "week": "16",
+      "weekTimeStart": "2023-12-04T00:00:00Z",
+      "weekTimeEnd": "2023-12-10T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "8-11",
+          "dayID": "1052"
+        }
+      ]
+    },
+    {
+      "week": "17",
+      "weekTimeStart": "2023-12-11T00:00:00Z",
+      "weekTimeEnd": "2023-12-17T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "8-11",
+          "dayID": "1053"
+        }
+      ]
+    },
+    {
+      "week": "18",
+      "weekTimeStart": "2023-12-18T00:00:00Z",
+      "weekTimeEnd": "2023-12-24T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "8-11",
+          "dayID": "1054"
+        }
+      ]
+    },
+    {
+      "week": "19",
+      "weekTimeStart": "2023-12-25T00:00:00Z",
+      "weekTimeEnd": "2023-12-31T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "8-11",
+          "dayID": "1055"
+        }
+      ]
+    }
+  ],
+  "classRoomID": "P206",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655985c56d9dd423d059ee90"
+  },
+  "scheduleID": "411117",
+  "moduleID": "231129",
+  "dayTerms": [
+    {
+      "day": "6",
+      "time": "1-4",
+      "weekTimeStart": "2023-10-16T00:00:00Z",
+      "weekTimeEnd": "2023-12-10T00:00:00Z"
+    }
+  ],
+  "dateStart": "2023-10-16T00:00:00.000Z",
+  "dateEnd": "2023-12-10T00:00:00.000Z",
+  "details": [
+    {
+      "week": "10",
+      "weekTimeStart": "2023-10-23T00:00:00Z",
+      "weekTimeEnd": "2023-11-29T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "1-4",
+          "dayID": "1041"
+        }
+      ]
+    },
+    {
+      "week": "11",
+      "weekTimeStart": "2023-10-30T00:00:00Z",
+      "weekTimeEnd": "2023-11-05T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "1-4",
+          "dayID": "1042"
+        }
+      ]
+    },
+    {
+      "week": "12",
+      "weekTimeStart": "2023-11-06T00:00:00Z",
+      "weekTimeEnd": "2023-11-12T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "1-4",
+          "dayID": "1043"
+        }
+      ]
+    },
+    {
+      "week": "13",
+      "weekTimeStart": "2023-11-13T00:00:00Z",
+      "weekTimeEnd": "2023-11-19T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "1-4",
+          "dayID": "1044"
+        }
+      ]
+    },
+    {
+      "week": "14",
+      "weekTimeStart": "2023-11-20T00:00:00Z",
+      "weekTimeEnd": "2023-11-26T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "1-4",
+          "dayID": "1045"
+        }
+      ]
+    },
+    {
+      "week": "15",
+      "weekTimeStart": "2023-11-27T00:00:00Z",
+      "weekTimeEnd": "2023-12-03T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "1-4",
+          "dayID": "1046"
+        }
+      ]
+    },
+    {
+      "week": "16",
+      "weekTimeStart": "2023-12-04T00:00:00Z",
+      "weekTimeEnd": "2023-12-10T00:00:00Z",
+      "weekDetails": [
+        {
+          "day": "6",
+          "time": "1-4",
+          "dayID": "1056"
+        }
+      ]
+    }
+  ],
+  "classRoomID": "P206",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0
+}]

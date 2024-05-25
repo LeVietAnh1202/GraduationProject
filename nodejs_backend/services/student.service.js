@@ -229,8 +229,27 @@ class StudentService {
             const listStudentID = module.listStudentID;
             console.log(listStudentID)
             const students = await StudentModel.find({ studentId: { $in: listStudentID } });
-            // console.log(students)
-            return students;
+
+            const specializationMap = new Map();
+
+            const faculties = await FacultyModel.find();
+            faculties.forEach(faculty => {
+                faculty.majors.forEach(major => {
+                    major.specializations.forEach(specialization => {
+                        specializationMap.set(specialization.specializationID, specialization.specializationName);
+                    });
+                });
+            });
+
+            const studentsWithSpecialization = students.map(student => {
+                const specializationName = specializationMap.get(student.specializationID) || 'Unknown';
+                return {
+                    ...student.toObject(), // Chuyển đổi document MongoDB thành object JS
+                    specializationName: specializationName
+                };
+            });
+
+            return studentsWithSpecialization;
 
         } catch (err) {
             console.log(err);

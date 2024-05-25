@@ -11,10 +11,8 @@ class CheckAttendanceSocketIO {
 
     static async checkAttendanceSocketIO(io, client) {
         client.on('attendance', async data => {
-            // Xử lý dữ liệu từ ESP32
             console.log(data);
 
-            // Gửi phản hồi về ESP32 (nếu cần)
             client.emit('dataReceived', 'Data received by server');
 
             io.emit('attendance', data);
