@@ -15,17 +15,22 @@ class Faculty {
       required this.majorNumber});
 
   factory Faculty.fromMap(Map<String, dynamic> json) {
-    List<Major> majors =
-        (json['majors'] as List<dynamic>).asMap().entries.map(((e) {
-      return Major.fromMap(e.value);
-    })).toList();
+    try {
+      List<Major> majors =
+          (json['majors'] as List<dynamic>).asMap().entries.map(((e) {
+        return Major.fromMap(e.value);
+      })).toList();
 
-    return Faculty(
-        id: json['_id'],
-        facultyID: json['facultyID'],
-        facultyName: json['facultyName'],
-        majors: majors,
-        majorNumber: majors.length);
+      return Faculty(
+          id: json['_id'],
+          facultyID: json['facultyID'],
+          facultyName: json['facultyName'],
+          majors: majors,
+          majorNumber: majors.length);
+    } catch (e) {
+      print(e);
+      throw new Exception('Failed to Faculty.fromMap');
+    }
   }
 
   @override

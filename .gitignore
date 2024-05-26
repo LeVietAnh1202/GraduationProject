@@ -138,3 +138,5 @@ facial_recognition_server/aligned_img
 New folder/aligned_img/bounding_boxes_14221.txt
 nodejs_backend/public/videos/default/12520088_LeVietAnh.mp4
 nodejs_backend/public/videos/default/12520088_LeVietAnh1.mp4
+multi_camera/multi_thread.py
+facial_recognition_server/camera_ezviz.py

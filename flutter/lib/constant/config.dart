@@ -1,9 +1,11 @@
-const url = '192.168.1.8:3000';
+const url = '192.168.1.9:3000';
 // const url = '192.168.1.3:3000';
-const url_ras = '192.168.1.8:3000';
+const url_ras = '192.168.1.9:3000';
 const url_python = '192.168.1.9:8001';
 final register = "user/register";
 final login = 'user/login';
+
+final changeSimulationDateAPI = '/simulationDate';
 
 final createStudentAPI = 'student/create';
 final editStudentAPI = 'student/edit';
@@ -26,6 +28,7 @@ final getAllClassAPI = 'class/getAllClass';
 final getAllSchoolyearAPI = 'schoolyear/getAll';
 
 final getAllFacultyAPI = 'faculty/getAllFaculty';
+final getFacultyByStudentIDAPI = 'faculty/getFacultyByStudentID';
 
 final getAllScheduleStudentWeekAPI = 'student/getAllScheduleWeek';
 final getAllScheduleStudentTermAPI = 'student/getAllScheduleTerm';

@@ -7,7 +7,6 @@ import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class _JsonMap extends MapView<dynamic, dynamic> {
   _JsonMap.fromJson(Map<dynamic, dynamic> json) : super(json);
