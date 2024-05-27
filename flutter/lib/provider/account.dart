@@ -10,13 +10,13 @@ class Account {
   String token;
   // String facultyID;
 
-  Account(
-      {required this.account,
-      required this.username,
-      required this.role,
-      required this.token,
-      // required this.facultyID
-      });
+  Account({
+    required this.account,
+    required this.username,
+    required this.role,
+    required this.token,
+    // required this.facultyID
+  });
 }
 
 class AccountProvider with ChangeNotifier {
@@ -46,24 +46,29 @@ class AccountProvider with ChangeNotifier {
   }
 
   Future<void> restoreFromSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? account = prefs.getString('account');
-    String? role = prefs.getString('accountRole');
-    String? username = prefs.getString('accountUsername');
-    String? token = prefs.getString('token');
-    // String? facultyID = prefs.getString('facultyID');
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? account = prefs.getString('account');
+      String? role = prefs.getString('accountRole');
+      String? username = prefs.getString('accountUsername');
+      String? token = prefs.getString('token');
+      // String? facultyID = prefs.getString('facultyID');
 
-    if (account != null && role != null && username != null && token != null 
-    // && facultyID != null
-    ) {
-      _account = Account(
+      if (account != null && role != null && username != null && token != null
+          // && facultyID != null
+          ) {
+        _account = Account(
           account: account, role: role, username: username, token: token,
           // facultyID: facultyID
-          );
-      print('Khởi tạo thành công account');
-      notifyListeners();
-    } else {
-      print('restore false');
+        );
+        print('Khởi tạo thành công account');
+        notifyListeners();
+      } else {
+        print('restore false');
+      }
+    } catch (e) {
+      print('Failed to restore from sharedPreferences: ' + e.toString());
+      throw Exception('Failed to restore from sharedPreferences: ' + e.toString());
     }
   }
 

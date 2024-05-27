@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/number.dart';
-import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/classModel.dart';
 import 'package:flutter_todo_app/model/facultyModel.dart';
 import 'package:flutter_todo_app/model/lecturerModel.dart';
@@ -69,8 +67,8 @@ class AppState {
     required this.attendanceAdminWeeks,
     required this.attendanceAdminTerms,
   }) {
-    socket = IO.io(URLNodeJSServer,
-        IO.OptionBuilder().setTransports(['websocket']).build());
+    // socket = IO.io(URLNodeJSServer,
+    //     IO.OptionBuilder().setTransports(['websocket']).build());
   }
 }
 
@@ -443,8 +441,10 @@ class AppStateProvider with ChangeNotifier {
       parseImagesView = ShowImage.full;
     } else if (imagesString == 'ShowImage.crop') {
       parseImagesView = ShowImage.crop;
+    } else if (imagesString == 'ShowImage.video') {
+      parseImagesView = ShowImage.video;
     } else {
-      throw ArgumentError('Invalid calendar string: $imagesString');
+      throw ArgumentError('Invalid images view string: $imagesString');
     }
 
     return parseImagesView;
@@ -529,33 +529,11 @@ class AppStateProvider with ChangeNotifier {
     Map<String, dynamic> attendanceStudentTermsJson =
         jsonDecode(attendanceStudentTermsString);
     return attendanceStudentTermsJson;
-    // List<dynamic> attendanceStudentTermsJson =
-    //     jsonDecode(attendanceStudentTermsString);
-    // Map<String, dynamic> attendanceStudentTerms = {};
-    // for (var attendanceStudentTermJson in attendanceStudentTermsJson) {
-    //   attendanceStudentTerms
-    //       .addAll(Map<String, dynamic>.from(attendanceStudentTermJson));
-    // }
-    // return attendanceStudentTerms;
   }
-
-  // List<Map<String, dynamic>> parseAttendanceLecturerWeeks(
-  //     String attendanceLecturerWeeksString) {
-  //   // Thực hiện chuyển đổi chuỗi thành danh sách giảng viên phù hợp
-  //   // Ví dụ:
-  //   List<dynamic> attendanceLecturerWeeksJson =
-  //       jsonDecode(attendanceLecturerWeeksString);
-  //   List<Map<String, dynamic>> attendanceLecturerWeeks = [];
-  //   for (var attendanceLecturerWeekJson in attendanceLecturerWeeksJson) {
-  //     attendanceLecturerWeeks
-  //         .add(Map<String, dynamic>.from(attendanceLecturerWeekJson));
-  //   }
-  //   return attendanceLecturerWeeks;
-  // }
 
   Map<String, dynamic> parseAttendanceLecturerWeeks(
       String attendanceLecturerWeeksString) {
-    // Perform the conversion from string to the appropriate lecturer weeks map
+    print('jsonDecode(attendanceLecturerWeeksString): ' + jsonDecode(attendanceLecturerWeeksString));
     List<dynamic> attendanceLecturerWeeksJson =
         jsonDecode(attendanceLecturerWeeksString);
     Map<String, dynamic> attendanceLecturerWeeks = {};
@@ -613,8 +591,8 @@ class AppStateProvider with ChangeNotifier {
 // --------------------------------------------------------------
     prefs.setString(
         'attendanceStudentTerms', appState.attendanceStudentTerms.toString());
-    prefs.setString(
-        'attendanceLecturerWeeks', appState.attendanceLecturerWeeks.toString());
+    /* prefs.setString(
+        'attendanceLecturerWeeks', appState.attendanceLecturerWeeks.toString()); */
     prefs.setString(
         'attendanceLecturerTerms', appState.attendanceLecturerTerms.toString());
     prefs.setString(

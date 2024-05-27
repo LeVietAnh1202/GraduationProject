@@ -29,9 +29,14 @@ class _DataTableStudentState extends State<DataTableStudent> {
   }
 
   Future<void> fetchStudents() async {
-    final students = await StudentService.fetchStudents(context, (value) => {});
-    Provider.of<AppStateProvider>(context, listen: false)
-        .setTableLength(students.length);
+    try {
+      final students =
+          await StudentService.fetchStudents(context, (value) => {});
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setTableLength(students.length);
+    } catch (e) {
+      print('Error fetching students: $e');
+    }
   }
 
   // Future<void> fetchFaculties() async {

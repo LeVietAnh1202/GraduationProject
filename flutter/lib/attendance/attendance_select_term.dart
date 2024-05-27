@@ -33,14 +33,30 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      init(); // Gọi hàm setAppState sau khi initState hoàn thành
+      init(); // Gọi hàm init sau khi initState hoàn thành
     });
   }
 
   Future<void> init() async {
-    await SchoolyearService.fetchSchoolyears(context, (value) => {});
-    await LecturerService.fetchLecturers(context);
-    await SubjectService.fetchSubjects(context);
+    try {
+      await SchoolyearService.fetchSchoolyears(context, (value) {
+        // Handle the value if necessary
+      });
+    } catch (e) {
+      print('Error fetching school years: $e');
+    }
+
+    try {
+      await LecturerService.fetchLecturers(context);
+    } catch (e) {
+      print('Error fetching lecturers: $e');
+    }
+
+    try {
+      await SubjectService.fetchSubjects(context);
+    } catch (e) {
+      print('Error fetching subjects: $e');
+    }
   }
 
   // ignore: unused_field

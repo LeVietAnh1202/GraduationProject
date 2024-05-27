@@ -60,16 +60,11 @@ class _BodyContentState extends State<BodyContent> {
   Widget build(BuildContext context) {
     widget.calendarView =
         context.watch<AppStateProvider>().appState!.calendarView;
-    print('widget.calendarView: ');
-    print(widget.calendarView);
     widget.sidebarKey = context.watch<AppStateProvider>().appState!.breadcrumbs;
-    print(widget.sidebarKey);
 
     Role? role = context.watch<AccountProvider>().getRole();
     SidebarMap sidebarMap =
         new SidebarMap(widget.calendarView, role, widget.sidebarKey, context);
-    print('sidebarMap: ');
-    print(sidebarMap);
 
     int numberOfPages = Provider.of<AppStateProvider>(context, listen: false)
         .getNumberOfPages();
