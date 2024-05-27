@@ -11,10 +11,11 @@ import 'package:provider/provider.dart';
 class DataTableStudentByModule extends StatefulWidget {
   final String moduleID;
   // final int scheduleTermsLength;
-  DataTableStudentByModule(
-      {Key? key, required this.moduleID, 
-      // required this.scheduleTermsLength
-      });
+  DataTableStudentByModule({
+    Key? key,
+    required this.moduleID,
+    // required this.scheduleTermsLength
+  });
 
   @override
   State<DataTableStudentByModule> createState() =>
@@ -119,6 +120,14 @@ class _DataTableStudentByModuleState extends State<DataTableStudentByModule> {
                   DataColumn(
                     label: Expanded(
                       child: Text(
+                        'Chuyên ngành',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
                         'Giới tính',
                         textAlign: TextAlign.center,
                       ),
@@ -176,6 +185,10 @@ class _DataTableStudentByModuleState extends State<DataTableStudentByModule> {
                       )),
                       DataCell(Text(
                         student.classCode,
+                        textAlign: TextAlign.left,
+                      )),
+                      DataCell(Text(
+                        student.specializationName,
                         textAlign: TextAlign.left,
                       )),
                       DataCell(Center(child: Text(student.gender))),

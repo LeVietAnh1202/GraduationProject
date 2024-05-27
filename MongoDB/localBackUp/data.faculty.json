@@ -1,0 +1,108 @@
+[
+    {
+        "_id": {
+            "$oid": "66418e865fb1a026bec3ec3a"
+        },
+        "facultyID": "7480",
+        "facultyName": "Công nghệ thông tin",
+        "majors": [
+            {
+                "majorID": "7480201",
+                "majorName": "Công nghệ thông tin",
+                "specializations": [
+                    {
+                        "specializationID": "101",
+                        "specializationName": "Công nghệ thông tin"
+                    },
+                    {
+                        "specializationID": "102",
+                        "specializationName": "Phát triển ứng dụng IoT"
+                    },
+                    {
+                        "specializationID": "103",
+                        "specializationName": "Đồ họa đa phương tiện"
+                    }
+                ]
+            },
+            {
+                "majorID": "7480101",
+                "majorName": "Khoa học máy tính",
+                "specializations": [
+                    {
+                        "specializationID": "201",
+                        "specializationName": "Trí tuệ nhân tạo và khoa học dữ liệu"
+                    },
+                    {
+                        "specializationID": "202",
+                        "specializationName": "Trí tuệ nhân tạo và xử lý ngôn ngữ tự nhiên"
+                    },
+                    {
+                        "specializationID": "203",
+                        "specializationName": "Trí tuệ nhân tạo và thị giác máy tính"
+                    }
+                ]
+            },
+            {
+                "majorID": "7480103",
+                "majorName": "Kỹ thuật phần mềm",
+                "specializations": [
+                    {
+                        "specializationID": "301",
+                        "specializationName": "Phát triển ứng dụng phần mềm"
+                    },
+                    {
+                        "specializationID": "302",
+                        "specializationName": "Kiểm thử và đảm bảo chất lượng phần mềm"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "66419feb5fb1a026bec3ec45"
+        },
+        "facultyID": "7340",
+        "facultyName": "Kinh tế",
+        "majors": [
+            {
+                "majorID": "7340101",
+                "majorName": "Quản trị kinh doanh",
+                "specializations": [
+                    {
+                        "specializationID": "401",
+                        "specializationName": "Quản trị kinh doanh công nghệ"
+                    }
+                ]
+            },
+            {
+                "majorID": "7340301",
+                "majorName": "Kế toán",
+                "specializations": [
+                    {
+                        "specializationID": "501",
+                        "specializationName": "Kế toán doanh nghiệp"
+                    },
+                    {
+                        "specializationID": "502",
+                        "specializationName": "Kiểm toán"
+                    }
+                ]
+            },
+            {
+                "majorID": "7310101",
+                "majorName": "Kinh tế",
+                "specializations": [
+                    {
+                        "specializationID": "601",
+                        "specializationName": "Kinh tế đầu tư"
+                    },
+                    {
+                        "specializationID": "602",
+                        "specializationName": "Logistics và quản lý chuỗi cung ứng"
+                    }
+                ]
+            }
+        ]
+    }
+]

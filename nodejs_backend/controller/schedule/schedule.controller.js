@@ -24,3 +24,13 @@ exports.getAllSchedule = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.getCheckSchedule = async (req, res, next) => {
+    try {
+        const scheduleList = await ScheduleService.checkSchedule();
+        res.json({ status: true, success: 'CheckSchedule successfully', data: scheduleList });
+    } catch (err) {
+        console.log("---> err -->", err);
+        next(err);
+    }
+};
