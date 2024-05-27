@@ -22,7 +22,7 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
   String selectedWeek = '19'; // Tuần được chọn mặc định
   bool _isLoading = true;
 
-  void onWeekSelected(String? week) {
+  void _onWeekSelected(String? week) {
     setState(() {
       selectedWeek = week!;
     });
@@ -35,11 +35,11 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
   }
 
   void init() async {
-    schedules = Provider.of<AppStateProvider>(context, listen: false)
-        .appState!
-        .scheduleStudentWeeks;
+    final appStateProvider =
+        Provider.of<AppStateProvider>(context, listen: false);
+    schedules = appStateProvider.appState!.scheduleStudentWeeks;
     if (schedules.isEmpty) {
-      ScheduleService.fetchScheduleStudentWeeks(
+      await ScheduleService.fetchScheduleStudentWeeks(
           context,
           (bool value) => setState(() {
                 _isLoading = value;
@@ -49,22 +49,6 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
         _isLoading = false;
       });
     }
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // String? scheduleStudentWeeksString =
-    //     prefs.getString('scheduleStudentWeeks');
-
-    // if (scheduleStudentWeeksString == null ) {
-    //   ScheduleService.fetchScheduleStudentWeeks(
-    //       context,
-    //       (bool value) => setState(() {
-    //             _isLoading = value;
-    //           }));
-    // } else {
-    //   Provider.of<AppStateProvider>(context, listen: false).restoreFromSharedPreferences();
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    // }
   }
 
   void deleteSchedule(int index) {
@@ -76,7 +60,7 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
     return a.compareTo(b);
   }
 
-  Widget buildWeekDropdown(BuildContext context) {
+  Widget _buildWeekDropdown(BuildContext context) {
     final List<String> weeks = [
       '11',
       '12',
@@ -92,20 +76,9 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
     schedules =
         context.watch<AppStateProvider>().appState!.scheduleStudentWeeks;
 
-    // return DropdownButton<String>(
-    //   value: selectedWeek,
-    //   onChanged: onWeekSelected,
-    //   items: weeks.map((week) {
-    //     return DropdownMenuItem<String>(
-    //       value: week,
-    //       child: Text('Tuần $week'),
-    //     );
-    //   }).toList(),
-    // );
-
     return DropdownButton<String>(
       value: selectedWeek,
-      onChanged: onWeekSelected,
+      onChanged: _onWeekSelected,
       items: weeks
           .map((week) {
             final schedule = schedules.firstWhere(
@@ -115,10 +88,7 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
             final weekTimeStart = schedule['weekTimeStart'];
             final weekTimeEnd = schedule['weekTimeEnd'];
 
-            print('weekTimeStart: $weekTimeStart');
-            print('weekTimeEnd: $weekTimeEnd');
-
-            if (weekTimeStart != '' && weekTimeEnd != '') {
+            if (weekTimeStart.isNotEmpty && weekTimeEnd.isNotEmpty) {
               final inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
               final outputFormat = DateFormat('dd/MM/yyyy');
 
@@ -142,13 +112,70 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
               return null;
             }
           })
-          .where((item) => item != null)
-          .toList()
-          .cast<DropdownMenuItem<String>>(),
+          // .where((item) => item != null)
+          // .toList()
+          // .cast<DropdownMenuItem<String>>(),
+          .whereType<DropdownMenuItem<String>>().toList(),
+    );
+  }
+
+   Widget _buildDataTable(BuildContext context) {
+    final appState = context.watch<AppStateProvider>().appState!;
+    final filteredSchedules = appState.scheduleStudentWeeks.where((schedule) {
+      return schedule['week'] == selectedWeek;
+    }).toList();
+
+    filteredSchedules.sort((a, b) {
+      return scheduleDayComparator(a['day'], b['day']);
+    });
+
+    return DataTable(
+      columns: [
+        DataColumn(label: Text('Thứ', textAlign: TextAlign.center)),
+        DataColumn(label: Text('Tiết', textAlign: TextAlign.center)),
+        DataColumn(label: Text('Mã học phần', textAlign: TextAlign.center)),
+        DataColumn(label: Text('Tên môn', textAlign: TextAlign.center)),
+        DataColumn(label: Text('Phòng học', textAlign: TextAlign.center)),
+        DataColumn(label: Text('Tên giảng viên', textAlign: TextAlign.center)),
+        DataColumn(label: Text('Điểm danh', textAlign: TextAlign.center)),
+      ],
+      rows: filteredSchedules.map((schedule) {
+        return DataRow(
+          cells: [
+            DataCell(Center(child: Text(schedule['day']))),
+            DataCell(Center(child: Text(schedule['time']))),
+            DataCell(Center(child: Text(schedule['moduleID']))),
+            DataCell(Center(child: Text(schedule['subjectName']))),
+            DataCell(Center(child: Text(schedule['roomName']))),
+            DataCell(Center(child: Text(schedule['lecturerName']))),
+            DataCell(Center(child: Utilities.attendanceIcon(schedule['attendance']))),
+          ],
+        );
+      }).toList(growable: false),
     );
   }
 
   @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          _buildWeekDropdown(context),
+          _isLoading
+              ? Container(
+                  child: CircularProgressIndicator(),
+                  margin: EdgeInsets.only(bottom: 5, top: 10),
+                )
+              : Container(
+                  width: MediaQuery.of(context).size.width - sideBarWidth,
+                  child: _buildDataTable(context),
+                ),
+        ],
+      ),
+    );
+  }
+
+  /* @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
@@ -270,5 +297,5 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
         ],
       ),
     );
-  }
+  } */
 }
