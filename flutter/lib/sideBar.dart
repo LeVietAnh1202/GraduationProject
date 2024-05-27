@@ -71,9 +71,7 @@ class _SidebarState extends State<Sidebar> {
         selectedTileColor: selectedSideBarItemColor,
         selectedColor: Colors.white,
         onTap: () {
-          isCategory ?
-          select('$quanLyDanhMuc > ${title}')
-          : select(title);
+          isCategory ? select('$quanLyDanhMuc > ${title}') : select(title);
         },
       );
     }
@@ -109,7 +107,8 @@ class _SidebarState extends State<Sidebar> {
             listTile(Icons.task, false, quanLyDiemDanh),
             if (role == Role.admin || role == Role.aao)
               listTile(Icons.task, false, quanLyDinhDanh),
-            if (role == Role.admin) listTile(Icons.book, false, 'Quản lý học phần'),
+            if (role == Role.admin)
+              listTile(Icons.book, false, 'Quản lý học phần'),
 
             if (role == Role.admin || role == Role.aao)
               ExpansionTile(
@@ -117,14 +116,14 @@ class _SidebarState extends State<Sidebar> {
                 title: Text('$quanLyDanhMuc'),
                 children: [
                   if (role == Role.admin) listTile(null, true, danhMucKhoa),
-                  listTile(null, true, '$quanLyDanhMuc > ${danhMucNganh}'),
-                  listTile(null, true, '$quanLyDanhMuc > ${danhMucChuyenNganh}'),
-                  listTile(null, true, '$quanLyDanhMuc > ${danhMucSinhVien}'),
-                  listTile(null, true, '$quanLyDanhMuc > ${danhMucGiangVien}'),
-                  listTile(null, true, '$quanLyDanhMuc > ${'Danh mục lớp'}'),
-                  listTile(null, true, '$quanLyDanhMuc > ${'Danh mục môn học'}'),
-                  listTile(null, true, '$quanLyDanhMuc > ${'Danh mục phòng'}'),
-                  listTile(null, true, '$quanLyDanhMuc > ${'Danh mục thiết bị'}'),
+                  listTile(null, true, danhMucNganh),
+                  listTile(null, true, danhMucChuyenNganh),
+                  listTile(null, true, danhMucSinhVien),
+                  listTile(null, true, danhMucGiangVien),
+                  listTile(null, true, 'Danh mục lớp'),
+                  listTile(null, true, 'Danh mục môn học'),
+                  listTile(null, true, 'Danh mục phòng'),
+                  listTile(null, true, 'Danh mục thiết bị'),
                   // Add other dropdown items as needed
                 ],
               ),
