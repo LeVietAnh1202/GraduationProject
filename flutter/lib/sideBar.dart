@@ -63,7 +63,7 @@ class _SidebarState extends State<Sidebar> {
       });
     }
 
-    ListTile listTile(IconData? icon, String title) {
+    ListTile listTile(IconData? icon, bool isCategory, String title) {
       return ListTile(
         leading: Icon(icon),
         title: Text(title),
@@ -71,7 +71,9 @@ class _SidebarState extends State<Sidebar> {
         selectedTileColor: selectedSideBarItemColor,
         selectedColor: Colors.white,
         onTap: () {
-          select(title);
+          isCategory ?
+          select('$quanLyDanhMuc > ${title}')
+          : select(title);
         },
       );
     }
@@ -102,27 +104,27 @@ class _SidebarState extends State<Sidebar> {
                 // ),
                 ),
 
-            listTile(Icons.home, trangChu),
-            listTile(Icons.schedule, quanLyLichHoc),
-            listTile(Icons.task, quanLyDiemDanh),
+            listTile(Icons.home, false, trangChu),
+            listTile(Icons.schedule, false, quanLyLichHoc),
+            listTile(Icons.task, false, quanLyDiemDanh),
             if (role == Role.admin || role == Role.aao)
-              listTile(Icons.task, quanLyDinhDanh),
-            if (role == Role.admin) listTile(Icons.book, 'Quản lý học phần'),
+              listTile(Icons.task, false, quanLyDinhDanh),
+            if (role == Role.admin) listTile(Icons.book, false, 'Quản lý học phần'),
 
             if (role == Role.admin || role == Role.aao)
               ExpansionTile(
                 leading: Icon(Icons.menu),
                 title: Text('$quanLyDanhMuc'),
                 children: [
-                  if (role == Role.admin) listTile(null, danhMucKhoa),
-                  listTile(null, '$quanLyDanhMuc > ${danhMucNganh}'),
-                  listTile(null, '$quanLyDanhMuc > ${danhMucChuyenNganh}'),
-                  listTile(null, '$quanLyDanhMuc > ${danhMucSinhVien}'),
-                  listTile(null, '$quanLyDanhMuc > ${danhMucGiangVien}'),
-                  listTile(null, '$quanLyDanhMuc > ${'Danh mục lớp'}'),
-                  listTile(null, '$quanLyDanhMuc > ${'Danh mục môn học'}'),
-                  listTile(null, '$quanLyDanhMuc > ${'Danh mục phòng'}'),
-                  listTile(null, '$quanLyDanhMuc > ${'Danh mục thiết bị'}'),
+                  if (role == Role.admin) listTile(null, true, danhMucKhoa),
+                  listTile(null, true, '$quanLyDanhMuc > ${danhMucNganh}'),
+                  listTile(null, true, '$quanLyDanhMuc > ${danhMucChuyenNganh}'),
+                  listTile(null, true, '$quanLyDanhMuc > ${danhMucSinhVien}'),
+                  listTile(null, true, '$quanLyDanhMuc > ${danhMucGiangVien}'),
+                  listTile(null, true, '$quanLyDanhMuc > ${'Danh mục lớp'}'),
+                  listTile(null, true, '$quanLyDanhMuc > ${'Danh mục môn học'}'),
+                  listTile(null, true, '$quanLyDanhMuc > ${'Danh mục phòng'}'),
+                  listTile(null, true, '$quanLyDanhMuc > ${'Danh mục thiết bị'}'),
                   // Add other dropdown items as needed
                 ],
               ),
