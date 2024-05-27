@@ -29,27 +29,24 @@ class _SidebarState extends State<Sidebar> {
 
   Future<void> getfacultyID() async {
     final role = Provider.of<AccountProvider>(context, listen: false).getRole();
-    print('role: ');
-    print(role);
     List<Faculty>? faculties;
-    if (role == Role.student) {
+    if (role == Role.lecturer || role == Role.aao) {
+      faculties = await FacultyService.fetchFaculties(context, (value) {
+        setState(() {
+          _isLoading = value;
+        });
+      });
+    } else if (role == Role.student) {
       faculties =
           await FacultyService.fetchFacultyByStudentID(context, (value) {
         setState(() {
           _isLoading = value;
         });
       });
-      setState(() {
-        facultyID = faculties![0].facultyID;
-      });
-    } else {
-      _isLoading = false;
-      setState(() {
-        facultyID = 'utehy';
-      });
     }
-    // else if (role == Role.lecturer || role == Role.aao)
-    // faculties = await FacultyService.fetchFacultyByLecturerID(context, (value) {});
+    setState(() {
+      facultyID = faculties![0].facultyID;
+    });
   }
 
   @override
@@ -88,7 +85,11 @@ class _SidebarState extends State<Sidebar> {
                 // ),
                 margin: EdgeInsets.zero,
                 child: _isLoading
-                    ? CircularProgressIndicator()
+                    ? Center(
+                        child: Container(
+                            width: 15,
+                            height: 15,
+                            child: CircularProgressIndicator()))
                     : Image.asset(
                         'assets/images/logo/${facultyID}.png',
                         width: 25,

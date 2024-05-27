@@ -14,28 +14,25 @@ class FacultyService {
       BuildContext context, ValueChanged<bool> isLoading) async {
     final role = Provider.of<AccountProvider>(context, listen: false).getRole();
     Response? response;
-    if (role == Role.aao) {
+    if (role == Role.lecturer || role == Role.aao) {
       final lecturerID =
           Provider.of<AccountProvider>(context, listen: false).getAccount();
       final bodyData = {'lecturerID': lecturerID};
-      print(bodyData);
       response = await http.post(Uri.http(url, getAllFacultyByLecturerIDAPI),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(bodyData));
-      print(response.body);
     }
     if (role == Role.admin)
       response = await http.get(Uri.http(url, getAllFacultyAPI));
     if (response!.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       List<dynamic> facultiesList = [];
-      if (role == Role.aao) {
+      if (role == Role.aao || role == Role.lecturer) {
         facultiesList.add(data['data']);
       } else
-        facultiesList = (data['data']);
+        facultiesList = data['data'];
       final List<Faculty> faculties =
           facultiesList.map((e) => Faculty.fromMap(e)).toList();
-      print("faculties: " + faculties.toString());
 
       Provider.of<AppStateProvider>(context, listen: false)
           .setFaculties(faculties);
@@ -63,16 +60,12 @@ class FacultyService {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         List<dynamic> facultyList = [];
         facultyList.add(data['data']);
-        print('data: ' + facultyList.toString());
 
-        final List<Faculty> faculties = facultyList
-            .map((e) => Faculty.fromMap(e))
-            .toList();
-        print(faculties); 
+        final List<Faculty> faculties =
+            facultyList.map((e) => Faculty.fromMap(e)).toList();
         Provider.of<AppStateProvider>(context, listen: false)
             .setFaculties(faculties);
         isLoading(false);
-        print('faculties: ' + faculties.toString());
         return faculties;
       } else {
         throw Exception('Failed to fetch faculty by student ID');
