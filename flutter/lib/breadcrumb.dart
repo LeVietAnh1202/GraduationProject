@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/students/formAddStudent.dart';
 import 'package:flutter_todo_app/timePicker.dart';
@@ -18,6 +20,8 @@ class _BreadcrumbState extends State<Breadcrumb> {
     BuildContext mainContext = context;
     String breadcrumbs =
         context.watch<AppStateProvider>().appState!.breadcrumbs;
+    final role =
+        Provider.of<AccountProvider>(context, listen: false).getRole();
     return Column(
       children: [
         Row(
@@ -30,20 +34,20 @@ class _BreadcrumbState extends State<Breadcrumb> {
                   : 'Trang chủ > ${context.watch<AppStateProvider>().appState?.breadcrumbs}',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
-            DateTimePickerWidget(),
-            (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien')
+            if (breadcrumbs == quanLyLichHoc || breadcrumbs == quanLyDiemDanh)
+              DateTimePickerWidget(),
+            (breadcrumbs == quanLyDinhDanh && role == Role.aao)
                 ? ElevatedButton(
                     onPressed: () {
-                      // xử lý sự kiện
-                      print(breadcrumbs);
-                      if (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien') {
+                      // if (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien') 
+                      
                         showDialog(
                           context: mainContext,
                           builder: (BuildContext context) {
                             return FromAddStudent();
                           },
                         );
-                      }
+                      
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green, // Đổi màu xanh cho nút

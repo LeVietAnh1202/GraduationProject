@@ -20,7 +20,6 @@ const studentSchema = new Schema({
     specializationID: {
         type: String,
         required: [true, "specializationID is required"],
-        unique: true,
     },
     gender: {
         type: String,
@@ -48,19 +47,15 @@ const studentSchema = new Schema({
     },
     NoAvatar: {
         type: Number,
-        required: [true, "NoAvatar is required"],
     },
     NoFullImage: {
         type: Number,
-        required: [true, "NoFullImage is required"],
     },
     NoCropImage: {
         type: Number,
-        required: [true, "NoCropImage is required"],
     },
     NoVideo: {
         type: Number,
-        required: [true, "NoVideo is required"],
     },
 }, { timestamps: true });
 
