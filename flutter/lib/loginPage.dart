@@ -166,7 +166,8 @@ class _SignInPageState extends State<SignInPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    'assets/images/face_recognition_dynamic.gif',
+                    // 'assets/images/face_recognition_dynamic.gif',
+                    'assets/images/logoHome.jpg',
                     width: 200,
                   ),
                   SizedBox(height: 20.0),

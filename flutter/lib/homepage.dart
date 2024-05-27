@@ -23,12 +23,12 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Ứng dụng & Website Danh mục Đầu tư Flutter Responsive',
+              'Hệ thống điểm danh sinh viên bằng công nghệ nhận dạng khuôn mặt',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Text(
-              'Cảm ơn bạn đã ghé thăm kho lưu trữ trang web danh mục đầu tư của tôi. Trang web dựa trên Flutter này là nơi để giới thiệu các kỹ năng, dự án, chứng chỉ và cách liên hệ với tôi. Trang web được thiết kế với trọng tâm là tính đáp ứng, đảm bảo rằng nó trông và hoạt động hoàn hảo trên nhiều thiết bị khác nhau, từ màn hình máy tính để bàn lớn đến thiết bị Android nhỏ gọn.',
+              'Cảm ơn bạn đã ghé thăm hệ thống điểm danh sinh viên của tôi. Trang web dựa trên Flutter này là nơi để giới thiệu các tính năng dành cho sinh viên, giảng viên trong vấn đề điểm dnah tự động bằng khuôn mặt. Trang web được thiết kế với trọng tâm là tính đáp ứng, đảm bảo rằng nó trông và hoạt động hoàn hảo.',
             ),
             SizedBox(height: 8),
             Text(

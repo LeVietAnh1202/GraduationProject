@@ -97,7 +97,8 @@ class _DashboardState extends State<Dashboard> {
         title: Row(
           children: [
             Image.asset(
-              'assets/images/face_recognition_dynamic.gif',
+              // 'assets/images/face_recognition_dynamic.gif',
+              'assets/images/logoHome.jpg',
               width: 25,
             ),
             SizedBox(

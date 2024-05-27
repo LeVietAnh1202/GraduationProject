@@ -26,6 +26,8 @@ final getAllClassAPI = 'class/getAllClass';
 final getAllSchoolyearAPI = 'schoolyear/getAll';
 
 final getAllFacultyAPI = 'faculty/getAllFaculty';
+final getAllSpecializationsByLecturerIDAPI = 'faculty/getSpecializationsByLecturerID';
+final getAllFacultyByLecturerIDAPI = 'faculty/getFacultyByLecturerID';
 
 final getAllScheduleStudentWeekAPI = 'student/getAllScheduleWeek';
 final getAllScheduleStudentTermAPI = 'student/getAllScheduleTerm';

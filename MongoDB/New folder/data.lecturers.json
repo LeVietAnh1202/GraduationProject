@@ -6,7 +6,7 @@
   "lecturerName": "Nguyễn Văn Quyết",
   "gender": "Nam",
   "birthDate": {
-    "$date": "2023-11-30T17:00:00.000Z"
+    "$date": "1980-11-30T17:00:00.000Z"
   },
   "position": "lecturer",
   "createdAt": {
@@ -17,7 +17,6 @@
   },
   "__v": 0,
   "facultyID": "7480"
-  
 },
 {
   "_id": {
@@ -27,9 +26,49 @@
   "lecturerName": "Trần Đỗ Thu Hà",
   "gender": "Nữ",
   "birthDate": {
-    "$date": "2023-11-30T17:00:00.000Z"
+    "$date": "1980-11-30T17:00:00.000Z"
   },
   "position": "aao",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7480"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039ee88"
+  },
+  "lecturerID": "1227",
+  "lecturerName": "Nguyễn Thị Thanh Huệ",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7480"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039ee68"
+  },
+  "lecturerID": "1228",
+  "lecturerName": "Chu Bá Thành",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
   "createdAt": {
     "$date": "2023-12-13T10:21:57.700Z"
   },
@@ -47,7 +86,7 @@
   "lecturerName": "Vũ Huy Thế",
   "gender": "Nam",
   "birthDate": {
-    "$date": "2023-11-30T17:00:00.000Z"
+    "$date": "1980-11-30T17:00:00.000Z"
   },
   "position": "lecturer",
   "createdAt": {
@@ -67,7 +106,27 @@
   "lecturerName": "Phạm Minh Chuẩn",
   "gender": "Nam",
   "birthDate": {
-    "$date": "2023-11-30T17:00:00.000Z"
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7480"
+},
+{
+  "_id": {
+    "$oid": "617985c56d8dd623d089ee17"
+  },
+  "lecturerID": "1227",
+  "lecturerName": "Nguyễn Đình Chiến",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
   },
   "position": "lecturer",
   "createdAt": {
@@ -87,7 +146,87 @@
   "lecturerName": "Nguyễn Quốc Phóng",
   "gender": "Nam",
   "birthDate": {
-    "$date": "2023-11-30T17:00:00.000Z"
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7340"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e101"
+  },
+  "lecturerID": "1323",
+  "lecturerName": "Nguyễn Văn Hưởng",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7340"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e902"
+  },
+  "lecturerID": "1324",
+  "lecturerName": "Nguyễn Thị Hải Yến",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7340"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e102"
+  },
+  "lecturerID": "1325",
+  "lecturerName": "Hoàng Văn Hùng",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7340"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e125"
+  },
+  "lecturerID": "1326",
+  "lecturerName": "Hoàng Minh Đức",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
   },
   "position": "lecturer",
   "createdAt": {
@@ -107,7 +246,7 @@
   "lecturerName": "Nguyễn Văn Hậu",
   "gender": "Nam",
   "birthDate": {
-    "$date": "2023-11-30T17:00:00.000Z"
+    "$date": "1980-11-30T17:00:00.000Z"
   },
   "position": "lecturer",
   "createdAt": {
@@ -127,7 +266,7 @@
   "lecturerName": "Tạ Hữu Sang",
   "gender": "Nam",
   "birthDate": {
-    "$date": "2023-11-30T17:00:00.000Z"
+    "$date": "1980-11-30T17:00:00.000Z"
   },
   "position": "aao",
   "createdAt": {
@@ -138,4 +277,345 @@
   },
   "__v": 0,
   "facultyID": "7340"
-}]
+},
+
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e126"
+  },
+  "lecturerID": "1421",
+  "lecturerName": "Đỗ Thị Oanh",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "aao",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7220"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e127"
+  },
+  "lecturerID": "1422",
+  "lecturerName": "Đỗ Phúc Hường",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7220"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e128"
+  },
+  "lecturerID": "1423",
+  "lecturerName": "Trần Cẩm Ninh",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7220"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e129"
+  },
+  "lecturerID": "1424",
+  "lecturerName": "Nguyễn Thị Năm",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7220"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e130"
+  },
+  "lecturerID": "1425",
+  "lecturerName": "Hồ Quang Trung",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7220"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e131"
+  },
+  "lecturerID": "1426",
+  "lecturerName": "Đoàn Thị Thu Thủy",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7220"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e132"
+  },
+  "lecturerID": "1427",
+  "lecturerName": "Mai Thị Phương Quỳnh",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7220"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e133"
+  },
+  "lecturerID": "1428",
+  "lecturerName": "Nguyễn Đình Sinh",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7220"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e106"
+  },
+  "lecturerID": "1521",
+  "lecturerName": "Đỗ Thị Hằng",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "aao",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7540"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e107"
+  },
+  "lecturerID": "1522",
+  "lecturerName": "Nguyễn Thị Nhung",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7540"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e108"
+  },
+  "lecturerID": "1523",
+  "lecturerName": "Lê Thúy Hằng",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7540"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e109"
+  },
+  "lecturerID": "1524",
+  "lecturerName": "Bùi Thị Việt Hòa",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7540"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e110"
+  },
+  "lecturerID": "1525",
+  "lecturerName": "Nguyễn Thị Xuân",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7540"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e111"
+  },
+  "lecturerID": "1526",
+  "lecturerName": "Cao Thị Kiên Chung",
+  "gender": "Nữ",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7540"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e112"
+  },
+  "lecturerID": "1527",
+  "lecturerName": "Nguyễn Thế Lực",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7540"
+},
+{
+  "_id": {
+    "$oid": "657985c56d8dd427d039e113"
+  },
+  "lecturerID": "1528",
+  "lecturerName": "Phạm Văn Quyện",
+  "gender": "Nam",
+  "birthDate": {
+    "$date": "1980-11-30T17:00:00.000Z"
+  },
+  "position": "lecturer",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "facultyID": "7540"
+}
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

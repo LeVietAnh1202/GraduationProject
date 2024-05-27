@@ -9,44 +9,6 @@ const RoomModel = require("../../models/room.model");
 
 const ScheduleStudentWeekModel = require("../../models/schedule/schedule_student_week.model");
 
-// class ScheduleStudentWeekService {
-//     // static async createSchedule(scheduleID, moduleID, dateStart, dateEnd, details) {
-//     //     try {
-//     //         const createSchedule = new ScheduleStudentWeekModel({ scheduleID, moduleID, dateStart, dateEnd, details });
-//     //         return await createSchedule.save();
-//     //     } catch (err) {
-//     //         throw err;
-//     //     }
-//     // }
-
-//     // static async getScheduleStudentWeekByScheduleID(scheduleID) {
-//     //     try {
-//     //         return await ScheduleStudentWeekModel.findOne({ scheduleID });
-//     //     } catch (err) {
-//     //         console.log(err);
-//     //     }
-//     // }
-
-//     static async getAllScheduleStudentWeek(studentID) {
-//         try {
-//             // return await ScheduleStudentWeekModel.find();
-
-//             scheduleModel = await ScheduleModel.findOne(studentID);
-
-//             lecturerModel = await LecturerModel.find();
-
-
-
-
-//             const scheduleStudentWeek = new ScheduleStudentWeekModel({ day, time, moduleID, subjectName, roomName, lecturerName, week, dateStart, dateEnd });
-
-//             return scheduleStudentWeek;
-//         } catch (err) {
-//             console.log(err);
-//         }
-//     }
-// }
-
 
 class ScheduleStudentWeekService {
   static async getAllScheduleStudentWeek(studentId) {
@@ -77,7 +39,7 @@ class ScheduleStudentWeekService {
             const weekTimeEnd = week.weekTimeEnd;
 
             for (const weekDetail of weekDetails) {
-              const { day, time, dayID } = weekDetail;
+              const { day, time, dayID } = weekDetail; 
 
               const subjectID = module.subjectID;
               const subject = await SubjectModel.findOne({ subjectID });
