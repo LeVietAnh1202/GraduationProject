@@ -14,17 +14,20 @@ class LecturerService {
     final role = Provider.of<AccountProvider>(context, listen: false).getRole();
     Response? response;
     if (role == Role.aao) {
-    final lecturerID =
-        Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final lecturerID =
+          Provider.of<AccountProvider>(context, listen: false).getAccount();
       final bodyData = {'lecturerID': lecturerID};
       response = await http.post(Uri.http(url, getAllLecturerByFacultyIDAPI),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(bodyData));
+      print('Response body: ${response.body}');
     }
     if (role == Role.admin)
       response = await http.get(Uri.http(url, getAllLecturerAPI));
 
     if (response!.statusCode == 200) {
+      print('Response status: ${response.statusCode}');
+
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final lecturerList = data['data'];
       print(lecturerList);

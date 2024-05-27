@@ -50,7 +50,7 @@ class _DataTableSpecializationState extends State<DataTableSpecialization> {
           DataColumn(
             label: Expanded(
               child: Text(
-                'Tên chuyển ngành',
+                'Tên chuyên ngành',
                 textAlign: TextAlign.center,
               ),
             ),

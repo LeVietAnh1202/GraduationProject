@@ -255,10 +255,6 @@ class StudentService {
             console.log(err);
         }
     }
-
-
-
-
 }
 
 module.exports = StudentService;

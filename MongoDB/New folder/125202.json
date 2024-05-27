@@ -1,0 +1,635 @@
+[
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990150"
+        },
+        "studentId": "10120005",
+        "studentName": "Nguyễn Quốc Anh",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990151"
+        },
+        "studentId": "10120601",
+        "studentName": "Dương Thị Vân Anh",
+        "classCode": "125202",
+        "gender":"Nữ",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990152"
+        },
+        "studentId": "10120605",
+        "studentName": "Đinh Hoàng Anh",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990153"
+        },
+        "studentId": "10120607",
+        "studentName": "Hoàng Đức Anh",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990154"
+        },
+        "studentId": "10120308",
+        "studentName": "Đoàn Thị Doan",
+        "classCode": "125202",
+        "gender":"Nữ",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990155"
+        },
+        "studentId": "10119471",
+        "studentName": "Nguyễn Khương Duy",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990156"
+        },
+        "studentId": "10120738",
+        "studentName": "Lê Hoàng Đại",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990157"
+        },
+        "studentId": "10120137",
+        "studentName": "Bùi Hải Hiệp",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990158"
+        },
+        "studentId": "10120049",
+        "studentName": "Phạm Trọng Hùng",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990159"
+        },
+        "studentId": "10120665",
+        "studentName": "Đỗ Thanh Linh",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990160"
+        },
+        "studentId": "10120780",
+        "studentName": "Nguyễn Vũ Thành Long",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990161"
+        },
+        "studentId": "10120345",
+        "studentName": "Đinh Thành Luân",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990162"
+        },
+        "studentId": "10120702",
+        "studentName": "Trần Khánh Sơn",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990163"
+        },
+        "studentId": "10120088",
+        "studentName": "Phan Thị Minh Tâm",
+        "classCode": "125202",
+        "gender":"Nữ",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990164"
+        },
+        "studentId": "10120241",
+        "studentName": "Phí Đức Thanh",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990165"
+        },
+        "studentId": "12520041",
+        "studentName": "Trần Thị Thảo",
+        "classCode": "125202",
+        "gender":"Nữ",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990166"
+        },
+        "studentId": "10120769",
+        "studentName": "Phạm Thu Thủy",
+        "classCode": "125202",
+        "gender":"Nữ",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990167"
+        },
+        "studentId": "10120595",
+        "studentName": "Nguyễn Văn Tùng",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990168"
+        },
+        "studentId": "10120291",
+        "studentName": "Nguyễn Công Vũ",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      },
+    {
+        "_id": {
+          "$oid": "6579c038e2ce7ce73e990169"
+        },
+        "studentId": "10120196",
+        "studentName": "Hoàng Hào Vũ",
+        "classCode": "125202",
+        "gender":"Nam",
+        "birthDate": {
+          "$date": "2002-11-11T17:00:00.000Z"
+        },
+        "specializationID": "301",
+        "avatar": "11421300_TranThiThuyTrang.jpg",
+        "video": "11421300_TranThiThuyTrang.mp4",
+        "NoAvatar": 1,
+        "NoFullImage": 0,
+        "NoCropImage": 0,
+        "NoVideo": 1,
+        "createdAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "updatedAt": {
+          "$date": "2023-12-13T14:31:20.870Z"
+        },
+        "__v": 0
+      }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

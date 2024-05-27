@@ -3,7 +3,6 @@
     "$oid": "664616ef4bd169d3b1f9e8b8"
   },
   "schoolYearID": "2324",
-  "schoolYeaNamer": "2023-2024",
   "semesters": [
     {
       "semesterID": "232",
@@ -13,14 +12,14 @@
       "semesterID": "241",
       "semesterName": "2"
     }
-  ]
+  ],
+  "schoolYearName": "2023-2024"
 },
 {
   "_id": {
     "$oid": "664616ef4bd169d3b1f9e8b9"
   },
   "schoolYearID": "2223",
-  "schoolYeaNamer": "2022-2023",
   "semesters": [
     {
       "semesterID": "222",
@@ -30,6 +29,6 @@
       "semesterID": "231",
       "semesterName": "2"
     }
-  ]
-}
-]
+  ],
+  "schoolYearName": "2022-2023"
+}]

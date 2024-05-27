@@ -1,0 +1,594 @@
+[
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199372"
+    },
+    "account": "11421327",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Bì Trần Quỳnh Anh",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199373"
+    },
+    "account": "11421103",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Đào Thị Ngọc Anh",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199374"
+    },
+    "account": "11421125",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Trần Thị Lan Anh",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199375"
+    },
+    "account": "11421180",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Vũ Thị Thuỳ Dương",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199376"
+    },
+    "account": "11421220",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Lê Thị Trà Giang",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199377"
+    },
+    "account": "11421124",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Lê Thu Hà",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199378"
+    },
+    "account": "11421224",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Thu Hà",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199379"
+    },
+    "account": "11421131",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thu Hà",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199380"
+    },
+    "account": "11421230",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Trương Thị Thu Hảo",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199381"
+    },
+    "account": "11421231",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Phạm Thị Kiều Hay",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199382"
+    },
+    "account": "11421046",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "La Thị Thu Hiền",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199383"
+    },
+    "account": "11421010",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Đặng Ngọc Hoa",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199384"
+    },
+    "account": "11421016",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Hoài",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199385"
+    },
+    "account": "11421130",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Trần Thị Hoài",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199386"
+    },
+    "account": "11421312",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Đặng Thu Huệ",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199387"
+    },
+    "account": "10921168",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Huệ",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199388"
+    },
+    "account": "11421177",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Đặng Ngọc Huyền",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199389"
+    },
+    "account": "11421237",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Đoàn Thị Thanh Huyền",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199390"
+    },
+    "account": "11421236",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Vũ Thị Mai Huyên",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199391"
+    },
+    "account": "11421241",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Trần Thị Lệ",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199392"
+    },
+    "account": "10721308",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thùy Linh",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199393"
+    },
+    "account": "11321152",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Trần Ngọc Linh",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199394"
+    },
+    "account": "11421244",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Vũ Thị Thùy Linh",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199395"
+    },
+    "account": "10721092",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Phạm Thị Lụa",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199396"
+    },
+    "account": "11420119",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Họa My",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199397"
+    },
+    "account": "11421278",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Phạm Hằng Nga",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199398"
+    },
+    "account": "11321107",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Ngân",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199399"
+    },
+    "account": "11421064",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Quỳnh Ngọc",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199400"
+    },
+    "account": "11421253",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Đỗ Thị Phi Nhung",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199401"
+    },
+    "account": "10721306",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Kim Oanh",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199402"
+    },
+    "account": "10921248",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Phương",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199403"
+    },
+    "account": "11421186",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Phương Thảo",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199404"
+    },
+    "account": "10721148",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Lê Hồng Thơm",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199405"
+    },
+    "account": "11421068",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Cao Thị Minh Thùy",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199406"
+    },
+    "account": "11421128",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Khúc Thị Ngọc Thư",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199407"
+    },
+    "account": "11421269",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Nguyễn Thị Huyền Trang",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65659f8102f664a540199408"
+    },
+    "account": "11421300",
+    "password": "$2b$10$vpI35ZS2.wQK43WNt4IeWebe180SvMQuYwLso7pMec02.mBgLCNee",
+    "role": "sinhvien",
+    "username": "Trần Thị Thùy Trang",
+    "createdAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-08T16:48:31.467Z"
+    },
+    "__v": 0
+  }
+]

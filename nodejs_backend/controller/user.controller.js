@@ -49,7 +49,7 @@ exports.login = async (req, res, next) => {
 
         const token = await UserServices.generateAccessToken(tokenData, "secret", "1h")
         console.log("token: " + token)
-        res.status(200).json({ status: true, success: "sendData", token: token, message: "Đăng nhập thành công"});
+        res.status(200).json({ status: true, success: "sendData", token: token, message: "Đăng nhập thành công" });
     } catch (error) {
         console.log(error, 'err---->');
         next(error);

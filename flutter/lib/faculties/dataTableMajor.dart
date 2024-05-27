@@ -79,6 +79,10 @@ class _DataTableMajorState extends State<DataTableMajor> {
       rows: faculty.majors.asMap().entries.map((entry) {
         final major = entry.value;
         final index = entry.key;
+        print("major: ");
+        print(major);
+        print("entry:");
+        print(entry);
 
         return DataRow(
           cells: [
