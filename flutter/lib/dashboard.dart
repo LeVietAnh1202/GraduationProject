@@ -104,7 +104,7 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               width: 10,
             ),
-            Text('Hệ thống quản lý điểm danh sinh viên'.toUpperCase()),
+            Text('Hệ thống quản lý điểm danh sinh viên'.toUpperCase(), style: TextStyle(letterSpacing: 1.5, wordSpacing: 1.7),),
             // Text('fingerID: ${fingerID.toString()} - confidence: ${confidence.toString()} - time: ${time}'),
           ],
         ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/color.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
+import 'package:flutter_todo_app/faculties/facultyService.dart';
+import 'package:flutter_todo_app/model/facultyModel.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
@@ -12,10 +15,66 @@ class Sidebar extends StatefulWidget {
 
 class _SidebarState extends State<Sidebar> {
   // bool _isSidebarCollapsed = false;
+  String _selectedItem = trangChu;
+  late String facultyID;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      getfacultyID(); // Gọi hàm setAppState sau khi initState hoàn thành
+    });
+  }
+
+  Future<void> getfacultyID() async {
+    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
+    print('role: ');
+    print(role);
+    List<Faculty>? faculties;
+    if (role == Role.student) {
+      faculties =
+          await FacultyService.fetchFacultyByStudentID(context, (value) {
+        setState(() {
+          _isLoading = value;
+        });
+      });
+      setState(() {
+        facultyID = faculties![0].facultyID;
+      });
+    } else {
+      _isLoading = false;
+      setState(() {
+        facultyID = 'utehy';
+      });
+    }
+    // else if (role == Role.lecturer || role == Role.aao)
+    // faculties = await FacultyService.fetchFacultyByLecturerID(context, (value) {});
+  }
 
   @override
   Widget build(BuildContext context) {
     final role = context.watch<AccountProvider>().getRole();
+
+    void select(String item) {
+      context.read<AppStateProvider>().setBreadcrumbs(item);
+      setState(() {
+        _selectedItem = item;
+      });
+    }
+
+    ListTile listTile(IconData? icon, String title) {
+      return ListTile(
+        leading: Icon(icon),
+        title: Text(title),
+        selected: _selectedItem == title,
+        selectedTileColor: selectedSideBarItemColor,
+        selectedColor: Colors.white,
+        onTap: () {
+          select(title);
+        },
+      );
+    }
 
     return Container(
       // width: _isSidebarCollapsed ? 60 : 200,
@@ -23,146 +82,52 @@ class _SidebarState extends State<Sidebar> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            // DrawerHeader(
-            //   decoration: BoxDecoration(
-            //     color: Colors.blue,
-            //   ),
-            //   child: Text(
-            //     'Quản lý điểm danh',
-            //     style: TextStyle(
-            //       color: Colors.white,
-            //       fontSize: 24,
-            //     ),
-            //   ),
-            // ),
-            
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text(trangChu),
-              onTap: () {
-                context.read<AppStateProvider>().setBreadcrumbs(trangChu);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.schedule),
-              title: Text(quanLyLichHoc),
-              onTap: () {
-                context.read<AppStateProvider>().setBreadcrumbs(quanLyLichHoc);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.task),
-              title: Text(quanLyDiemDanh),
-              onTap: () {
-                context.read<AppStateProvider>().setBreadcrumbs(quanLyDiemDanh);
-              },
-            ),
+            DrawerHeader(
+                // decoration: BoxDecoration(
+                //   color: Colors.grey.shade300,
+                // ),
+                margin: EdgeInsets.zero,
+                child: _isLoading
+                    ? CircularProgressIndicator()
+                    : Image.asset(
+                        'assets/images/logo/${facultyID}.png',
+                        width: 25,
+                      )
+                // Text(
+                //   'Quản lý điểm danh',
+                //   style: TextStyle(
+                //     color: Colors.white,
+                //     fontSize: 24,
+                //   ),
+                // ),
+                ),
+
+            listTile(Icons.home, trangChu),
+            listTile(Icons.schedule, quanLyLichHoc),
+            listTile(Icons.task, quanLyDiemDanh),
             if (role == Role.admin || role == Role.aao)
-              ListTile(
-                leading: Icon(Icons.task),
-                title: Text(quanLyDinhDanh),
-                onTap: () {
-                  context
-                      .read<AppStateProvider>()
-                      .setBreadcrumbs(quanLyDinhDanh);
-                },
-              ),
-            if (role == Role.admin)
-              ListTile(
-                leading: Icon(Icons.book),
-                title: Text('Quản lý học phần'),
-                onTap: () {
-                  context
-                      .read<AppStateProvider>()
-                      .setBreadcrumbs('Quản lý học phần');
-                },
-              ),
+              listTile(Icons.task, quanLyDinhDanh),
+            if (role == Role.admin) listTile(Icons.book, 'Quản lý học phần'),
 
             if (role == Role.admin || role == Role.aao)
               ExpansionTile(
                 leading: Icon(Icons.menu),
                 title: Text('$quanLyDanhMuc'),
                 children: [
-                  if (role == Role.admin)
-                    ListTile(
-                      // leading: Icon(Icons.account_balance),
-                      title: Text(danhMucKhoa),
-                      onTap: () {
-                        context
-                            .read<AppStateProvider>()
-                            .setBreadcrumbs('$quanLyDanhMuc > $danhMucKhoa');
-                      },
-                    ),
-                  ListTile(
-                    // leading: Icon(Icons.account_balance),
-                    title: Text(danhMucNganh),
-                    onTap: () {
-                      context
-                          .read<AppStateProvider>()
-                          .setBreadcrumbs('$quanLyDanhMuc > $danhMucNganh');
-                    },
-                  ),
-                  ListTile(
-                    // leading: Icon(Icons.account_balance),
-                    title: Text(danhMucChuyenNganh),
-                    onTap: () {
-                      context.read<AppStateProvider>().setBreadcrumbs(
-                          '$quanLyDanhMuc > $danhMucChuyenNganh');
-                    },
-                  ),
-                  ListTile(
-                    title: Text(danhMucSinhVien),
-                    onTap: () {
-                      context
-                          .read<AppStateProvider>()
-                          .setBreadcrumbs('$quanLyDanhMuc > $danhMucSinhVien');
-                    },
-                  ),
-                  ListTile(
-                    title: Text(danhMucGiangVien),
-                    onTap: () {
-                      context
-                          .read<AppStateProvider>()
-                          .setBreadcrumbs('$quanLyDanhMuc > $danhMucGiangVien');
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Danh mục lớp'),
-                    onTap: () {
-                      context
-                          .read<AppStateProvider>()
-                          .setBreadcrumbs('$quanLyDanhMuc > Danh mục lớp');
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Danh mục môn học'),
-                    onTap: () {
-                      context
-                          .read<AppStateProvider>()
-                          .setBreadcrumbs('$quanLyDanhMuc > Danh mục môn học');
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Danh mục phòng'),
-                    onTap: () {
-                      context
-                          .read<AppStateProvider>()
-                          .setBreadcrumbs('$quanLyDanhMuc > Danh mục phòng');
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Danh mục thiết bị'),
-                    onTap: () {
-                      context
-                          .read<AppStateProvider>()
-                          .setBreadcrumbs('$quanLyDanhMuc > Danh mục thiết bị');
-                    },
-                  ),
+                  if (role == Role.admin) listTile(null, danhMucKhoa),
+                  listTile(null, danhMucNganh),
+                  listTile(null, danhMucChuyenNganh),
+                  listTile(null, danhMucSinhVien),
+                  listTile(null, danhMucGiangVien),
+                  listTile(null, 'Danh mục lớp'),
+                  listTile(null, 'Danh mục môn học'),
+                  listTile(null, 'Danh mục phòng'),
+                  listTile(null, 'Danh mục thiết bị'),
                   // Add other dropdown items as needed
                 ],
               ),
 
-            // ListTile(
+            // ListTgile(
             //     leading: _isSidebarCollapsed
             //         ? IconButton(
             //             icon: Icon(Icons.arrow_forward),
@@ -181,7 +146,8 @@ class _SidebarState extends State<Sidebar> {
             //             },
             //           ),
             //     title: _isSidebarCollapsed ? null : Text('Quản lý điểm danh'),
-            //     onTap: () {
+            //selectedTileColor: selectedSideBarItemColor,
+            //onTap: () {
             //       // Handle sidebar item click
             //     },
             //   ),

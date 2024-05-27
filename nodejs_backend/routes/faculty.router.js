@@ -5,6 +5,8 @@ router.get("/getAllFaculty", FacultyController.getAllFaculty);
 
 router.post("/getFacultyByLecturerID", FacultyController.getFacultyByLecturerID);
 
+router.post("/getFacultyByStudentID", FacultyController.getFacultyByStudentID);
+
 router.post("/getSpecializationsByLecturerID", FacultyController.getSpecializationsByLecturerID);
 
 

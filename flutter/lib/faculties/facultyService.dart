@@ -46,4 +46,40 @@ class FacultyService {
       throw Exception('Failed to fetch faculties');
     }
   }
+
+  static Future<List<Faculty>> fetchFacultyByStudentID(
+      BuildContext context, ValueChanged<bool> isLoading) async {
+    final studentId =
+        Provider.of<AccountProvider>(context, listen: false).account?.account;
+    final bodyData = {'studentId': studentId};
+    return http
+        .post(
+      Uri.http(url, getFacultyByStudentIDAPI),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(bodyData),
+    )
+        .then((response) {
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body) as Map<String, dynamic>;
+        List<dynamic> facultyList = [];
+        facultyList.add(data['data']);
+        print('data: ' + facultyList.toString());
+
+        final List<Faculty> faculties = facultyList
+            .map((e) => Faculty.fromMap(e))
+            .toList();
+        print(faculties); 
+        Provider.of<AppStateProvider>(context, listen: false)
+            .setFaculties(faculties);
+        isLoading(false);
+        print('faculties: ' + faculties.toString());
+        return faculties;
+      } else {
+        throw Exception('Failed to fetch faculty by student ID');
+      }
+    }).catchError((error) {
+      // Xử lý lỗi nếu có
+      print('Error: $error');
+    });
+  }
 }
