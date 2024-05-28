@@ -1,7 +1,6 @@
 const UserServices = require('../services/user.service');
 exports.register = async (req, res, next) => {
     try {
-        console.log("---req body---", req.body);
         const { account, password } = req.body;
         const duplicate = await UserServices.getUserByaccount(account);
         if (duplicate) {
@@ -44,7 +43,6 @@ exports.login = async (req, res, next) => {
         // Creating Token
 
         let tokenData;
-        console.log(user)
         tokenData = { username: user.username, role: user.role, account: user.account };
 
         const token = await UserServices.generateAccessToken(tokenData, "secret", "1h")

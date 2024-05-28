@@ -24,7 +24,6 @@ class _DtScheduleAdminWeekState extends State<DtScheduleAdminWeek> {
   //   if (response.statusCode == 200) {
   //     final data = jsonDecode(response.body) as Map<String, dynamic>;
   //     final studentList = data['data'] as List<dynamic>;
-  //     print("Student list: " + studentList.toString());
 
   //     // setState(() {
   //     //   students = studentList.cast<Map<String, dynamic>>();

@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
         bodyContentPadding -
         breadcrumbHeight -
         selectHeight;
-    print('heightDataTable: ' + heightDataTable.toString());
     return Container(
       height: heightDataTable,
       child: SingleChildScrollView(

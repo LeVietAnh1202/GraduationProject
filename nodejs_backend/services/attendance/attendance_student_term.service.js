@@ -48,7 +48,6 @@ class AttendanceStudentTermService {
             }
           }
         }
-        console.log(student.studentName);
         const attendanceStudentTerm = new AttendanceStudentTermModel(
           student.studentName,
           attendances,

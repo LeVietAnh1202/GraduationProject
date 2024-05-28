@@ -8,7 +8,6 @@ class CheckScheduleService {
             dateStart: { $lte: now },
             dateEnd: { $gte: now }
         });
-        console.log(schedules);
         return schedules;
 
     };

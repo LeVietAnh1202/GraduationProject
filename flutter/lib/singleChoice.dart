@@ -73,8 +73,6 @@ class _SingleChoiceState extends State<SingleChoice> {
         setState(() {
           Provider.of<AppStateProvider>(context, listen: false)
               .setCalendarView(newSelection.first);
-          print('newSelection.first: ');
-          print(newSelection.first);
         });
       },
     );

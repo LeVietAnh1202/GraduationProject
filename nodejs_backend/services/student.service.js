@@ -34,13 +34,6 @@ class StudentService {
             // Tìm sinh viên cần xóa bằng studentId
             const student = await StudentModel.findOneAndDelete({ studentId });
 
-            // Kiểm tra xem sinh viên có tồn tại không
-            // if (!student) {
-            //     throw new Error('Student not found');
-            // }
-            console.log(student)
-            // const student = await StudentService.getStudentByStudentID(studentId);
-            console.log(path.join(__dirname, `../public/images/default/avatar/${student.avatar}`));
             // Xóa hình ảnh và video liên quan đến sinh viên
             const imagePath = path.join(__dirname, `../public/images/default/avatar/${student.avatar}`);
             const videoPath = path.join(__dirname, `../public/videos/default/${student.video}`);
@@ -62,7 +55,6 @@ class StudentService {
     }
 
     static async getStudentByStudentID(studentId) {
-        console.log('HTHI StudenID:', studentId);
         try {
             return await StudentModel.findOne({ studentId });
         } catch (err) {
@@ -173,7 +165,6 @@ class StudentService {
                 },
                 filename: function (req, file, cb) {
                     const fileName = file.originalname;
-                    // console.log(fileName);
                     cb(null, fileName); // Sử dụng tên file gốc
                 }
             });
@@ -198,7 +189,6 @@ class StudentService {
                 },
                 filename: function (req, file, cb) {
                     const fileName = file.originalname;
-                    // console.log(fileName);
                     cb(null, fileName); // Sử dụng tên file gốc
                 }
             });
@@ -219,7 +209,6 @@ class StudentService {
         try {
             // const { listStudentID } = await ModuleModel.findOne({ moduleID: moduleID });
             const module = await ModuleModel.findOne({ moduleID: moduleID });
-            console.log(moduleID)
 
             if (!module) {
                 throw new Error(`Module with ID ${moduleID} not found`);
@@ -227,7 +216,6 @@ class StudentService {
 
             // Extract the list of student IDs
             const listStudentID = module.listStudentID;
-            console.log(listStudentID)
             const students = await StudentModel.find({ studentId: { $in: listStudentID } });
 
             const specializationMap = new Map();

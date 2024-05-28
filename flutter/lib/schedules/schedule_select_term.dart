@@ -224,7 +224,6 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
                           moduleID = moduleID_value;
                           scheduleTermsLength = length;
                         });
-                        print("moduleID: " + moduleID);
                       })),
           ],
         ),

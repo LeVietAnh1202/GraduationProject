@@ -43,17 +43,14 @@ class _BodyContentState extends State<BodyContent> {
     // widget.calendarView = Provider.of<AppStateProvider>(context, listen: false)
     //     .appState!
     //     .calendarView;
-    // print(widget.calendarView);
     // widget.sidebarKey = Provider.of<AppStateProvider>(context, listen: false)
     //     .appState!
     //     .breadcrumbs;
-    // print(widget.sidebarKey);
 
     // widget.role =
     //     Provider.of<AccountProvider>(context, listen: false).account!.role;
     // // widget.role = '';
     // // widget.role = context.watch<AccountProvider>().account!.role;
-    // print(widget.role);
   }
 
   @override

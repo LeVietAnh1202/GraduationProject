@@ -33,8 +33,6 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
     Future.delayed(Duration.zero, () {
       fetchAttendanceTerms(); // Gọi hàm setAppState sau khi initState hoàn thành
     });
-    print(
-        'initState DtModuleByLecturerIDTerm ${widget.lecturerID}, ${widget.semesterID}');
   }
 
   Future<void> fetchAttendanceTerms() async {
@@ -60,7 +58,6 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
   @override
   Widget build(BuildContext context) {
     // fetchAttendanceTerms();
-    print('DtModuleByLecturerIDTerm ${widget.lecturerID}, ${widget.semesterID}');
     return Container(
       child: _isLoading
           ? Container(
@@ -173,9 +170,6 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
                                                     listen: false)
                                                 .appState!
                                                 .moduleTermByLecturerIDs;
-                                        print('scheduleAdminTerms.length: ' +
-                                            scheduleAdminTerms.length
-                                                .toString());
                                         widget.onPress(module.moduleID,
                                             scheduleAdminTerms.length);
 

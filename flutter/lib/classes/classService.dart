@@ -14,10 +14,8 @@ class ClassService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final classesList = data['data'] as List<dynamic>;
-      print("classesList: " + classesList.toString());
       final classes = classesList.map((e) => Class.fromMap(e)).toList();
       Provider.of<AppStateProvider>(context, listen: false).setClasses(classes);
-      print("classes: " + classes.toString());
       isLoading(false);
 
       return classes;

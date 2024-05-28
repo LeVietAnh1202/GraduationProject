@@ -40,8 +40,6 @@ class ModuleService {
 
   static async getAllModuleTermByLecturerID(lecturerID, semesterID) {
     try {
-      console.log('semesterID service: ' + semesterID);
-
       // Tìm tất cả các module của giảng viên trong học kỳ hiện tại
       const modules = await ModuleModel.find({ lecturerID, semesterID });
       if (!modules || modules.length === 0) {

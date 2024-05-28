@@ -109,13 +109,8 @@ class AppStateProvider with ChangeNotifier {
   List<T> parseJsonList<T>(
       String jsonString, T Function(Map<String, dynamic>) fromMap) {
     // List<dynamic> jsonList = jsonDecode(jsonString);
-    print(jsonDecode(jsonString).runtimeType);
     List<Map<String, dynamic>> jsonList =
         List<Map<String, dynamic>>.from(jsonDecode(jsonString));
-    print('jsonString');
-    print(jsonString);
-    print('jsonList');
-    print(jsonList);
     // List<T> resultList = [];
     // for (var jsonItem in jsonList) {
     //   resultList.add(fromMap(jsonItem));
@@ -533,7 +528,6 @@ class AppStateProvider with ChangeNotifier {
 
   Map<String, dynamic> parseAttendanceLecturerWeeks(
       String attendanceLecturerWeeksString) {
-    print('jsonDecode(attendanceLecturerWeeksString): ' + jsonDecode(attendanceLecturerWeeksString));
     List<dynamic> attendanceLecturerWeeksJson =
         jsonDecode(attendanceLecturerWeeksString);
     Map<String, dynamic> attendanceLecturerWeeks = {};
@@ -568,7 +562,6 @@ class AppStateProvider with ChangeNotifier {
     prefs.setString('tableLength', appState.tableLength.toString());
     prefs.setString('currentPage', appState.currentPage.toString());
     prefs.setString('rowsPerPage', appState.rowsPerPage.toString());
-    print('save to ' + appState.students.toString());
     prefs.setString('students', appState.students.toString());
     prefs.setString('classes', appState.classes.toString());
     prefs.setString('schoolyears', appState.schoolyears.toString());

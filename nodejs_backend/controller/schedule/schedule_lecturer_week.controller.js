@@ -2,7 +2,6 @@ const ScheduleLecturerWeekService = require('../../services/schedule/schedule_le
 
 exports.getAllScheduleLecturerWeek = async (req, res, next) => {
     try {
-        console.log(req.body)
         const { lecturerID } = req.body;
 
         const scheduleList = await ScheduleLecturerWeekService.getAllScheduleLecturerWeek(lecturerID);

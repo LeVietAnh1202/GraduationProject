@@ -18,7 +18,6 @@ class LecturerService {
     }
 
     static async getLecturerByLecturerID(lecturerID) {
-        console.log('HTHI LecturerID:', lecturerID);
         try {
             return await LecturerModel.findOne({ lecturerID });
         } catch (err) {
@@ -28,9 +27,7 @@ class LecturerService {
 
     static async getLecturersByFacultyID(lecturerID) {
         try {
-            console.log(lecturerID)
             const lecturer = await LecturerModel.findOne({ lecturerID });
-            console.log(lecturer.facultyID)
             const lecturers = await LecturerModel.find({ facultyID: lecturer.facultyID });
             return lecturers;
         } catch (err) {

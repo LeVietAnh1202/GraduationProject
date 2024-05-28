@@ -14,7 +14,6 @@ class AttendanceService with ChangeNotifier {
       String moduleID) async {
     final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('lecturerID: ' + lecturerID!);
     final bodyData = {'lecturerID': lecturerID, 'moduleID': moduleID};
 
     return http
@@ -26,11 +25,8 @@ class AttendanceService with ChangeNotifier {
         .then((response) {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
-
         final attendanceList = data['data'] as List<dynamic>;
-        print("Attendance List: " + attendanceList.toString());
 
-        // Gọi hàm để xử lý và cập nhật trạng thái
         Provider.of<AppStateProvider>(context, listen: false)
             .setAttendanceLecturerTerms(
                 attendanceList.cast<Map<String, dynamic>>());
@@ -50,9 +46,7 @@ class AttendanceService with ChangeNotifier {
       BuildContext context, ValueChanged<bool> isLoading, String dayID) async {
     final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('lecturerID: ' + lecturerID!);
     final bodyData = {'lecturerID': lecturerID, 'dayID': dayID};
-    print('dayID: ' + dayID);
     http
         .post(
       Uri.http(url, getAllAttendanceLecturerWeekAPI),
@@ -62,11 +56,8 @@ class AttendanceService with ChangeNotifier {
         .then((response) {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
-
         final attendanceList = data['data'] as Map<String, dynamic>;
-        print("Attendance List: " + attendanceList.toString());
 
-        // Gọi hàm để xử lý và cập nhật trạng thái
         Provider.of<AppStateProvider>(context, listen: false)
             .setAttendanceLecturerWeeks(attendanceList);
 
@@ -84,7 +75,6 @@ class AttendanceService with ChangeNotifier {
       ValueChanged<bool> isLoading, String moduleID) async {
     final studentId =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('studentId: ' + studentId!);
     final bodyData = {'studentId': studentId, 'moduleID': moduleID};
 
     http
@@ -96,11 +86,8 @@ class AttendanceService with ChangeNotifier {
         .then((response) {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
-
         final attendanceList = data['data'] as Map<String, dynamic>;
-        print("Attendance List: " + attendanceList.toString());
 
-        // Gọi hàm để xử lý và cập nhật trạng thái
         Provider.of<AppStateProvider>(context, listen: false)
             .setAttendanceStudentTerms(attendanceList);
 

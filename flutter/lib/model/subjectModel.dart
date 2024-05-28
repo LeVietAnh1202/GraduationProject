@@ -13,7 +13,6 @@ class Subject {
       required this.numberOfLessons});
 
   factory Subject.fromMap(Map<String, dynamic> json) {
-    print(json);
     return Subject(
       id: json['_id'],
       subjectID: json['subjectID'],

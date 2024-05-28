@@ -45,9 +45,7 @@ class CheckAttendanceSocketIO {
                                 const weekTimeEnd = new Date(week.weekTimeEnd);
                                 for (const weekDetail of weekDetails) {
                                     const { day, time, dayID } = weekDetail;
-                                    console.log('dayID: ' + dayID)
                                     const numberOfDays = parseInt(day, 10);
-                                    console.log('numberOfDays: ' + numberOfDays)
                                     const [hours, minutes] = calculateTime(time).split(':');
                                     console.log('weekTimeStart: ' + weekTimeStart.toLocaleString('vi-VN', { hour12: false, timeZone: 'Asia/Ho_Chi_Minh' }))
                                     console.log('weekTimeEnd: ' + weekTimeEnd.toLocaleString('vi-VN', { hour12: false, timeZone: 'Asia/Ho_Chi_Minh' }))

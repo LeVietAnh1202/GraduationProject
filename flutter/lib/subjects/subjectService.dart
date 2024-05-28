@@ -18,8 +18,6 @@ class SubjectService {
           .toList();
       Provider.of<AppStateProvider>(context, listen: false)
           .setSubjects(subjects);
-      print('subjects');
-      print(subjects);
       return subjects;
     } else {
       throw Exception('Failed to fetch subjects');

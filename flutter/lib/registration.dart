@@ -31,8 +31,6 @@ class _RegistrationState extends State<Registration> {
 
       var jsonResponse = jsonDecode(response.body);
 
-      print(jsonResponse['status']);
-
       if (jsonResponse['status']) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => SignInPage()));
@@ -125,7 +123,6 @@ class _RegistrationState extends State<Registration> {
                   ]),
                   GestureDetector(
                     onTap: () {
-                      print("Sign In");
                       Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -264,7 +264,6 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
                           moduleID = moduleID_value;
                           scheduleAdminTermsLength = length;
                         });
-                        print("moduleID: " + moduleID);
                       })),
           ],
         ),

@@ -70,7 +70,6 @@ class Utilities {
   static int nthIndexOf(String str, String char, int n) {
     int count = 0;
     for (int i = 0; i < str.length; i++) {
-      print('str[${i}]: ${str[i]} --- char: ${char}');
       if (str[i] == char) {
         count++;
         if (count == n) {
@@ -111,9 +110,6 @@ class Utilities {
     String result = stringSplited.substring(0, thirdDashIndex) +
         ':' +
         stringSplited.substring(thirdDashIndex + 1);
-
-    print('result');
-    print(result);
 
     // Chuyển đổi từ chuỗi sang đối tượng DateTime
     DateTime dateTime = DateTime.parse(result.replaceAll('_', 'T'));

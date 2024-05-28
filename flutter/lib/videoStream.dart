@@ -145,8 +145,6 @@ class _VideoStreamState extends State<VideoStream> {
     } else {
       frameCounter++;
     }
-    // print('response.bodyBytes: ');
-    // print(response.bodyBytes);
     return Image.memory(
       response.bodyBytes,
       gaplessPlayback: true,

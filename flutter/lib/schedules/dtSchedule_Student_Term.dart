@@ -149,9 +149,6 @@ class _DtScheduleStudentTermState extends State<DtScheduleStudentTerm> {
                     final dateStart = schedule['dateStart'];
                     final dateEnd = schedule['dateEnd'];
 
-                    print('dateStart: $dateStart');
-                    print('dateEnd: $dateEnd');
-
                     final inputFormat =
                         DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                     final outputFormat = DateFormat('dd/MM/yyyy');

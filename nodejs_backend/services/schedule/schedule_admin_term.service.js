@@ -10,9 +10,7 @@ const ScheduleTermModel = require("../../models/schedule/schedule_admin_term.mod
 class ScheduleTermService {
   // static async getAttendanceAdminTerm(lecturerID,  semesterID) {
   //   try {
-  //     console.log('semesterID service: ' + semesterID)
   //     const modules = await ModuleModel.find({ lecturerID: lecturerID, semesterID: semesterID });
-  //     console.log(modules)
 
   //     const scheduleAdminTerms = [];
 
@@ -51,8 +49,6 @@ class ScheduleTermService {
   //----------------------------------------------------------------------
   static async getAllScheduleTerm(lecturerID, semesterID) {
     try {
-      console.log('semesterID service: ' + semesterID);
-
       // Tìm tất cả các module của giảng viên trong học kỳ hiện tại
       const modules = await ModuleModel.find({ lecturerID, semesterID });
       if (!modules || modules.length === 0) {

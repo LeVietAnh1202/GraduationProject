@@ -59,8 +59,6 @@ class _DetailStudentState extends State<DetailStudent> {
     //   (student) => student.studentId == widget.studentId,
     //   orElse: () => defaultStudent,
     // );
-    // print("Student: ");
-    // print(student);
     // Future.delayed(Duration.zero, () async {
     //   flickManager = await getVideo(student);
     // });
@@ -143,18 +141,14 @@ class _DetailStudentState extends State<DetailStudent> {
   //           ..initialize().then((_) {
   //             // setState(() {});
   //           }));
-  //     print('try');
   //   } catch (e) {
-  //     print('catch');
   //     flickManager = FlickManager(
   //         videoPlayerController: VideoPlayerController.networkUrl(
   //             Uri.http(url_ras, '${URLVideoPath}/video_default.mp4'))
   //           ..initialize().then((_) {
   //             // setState(() {});
   //           }));
-  //     print(flickManager);
   //   }
-  //   print('fliclManager');
   //   return flickManager;
   // }
 
@@ -188,16 +182,13 @@ class _DetailStudentState extends State<DetailStudent> {
       VideoPlayerController videoPlayerController =
           VideoPlayerController.networkUrl(
               Uri.http(url_ras, '${URLVideoPath}/${student.video}'));
-      print('getVideo');
       await videoPlayerController.initialize();
       return FlickManager(videoPlayerController: videoPlayerController
           // ..initialize().then((_) {
           //   videoPlayerController.play();
           //   setState(() {
           //     hasVideo = true;
-          //     print(hasVideo);
           //   });
-          //   print('Video initialized successfully');
           // }).catchError((error) {
           //   // Xử lý lỗi khi không thể khởi tạo video
           //   print('Error initializing video: $error');
@@ -247,7 +238,6 @@ class _DetailStudentState extends State<DetailStudent> {
     ShowImage imagesView = Provider.of<AppStateProvider>(context, listen: false)
         .appState!
         .imagesView;
-    print(imagesView);
 
     return AlertDialog(
       title: Text('Chi tiết sinh viên'),

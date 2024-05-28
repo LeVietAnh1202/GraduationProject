@@ -62,19 +62,14 @@ class SidebarMap {
     dataTableScheduleKey =
         "${roleMap[role].toString()}${((roleMap[role] == Role.admin || roleMap[role] == Role.lecturer) ? 'Term' : (calendarView == Calendar.week ? 'Week' : 'Term'))}";
 
-    print('dataTableScheduleKey: ' + dataTableScheduleKey);
-
     return dataTableSchedule[dataTableScheduleKey];
   }
 
   bool containsKey() {
-    print('ContainsKey');
     return sidebarMap.containsKey(sidebarMapKey);
   }
 
   Widget? getSidebarMap() {
-    print('getSidebarMap');
-    print(sidebarMap[sidebarMapKey]);
     return sidebarMap[sidebarMapKey];
   }
 }

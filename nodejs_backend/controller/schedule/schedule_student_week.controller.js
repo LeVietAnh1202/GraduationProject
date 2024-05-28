@@ -2,7 +2,6 @@ const ScheduleStudentWeekService = require('../../services/schedule/schedule_stu
 
 exports.getAllScheduleStudentWeek = async (req, res, next) => {
     try {
-        console.log(req.body)
         const { studentId } = req.body;
 
         const scheduleList = await ScheduleStudentWeekService.getAllScheduleStudentWeek(studentId);

@@ -50,8 +50,6 @@ userSchema.pre("save", async function () {
 //used while signIn decrypt
 userSchema.methods.comparePassword = async function (candidatePassword) {
     try {
-        console.log('----------------no password', this.password);
-        // @ts-ignore
         const isMatch = await bcrypt.compare(candidatePassword, this.password);
         return isMatch;
     } catch (error) {

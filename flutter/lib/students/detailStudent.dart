@@ -98,7 +98,6 @@ class _DetailStudentState extends State<DetailStudent> {
       VideoPlayerController videoPlayerController =
           VideoPlayerController.networkUrl(
               Uri.http(url_ras, '${URLVideoPath}/${student.video}'));
-      print('getVideo');
       await videoPlayerController.initialize();
       return FlickManager(videoPlayerController: videoPlayerController);
     } catch (e) {
@@ -132,7 +131,6 @@ class _DetailStudentState extends State<DetailStudent> {
     ShowImage imagesView = Provider.of<AppStateProvider>(context, listen: false)
         .appState!
         .imagesView;
-    print(imagesView);
 
     return AlertDialog(
       title: Text('Chi tiết sinh viên'),

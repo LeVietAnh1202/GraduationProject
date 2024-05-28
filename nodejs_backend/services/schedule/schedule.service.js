@@ -35,7 +35,6 @@ class ScheduleService {
                 dateStart: { $lt: now },
                 dateEnd: { $gt: now }
             });
-            console.log(schedules)
             return schedules;
         } catch (error) {
             console.error("Lỗi khi lấy danh sách lịch học:", error);

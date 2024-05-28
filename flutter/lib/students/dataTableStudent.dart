@@ -66,21 +66,14 @@ class _DataTableStudentState extends State<DataTableStudent> {
     final currentPage = appState.currentPage;
     final rowsPerPage = appState.rowsPerPage;
     final students = appState.students;
-    // int currentPage = context.watch<AppStateProvider>().appState!.currentPage;
-    // Faculty faculty =
-    //     context.watch<AppStateProvider>().appState!.faculties[currentPage - 1];
 
     // Calculate the start and end index of the current page
     int startIndex = (currentPage - 1) * rowsPerPage;
     int endIndex = startIndex + rowsPerPage;
 
     // Get the student list for the current page
-    // List<Map<String, dynamic>> currentPageStudents =
     List<Student> currentPageStudents = students.sublist(
         startIndex, endIndex > students.length ? students.length : endIndex);
-
-    print('currentPageStudents: ');
-    print(currentPageStudents);
 
     double iconSize = 20;
 

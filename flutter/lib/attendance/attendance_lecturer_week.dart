@@ -29,7 +29,6 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
   }
 
   void init() async {
-    print('widget.dayID: ' + widget.dayID);
     attendances = Provider.of<AppStateProvider>(context, listen: false)
         // attendances = context.watch<AppStateProvider>()
         .appState!
@@ -149,12 +148,6 @@ class _AttendanceLecturerWeekState extends State<AttendanceLecturerWeek> {
                           .appState!
                           .attendanceLecturerWeeks['studentAttendance']))
                       .map((entry) {
-                        print('entry attendance lecturer week datacell');
-                        // print(entry);
-                        // final index = entry.keys.first;
-                        print('entry');
-                        print(entry);
-                        // final studentAttendance = entry.value['studentAttendance'];
                         return DataRow(
                           cells: [
                             DataCell(Container(

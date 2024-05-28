@@ -59,7 +59,6 @@ class _SignInPageState extends State<SignInPage> {
         if (jsonResponse != null && jsonResponse['status'] != null) {
           var myToken = jsonResponse['token'];
           prefs.setString('token', myToken);
-          print('In ra:' + myToken);
 
           String successMessage = jsonResponse["message"];
           ScaffoldMessenger.of(context).showSnackBar(

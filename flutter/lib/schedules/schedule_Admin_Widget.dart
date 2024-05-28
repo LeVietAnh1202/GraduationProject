@@ -78,7 +78,6 @@
 //     schoolYears = context.watch<AppStateProvider>().appState!.schoolyears;
 //     lecturers = context.watch<AppStateProvider>().appState!.lecturers;
 //     subjects = context.watch<AppStateProvider>().appState!.subjects;
-//     print(subjects);
 //     return Column(
 //       children: [
 //         Row(

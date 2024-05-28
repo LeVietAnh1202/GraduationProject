@@ -17,11 +17,6 @@ class ScheduleService with ChangeNotifier {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final studentList = data['data'] as List<dynamic>;
-      print("fetchStudents: " + studentList.toString());
-
-      // setState(() {
-      //   students = studentList.cast<Map<String, dynamic>>();
-      // });
 
       Provider.of<AppStateProvider>(context, listen: false)
           .setStudents(studentList.cast<Student>());
@@ -35,7 +30,6 @@ class ScheduleService with ChangeNotifier {
       BuildContext context, ValueChanged<bool> isLoading) async {
     final studentId =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('studentID: ' + studentId!);
     final bodyData = {'studentId': studentId};
 
     http
@@ -49,7 +43,6 @@ class ScheduleService with ChangeNotifier {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final scheduleList = data['data'] as List<dynamic>;
 
-        // Gọi hàm để xử lý và cập nhật trạng thái
         Provider.of<AppStateProvider>(context, listen: false)
             .setScheduleStudentWeeks(scheduleList.cast<Map<String, dynamic>>());
 
@@ -67,7 +60,6 @@ class ScheduleService with ChangeNotifier {
       BuildContext context, ValueChanged<bool> isLoading) async {
     final studentId =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('studentId: ' + studentId!);
     final bodyData = {'studentId': studentId};
     http
         .post(
@@ -78,11 +70,8 @@ class ScheduleService with ChangeNotifier {
         .then((response) {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
-
         final scheduleList = data['data'] as List<dynamic>;
-        print("ScheduleList List: " + scheduleList.toString());
 
-        // Gọi hàm để xử lý và cập nhật trạng thái
         Provider.of<AppStateProvider>(context, listen: false)
             .setScheduleStudentTerms(scheduleList.cast<Map<String, dynamic>>());
 
@@ -110,12 +99,8 @@ class ScheduleService with ChangeNotifier {
         .then((response) {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
-
-        // final scheduleList = data['data'] as List<dynamic>;0
         final scheduleList = data['data'];
-        print("ScheduleList List: " + scheduleList.toString());
 
-        // Gọi hàm để xử lý và cập nhật trạng thái
         Provider.of<AppStateProvider>(context, listen: false)
             .setScheduleLecturerWeeks(
                 scheduleList.cast<Map<String, dynamic>>());
@@ -134,7 +119,6 @@ class ScheduleService with ChangeNotifier {
       BuildContext context, ValueChanged<bool> isLoading) async {
     final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
-    print('lecturerID: ' + lecturerID!);
     final bodyData = {'lecturerID': lecturerID};
     http
         .post(
@@ -145,11 +129,8 @@ class ScheduleService with ChangeNotifier {
         .then((response) {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
-
         final scheduleList = data['data'] as List<dynamic>;
-        print("ScheduleList List: " + scheduleList.toString());
 
-        // Gọi hàm để xử lý và cập nhật trạng thái
         Provider.of<AppStateProvider>(context, listen: false)
             .setScheduleLecturerTerms(
                 scheduleList.cast<Map<String, dynamic>>());
@@ -186,8 +167,6 @@ class ScheduleService with ChangeNotifier {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final attendanceTermsList = data['data'] as List<dynamic>;
-        print('attendanceTermsList: ');
-        print(attendanceTermsList);
         final attendanceTerms = attendanceTermsList
             .map((e) => ModuleTermByLecturerID.fromMap(e))
             .toList();

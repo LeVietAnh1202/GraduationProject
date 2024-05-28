@@ -41,7 +41,6 @@ class AccountProvider with ChangeNotifier {
   // }
 
   AccountProvider() {
-    print('Khởi tạo AccountProvider');
     restoreFromSharedPreferences(); // Khôi phục từ SharedPreferences
   }
 

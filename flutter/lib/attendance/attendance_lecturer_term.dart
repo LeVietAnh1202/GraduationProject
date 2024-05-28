@@ -35,29 +35,18 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
     super.didChangeDependencies();
     // Lấy tham chiếu tới ThemeData và lưu trữ trong biến thành viên
     _themeData = Theme.of(context);
-    // print('widget.moduleID: ' + widget.moduleID);
     // if (widget.moduleID != "") fetchAttendanceLecturerTerms();
   }
 
   @override
   void initState() {
     super.initState();
-    print('init state fetchAttendanceLecturerTerms');
-    fetchAttendanceLecturerTerms();
+    Future.delayed(Duration.zero, () {
+      fetchAttendanceLecturerTerms();
+    });
   }
 
-  // @override
-  // void dispose() {
-  //   // Sử dụng biến thành viên đã lưu trữ thay vì truy cập context
-  //   if (_themeData != null) {
-  //     // Làm gì đó với _themeData
-  //     print('Disposing with theme: $_themeData');
-  //   }
-  //   super.dispose();
-  // }
-
   void fetchAttendanceLecturerTerms() async {
-    print('fetchAttendanceLecturerTerms in attendance_lecturer_term');
     // if (attendances.isEmpty) {
     attendanceLecturerTerms =
         await AttendanceService.fetchAttendanceLecturerTerms(
@@ -79,8 +68,6 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     double widthDataTable = screenWidth - sideBarWidth - 40;
-    print('widget.scheduleAdminTermsLength: ' +
-        widget.scheduleAdminTermsLength.toString());
     double heightDataTable = screenHeight -
         appBarHeight -
         2 * bodyContentPadding -
@@ -89,7 +76,6 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
         selectHeight -
         dataRowHeight * widget.scheduleAdminTermsLength -
         82;
-    print('heightDataTable: ' + heightDataTable.toString());
 
     return _isLoading
         ? Container(

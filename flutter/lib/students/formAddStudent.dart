@@ -249,10 +249,10 @@ class _FromAddStudentState extends State<FromAddStudent> {
     var response = await request.send();
 
     if (response.statusCode == 200) {
-      print('Image uploaded successfully!');
-      print('Image URL: ${await response.stream.bytesToString()}');
+      print('Video uploaded successfully!');
+      print('Video URL: ${await response.stream.bytesToString()}');
     } else {
-      print('Failed to upload image. Status code: ${response.statusCode}');
+      print('Failed to upload video. Status code: ${response.statusCode}');
     }
   }
 
@@ -365,7 +365,7 @@ class _FromAddStudentState extends State<FromAddStudent> {
                                         birthDate = date;
                                         _birthDateController.text =
                                             DateFormat('dd/MM/yyyy').format(
-                                                date); // Update the displayed date format
+                                                date);
                                         isFormValid = _checkFormValidity();
                                       });
                                     }
@@ -382,9 +382,7 @@ class _FromAddStudentState extends State<FromAddStudent> {
                               onChanged: (value) {
                                 setState(() {
                                   specializationID = value;
-                                  print('specializationID' + specializationID!);
-                                  isFormValid =
-                                      _checkFormValidity(); // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
+                                  isFormValid = _checkFormValidity();
                                 });
                               },
                               items: context

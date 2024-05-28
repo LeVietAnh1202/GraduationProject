@@ -33,8 +33,6 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
     Future.delayed(Duration.zero, () {
       fetchScheduleTerms(); // Gọi hàm setAppState sau khi initState hoàn thành
     });
-    print(
-        'initState DtAttendanceTerm ${widget.lecturerID}, ${widget.semesterID}');
   }
 
   Future<void> fetchScheduleTerms() async {
@@ -189,9 +187,6 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
                                                     listen: false)
                                                 .appState!
                                                 .scheduleAdminTerms;
-                                        print('scheduleAdminTerms.length: ' +
-                                            scheduleAdminTerms.length
-                                                .toString());
                                         widget.onPress(schedule.moduleID,
                                             scheduleAdminTerms.length);
 

@@ -50,8 +50,6 @@ class _DataTableStudentByModuleState extends State<DataTableStudentByModule> {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     // double widthDataTable = screenWidth - sideBarWidth - 40;
-    // print('widget.scheduleAdminTermsLength: ' +
-    //     widget.scheduleTermsLength.toString());
     // double heightDataTable = screenHeight -
     //     appBarHeight -
     //     2 * bodyContentPadding -

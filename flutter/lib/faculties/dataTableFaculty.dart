@@ -69,7 +69,6 @@ class _DataTableFacultyState extends State<DataTableFaculty> {
           .map((entry) {
         final index = entry.key;
         final faculty = entry.value;
-        print(entry.value);
 
         return DataRow(
           cells: [

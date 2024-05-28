@@ -33,16 +33,11 @@ class AttendanceLecturerWeekService {
         const studentName = student.studentName;
         const classCode = student.classCode;
         const gender = student.gender;
-
         const studentImagePath = path.join(__dirname, '..', '..', 'public', 'images', 'attendance_images', dayID, `${studentId}`);
-
         const studentImages = [];
-        // "G:\\Ki_8\\GraduationProject\\nodejs_backend\\public\\images\\attendance_images\\1008\\10120620"
 
         // Kiểm tra xem thư mục tồn tại hay không
         if (fs.existsSync(studentImagePath)) {
-          console.log("studentImagePath already exists")
-
           // Lấy danh sách các tệp trong thư mục
           const files = fs.readdirSync(studentImagePath);
           // Lặp qua từng tệp và tạo đường dẫn đầy đủ cho mỗi tệp

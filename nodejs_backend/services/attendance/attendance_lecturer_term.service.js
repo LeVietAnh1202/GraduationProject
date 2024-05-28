@@ -57,12 +57,7 @@ class AttendanceLecturerTermService {
 
               attendances.push(
                 attendancePromise.then(attendance => {
-
-                  // console.log(studentName + ' ' + dayID + ' currentTime' + currentTime);
-                  // console.log(studentName + ' ' + dayID + ' afterTimeStartSession' + afterTimeStartSession);
-                  // console.log(studentName + ' ' + dayID + ' (currentTime > afterTimeStartSession)' + (currentTime > afterTimeStartSession));
                   const attendanceValue = attendance ? attendance.attendance : ((currentTime > afterTimeStartSession) ? 0 : null);
-                  // console.log(studentName + ' ' + dayID + ' attendanceValue' + attendanceValue);
                   if (attendanceValue === 0) {
                     numberOfBreaksSessions++;
                   } else if (attendanceValue === 1) {

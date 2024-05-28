@@ -49,7 +49,6 @@ exports.deleteStudent = async (req, res, next) => {
         }
 
         const deletedStudent = await StudentService.deleteStudent(studentId);
-        console.log(deletedStudent);
 
         res.json({ status: true, data: deletedStudent, success: 'Delete Student successfully' });
 
@@ -76,7 +75,6 @@ exports.uploadVideo = async (req, res, next) => {
         return res.status(400).json({ error: 'Request object is null' });
     }
 
-    console.log("req video", req);
     try {
         // Gọi phương thức uploadVideo từ Service để xử lý tải lên video
         const uploadVideoMiddleware = await StudentService.uploadVideo(req);

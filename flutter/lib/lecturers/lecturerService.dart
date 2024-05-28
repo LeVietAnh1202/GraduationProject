@@ -20,21 +20,16 @@ class LecturerService {
       response = await http.post(Uri.http(url, getAllLecturerByFacultyIDAPI),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(bodyData));
-      print('Response body: ${response.body}');
     }
     if (role == Role.admin)
       response = await http.get(Uri.http(url, getAllLecturerAPI));
 
     if (response!.statusCode == 200) {
-      print('Response status: ${response.statusCode}');
-
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final lecturerList = data['data'];
-      print(lecturerList);
       final List<Lecturer> lecturers = (lecturerList as List<dynamic>)
           .map((e) => Lecturer.fromMap(e))
           .toList();
-      print(lecturers);
       Provider.of<AppStateProvider>(context, listen: false)
           .setLecturers(lecturers);
       return lecturers;

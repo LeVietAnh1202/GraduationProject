@@ -21,7 +21,6 @@ class SubjectService {
 
     static async getSubjectsByLecturerID(semesterID, lecturerID) {
         try {
-            console.log(semesterID + lecturerID);
             const modules = await ModuleModel.find({ semesterID: semesterID, lecturerID: lecturerID });
 
             // Sử dụng Set để loại bỏ các subjectID trùng nhau

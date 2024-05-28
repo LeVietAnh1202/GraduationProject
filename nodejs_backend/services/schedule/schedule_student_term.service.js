@@ -12,7 +12,6 @@ class ScheduleStudentTermService {
   //   try {
   //     const student = await StudentModel.findOne({ studentId: studentId });
   //     const classCode = student.classCode;
-  //     console.log("classCode get :" + classCode);
 
   //     const modules = await ModuleModel.find({ classCode });
 
@@ -27,11 +26,8 @@ class ScheduleStudentTermService {
   //       for (const scheduleModel of scheduleModels) {
   //         const { details, dateStart, dateEnd, classRoomID, dayTerm } = scheduleModel;
   //         const roomName = await RoomModel.findOne({ classRoomID });
-  //         console.log("dayTerm.day: " + dayTerm)
   //         const day = dayTerm[0].day;
   //         const time = dayTerm[0].time;
-  //         console.log("dayTerm.day: " + day)
-  //         console.log("dayTerm.Time: " + time)
 
   //         const subjectID = module.subjectID;
   //         const subject = await SubjectModel.findOne({ subjectID });

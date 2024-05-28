@@ -67,7 +67,6 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
   //     // var stream = response.bodyBytes;
   //     //   var stream = await getStream(http.Request('GET', Uri.http('127.0.0.1:8000', 'process')));
   //     //   stream.transform(utf8.decoder).transform(const LineSplitter()).listen((String line) {
-  //     //     print(line);
   //     //   setState(() {
   //     //     // messages.add(line);
   //     //     widget.text = line;
@@ -81,7 +80,6 @@ class _ProcessingAndTrainingState extends State<ProcessingAndTraining> {
   //     //     .transform(utf8.decoder)
   //     //     .transform(const LineSplitter())
   //     //     .listen((dynamic line) {
-  //     //   print("line: " + line);
   //     //   setState(() {
   //     //     // messages.add(line);
   //     //     widget.text = line.toString();

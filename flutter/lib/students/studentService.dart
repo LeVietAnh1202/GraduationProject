@@ -24,17 +24,12 @@ class StudentService {
     }
     if (role == Role.admin)
       response = await http.get(Uri.http(url, getAllStudentAPI));
-    print('fetchStudents function');
     if (response!.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final studentsList = data['data'];
-      // print("Student list: " + studentsList.toString());
-      print('studentsList');
-      print(studentsList);
       final List<Student> students = (studentsList as List<dynamic>)
           .map((e) => Student.fromMap(e))
           .toList();
-      print("Students: " + students.toString());
 
       Provider.of<AppStateProvider>(context, listen: false)
           .setStudents(students);
@@ -60,7 +55,6 @@ class StudentService {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final studentList = data['data'] as List<dynamic>;
         final students = studentList.map((e) => Student.fromMap(e)).toList();
-        print("fetchStudentByModuleIDs: " + students.toString());
         Provider.of<AppStateProvider>(context, listen: false)
             .setStudents(students);
         isLoading(false);

@@ -84,8 +84,6 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
                           .appState!
                           .attendanceStudentTerms['dateList'] as List<dynamic>)
                       .map<DataColumn>((entry) {
-                    print(entry);
-                    print(entry.keys.first);
                     return DataColumn(
                       label: Expanded(
                         child: RotatedBox(
@@ -138,7 +136,6 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
                                 .attendanceStudentTerms['dateList']
                             as List<dynamic>)
                         .map((entry) {
-                      print(entry.values.first);
                       return DataCell(Center(
                         child: Utilities.attendanceIcon(entry.values.first),
                       ));

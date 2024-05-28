@@ -36,7 +36,6 @@ class _DtScheduleLecturerWeekState extends State<DtScheduleLecturerWeek> {
     schedules = Provider.of<AppStateProvider>(context, listen: false)
         .appState!
         .scheduleLecturerWeeks;
-    print('schedules check');
     if (schedules.isEmpty) {
       ScheduleService.fetchScheduleLecturerWeeks(
           context,
@@ -87,8 +86,6 @@ class _DtScheduleLecturerWeekState extends State<DtScheduleLecturerWeek> {
                   final weekTimeStart = schedule['weekTimeStart'];
                   final weekTimeEnd = schedule['weekTimeEnd'];
 
-                  print('weekTimeStart: $weekTimeStart');
-                  print('weekTimeEnd: $weekTimeEnd');
                   String formattedStart = '';
                   String formattedEnd = '';
 
