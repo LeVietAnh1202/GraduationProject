@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/attendance/attendance_lecturer_term.dart';
+import 'package:flutter_todo_app/attendance/attendance_student_term.dart';
 import 'package:flutter_todo_app/attendance/dtModule_by_lecturerID_term.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/lecturers/lecturerService.dart';
@@ -28,6 +29,10 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
   // List<Subject> subjects = [];
   int scheduleAdminTermsLength = 0;
   String moduleID = "";
+  String? selectedSchoolYear;
+  String? selectedSemester;
+  String? selectedLecturer;
+  String? selectedStudent;
 
   @override
   void initState() {
@@ -37,25 +42,31 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
     });
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<void> init() async {
     try {
-      await SchoolyearService.fetchSchoolyears(context, (value) {
-        // Handle the value if necessary
-      });
+      final schoolyears = await SchoolyearService.fetchSchoolyears((value) {});
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setSchoolyears(schoolyears);
     } catch (e) {
       print('Error fetching school years: $e');
     }
 
     try {
-      await LecturerService.fetchLecturers(context);
+      final role =
+          Provider.of<AccountProvider>(context, listen: false).getRole();
+      final lecturerID =
+          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final lecturers = await LecturerService.fetchLecturers(role, lecturerID);
+
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setLecturers(lecturers);
     } catch (e) {
       print('Error fetching lecturers: $e');
-    }
-
-    try {
-      await SubjectService.fetchSubjects(context);
-    } catch (e) {
-      print('Error fetching subjects: $e');
     }
   }
 
@@ -73,8 +84,8 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
             });
           },
           selectedLecturer!,
-          // selectedSubject!,
           selectedSemester!,
+          selectedStudent!,
         );
         Provider.of<AppStateProvider>(context, listen: false)
             .setTableLength(scheduleAdminTerms.length);
@@ -85,27 +96,32 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
   }
 
   bool isNull() {
-    return
-        // selectedSubject == null ||
-        selectedSchoolYear == null ||
-            selectedLecturer == null ||
-            selectedSemester == null;
+    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
+    if (role == Role.student) {
+      selectedLecturer = '';
+      return selectedSchoolYear == null || selectedSemester == null;
+    }
+    selectedStudent = '';
+    return selectedSchoolYear == null ||
+        selectedLecturer == null ||
+        selectedSemester == null;
   }
-
-  String? selectedSchoolYear;
-  String? selectedSemester;
-  String? selectedLecturer;
-  // String? selectedSubject;
 
   @override
   Widget build(BuildContext context) {
     final role = context.watch<AccountProvider>().getRole();
-    if (role == Role.lecturer)
+    if (role == Role.lecturer) {
       selectedLecturer =
           Provider.of<AccountProvider>(context, listen: false).account!.account;
-    else
+      selectedStudent = '';
+    } else if (role == Role.student) {
+      selectedStudent =
+          Provider.of<AccountProvider>(context, listen: false).account!.account;
+      selectedLecturer = '';
+    } else {
       lecturers = context.watch<AppStateProvider>().appState!.lecturers;
-
+      selectedStudent = '';
+    }
     schoolYears = context.watch<AppStateProvider>().appState!.schoolyears;
     // subjects = context.watch<AppStateProvider>().appState!.subjects;
     return Column(
@@ -259,6 +275,7 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
                       lecturerID: selectedLecturer!,
                       // subjectID: selectedSubject!,
                       semesterID: selectedSemester!,
+                      studentId: selectedStudent!,
                       onPress: (moduleID_value, length) {
                         setState(() {
                           moduleID = moduleID_value;
@@ -272,7 +289,14 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (moduleID != '')
+            if (moduleID != '' && role == Role.student)
+              AttendanceStudentTerm(
+                  moduleID: moduleID
+                 ),
+            if (moduleID != '' &&
+                (role == Role.admin ||
+                    role == Role.aao ||
+                    role == Role.lecturer))
               AttendanceLecturerTerm(
                   moduleID: moduleID,
                   scheduleAdminTermsLength: scheduleAdminTermsLength)

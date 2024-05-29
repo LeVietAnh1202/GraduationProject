@@ -9,7 +9,6 @@ import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/dtSchedule_Lecturer_Term.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
 import 'package:flutter_todo_app/schoolyears/schoolyearService.dart';
-import 'package:flutter_todo_app/subjects/subjectService.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleSelectionTerm extends StatefulWidget {
@@ -35,25 +34,31 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
     });
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<void> init() async {
     try {
-      await SchoolyearService.fetchSchoolyears(context, (value) {
-        // Handle the value if necessary
-      });
+      final schoolyears = await SchoolyearService.fetchSchoolyears((value) {});
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setSchoolyears(schoolyears);
     } catch (e) {
       print('Error fetching school years: $e');
     }
 
     try {
-      await LecturerService.fetchLecturers(context);
+      final role =
+          Provider.of<AccountProvider>(context, listen: false).getRole();
+      final lecturerID =
+          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final lecturers = await LecturerService.fetchLecturers(role, lecturerID);
+
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setLecturers(lecturers);
     } catch (e) {
       print('Error fetching lecturers: $e');
-    }
-
-    try {
-      await SubjectService.fetchSubjects(context);
-    } catch (e) {
-      print('Error fetching subjects: $e');
     }
   }
 
@@ -72,6 +77,7 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
           selectedLecturer!,
           // selectedSubject!,
           selectedSemester!,
+          // selectedStudent!,
         );
         Provider.of<AppStateProvider>(context, listen: false)
             .setTableLength(scheduleTerms.length);
@@ -92,7 +98,6 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
   String? selectedSchoolYear;
   String? selectedSemester;
   String? selectedLecturer;
-  // String? selectedSubject;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +109,6 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
       lecturers = context.watch<AppStateProvider>().appState!.lecturers;
 
     schoolYears = context.watch<AppStateProvider>().appState!.schoolyears;
-    // subjects = context.watch<AppStateProvider>().appState!.subjects;
     return Column(
       children: [
         Row(
@@ -219,6 +223,7 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
                   child: DtScheduleTerm(
                       lecturerID: selectedLecturer!,
                       semesterID: selectedSemester!,
+                      // studentId: selectedStudent!,
                       onPress: (moduleID_value, length) {
                         setState(() {
                           moduleID = moduleID_value;

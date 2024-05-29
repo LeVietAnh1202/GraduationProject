@@ -30,6 +30,7 @@ class SidebarMap {
       studentTerm: DtScheduleStudentTerm(),
       lecturerTerm: ScheduleSelectionTerm(),
       adminTerm: ScheduleSelectionTerm(),
+      aaoTerm: ScheduleSelectionTerm(),
     };
 
     sidebarMap = {
@@ -60,7 +61,7 @@ class SidebarMap {
     };
 
     dataTableScheduleKey =
-        "${roleMap[role].toString()}${((roleMap[role] == Role.admin || roleMap[role] == Role.lecturer) ? 'Term' : (calendarView == Calendar.week ? 'Week' : 'Term'))}";
+        "${roleMap[role].toString()}${((roleMap[role] == Role.admin || roleMap[role] == Role.lecturer || roleMap[role] == Role.aao) ? 'Term' : (calendarView == Calendar.week ? 'Week' : 'Term'))}";
 
     return dataTableSchedule[dataTableScheduleKey];
   }

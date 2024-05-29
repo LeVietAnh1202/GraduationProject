@@ -71,13 +71,15 @@ class AttendanceService with ChangeNotifier {
     });
   }
 
-  static Future<void> fetchAttendanceStudentTerms(BuildContext context,
-      ValueChanged<bool> isLoading, String moduleID) async {
+  static Future<Map<String, dynamic>> fetchAttendanceStudentTerms(
+      BuildContext context,
+      ValueChanged<bool> isLoading,
+      String moduleID) async {
     final studentId =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
     final bodyData = {'studentId': studentId, 'moduleID': moduleID};
 
-    http
+    return http
         .post(
       Uri.http(url, getAllAttendanceStudentTermAPI),
       headers: {'Content-Type': 'application/json'},
@@ -86,18 +88,22 @@ class AttendanceService with ChangeNotifier {
         .then((response) {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
+        print('data');
+        print(data);
         final attendanceList = data['data'] as Map<String, dynamic>;
-
+        print(attendanceList);
         Provider.of<AppStateProvider>(context, listen: false)
             .setAttendanceStudentTerms(attendanceList);
 
         isLoading(false);
+        return attendanceList;
       } else {
         throw Exception('Failed to fetchAttendanceStudentTerms');
       }
     }).catchError((error) {
       // Xử lý lỗi nếu có
-      print('Error: $error');
+      print('Error fetchAttendanceStudentTerms: $error');
+      throw Exception('Failed to fetchAttendanceStudentTerms');
     });
   }
 }

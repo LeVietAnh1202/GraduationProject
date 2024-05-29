@@ -6,7 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DtScheduleStudentTerm extends StatefulWidget {
-  const DtScheduleStudentTerm({Key? key});
+  DtScheduleStudentTerm(
+  );
 
   @override
   State<DtScheduleStudentTerm> createState() => _DtScheduleStudentTermState();
@@ -15,11 +16,15 @@ class DtScheduleStudentTerm extends StatefulWidget {
 class _DtScheduleStudentTermState extends State<DtScheduleStudentTerm> {
   List<Map<String, dynamic>> schedules = [];
   bool _isLoading = true;
+  String moduleID = "";
 
   @override
   void initState() {
     super.initState();
-    init();
+    Future.delayed(Duration.zero, () {
+      init();
+      // fetchScheduleStudentTerms(); // Gọi hàm setAppState sau khi initState hoàn thành
+    });
   }
 
   void init() async {

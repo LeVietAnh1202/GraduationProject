@@ -20,32 +20,25 @@ class AttendanceStudentTerm extends StatefulWidget {
 
 class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
   Map<String, dynamic> attendances = {};
-  // List<String> dateList = ["21/12/2023", "22/12/2023", "23/12/2023"];
   bool _isLoading = true;
   @override
   void initState() {
     super.initState();
-    init();
+    Future.delayed(Duration.zero, () {
+      init();
+    });
   }
 
   void init() async {
-    attendances = Provider.of<AppStateProvider>(context, listen: false)
-        .appState!
-        .attendanceStudentTerms;
-    // attendances =
-    //     context.watch<AppStateProvider>().appState!.attendanceStudentTerms;
-    // if (attendances.isEmpty) {
-    AttendanceService.fetchAttendanceStudentTerms(
+    // attendances = Provider.of<AppStateProvider>(context, listen: false)
+    //     .appState!
+    //     .attendanceStudentTerms;
+    attendances = await AttendanceService.fetchAttendanceStudentTerms(
         context,
         (bool value) => setState(() {
               _isLoading = value;
             }),
         widget.moduleID);
-    // } else {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    // }
   }
 
   // int vietnameseCollator = Collator('vi');
@@ -57,9 +50,10 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
 
   @override
   Widget build(BuildContext context) {
-    // int index = 0;
-    attendances =
-        context.watch<AppStateProvider>().appState!.attendanceStudentTerms;
+    // attendances =
+    //     context.watch<AppStateProvider>().appState!.attendanceStudentTerms;
+    print('attendances');
+    print(attendances);
     return _isLoading
         ? Container(
             alignment: Alignment.center,
@@ -84,6 +78,8 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
                           .appState!
                           .attendanceStudentTerms['dateList'] as List<dynamic>)
                       .map<DataColumn>((entry) {
+                    print('entry.keys.first');
+                    print(entry.keys.first);
                     return DataColumn(
                       label: Expanded(
                         child: RotatedBox(
@@ -97,29 +93,10 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
                       ),
                     );
                   }).toList(),
-
                   DataColumn(
                     label: Expanded(
                       child: Text(
-                        'Số buổi\nđúng giờ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Số buổi\nđi muộn',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Số buổi\nnghỉ',
+                        'Số ảnh/Tổng số tiết',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -136,24 +113,16 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
                                 .attendanceStudentTerms['dateList']
                             as List<dynamic>)
                         .map((entry) {
+                      final date = entry.keys.first;
+                      final value = entry[date];
                       return DataCell(Center(
-                        child: Utilities.attendanceIcon(entry.values.first),
+                        child: Utilities.attendanceImages(value['NoImages']),
                       ));
                     }).toList(),
                     DataCell(Center(
-                        child: Text((attendances['numberOfOnTimeSessions'] == 0
+                        child: Text((attendances['NoImagesValid'] == 0
                                 ? '-'
-                                : attendances['numberOfOnTimeSessions'])
-                            .toString()))),
-                    DataCell(Center(
-                        child: Text((attendances['numberOfLateSessions'] == 0
-                                ? '-'
-                                : attendances['numberOfLateSessions'])
-                            .toString()))),
-                    DataCell(Center(
-                        child: Text((attendances['numberOfBreaksSessions'] == 0
-                                ? '-'
-                                : attendances['numberOfBreaksSessions'])
+                                : attendances['NoImagesValid'])
                             .toString()))),
                   ])
                 ],

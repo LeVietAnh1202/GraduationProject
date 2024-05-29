@@ -12,7 +12,7 @@ const attendanceSchema = new Schema({
     required: true,
   },
   attendance: {
-    type: Number,
+    type: [String],
     required: true,
   },
 }, { timestamps: true });

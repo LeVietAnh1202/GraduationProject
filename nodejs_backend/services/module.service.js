@@ -38,19 +38,26 @@ class ModuleService {
     }
   }
 
-  static async getAllModuleTermByLecturerID(lecturerID, semesterID) {
+  static async getAllModuleTermByLecturerID(_lecturerID, semesterID, studentId) {
     try {
       // Tìm tất cả các module của giảng viên trong học kỳ hiện tại
-      const modules = await ModuleModel.find({ lecturerID, semesterID });
+      var modules;
+      if (_lecturerID === "") {
+        modules = await ModuleModel.find({ listStudentID: studentId, semesterID });
+      }
+      else if (studentId === "") {
+        modules = await ModuleModel.find({ lecturerID: _lecturerID, semesterID });
+      }
+
       if (!modules || modules.length === 0) {
-        console.warn(`No modules found for lecturer with ID ${lecturerID} and semester ID ${semesterID}`);
+        console.warn(`No modules found for lecturer with ID ${_lecturerID} and semester ID ${semesterID}`);
         return [];
       }
 
       const moduleTerms = [];
 
       for (const module of modules) {
-        const { moduleID } = module;
+        const { moduleID, lecturerID } = module;
 
         // Tìm tất cả các lịch trình của module
         const scheduleModels = await ScheduleModel.find({ moduleID });
@@ -65,7 +72,8 @@ class ModuleService {
         //   console.warn(`Lecturer with ID ${lecturerID} not found`);
         //   continue;
         // }
-
+        const lecturer = await LecturerModel.findOne({ lecturerID: studentId === "" ? _lecturerID : lecturerID });
+        const lecturerName = lecturer.lecturerName;
         for (const scheduleModel of scheduleModels) {
           const { dateStart, dateEnd, classRoomID, dayTerms } = scheduleModel;
 
@@ -76,34 +84,28 @@ class ModuleService {
             continue;
           }
 
-          for (const dayTerm of dayTerms) {
-            const { weekTimeStart, weekTimeEnd } = dayTerm;
+          // Tìm thông tin môn học
+          const subject = await SubjectModel.findOne({ subjectID: module.subjectID });
 
-            // Tìm thông tin môn học
-            const subject = await SubjectModel.findOne({ subjectID: module.subjectID });
-            if (!subject) {
-              console.warn(`Subject with ID ${module.subjectID} not found`);
-              continue;
-            }
-            const subjectName = subject.subjectName;
-            const numberOfCredits = subject.numberOfCredits;
+          const subjectName = subject.subjectName;
+          const numberOfCredits = subject.numberOfCredits;
 
-            // Tạo đối tượng ScheduleAdminTermModel
-            const moduleTerm = new ModuleTermByLecturerIDModel(
-              moduleID,
-              subjectName,
-              room.roomName,
-              dateStart,
-              dateEnd,
-              numberOfCredits,
-              weekTimeStart,
-              weekTimeEnd
-            );
-            moduleTerms.push(moduleTerm);
-          }
+          // Tạo đối tượng ScheduleAdminTermModel
+          const moduleTerm = new ModuleTermByLecturerIDModel(
+            moduleID,
+            subjectName,
+            room.roomName,
+            lecturerName,
+            dateStart,
+            dateEnd,
+            numberOfCredits,
+            // weekTimeStart,
+            // weekTimeEnd
+          );
+          moduleTerms.push(moduleTerm);
+
         }
       }
-
       return moduleTerms;
     } catch (err) {
       console.error(err);

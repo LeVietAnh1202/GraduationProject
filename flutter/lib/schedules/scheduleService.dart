@@ -149,12 +149,15 @@ class ScheduleService with ChangeNotifier {
       BuildContext context,
       ValueChanged<bool> isLoading,
       String lecturerID,
+      String semesterID,
+      String studentId
       // String subjectID,
-      String semesterID) async {
+      ) async {
     final bodyData = {
       'lecturerID': lecturerID,
       // 'subjectID': subjectID,
-      'semesterID': semesterID
+      'semesterID': semesterID,
+      'studentId': studentId
     };
     isLoading(true);
     return http
@@ -167,9 +170,11 @@ class ScheduleService with ChangeNotifier {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final attendanceTermsList = data['data'] as List<dynamic>;
+        print(attendanceTermsList);
         final attendanceTerms = attendanceTermsList
             .map((e) => ModuleTermByLecturerID.fromMap(e))
             .toList();
+        print(attendanceTerms);
         Provider.of<AppStateProvider>(context, listen: false)
             .setModuleTermByLecturerIDs(attendanceTerms);
         isLoading(false);
@@ -181,10 +186,12 @@ class ScheduleService with ChangeNotifier {
   }
 
   static Future<List<ScheduleAdminTerm>> fetchScheduleTerms(
-      BuildContext context,
-      ValueChanged<bool> isLoading,
-      String lecturerID,
-      String semesterID) async {
+    BuildContext context,
+    ValueChanged<bool> isLoading,
+    String lecturerID,
+    String semesterID,
+    // String studentId,
+  ) async {
     final bodyData = {'lecturerID': lecturerID, 'semesterID': semesterID};
     isLoading(true);
     return http

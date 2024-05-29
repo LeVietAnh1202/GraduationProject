@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/lecturers/lecturerService.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -17,11 +18,27 @@ class _DataTableLecturerState extends State<DataTableLecturer> {
   @override
   void initState() {
     super.initState();
-    LecturerService.fetchLecturers(context);
+    Future.delayed(Duration.zero, () {
+      fetchLecturers();
+    });
   }
 
-  void deleteLecturer(int index) {
+  Future<void> fetchLecturers() async {
+    try {
+      final role =
+          Provider.of<AccountProvider>(context, listen: false).getRole();
+      final lecturerID =
+          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final lecturers = await LecturerService.fetchLecturers(role, lecturerID);
+
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setLecturers(lecturers);
+    } catch (e) {
+      print('Error fetching lecturers: $e');
+    }
   }
+
+  void deleteLecturer(int index) {}
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +102,7 @@ class _DataTableLecturerState extends State<DataTableLecturer> {
             DataCell(Center(child: Text(lecturer.lecturerName))),
             DataCell(Center(child: Text(lecturer.gender))),
             DataCell(Center(
-              child: Text(DateFormat('dd/MM/yyyy')
-                  .format(lecturer.birthDate)),
+              child: Text(DateFormat('dd/MM/yyyy').format(lecturer.birthDate)),
             )),
             DataCell(
               Row(

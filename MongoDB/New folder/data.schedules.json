@@ -672,20 +672,52 @@
         "day": "4",
         "time": "8-11",
         "weekTimeStart": {
-          "$date": "2023-11-06T00:00:00.000Z"
+          "$date": "2023-10-23T00:00:00.000Z"
         },
         "weekTimeEnd": {
-          "$date": "2023-12-31T00:00:00.000Z"
+          "$date": "2023-12-17T00:00:00.000Z"
         }
       }
     ],
     "dateStart": {
-      "$date": "2023-11-06T00:00:00.000Z"
+      "$date": "2023-10-23T00:00:00.000Z"
     },
     "dateEnd": {
-      "$date": "2023-12-31T00:00:00.000Z"
+      "$date": "2023-12-17T00:00:00.000Z"
     },
     "details": [
+      {
+        "week": "10",
+        "weekTimeStart": {
+          "$date": "2023-10-23T00:00:00.000Z"
+        },
+        "weekTimeEnd": {
+          "$date": "2023-10-29T00:00:00.000Z"
+        },
+        "weekDetails": [
+          {
+            "day": "4",
+            "time": "8-11",
+            "dayID": "1038"
+          }
+        ]
+      },
+      {
+        "week": "11",
+        "weekTimeStart": {
+          "$date": "2023-10-30T00:00:00.000Z"
+        },
+        "weekTimeEnd": {
+          "$date": "2023-11-05T00:00:00.000Z"
+        },
+        "weekDetails": [
+          {
+            "day": "4",
+            "time": "8-11",
+            "dayID": "1039"
+          }
+        ]
+      },
       {
         "week": "12",
         "weekTimeStart": {
@@ -779,38 +811,6 @@
             "day": "4",
             "time": "8-11",
             "dayID": "1037"
-          }
-        ]
-      },
-      {
-        "week": "18",
-        "weekTimeStart": {
-          "$date": "2023-12-18T00:00:00.000Z"
-        },
-        "weekTimeEnd": {
-          "$date": "2023-12-24T00:00:00.000Z"
-        },
-        "weekDetails": [
-          {
-            "day": "4",
-            "time": "8-11",
-            "dayID": "1038"
-          }
-        ]
-      },
-      {
-        "week": "19",
-        "weekTimeStart": {
-          "$date": "2023-12-25T00:00:00.000Z"
-        },
-        "weekTimeEnd": {
-          "$date": "2023-12-31T00:00:00.000Z"
-        },
-        "weekDetails": [
-          {
-            "day": "4",
-            "time": "8-11",
-            "dayID": "1039"
           }
         ]
       }

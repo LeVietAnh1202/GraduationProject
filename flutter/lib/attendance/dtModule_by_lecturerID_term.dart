@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/model/moduleTermByLecturerIDModel.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
 import 'package:intl/intl.dart';
@@ -11,15 +13,18 @@ class DtModuleByLecturerIDTerm extends StatefulWidget {
   String lecturerID;
   // String subjectID;
   String semesterID;
+  String studentId;
   DtModuleByLecturerIDTerm(
       {Key? key,
       required this.lecturerID,
       // required this.subjectID,
       required this.semesterID,
+      required this.studentId,
       required this.onPress});
 
   @override
-  State<DtModuleByLecturerIDTerm> createState() => _DtModuleByLecturerIDTermState();
+  State<DtModuleByLecturerIDTerm> createState() =>
+      _DtModuleByLecturerIDTermState();
 }
 
 class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
@@ -41,7 +46,7 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
       setState(() {
         _isLoading = value;
       });
-    }, widget.lecturerID, widget.semesterID);
+    }, widget.lecturerID, widget.semesterID, widget.studentId);
     Provider.of<AppStateProvider>(context, listen: false)
         .setTableLength(scheduleAdminTerms.length);
   }
@@ -58,6 +63,8 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
   @override
   Widget build(BuildContext context) {
     // fetchAttendanceTerms();
+    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
+
     return Container(
       child: _isLoading
           ? Container(
@@ -97,6 +104,15 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
                     ),
                   ),
                 ),
+                if (role == Role.student)
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Tên giảng viên',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
                 DataColumn(
                   label: Expanded(
                     child: Text(
@@ -147,6 +163,8 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
                         DataCell(Center(child: Text(module.subjectName))),
                         DataCell(Center(
                             child: Text(module.numberOfCredits.toString()))),
+                        if (role == Role.student)
+                          DataCell(Center(child: Text(module.lecturerName))),
                         DataCell(Center(child: Text(module.roomName))),
                         DataCell(Center(
                             child:
