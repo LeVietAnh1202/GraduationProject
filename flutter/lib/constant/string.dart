@@ -16,6 +16,7 @@ String studentWeek = '${Role.student.toString()}Week';
 String studentTerm = '${Role.student.toString()}Term';
 String lecturerTerm = '${Role.lecturer.toString()}Term';
 String adminTerm = '${Role.admin.toString()}Term';
+String aaoTerm = '${Role.aao.toString()}Term';
 
 const String URLNodeJSServer = 'http://${url}';
 const String URLNodeJSServer_RaspberryPi = 'http://${url_ras}';

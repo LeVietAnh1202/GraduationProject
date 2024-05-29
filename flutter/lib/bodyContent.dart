@@ -76,7 +76,8 @@ class _BodyContentState extends State<BodyContent> {
           SizedBox(height: 16.0),
           if (widget.sidebarKey == quanLyLichHoc &&
               role != Role.admin &&
-              role != Role.lecturer)
+              role != Role.lecturer &&
+              role != Role.aao)
             SingleChoice(
                 option: SegmentButtonOption.calendar,
                 changeImageOption: (_) {}),

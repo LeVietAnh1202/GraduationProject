@@ -10,12 +10,12 @@ import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class LecturerService {
-  static Future<List<Lecturer>> fetchLecturers(BuildContext context) async {
-    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
+  static Future<List<Lecturer>> fetchLecturers(
+      // BuildContext context
+      Role? role,
+      String? lecturerID) async {
     Response? response;
     if (role == Role.aao) {
-      final lecturerID =
-          Provider.of<AccountProvider>(context, listen: false).getAccount();
       final bodyData = {'lecturerID': lecturerID};
       response = await http.post(Uri.http(url, getAllLecturerByFacultyIDAPI),
           headers: {"Content-Type": "application/json"},
@@ -30,8 +30,8 @@ class LecturerService {
       final List<Lecturer> lecturers = (lecturerList as List<dynamic>)
           .map((e) => Lecturer.fromMap(e))
           .toList();
-      Provider.of<AppStateProvider>(context, listen: false)
-          .setLecturers(lecturers);
+      // Provider.of<AppStateProvider>(context, listen: false)
+      //     .setLecturers(lecturers);
       return lecturers;
     } else {
       throw Exception('Failed to fetch lecturers');

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/number.dart';
+import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/classModel.dart';
 import 'package:flutter_todo_app/model/facultyModel.dart';
 import 'package:flutter_todo_app/model/lecturerModel.dart';
@@ -67,8 +68,8 @@ class AppState {
     required this.attendanceAdminWeeks,
     required this.attendanceAdminTerms,
   }) {
-    // socket = IO.io(URLNodeJSServer,
-    //     IO.OptionBuilder().setTransports(['websocket']).build());
+    socket = IO.io(URLNodeJSServer,
+        IO.OptionBuilder().setTransports(['websocket']).build());
   }
 }
 
@@ -242,6 +243,8 @@ class AppStateProvider with ChangeNotifier {
 
 // ----------------------------------------------------------------
   void setAttendanceStudentTerms(Map<String, dynamic> attendanceStudentTerms) {
+    print('attendanceStudentTerms.toString()');
+    print(attendanceStudentTerms.toString());
     _appState?.attendanceStudentTerms = attendanceStudentTerms;
     notifyListeners();
   }
@@ -519,10 +522,40 @@ class AppStateProvider with ChangeNotifier {
   }
 
 //----------------------------------------------------------------
+  // Map<String, dynamic> parseAttendanceStudentTerms(
+  //     String attendanceStudentTermsString) {
+  //   Map<String, dynamic> attendanceStudentTermsJson =
+  //       jsonDecode(attendanceStudentTermsString);
+  //   return attendanceStudentTermsJson;
+  // }
   Map<String, dynamic> parseAttendanceStudentTerms(
       String attendanceStudentTermsString) {
+    print('attendanceStudentTermsString');
+    print(attendanceStudentTermsString);
     Map<String, dynamic> attendanceStudentTermsJson =
         jsonDecode(attendanceStudentTermsString);
+
+    // Kiểm tra xem dữ liệu có hợp lệ và có trường "dateList" không
+    if (attendanceStudentTermsJson.containsKey('dateList')) {
+      List<Map<String, dynamic>> dateList =
+          attendanceStudentTermsJson['dateList'];
+
+      // Chuyển đổi mỗi phần tử trong dateList thành Map<String, dynamic>
+      List<Map<String, dynamic>> parsedDateList = dateList.map((item) {
+        // Mỗi item trong dateList là một Map với một cặp key-value
+        // Key là ngày tháng, value là chi tiết
+        if (item.keys.isNotEmpty) {
+          String dateKey = item.keys.first;
+          Map<String, dynamic> details = item[dateKey];
+          return {dateKey: details};
+        }
+        return {};
+      }).toList() as List<Map<String, dynamic>>;
+
+      // Cập nhật lại dateList trong JSON ban đầu
+      attendanceStudentTermsJson['dateList'] = parsedDateList;
+    }
+
     return attendanceStudentTermsJson;
   }
 

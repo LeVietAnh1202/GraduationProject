@@ -106,18 +106,18 @@ class _DetailStudentState extends State<DetailStudent> {
     }
   }
 
-  // Container showVideo() {
-  //   flickManager = FlickManager(
-  //       videoPlayerController: VideoPlayerController.networkUrl(Uri.http(
-  //           "192.168.1.3:3000",
-  //           "videos/default/10120620_NguyenMinhDoanh.mp4")));
-
-  //   return Container(
-  //     width: 400,
-  //     height: 400,
-  //     child: FlickVideoPlayer(flickManager: flickManager),
-  //   );
-  // }
+  // Function to call your API
+  Future<void> callYourAPI() async {
+    // Implement your API call here
+    print("API called!");
+    // For example:
+    // final response = await http.get(Uri.parse('http://yourapi.com/endpoint'));
+    // if (response.statusCode == 200) {
+    //   // Successfully called API
+    // } else {
+    //   // Handle error
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,14 +134,7 @@ class _DetailStudentState extends State<DetailStudent> {
 
     return AlertDialog(
       title: Text('Chi tiết sinh viên'),
-      content:
-          // Container(
-          //   width: 400,
-          //   height: 400,
-          //   child: FlickVideoPlayer(flickManager: flickManager),
-          // ),
-
-          SingleChildScrollView(
+      content: SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -194,17 +187,43 @@ class _DetailStudentState extends State<DetailStudent> {
               ],
             ),
             SizedBox(height: 20),
-            SingleChoice(
-              option: SegmentButtonOption.image,
-              changeImageOption: (selectedOption) {
-                setState(() {
-                  option = selectedOption;
-                });
-              },
+            // SingleChoice(
+            //   option: SegmentButtonOption.image,
+            //   changeImageOption: (selectedOption) {
+            //     setState(() {
+            //       option = selectedOption;
+            //     });
+            //   },
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SingleChoice(
+                  option: SegmentButtonOption.image,
+                  changeImageOption: (selectedOption) {
+                    setState(() {
+                      // option = selectedOption;
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: callYourAPI,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed)) {
+                          return Colors
+                              .green; // Color when the button is pressed
+                        }
+                        return Colors.blue; // Default color
+                      },
+                    ),
+                  ),
+                  child: Text('Call API'),
+                ),
+              ],
             ),
             SizedBox(height: 30),
-            // showVideo()
-            // option == ShowImage.video
             (Provider.of<AppStateProvider>(context, listen: false)
                         .appState
                         ?.imagesView) ==
@@ -212,7 +231,6 @@ class _DetailStudentState extends State<DetailStudent> {
                 ? SizedBox(
                     height: 405,
                     width: 720,
-                    // child: Container(),
                     child: Container(
                       width: 400,
                       height: 400,

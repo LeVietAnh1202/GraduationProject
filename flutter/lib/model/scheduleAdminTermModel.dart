@@ -3,6 +3,7 @@ class ScheduleAdminTerm {
   final String time;
   final String moduleID;
   final String subjectName;
+  final String lecturerName;
   final String roomName;
   final DateTime dateStart;
   final DateTime dateEnd;
@@ -15,6 +16,7 @@ class ScheduleAdminTerm {
       required this.time,
       required this.moduleID,
       required this.subjectName,
+      required this.lecturerName,
       required this.roomName,
       required this.dateStart,
       required this.dateEnd,
@@ -28,6 +30,7 @@ class ScheduleAdminTerm {
       time: json['time'],
       moduleID: json['moduleID'],
       subjectName: json['subjectName'],
+      lecturerName: json['lecturerName'],
       roomName: json['roomName'],
       dateStart: DateTime.parse(json['dateStart']),
       dateEnd: DateTime.parse(json['dateEnd']),
@@ -39,6 +42,6 @@ class ScheduleAdminTerm {
 
   @override
   String toString() {
-    return '${day}-${time}-${moduleID} - ${subjectName} - ${roomName} - ${dateStart} - ${dateEnd} - ${numberOfCredits}-${weekTimeStart}-${weekTimeEnd}';
+    return '${day}-${time}-${moduleID} - ${subjectName} - ${lecturerName} - ${roomName} - ${dateStart} - ${dateEnd} - ${numberOfCredits}-${weekTimeStart}-${weekTimeEnd}';
   }
 }

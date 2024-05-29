@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/lecturers/lecturerService.dart';
+import 'package:flutter_todo_app/provider/account.dart';
+import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class FromAddLecturer extends StatefulWidget {
   const FromAddLecturer({Key? key}) : super(key: key);
@@ -58,6 +61,21 @@ class _FromAddLecturerState extends State<FromAddLecturer> {
     } else {
       // Xử lý lỗi
       print('Lỗi khi thêm giảng viên: ${response.statusCode}');
+    }
+  }
+
+  Future<void> fetchLecturers() async {
+    try {
+      final role =
+          Provider.of<AccountProvider>(context, listen: false).getRole();
+      final lecturerID =
+          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final lecturers = await LecturerService.fetchLecturers(role, lecturerID);
+
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setLecturers(lecturers);
+    } catch (e) {
+      print('Error fetching lecturers: $e');
     }
   }
 
@@ -185,7 +203,7 @@ class _FromAddLecturerState extends State<FromAddLecturer> {
               await createLecturer();
               // Perform form submission or validation
               if (isAddingLecturerSuccess) {
-                LecturerService.fetchLecturers(context);
+                fetchLecturers();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Thêm giảng viên thành công'),
