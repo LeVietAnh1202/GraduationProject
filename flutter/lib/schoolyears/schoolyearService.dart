@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 
 class SchoolyearService {
   static Future<List<Schoolyear>> fetchSchoolyears(
-      BuildContext context, ValueChanged<bool> isLoading) async {
+      // BuildContext context, 
+      ValueChanged<bool> isLoading) async {
     final response = await http.get(Uri.http(url, getAllSchoolyearAPI));
 
     if (response.statusCode == 200) {
@@ -16,8 +17,8 @@ class SchoolyearService {
       final schoolyearsList = data['data'] as List<dynamic>;
       final schoolyears =
           schoolyearsList.map((e) => Schoolyear.fromMap(e)).toList();
-      Provider.of<AppStateProvider>(context, listen: false)
-          .setSchoolyears(schoolyears);
+      // Provider.of<AppStateProvider>(context, listen: false)
+      //     .setSchoolyears(schoolyears);
       isLoading(false);
 
       return schoolyears;

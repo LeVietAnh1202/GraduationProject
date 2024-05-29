@@ -45,21 +45,24 @@ class ScheduleTermService {
   //   }
   // }
 
-  
+
   //----------------------------------------------------------------------
   static async getAllScheduleTerm(lecturerID, semesterID) {
     try {
       // Tìm tất cả các module của giảng viên trong học kỳ hiện tại
-      const modules = await ModuleModel.find({ lecturerID, semesterID });
+     
+        const modules = await ModuleModel.find({ lecturerID, semesterID });
+      
+
       if (!modules || modules.length === 0) {
-        console.warn(`No modules found for lecturer with ID ${lecturerID} and semester ID ${semesterID} and subject ID ${subjectID}`);
+        console.warn(`No modules found for lecturer with ID ${lecturerID} and semester ID ${semesterID}`);
         return [];
       }
 
       const scheduleTerms = [];
 
       for (const module of modules) {
-        const { moduleID } = module;
+        const { moduleID} = module;
 
         // Tìm tất cả các lịch trình của module
         const scheduleModels = await ScheduleModel.find({ moduleID });
@@ -70,10 +73,10 @@ class ScheduleTermService {
 
         // Tìm thông tin giảng viên
         const lecturer = await LecturerModel.findOne({ lecturerID });
-        if (!lecturer) {
-          console.warn(`Lecturer with ID ${lecturerID} not found`);
-          continue;
-        }
+        // if (!lecturer) {
+        //   console.warn(`Lecturer with ID ${lecturerID} not found`);
+        //   continue;
+        // }
         const lecturerName = lecturer.lecturerName;
 
         for (const scheduleModel of scheduleModels) {

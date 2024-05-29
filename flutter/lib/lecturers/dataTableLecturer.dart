@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/lecturers/lecturerService.dart';
 import 'package:flutter_todo_app/model/lecturerModel.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,18 @@ class _DataTableLecturerState extends State<DataTableLecturer> {
   }
 
   Future<void> fetchLecturers() async {
-    final lecturers = await LecturerService.fetchLecturers(context);
+    try {
+      final role =
+          Provider.of<AccountProvider>(context, listen: false).getRole();
+      final lecturerID =
+          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final lecturers = await LecturerService.fetchLecturers(role, lecturerID);
+
+      Provider.of<AppStateProvider>(context, listen: false)
+          .setLecturers(lecturers);
+    } catch (e) {
+      print('Error fetching lecturers: $e');
+    }
     Provider.of<AppStateProvider>(context, listen: false)
         .setTableLength(lecturers.length);
   }
