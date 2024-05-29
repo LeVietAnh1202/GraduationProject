@@ -43,6 +43,23 @@ class Utilities {
                   );
   }
 
+  static Widget attendanceImages(int? NoImages) {
+    return Container(
+      alignment: Alignment.center,
+      width: 50,
+      height: 20,
+      color: ((NoImages! / 4) <= 1 && (NoImages / 4) >= 0.8)
+          ? Colors.green.shade200
+          : ((NoImages / 4) >= 0.5
+              ? Colors.amber.shade200
+              : Colors.red.shade200),
+      child: Text(
+        '${NoImages.toString()}/4',
+        // style: TextStyle(fontWeight: FontWeight.bold), 
+      ),
+    );
+  }
+
   static String attendanceString(int? attendance) {
     return (attendance == null)
         ? ''

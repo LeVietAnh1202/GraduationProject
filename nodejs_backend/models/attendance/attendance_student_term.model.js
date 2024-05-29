@@ -3,12 +3,10 @@ const { Schema } = mongoose;
 const db = require('../../config/db');
 
 class AttendanceStudentTerm {
-    constructor(studentName, dateList, numberOfOnTimeSessions, numberOfLateSessions, numberOfBreaksSessions) {
+    constructor(studentName, dateList, NoImagesValid) {
         this.studentName = studentName;
         this.dateList = dateList;
-        this.numberOfOnTimeSessions = numberOfOnTimeSessions;
-        this.numberOfLateSessions = numberOfLateSessions;
-        this.numberOfBreaksSessions = numberOfBreaksSessions;
+        this.NoImagesValid = NoImagesValid;
     }
 }
 

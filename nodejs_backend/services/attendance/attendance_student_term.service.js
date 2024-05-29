@@ -11,13 +11,9 @@ class AttendanceStudentTermService {
       const scheduleModelsPromise = ScheduleModel.find({ moduleID }).exec();
 
       const [student, scheduleModels] = await Promise.all([studentPromise, scheduleModelsPromise]);
-
       if (student) {
         const attendances = [];
-        let numberOfOnTimeSessions = 0;
-        let numberOfLateSessions = 0;
-        let numberOfBreaksSessions = 0;
-
+        var NoImagesValid = 0;
         for (const scheduleModel of scheduleModels) {
           const { details } = scheduleModel;
 
@@ -27,33 +23,31 @@ class AttendanceStudentTermService {
 
             for (const weekDetail of weekDetails) {
               const { dayID, day } = weekDetail;
+
               const numberOfDays = parseInt(day, 10);
               weekTimeStart.setDate(weekTimeStart.getDate() + numberOfDays - 2);
               const weekTimeStartStr = weekTimeStart.toISOString();
+              const studentId = student.studentId;
 
-              const attendancePromise = AttendanceModel.findOne({ studentId: student.studentId, dayID }).exec();
+              console.log(studentId)
+              console.log(dayID)
+              const attendancePromise = AttendanceModel.findOne({ studentId, dayID }).exec();
 
               const attendance = await attendancePromise;
-              const attendanceValue = attendance ? attendance.attendance : null;
+              console.log('attendance')
+              console.log(attendance)
+              const attendanceImages = attendance ? attendance.attendance : [];
+              const NoImages = attendanceImages.length;
+              NoImagesValid += NoImages;
 
-              if (attendanceValue === 0) {
-                numberOfBreaksSessions++;
-              } else if (attendanceValue === 1) {
-                numberOfLateSessions++;
-              } else if (attendanceValue === 2) {
-                numberOfOnTimeSessions++;
-              }
-
-              attendances.push({ [weekTimeStartStr]: attendanceValue });
+              attendances.push({ [weekTimeStartStr]: { attendanceImages: attendanceImages, NoImages: NoImages } });
             }
           }
         }
         const attendanceStudentTerm = new AttendanceStudentTermModel(
           student.studentName,
           attendances,
-          numberOfOnTimeSessions,
-          numberOfLateSessions,
-          numberOfBreaksSessions
+          NoImagesValid
         );
 
         return attendanceStudentTerm;

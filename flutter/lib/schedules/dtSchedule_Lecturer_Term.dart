@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/model/scheduleAdminTermModel.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
 import 'package:flutter_todo_app/students/dataTableStudentByModule.dart';
@@ -10,12 +12,13 @@ import 'package:provider/provider.dart';
 class DtScheduleTerm extends StatefulWidget {
   Function(String, int) onPress;
   String lecturerID;
-  // String subjectID;
   String semesterID;
+  // String studentId;
   DtScheduleTerm(
       {Key? key,
       required this.lecturerID,
       required this.semesterID,
+      // required this.studentId,
       required this.onPress});
 
   @override
@@ -57,6 +60,7 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
 
   @override
   Widget build(BuildContext context) {
+    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
     return Container(
       child: _isLoading
           ? Container(
@@ -112,6 +116,15 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
                     ),
                   ),
                 ),
+                // if (role == Role.student)
+                //   DataColumn(
+                //     label: Expanded(
+                //       child: Text(
+                //         'Tên giảng viên',
+                //         textAlign: TextAlign.center,
+                //       ),
+                //     ),
+                //   ),
                 DataColumn(
                   label: Expanded(
                     child: Text(
@@ -146,8 +159,8 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
                   .entries
                   .map((entry) {
                     final schedule = entry.value;
-                    final dateStart = schedule.dateStart;
-                    final dateEnd = schedule.dateEnd;
+                    final dateStart = schedule.weekTimeStart;
+                    final dateEnd = schedule.weekTimeEnd;
 
                     // final inputFormat =
                     //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -164,6 +177,8 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
                         DataCell(Center(child: Text(schedule.subjectName))),
                         DataCell(Center(
                             child: Text(schedule.numberOfCredits.toString()))),
+                        // if (role == Role.student)
+                        //   DataCell(Center(child: Text(schedule.lecturerName))),
                         DataCell(Center(child: Text(schedule.roomName))),
                         DataCell(Center(
                             child:

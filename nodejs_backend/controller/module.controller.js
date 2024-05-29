@@ -27,9 +27,10 @@ exports.getAllModule = async (req, res, next) => {
 
 exports.getAllModuleTermByLecturerID = async (req, res, next) => {
     try {
-        const { lecturerID, semesterID } = req.body;
-        console.log(lecturerID, semesterID);
-        const attendanceList = await ModuleService.getAllModuleTermByLecturerID(lecturerID, semesterID);
+        console.log(req.body)
+        const { lecturerID, semesterID, studentId } = req.body;
+        console.log(lecturerID, semesterID, studentId);
+        const attendanceList = await ModuleService.getAllModuleTermByLecturerID(lecturerID, semesterID, studentId);
         res.json({ status: true, success: 'getAllModuleTermByLecturerID successfully', data: attendanceList });
     } catch (err) {
         console.log("---> err -->", err);
