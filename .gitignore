@@ -132,7 +132,8 @@ dist
 nodejs_backend/public/images/full_images
 nodejs_backend/public/images/crop_images
 nodejs_backend/public/images/avatar
-facial_recognition_server/train_img
+# facial_recognition_server/train_img
+facial_recognition_server/train_img/12520088_LeVietAnh_Copy
 # facial_recognition_server/aligned_img
 /New folder/aligned_img/12520088_LeVietAnh
 New folder/aligned_img/bounding_boxes_14221.txt
