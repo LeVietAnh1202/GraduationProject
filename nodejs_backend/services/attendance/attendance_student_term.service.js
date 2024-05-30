@@ -2,6 +2,7 @@ const ScheduleModel = require("../../models/schedule/schedule.model");
 const ModuleModel = require("../../models/module.model");
 const AttendanceModel = require("../../models/attendance.model");
 const StudentModel = require("../../models/student.model");
+const SubjectModel = require("../../models/subject.model");
 const AttendanceStudentTermModel = require("../../models/attendance/attendance_student_term.model");
 
 class AttendanceStudentTermService {
@@ -9,9 +10,13 @@ class AttendanceStudentTermService {
     try {
       const studentPromise = StudentModel.findOne({ studentId }).exec();
       const scheduleModelsPromise = ScheduleModel.find({ moduleID }).exec();
+      const moduleModelsPromise = ModuleModel.findOne({ moduleID }).exec();
 
-      const [student, scheduleModels] = await Promise.all([studentPromise, scheduleModelsPromise]);
+      const [student, scheduleModels, module] = await Promise.all([studentPromise, scheduleModelsPromise, moduleModelsPromise]);
       if (student) {
+        const subjectID = module.subjectID;
+        const subject = await SubjectModel.findOne({ subjectID });
+        const numberOfLessons = subject.numberOfLessons;
         const attendances = [];
         var NoImagesValid = 0;
         for (const scheduleModel of scheduleModels) {
@@ -47,7 +52,8 @@ class AttendanceStudentTermService {
         const attendanceStudentTerm = new AttendanceStudentTermModel(
           student.studentName,
           attendances,
-          NoImagesValid
+          NoImagesValid,
+          numberOfLessons
         );
 
         return attendanceStudentTerm;
