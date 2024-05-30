@@ -20,6 +20,14 @@ from typing import Optional
 import socketio
 import pandas as pd
 from PIL import Image
+import time
+from datetime import datetime
+import base64
+from dateutil import parser
+import pytz
+
+from globals_var import currentTime, time_lock, start_time_thread
+import globals_var
 
 # Tạo một Socket.IO server không đồng bộ
 sio = socketio.AsyncServer(async_mode='asgi')
@@ -119,6 +127,10 @@ def train_model():
 
     return {"result": "All done"}
 
+@app.get('/connect_camera')
+def connect_camera():
+    connect_camera()
+
 app.mount('', socketio.ASGIApp(sio, other_asgi_app=app, socketio_path='socketio'))
 
 # Import các sự kiện từ các tệp riêng
@@ -128,10 +140,26 @@ import sio_event
 @sio.event
 async def facial_recognition(sid, data):
     print('facial_recognition - ', sid, ' - ', data)
-    await connect_camera(sio, sid)
+    await connect_camera(sio, sid, data)
     # await sio.emit('message', {'data': data}, to=sid)
 
+# Sự kiện tùy chỉnh để cập nhật thời gian hiện tại
+@sio.event
+async def update_time(sid, data):
+    # global currentTime
+    with time_lock:
+        # Phân tích thời gian từ chuỗi ISO 8601
+        received_time = parser.isoparse(data['currentTime'])
+        
+        # Chuyển đổi thời gian sang UTC+7
+        tz = pytz.timezone('Asia/Ho_Chi_Minh')
+        globals_var.currentTime = received_time.astimezone(tz)
+        print("Updated Current Time:", globals_var.currentTime)
 
+# Khởi động luồng cập nhật thời gian khi ứng dụng khởi động
+@app.on_event("startup")
+async def on_startup():
+    start_time_thread()
 
 
 
@@ -195,9 +223,9 @@ def recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image
             try:
                 # inner exception
                 if x_min <= 0 or y_min <= 0 or x_max >= len(frame[0]) or y_max >= len(frame):
-                    st.warning('Face is very close!', icon="⚠️")
+                    # st.warning('Face is very close!', icon="⚠️")
+                    print('Face is very close!')
                     continue
-                print('processing face')
                 cropped.append(frame[y_min: y_max, x_min: x_max, :])
                 cropped[i] = facenet.flip(cropped[i], False)
                 scaled.append(np.array(Image.fromarray(cropped[i]).resize((image_size, image_size))))
@@ -215,23 +243,15 @@ def recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image
                 if best_class_probabilities > 0.8:
                     cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (236, 0, 242), 2)  # boxing face
                     for H_i in HumanNames:
-                        print('in for')
-                        print(HumanNames[best_class_indices[0]] == H_i)
                         if HumanNames[best_class_indices[0]] == H_i:
-                            print('1')
                             result_names = HumanNames[best_class_indices[0]]
-                            print('2')
                             id = str(result_names).split('_')[0]
-                            print('3')
                             fullName = str(result_names).split('_')[1]
-                            print('4')
                             # print("Predictions : [ name: {} , accuracy: {:.3f} ]".format(
                             #     fullName, best_class_probabilities))
                             print("Predictions : [ name: {} , accuracy: {:.3f} ]".format(
                                 fullName, best_class_probabilities[0]))
-                            print('5')
                             cv2.rectangle(frame, (x_min, y_min-20), (x_max, y_min-2), (0, 255, 255), -1)
-                            print('6')
                             cv2.putText(frame, id, (x_min, y_min - 5), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (236, 0, 242), thickness=1, lineType=1)
                 else:
                     id = '???'
@@ -244,7 +264,6 @@ def recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image
                 # st.error(f'Đã có lỗi: {str(ex)}', icon='❌')
                 print(f"Đã có lỗi: {str(ex)}")
                 continue
-            print(f'f=end for {i}')
     return frame, id, fullName
 
 def recognition(image):
@@ -310,8 +329,13 @@ def text2speech(fullname, rate=150):
     engine.runAndWait()
 
 # @app.get("/connect_camera")
-async def connect_camera(sio, sid):
+async def connect_camera(sio, sid, data):
     logged_id = []
+    statusRecognize = data['status']
+    if (statusRecognize):
+        ids = data['ids']
+        dayID = data['dayID']
+        period = data['period']
 
     with tf.Graph().as_default():
         sess = gpu_configuration()
@@ -322,37 +346,79 @@ async def connect_camera(sio, sid):
             images_placeholder, embeddings, phase_train_placeholder, embedding_size, classifier_filename_exp = load_model_tensor(classifier_filename=classifier_filename)
             with open(classifier_filename_exp, 'rb') as infile:
                 (model, class_names) = pickle.load(infile, encoding='latin1')
+            cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.1.2:554/0')
             # cap = cv2.VideoCapture('rtsp://192.168.1.162:1202/h264_ulaw.sdp')
-            cap = cv2.VideoCapture(0)
+            # cap = cv2.VideoCapture(0)
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+            
             # FRAME_WINDOWS = st.image([])
-            while cap.isOpened():
+            while cap.isOpened() and statusRecognize:
                 if cv2.waitKey(1) == ord('q'):
                     break
-                print('cap.isOpened')
+                # print('cap.isOpened')
                 ret, frame = cap.read()
-                cv2.imshow('frame', frame)
-                # if not ret:
-                    # st.error('Đã có lỗi khi khởi động camera')
-                    # st.error('Vui lòng tắt các ứng dụng khác đang sử dụng camera và khởi động lại ứng dụng')
-                    # st.stop()
-                frame, id, fullName = recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image_size, input_image_size, HumanNames, images_placeholder, embeddings, phase_train_placeholder, embedding_size, sess, model)
-                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                # FRAME_WINDOWS.image(frame)
-                print(id)
-                # id_container.info(f'Mã sinh viên: {id}')
-                # name_container.info(f'Họ và tên sinh viên: {fullName}')
-                if id != '???' and id != '':
-                # if id not in logged_id and id != '???' and id != '':
-                    logged_id.append(id)
-                current_time = pd.Timestamp.now()
-                new_mark_attendance = {'Mã sinh viên': id, 'Họ và tên': fullName, 'Giờ điểm danh': str(current_time)}
-                await sio.emit('facial_recognition_result', {'data': new_mark_attendance}, to=sid)
-                print(new_mark_attendance)
-                #     attendance_data = pd.concat([attendance_data, pd.DataFrame([new_mark_attendance])], ignore_index=True)
+                if (ret):
+                    print('ret ' + str(ret))
+                    frame_copy = frame.copy()
+                    cv2.imshow('frame', frame)
+                    """ # if not ret:
+                        # st.error('Đã có lỗi khi khởi động camera')
+                        # st.error('Vui lòng tắt các ứng dụng khác đang sử dụng camera và khởi động lại ứng dụng')
+                        # st.stop()
+                    frame, id, fullName = recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image_size, input_image_size, HumanNames, images_placeholder, embeddings, phase_train_placeholder, embedding_size, sess, model)
+                    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    # FRAME_WINDOWS.image(frame)
+                    # id_container.info(f'Mã sinh viên: {id}')
+                    # name_container.info(f'Họ và tên sinh viên: {fullName}')
+                    # if id not in logged_id and id != '???' and id != '':
+                    
+                    # if id != '???' and id != '':
+                    #     logged_id.append(id)
+                    # current_time = pd.Timestamp.now()
+                    # new_mark_attendance = {'Mã sinh viên': id, 'Họ và tên': fullName, 'Giờ điểm danh': str(current_time)}
+                    # await sio.emit('facial_recognition_result', {'data': new_mark_attendance}, to=sid)
+                    # print(new_mark_attendance)
+                    
+                    #     attendance_data = pd.concat([attendance_data, pd.DataFrame([new_mark_attendance])], ignore_index=True)
 
-                # attendance_data.to_excel(f'{datetime.datetime.now().date()}.xlsx', index=False)
+                    # attendance_data.to_excel(f'{datetime.datetime.now().date()}.xlsx', index=False)
+                    
+                    print(f'12520088 in ids: {"12520088" in ids}')
+                    print(f'10120620 in ids: {"10120620" in ids}')
+                    if id in ids:
+                        current_time = pd.Timestamp.now()
+                        new_mark_attendance = {'Mã sinh viên': id, 'Họ và tên': fullName, 'Giờ điểm danh': str(current_time)}
+                        # # Convert the captured frame to a file-like object
+                        # _, img_encoded = cv2.imencode('.jpg', frame)
+                        # files = {'frame': ('frame.jpg', img_encoded.tobytes(), 'image/jpeg')}
+                        
+                        # # Send the frame to the API
+                        # response = requests.post(url, files=files)
+                        
+                        # print(response.json())
+                        _, buffer = cv2.imencode('.jpg', frame_copy)
+                        frame_encoded = base64.b64encode(buffer).decode('utf-8')
+                        # image_path = f'{dayID}/{id}_{fullName}/{period}_{datetime.now()}.jpg'
+                        # image_path = f'{dayID}/{id}_{fullName}/{period}_2024-05-30_01-48-11.jpg'
+                        
+                        # Tạo chuỗi thời gian có dạng yyyy-MM-DD_hh-mm-ss
+                        formatted_time = globals_var.currentTime.strftime('%Y-%m-%d_%H-%M-%S')
+                        image_path = f'{dayID}/{id}_{fullName}/{period}_{formatted_time}.jpg'
+                        # await sio.emit('facial_recognition_result', 'ok recognition', to=sid)
+                        await sio.emit('facial_recognition_result', {'status': True, 'studentId': id, 'dayID': dayID, 'image': frame_encoded, 'image_path': image_path}, to=sid)
+                        ids.remove(id)
+                        print({'info': new_mark_attendance, 'dayID': dayID})
+                    elif id == '???':
+                        await sio.emit('facial_recognition_result', {'status': False, 'message': 'Không nhận diện được'}, to=sid)
+                        print('Không nhận diện được')
+                    else:
+                        await sio.emit('facial_recognition_result', {'status': False, 'message': 'Doing...'}, to=sid)
+                        print('id rỗng') """
+                else:
+                    print('ret false')
+                    
+            
             cap.release()
             cv2.destroyAllWindows()
     return {"success": True}
