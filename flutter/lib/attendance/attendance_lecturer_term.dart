@@ -31,6 +31,14 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
   ThemeData? _themeData;
 
   @override
+  void initState() {
+    super.initState();
+    // Future.delayed(Duration.zero, () {
+      fetchAttendanceLecturerTerms();
+    // });
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     // Lấy tham chiếu tới ThemeData và lưu trữ trong biến thành viên
@@ -39,15 +47,17 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, () {
+  void didUpdateWidget(covariant AttendanceLecturerTerm oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.moduleID != oldWidget.moduleID) {
       fetchAttendanceLecturerTerms();
-    });
+    }
   }
 
   void fetchAttendanceLecturerTerms() async {
-    // if (attendances.isEmpty) {
+      setState(() {
+      _isLoading = true;
+    });
     attendanceLecturerTerms =
         await AttendanceService.fetchAttendanceLecturerTerms(
             context,
@@ -55,10 +65,6 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                   _isLoading = value;
                 }),
             widget.moduleID);
-    // attendances = Provider.of<AppStateProvider>(context, listen: false)
-    //     .appState!
-    //     .attendanceLecturerTerms;
-
     Provider.of<AppStateProvider>(context, listen: false)
         .setTableLength(attendanceLecturerTerms.length);
   }
@@ -79,7 +85,6 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
 
     return _isLoading
         ? Container(
-            // zzzzz: Alignment.center,
             alignment: Alignment.center,
             width: 60,
             height: 60,

@@ -11,7 +11,6 @@ import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
 import 'package:flutter_todo_app/schoolyears/schoolyearService.dart';
-import 'package:flutter_todo_app/subjects/subjectService.dart';
 import 'package:provider/provider.dart';
 
 class AttendanceSelectionTerm extends StatefulWidget {
@@ -290,16 +289,18 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (moduleID != '' && role == Role.student)
-              AttendanceStudentTerm(
-                  moduleID: moduleID
-                 ),
+              Expanded(
+                child: AttendanceStudentTerm(
+                    moduleID: moduleID
+                   )
+              ),
             if (moduleID != '' &&
                 (role == Role.admin ||
                     role == Role.aao ||
                     role == Role.lecturer))
-              AttendanceLecturerTerm(
+              Expanded(child: AttendanceLecturerTerm(
                   moduleID: moduleID,
-                  scheduleAdminTermsLength: scheduleAdminTermsLength)
+                  scheduleAdminTermsLength: scheduleAdminTermsLength))
           ],
         )
       ],
