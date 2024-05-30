@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
-import 'package:flutter_todo_app/provider/appState.dart';
-import 'package:provider/provider.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter_todo_app/constant/config.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class DateTimePickerWidget extends StatefulWidget {
@@ -17,8 +18,11 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
   void initState() {
     super.initState();
     _selectedDateTime = DateTime.now();
-    socket = Provider.of<AppStateProvider>(context, listen: false).appState!.socket;
-    socket.emit('currentTime', _selectedDateTime.toString());
+    // socket = Provider.of<AppStateProvider>(context, listen: false).appState!.socket;
+    // socket.emit('currentTime', _selectedDateTime.toString());
+    Future.delayed(Duration.zero, () {
+      changeSimulationDate(_selectedDateTime);
+    });
   }
 
   Future<void> _selectDateTime(BuildContext context) async {
@@ -45,11 +49,45 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
             pickedTime.minute,
           );
 
-          
           print(_selectedDateTime.toString());
-          socket.emit('currentTime', _selectedDateTime.toString());
+          // socket.emit('currentTime', _selectedDateTime.toString());
+          changeSimulationDate(_selectedDateTime);
         });
       }
+    }
+  }
+
+  static Future<String> changeSimulationDateService(DateTime date) async {
+    final response = await http.post(
+      Uri.http(url, changeSimulationDateAPI),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'simulationDate': date.toString()}),
+    );
+    return json.encode({
+      'message': json.decode(response.body)['message'],
+      'statusCode': response.statusCode
+    });
+  }
+
+  Future<void> changeSimulationDate(DateTime date) async {
+    final response = json.decode(await changeSimulationDateService(date));
+    if (response['statusCode'] == 200) {
+      // Xử lý thành công
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response['message']),
+          backgroundColor:
+              Colors.green, // Thay đổi màu nền thành màu xanh lá cây
+        ),
+      );
+    } else {
+      // Xử lý lỗi
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("${response['statusCode']}: ${response['message']}"),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 

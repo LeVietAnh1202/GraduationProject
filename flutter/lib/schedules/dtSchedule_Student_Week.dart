@@ -131,13 +131,13 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
 
     return DataTable(
       columns: [
-        DataColumn(label: Text('Thứ', textAlign: TextAlign.center)),
-        DataColumn(label: Text('Tiết', textAlign: TextAlign.center)),
-        DataColumn(label: Text('Mã học phần', textAlign: TextAlign.center)),
-        DataColumn(label: Text('Tên môn', textAlign: TextAlign.center)),
-        DataColumn(label: Text('Phòng học', textAlign: TextAlign.center)),
-        DataColumn(label: Text('Tên giảng viên', textAlign: TextAlign.center)),
-        DataColumn(label: Text('Điểm danh', textAlign: TextAlign.center)),
+        DataColumn(label: Expanded(child: Text('Thứ', textAlign: TextAlign.center))),
+        DataColumn(label: Expanded(child: Text('Tiết', textAlign: TextAlign.center))),
+        DataColumn(label: Expanded(child: Text('Mã học phần', textAlign: TextAlign.center))),
+        DataColumn(label: Expanded(child: Text('Tên môn', textAlign: TextAlign.center))),
+        DataColumn(label: Expanded(child: Text('Phòng học', textAlign: TextAlign.center))),
+        DataColumn(label: Expanded(child: Text('Tên giảng viên', textAlign: TextAlign.center))),
+        DataColumn(label: Expanded(child: Text('Điểm danh', textAlign: TextAlign.center))),
       ],
       rows: filteredSchedules.map((schedule) {
         return DataRow(
@@ -148,7 +148,7 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
             DataCell(Center(child: Text(schedule['subjectName']))),
             DataCell(Center(child: Text(schedule['roomName']))),
             DataCell(Center(child: Text(schedule['lecturerName']))),
-            DataCell(Center(child: Utilities.attendanceIcon(schedule['attendance']))),
+            DataCell(Center(child: Utilities.attendanceImages(schedule['NoImages']))),
           ],
         );
       }).toList(growable: false),
@@ -174,128 +174,4 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
       ),
     );
   }
-
-  /* @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          buildWeekDropdown(context),
-          _isLoading
-              ? Container(
-                  child: CircularProgressIndicator(),
-                  margin: EdgeInsets.only(bottom: 5, top: 10),
-                )
-              : Container(
-                  width: MediaQuery.of(context).size.width - sideBarWidth,
-                  child: DataTable(
-                      columns: [
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Thứ',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Tiết',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Mã học phần',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Tên môn',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Phòng học',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Tên giảng viên',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Điểm danh',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        // Add other columns as needed
-                      ],
-                      rows: context
-                          .watch<AppStateProvider>()
-                          .appState!
-                          .scheduleStudentWeeks
-                          .asMap()
-                          .entries
-                          .map((entry) {
-                            final schedule = entry.value;
-
-                            if (schedule['week'] == selectedWeek) {
-                              return DataRow(
-                                cells: [
-                                  DataCell(
-                                      Center(child: Text(schedule['day']))),
-                                  DataCell(
-                                      Center(child: Text(schedule['time']))),
-                                  DataCell(Center(
-                                      child: Text(schedule['moduleID']))),
-                                  DataCell(Center(
-                                      child: Text(schedule['subjectName']))),
-                                  DataCell(Center(
-                                      child: Text(schedule['roomName']))),
-                                  DataCell(Center(
-                                      child: Text(schedule['lecturerName']))),
-                                  DataCell(
-                                    Center(
-                                        child: Utilities.attendanceIcon(
-                                            schedule['attendance'])),
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return null; // Không trả về gì nếu không phải tuần 19
-                            }
-                          })
-                          .whereType<DataRow>()
-                          .toList(growable: false)
-                        ..sort((a, b) => scheduleDayComparator(
-                            ((a.cells[0].child as Center).child as Text)
-                                .data
-                                .toString(),
-                            ((b.cells[0].child as Center).child as Text)
-                                .data
-                                .toString()))),
-                ),
-        ],
-      ),
-    );
-  } */
 }
