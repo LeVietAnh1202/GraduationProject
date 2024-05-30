@@ -12,6 +12,7 @@ const FacultyRoute = require('./routes/faculty.router');
 const ScheduleRoute = require('./routes/schedule.router');
 const SubjectRoute = require('./routes/subject.router');
 const ModuleRoute = require('./routes/module.router');
+const AttendanceRoute = require('./routes/attendance.router');
 const LoadImageRoute = require('./routes/load_image.router');
 const path = require('path');
 
@@ -35,6 +36,12 @@ app.get('/health', (_req, res) => {
     })
 })
 
+app.post('/simulationDate', (_req, res) => {
+    const {simulationDate} = _req.body
+    global.currentTime = simulationDate
+    res.json({ status: true, message: 'Thay đổi thời gian mô phỏng thành công.' });
+});
+
 app.use(bodyParser.json())
 
 app.use("/user", UserRoute);
@@ -49,6 +56,7 @@ app.use("/faculty", FacultyRoute);
 app.use("/schedule", ScheduleRoute);
 app.use("/subject", SubjectRoute);
 app.use("/module", ModuleRoute);
+app.use("/attendance", AttendanceRoute);
 
 app.use('/images', LoadImageRoute);
 

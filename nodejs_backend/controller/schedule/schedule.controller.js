@@ -27,7 +27,8 @@ exports.getAllSchedule = async (req, res, next) => {
 
 exports.getCheckSchedule = async (req, res, next) => {
     try {
-        const scheduleList = await ScheduleService.checkSchedule();
+        const {simulationDate} = req.body;
+        const scheduleList = await ScheduleService.checkSchedule(simulationDate);
         res.json({ status: true, success: 'CheckSchedule successfully', data: scheduleList });
     } catch (err) {
         console.log("---> err -->", err);

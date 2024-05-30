@@ -1,4 +1,6 @@
 const ScheduleModel = require("../../models/schedule/schedule.model");
+const ModuleService = require("../module.service");
+const ModuleModel = require("../../models/module.model");
 
 class ScheduleService {
     static async createSchedule(scheduleID, dayTerm, moduleID, dateStart, dateEnd, details) {
@@ -68,9 +70,26 @@ class ScheduleService {
         });
     }
 
-    static async checkSchedule() {
+    static getCurrentPeriod(currentDate) {
+        const currentTime = currentDate.toTimeString().slice(0, 5); // Extract "HH:MM" format
+    
+        for (const period in periodTimes) {
+            const { start, end } = periodTimes[period];
+            if (currentTime >= start && currentTime <= end) {
+                return parseInt(period);
+            }
+        }
+    
+        return null; // If no period matches the current time
+    }
+
+    static async checkSchedule(now) {
         try {
-            const now = new Date(2023, 10, 27, 7, 15, 0); // Lấy thời gian hiện tại
+            const exam = new Date(2023, 10, 27, 7, 15, 0); // Lấy thời gian hiện tại
+            console.log('exam: ');
+            console.log(exam);
+            console.log('now: ');
+            console.log(now);
 
             // Tìm kiếm các lịch học với điều kiện dateStart nhỏ hơn thời gian hiện tại và dateEnd lớn hơn thời gian hiện tại
             const schedules = await ScheduleModel.find(
@@ -93,15 +112,40 @@ class ScheduleService {
                     detail
                 }))
             );
+            /* // Calculate the class times for each relevant detail
+            const classTimes = await Promise.all(
+                relevantDetails.map(async ({ moduleID, detail }) => {
+                    const { listStudentID } = await ModuleModel.findOne({ moduleID });
+
+                    return detail.weekDetails.map(weekDetail => {
+                        const { day, time, dayID } = weekDetail;
+                        const { classStartTime, classEndTime } = ScheduleService.getClassTimes(detail.weekTimeStart, day, time);
+
+                        return { listStudentID, classStartTime, classEndTime, dayID };
+                    });
+                })
+            ).then(results => results.flat()); */
+
+            // Truy vấn tất cả các moduleID để lấy listStudentID một lần
+            const moduleIDs = [...new Set(relevantDetails.map(rd => rd.moduleID))];
+            const moduleData = await ModuleModel.find({ moduleID: { $in: moduleIDs } }, 'moduleID listStudentID');
+            const moduleMap = new Map(moduleData.map(md => [md.moduleID, md.listStudentID]));
 
             // Calculate the class times for each relevant detail
-            const classTimes = relevantDetails.map(({ moduleID, detail }) => {
+            const classTimes = relevantDetails.flatMap(({ moduleID, detail }) => {
+                const listStudentID = moduleMap.get(moduleID);
+
                 return detail.weekDetails.map(weekDetail => {
                     const { day, time, dayID } = weekDetail;
                     const { classStartTime, classEndTime } = ScheduleService.getClassTimes(detail.weekTimeStart, day, time);
-                    return { moduleID, classStartTime, classEndTime, dayID };
+                    
+                    // Example usage
+                    // const currentPeriod = ScheduleService.getCurrentPeriod(global.currentTime);
+
+                    return { listStudentID, classStartTime, classEndTime, dayID };
                 });
-            }).flat();
+            });
+
             const filteredSchedules = ScheduleService.filterClassSchedules(classTimes, now);
 
             return filteredSchedules;

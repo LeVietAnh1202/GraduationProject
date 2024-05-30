@@ -1,14 +1,26 @@
 const AttendanceService = require('../services/attendance.service');
 
-exports.createAttendance = async (req, res, next) => {
+
+
+exports.createOrUpdateAttendance = async (req, res, next) => {
     try {
-        const { studentId, scheduleID, attendance } = req.body;
-        const duplicate = await AttendanceService.getAttendanceByStudentId(studentId);
-        if (duplicate) {
-            return res.json({ status: true, success: 'Attendance record already exists' });
-        }
-        await AttendanceService.createAttendance(studentId, scheduleID, attendance);
-        res.json({ status: true, success: 'Create attendance record successfully' });
+        const { studentId, dayID, attendanceImagePath } = req.body;
+        // const duplicate = await AttendanceService.getAttendanceByStudentId(studentId);
+        // if (duplicate) {
+        //     return res.json({ status: true, success: 'Attendance record already exists' });
+        // }
+        const studentName = await AttendanceService.createOrUpdateAttendance(studentId, dayID, attendanceImagePath);
+        res.json({ status: true, success: `Sinh viên ${studentId} - ${studentName} điểm danh thành công.` });
+    } catch (err) {
+        console.log("---> err -->", err);
+        next(err);
+    }
+};
+
+exports.uploadAttendanceImage = async (req, res, next) => {
+    try {
+        const studentName = await AttendanceService.uploadAttendanceImage(req);
+        res.json({ status: true, success: `Sinh viên ${studentId} - ${studentName} thêm ảnh điểm danh thành công.` });
     } catch (err) {
         console.log("---> err -->", err);
         next(err);

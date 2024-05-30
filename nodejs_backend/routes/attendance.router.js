@@ -1,7 +1,9 @@
 const router = require("express").Router();
-const AttendanceController = require('../controller/student.controller');
+const AttendanceController = require('../controller/attendance.controller');
 
-router.post("/createAttendance", AttendanceController.createAttendance);
+router.post("/createOrUpdateAttendance", AttendanceController.createOrUpdateAttendance);
+
+router.post("/uploadAttendanceImage", AttendanceController.uploadAttendanceImage);
 
 router.get("/getAllAttendance", AttendanceController.getAllAttendance);
 

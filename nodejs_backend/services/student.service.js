@@ -165,7 +165,7 @@ class StudentService {
                 },
                 filename: function (req, file, cb) {
                     const fileName = file.originalname;
-                    cb(null, fileName); // Sử dụng tên file gốc
+                    cb(null, fileName); // Sử dụng tên file được gửi
                 }
             });
 
