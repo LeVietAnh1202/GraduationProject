@@ -16,14 +16,21 @@ class Sidebar extends StatefulWidget {
 class _SidebarState extends State<Sidebar> {
   // bool _isSidebarCollapsed = false;
   String _selectedItem = trangChu;
-  late String facultyID;
+  late String facultyID = 'utehy';
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      getfacultyID(); // Gọi hàm setAppState sau khi initState hoàn thành
+      final role =
+          Provider.of<AccountProvider>(context, listen: false).getRole();
+      if (role != Role.admin)
+        getfacultyID(); // Gọi hàm setAppState sau khi initState hoàn thành
+      else
+        setState(() {
+          _isLoading = false;
+        });
     });
   }
 
@@ -73,6 +80,7 @@ class _SidebarState extends State<Sidebar> {
       );
     }
 
+    print('logo: ' + facultyID);
     return Container(
       // width: _isSidebarCollapsed ? 60 : 200,
       child: Drawer(

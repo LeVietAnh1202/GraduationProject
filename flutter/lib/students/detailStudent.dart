@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/constant/number.dart';
@@ -10,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:http/http.dart' as http;
 
 class DetailStudent extends StatefulWidget {
   final String studentId; // Thêm trường studentId
@@ -22,6 +25,8 @@ class DetailStudent extends StatefulWidget {
 class _DetailStudentState extends State<DetailStudent> {
   List<Student> students = [];
 
+  String _result = "";
+  bool _loading = false;
   bool hasVideo = true;
   bool isVideoEnded = false;
   double videoPosition = 0.0;
@@ -107,16 +112,78 @@ class _DetailStudentState extends State<DetailStudent> {
   }
 
   // Function to call your API
-  Future<void> callYourAPI() async {
-    // Implement your API call here
-    print("API called!");
-    // For example:
-    // final response = await http.get(Uri.parse('http://yourapi.com/endpoint'));
-    // if (response.statusCode == 200) {
-    //   // Successfully called API
-    // } else {
-    //   // Handle error
-    // }
+  void _callAPIHandleVideo() async {
+    setState(() {
+      _loading = true;
+    });
+
+    try {
+      var response = await http.post(
+        Uri.http('192.168.1.4:8001', 'crop_video'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "video_path":
+              '${URLNodeJSServer_RaspberryPi_Videos}/10120620_NguyenMinhDoanh.mp4',
+        }),
+      );
+
+      // var response = await http.get(
+      //   Uri.http('192.168.1.4:8001', ''),
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // );
+
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        setState(() {
+          _result = jsonResponse.toString();
+          _loading = false;
+        });
+
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text('API Response handle'),
+            content:
+                Text("Images_count: " + jsonResponse['image_count'].toString()),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+      } else {
+        throw Exception('Failed to handle video');
+      }
+    } catch (error) {
+      setState(() {
+        _loading = false;
+      });
+
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text('Error'),
+          content: Text('An error occurred: $error'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+      print(error);
+    } finally {
+      setState(() {
+        _loading = false;
+      });
+    }
   }
 
   @override
@@ -194,9 +261,11 @@ class _DetailStudentState extends State<DetailStudent> {
             //       option = selectedOption;
             //     });
             //   },
-            // ),
+            // ),\
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: (imagesView == ShowImage.video)
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.center,
               children: [
                 SingleChoice(
                   option: SegmentButtonOption.image,
@@ -206,21 +275,23 @@ class _DetailStudentState extends State<DetailStudent> {
                     });
                   },
                 ),
-                ElevatedButton(
-                  onPressed: callYourAPI,
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                      (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return Colors
-                              .green; // Color when the button is pressed
-                        }
-                        return Colors.blue; // Default color
-                      },
+                if (imagesView == ShowImage.video)
+                  ElevatedButton(
+                    onPressed: _callAPIHandleVideo,
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.pressed)) {
+                            return Colors
+                                .green; // Color when the button is pressed
+                          }
+                          return Colors.blue; // Default color
+                        },
+                      ),
                     ),
+                    child: Text('Call API'),
                   ),
-                  child: Text('Call API'),
-                ),
               ],
             ),
             SizedBox(height: 30),
