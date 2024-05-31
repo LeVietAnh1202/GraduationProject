@@ -25,6 +25,10 @@ from datetime import datetime
 import base64
 from dateutil import parser
 import pytz
+import subprocess
+
+import queue
+import threading
 
 from globals_var import currentTime, time_lock, start_time_thread
 import globals_var
@@ -328,14 +332,47 @@ def text2speech(fullname, rate=150):
     engine.say(f'Xin chào {fullname}')
     engine.runAndWait()
 
+# Tạo hàng đợi để lưu trữ các khung hình
+frame_queue = queue.Queue(maxsize=200)
+
+# Cờ hiệu để dừng luồng
+stop_flag = threading.Event()
+
 # @app.get("/connect_camera")
 async def connect_camera(sio, sid, data):
+    # Thiết lập biến môi trường cho OpenCV với tùy chọn rtsp_transport là udp
+    os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
     logged_id = []
     statusRecognize = data['status']
     if (statusRecognize):
         ids = data['ids']
         dayID = data['dayID']
         period = data['period']
+
+    def capture_frames():
+        print('khởi tạo camera')
+        # cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.1.2:554/0', cv2.CAP_FFMPEG)
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+        while not stop_flag.is_set() and cap.isOpened():
+            # print('isOpended')
+            ret, frame = cap.read()
+            if not ret:
+                print("Không thể đọc khung hình")
+                break
+            if frame_queue.full():
+                frame_queue.get()
+            frame_queue.put(frame)
+            # if cv2.waitKey(1) == ord('q'):
+            #     break
+        cap.release()
+        # cv2.destroyAllWindows()
+
+    """ capture_thread = threading.Thread(target=capture_frames)
+    capture_thread.daemon = True
+    capture_thread.start() """
 
     with tf.Graph().as_default():
         sess = gpu_configuration()
@@ -345,24 +382,37 @@ async def connect_camera(sio, sid, data):
             # st.success('Model loaded successfully')
             images_placeholder, embeddings, phase_train_placeholder, embedding_size, classifier_filename_exp = load_model_tensor(classifier_filename=classifier_filename)
             with open(classifier_filename_exp, 'rb') as infile:
-                (model, class_names) = pickle.load(infile, encoding='latin1')
-            cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.1.2:554/0')
+                (model, class_names) = pickle.load(infile, encoding='latin1')  
+
+            capture_thread = threading.Thread(target=capture_frames)
+            capture_thread.daemon = True
+            capture_thread.start()        
+
+            """  cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.163.114:554/0', cv2.CAP_FFMPEG)
             # cap = cv2.VideoCapture('rtsp://192.168.1.162:1202/h264_ulaw.sdp')
             # cap = cv2.VideoCapture(0)
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+            # Thiết lập kích thước bộ đệm
+            cap.set(cv2.CAP_PROP_BUFFERSIZE, 50) """
             
             # FRAME_WINDOWS = st.image([])
-            while cap.isOpened() and statusRecognize:
+            while statusRecognize:
+            # while cap.isOpened() and statusRecognize:
                 if cv2.waitKey(1) == ord('q'):
+                    stop_flag.set()
                     break
                 # print('cap.isOpened')
-                ret, frame = cap.read()
-                if (ret):
-                    print('ret ' + str(ret))
+
+                # ret, frame = cap.read()
+                # if (ret):
+                if not frame_queue.empty():
+                    print('frame_queue.empty() true')
+                    frame = frame_queue.get()
+                    # print('ret ' + str(ret))
                     frame_copy = frame.copy()
                     cv2.imshow('frame', frame)
-                    """ # if not ret:
+                    # if not ret:
                         # st.error('Đã có lỗi khi khởi động camera')
                         # st.error('Vui lòng tắt các ứng dụng khác đang sử dụng camera và khởi động lại ứng dụng')
                         # st.stop()
@@ -414,12 +464,12 @@ async def connect_camera(sio, sid, data):
                         print('Không nhận diện được')
                     else:
                         await sio.emit('facial_recognition_result', {'status': False, 'message': 'Doing...'}, to=sid)
-                        print('id rỗng') """
+                        print('id rỗng')
                 else:
-                    print('ret false')
+                    print('frame_queue.empty() false')
                     
             
-            cap.release()
+            # cap.release()
             cv2.destroyAllWindows()
     return {"success": True}
 # connect_camera()
@@ -468,7 +518,7 @@ def _get_frame():
 
 
 def main():
-    run("server:app", host="192.168.1.9", port=8001, reload=True)
+    run("server:app", host="192.168.1.6", port=8001, reload=True)
 
 if __name__ == '__main__':
     main()
