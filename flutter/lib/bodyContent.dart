@@ -3,7 +3,6 @@ import 'package:flutter_todo_app/breadcrumb.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/sidebar.dart';
 import 'package:flutter_todo_app/constant/string.dart';
-import 'package:flutter_todo_app/homepage.dart';
 import 'package:flutter_todo_app/processingAndTraining.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
@@ -12,7 +11,6 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class BodyContent extends StatefulWidget {
-  late bool _haveContent = false;
   late Calendar calendarView;
   late String sidebarKey;
 
@@ -24,33 +22,10 @@ class BodyContent extends StatefulWidget {
 
 class _BodyContentState extends State<BodyContent> {
   int currentPage = 1;
-  // late String dataTableScheduleKey;
-  // String getDataTableScheduleKey(BuildContext context) {
-
-  //   Map<String, String> roleMap = {
-  //     "admin": "admin",
-  //     "sinhvien": "student",
-  //     "giangvien": "lecture"
-  //   };
-
-  //   return "${roleMap[role] ?? ''}${calendarView == Calendar.week ? 'Week' : 'Term'}";
-  // }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // widget.calendarView = Provider.of<AppStateProvider>(context, listen: false)
-    //     .appState!
-    //     .calendarView;
-    // widget.sidebarKey = Provider.of<AppStateProvider>(context, listen: false)
-    //     .appState!
-    //     .breadcrumbs;
-
-    // widget.role =
-    //     Provider.of<AccountProvider>(context, listen: false).account!.role;
-    // // widget.role = '';
-    // // widget.role = context.watch<AccountProvider>().account!.role;
   }
 
   @override
@@ -84,43 +59,12 @@ class _BodyContentState extends State<BodyContent> {
           if (widget.sidebarKey == quanLyLichHoc) SizedBox(height: 16.0),
           Container(
               width: MediaQuery.of(context).size.width - sideBarWidth,
-              // child: DtScheduleStudentTerm(),
-              // child: DtScheduleLecturerTerm(),
 
               child: sidebarMap.containsKey()
                   ? Container(
                       child: sidebarMap.getSidebarMap(),
                     )
-                  // ? DtScheduleStudentWeek()
                   : ProcessingAndTraining()
-              // DataTable(
-              //     columns: [
-              //       DataColumn(
-              //         label: Expanded(
-              //           child: Text(
-              //             'Column 1',
-              //             textAlign: TextAlign.center,
-              //           ),
-              //         ),
-              //       ),
-              //       DataColumn(
-              //         label: Expanded(
-              //           child: Text(
-              //             'Column 2',
-              //             textAlign: TextAlign.center,
-              //           ),
-              //         ),
-              //       )
-              //     ],
-              //     rows: [
-              //       DataRow(
-              //         cells: [
-              //           DataCell(Center(child: Text("234324242"))),
-              //           DataCell(Center(child: Text("31111114"))),
-              //         ],
-              //       ),
-              //     ],
-              //   ),
               ),
           SizedBox(height: 16.0),
           if (widget.sidebarKey == quanLyDinhDanh ||
