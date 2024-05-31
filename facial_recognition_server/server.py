@@ -201,74 +201,132 @@ def load_model_tensor(classifier_filename):
 
     return images_placeholder, embeddings, phase_train_placeholder, embedding_size, classifier_filename_exp
 
+# def recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image_size, input_image_size, HumanNames, images_placeholder, embeddings, phase_train_placeholder, embedding_size, sess, model):
+#     id = ''
+#     fullName = ''
+#     # print('frame: ' + str(frame))
+#     if frame.ndim == 2:
+#         frame = facenet.to_rgb(frame)
+#     bounding_boxes, _ = detect_face.detect_face(frame, minsize, pnet, rnet, onet, threshold, factor)
+#     faceNum = bounding_boxes.shape[0]
+#     print('faceNum: ' + str(faceNum))
+#     if faceNum > 0:
+#         det = bounding_boxes[:, 0:4]
+#         img_size = np.asarray(frame.shape)[0:2]
+#         cropped = []
+#         scaled = []
+#         scaled_reshape = []
+
+#         for i in range(faceNum):
+#             emb_array = np.zeros((1, embedding_size))
+#             x_min = int(det[i][0])
+#             y_min = int(det[i][1])
+#             x_max = int(det[i][2])
+#             y_max = int(det[i][3])
+
+#             try:
+#                 # inner exception
+#                 if x_min <= 0 or y_min <= 0 or x_max >= len(frame[0]) or y_max >= len(frame):
+#                     # st.warning('Face is very close!', icon="⚠️")
+#                     print('Face is very close!')
+#                     continue
+#                 cropped.append(frame[y_min: y_max, x_min: x_max, :])
+#                 cropped[i] = facenet.flip(cropped[i], False)
+#                 scaled.append(np.array(Image.fromarray(cropped[i]).resize((image_size, image_size))))
+#                 scaled[i] = cv2.resize(scaled[i], (input_image_size, input_image_size),
+#                                        interpolation=cv2.INTER_CUBIC)
+#                 scaled[i] = facenet.prewhiten(scaled[i])
+#                 scaled_reshape.append(scaled[i].reshape(-1, input_image_size, input_image_size, 3))
+#                 feed_dict = {images_placeholder: scaled_reshape[i], phase_train_placeholder: False}
+#                 emb_array[0, :] = sess.run(embeddings, feed_dict=feed_dict)
+#                 predictions = model.predict_proba(emb_array)
+#                 best_class_indices = np.argmax(predictions, axis=1)
+#                 best_class_probabilities = predictions[
+#                     np.arange(len(best_class_indices)), best_class_indices]
+#                 print('best_class_probabilities:' + str(best_class_probabilities))
+#                 if best_class_probabilities > 0.8:
+#                     cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (236, 0, 242), 2)  # boxing face
+#                     for H_i in HumanNames:
+#                         if HumanNames[best_class_indices[0]] == H_i:
+#                             result_names = HumanNames[best_class_indices[0]]
+#                             id = str(result_names).split('_')[0]
+#                             fullName = str(result_names).split('_')[1]
+#                             # print("Predictions : [ name: {} , accuracy: {:.3f} ]".format(
+#                             #     fullName, best_class_probabilities))
+#                             print("Predictions : [ name: {} , accuracy: {:.3f} ]".format(
+#                                 fullName, best_class_probabilities[0]))
+#                             cv2.rectangle(frame, (x_min, y_min-20), (x_max, y_min-2), (0, 255, 255), -1)
+#                             cv2.putText(frame, id, (x_min, y_min - 5), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (236, 0, 242), thickness=1, lineType=1)
+#                 else:
+#                     id = '???'
+#                     fullName = '???'
+#                     cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (236, 0, 242), 2)
+#                     cv2.rectangle(frame, (x_min, y_min-20), (x_max, y_min-2), (0, 255, 255), -1)
+#                     cv2.putText(frame, "???", (x_min, y_min - 5), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1,
+#                                 (236, 0, 242), thickness=1, lineType=1)
+#             except Exception as ex:
+#                 # st.error(f'Đã có lỗi: {str(ex)}', icon='❌')
+#                 print(f"Đã có lỗi: {str(ex)}")
+#                 continue
+#     return frame, id, fullName
+
 def recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image_size, input_image_size, HumanNames, images_placeholder, embeddings, phase_train_placeholder, embedding_size, sess, model):
     id = ''
     fullName = ''
-    # print('frame: ' + str(frame))
+
     if frame.ndim == 2:
         frame = facenet.to_rgb(frame)
-    bounding_boxes, _ = detect_face.detect_face(frame, minsize, pnet, rnet, onet, threshold, factor)
+
+    bounding_boxes, _ = detect_face(frame, minsize, pnet, rnet, onet, threshold, factor)
     faceNum = bounding_boxes.shape[0]
-    print('faceNum: ' + str(faceNum))
+    print(f'Number of faces: {faceNum}')
+
     if faceNum > 0:
         det = bounding_boxes[:, 0:4]
         img_size = np.asarray(frame.shape)[0:2]
-        cropped = []
-        scaled = []
-        scaled_reshape = []
 
         for i in range(faceNum):
-            emb_array = np.zeros((1, embedding_size))
-            x_min = int(det[i][0])
-            y_min = int(det[i][1])
-            x_max = int(det[i][2])
-            y_max = int(det[i][3])
+            x_min, y_min, x_max, y_max = map(int, det[i])
+            if x_min <= 0 or y_min <= 0 or x_max >= img_size[1] or y_max >= img_size[0]:
+                print('Face is very close!')
+                continue
 
             try:
-                # inner exception
-                if x_min <= 0 or y_min <= 0 or x_max >= len(frame[0]) or y_max >= len(frame):
-                    # st.warning('Face is very close!', icon="⚠️")
-                    print('Face is very close!')
-                    continue
-                cropped.append(frame[y_min: y_max, x_min: x_max, :])
-                cropped[i] = facenet.flip(cropped[i], False)
-                scaled.append(np.array(Image.fromarray(cropped[i]).resize((image_size, image_size))))
-                scaled[i] = cv2.resize(scaled[i], (input_image_size, input_image_size),
-                                       interpolation=cv2.INTER_CUBIC)
-                scaled[i] = facenet.prewhiten(scaled[i])
-                scaled_reshape.append(scaled[i].reshape(-1, input_image_size, input_image_size, 3))
-                feed_dict = {images_placeholder: scaled_reshape[i], phase_train_placeholder: False}
-                emb_array[0, :] = sess.run(embeddings, feed_dict=feed_dict)
+                cropped = frame[y_min:y_max, x_min:x_max, :]
+                cropped_copy = cropped.copy()
+                cropped = facenet.flip(cropped, False)
+                scaled = np.array(Image.fromarray(cropped).resize((image_size, image_size)))
+                scaled = cv2.resize(scaled, (input_image_size, input_image_size), interpolation=cv2.INTER_CUBIC)
+                scaled = facenet.prewhiten(scaled)
+                scaled_reshape = scaled.reshape(-1, input_image_size, input_image_size, 3)
+
+                feed_dict = {images_placeholder: scaled_reshape, phase_train_placeholder: False}
+                emb_array = sess.run(embeddings, feed_dict=feed_dict)
+
                 predictions = model.predict_proba(emb_array)
                 best_class_indices = np.argmax(predictions, axis=1)
-                best_class_probabilities = predictions[
-                    np.arange(len(best_class_indices)), best_class_indices]
-                print('best_class_probabilities:' + str(best_class_probabilities))
-                if best_class_probabilities > 0.8:
-                    cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (236, 0, 242), 2)  # boxing face
+                best_class_probabilities = predictions[np.arange(len(best_class_indices)), best_class_indices]
+
+                if best_class_probabilities[0] > 0.8:
+                    result_name = HumanNames[best_class_indices[0]]
                     for H_i in HumanNames:
-                        if HumanNames[best_class_indices[0]] == H_i:
-                            result_names = HumanNames[best_class_indices[0]]
-                            id = str(result_names).split('_')[0]
-                            fullName = str(result_names).split('_')[1]
-                            # print("Predictions : [ name: {} , accuracy: {:.3f} ]".format(
-                            #     fullName, best_class_probabilities))
-                            print("Predictions : [ name: {} , accuracy: {:.3f} ]".format(
-                                fullName, best_class_probabilities[0]))
-                            cv2.rectangle(frame, (x_min, y_min-20), (x_max, y_min-2), (0, 255, 255), -1)
-                            cv2.putText(frame, id, (x_min, y_min - 5), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (236, 0, 242), thickness=1, lineType=1)
+                        if result_name == H_i:
+                            id, fullName = result_name.split('_')
+                            print(f"Predictions: [name: {fullName}, accuracy: {best_class_probabilities[0]:.3f}]")
+
+                            # cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (236, 0, 242), 2)
+                            # cv2.rectangle(frame, (x_min, y_min - 20), (x_max, y_min - 2), (0, 255, 255), -1)
+                            # cv2.putText(frame, id, (x_min, y_min - 5), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (236, 0, 242), 1, 1)
                 else:
-                    id = '???'
-                    fullName = '???'
-                    cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (236, 0, 242), 2)
-                    cv2.rectangle(frame, (x_min, y_min-20), (x_max, y_min-2), (0, 255, 255), -1)
-                    cv2.putText(frame, "???", (x_min, y_min - 5), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1,
-                                (236, 0, 242), thickness=1, lineType=1)
+                    id, fullName = '???', '???'
+                    # cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (236, 0, 242), 2)
+                    # cv2.rectangle(frame, (x_min, y_min - 20), (x_max, y_min - 2), (0, 255, 255), -1)
+                    # cv2.putText(frame, "???", (x_min, y_min - 5), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (236, 0, 242), 1, 1)
             except Exception as ex:
-                # st.error(f'Đã có lỗi: {str(ex)}', icon='❌')
-                print(f"Đã có lỗi: {str(ex)}")
+                print(f"Error: {str(ex)}")
                 continue
-    return frame, id, fullName
+
+    return frame, id, fullName, cropped_copy
 
 def recognition(image):
     id = ''
@@ -410,13 +468,13 @@ async def connect_camera(sio, sid, data):
                     print('frame_queue.empty() true')
                     frame = frame_queue.get()
                     # print('ret ' + str(ret))
-                    frame_copy = frame.copy()
+                    # frame_copy = frame.copy()
                     cv2.imshow('frame', frame)
                     # if not ret:
                         # st.error('Đã có lỗi khi khởi động camera')
                         # st.error('Vui lòng tắt các ứng dụng khác đang sử dụng camera và khởi động lại ứng dụng')
                         # st.stop()
-                    frame, id, fullName = recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image_size, input_image_size, HumanNames, images_placeholder, embeddings, phase_train_placeholder, embedding_size, sess, model)
+                    frame, id, fullName, cropped_copy = recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image_size, input_image_size, HumanNames, images_placeholder, embeddings, phase_train_placeholder, embedding_size, sess, model)
                     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                     # FRAME_WINDOWS.image(frame)
                     # id_container.info(f'Mã sinh viên: {id}')
@@ -447,7 +505,8 @@ async def connect_camera(sio, sid, data):
                         # response = requests.post(url, files=files)
                         
                         # print(response.json())
-                        _, buffer = cv2.imencode('.jpg', frame_copy)
+                        _, buffer = cv2.imencode('.jpg', cropped_copy)
+                        # _, buffer = cv2.imencode('.jpg', frame_copy)
                         frame_encoded = base64.b64encode(buffer).decode('utf-8')
                         # image_path = f'{dayID}/{id}_{fullName}/{period}_{datetime.now()}.jpg'
                         # image_path = f'{dayID}/{id}_{fullName}/{period}_2024-05-30_01-48-11.jpg'
