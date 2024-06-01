@@ -77,6 +77,8 @@ class ScheduleStudentTermService {
           for (const dayTerm of dayTerms) {
             const day = dayTerm.day;
             const time = dayTerm.time;
+            const weekTimeEnd = dayTerm.weekTimeEnd;
+            const weekTimeStart = dayTerm.weekTimeStart;
 
             // Tìm thông tin phòng học dựa trên classRoomID
             const room = await RoomModel.findOne({ classRoomID });
@@ -101,6 +103,8 @@ class ScheduleStudentTermService {
               lecturerName,
               dateStart,
               dateEnd,
+              weekTimeStart,
+              weekTimeEnd,
               numberOfCredits
             );
 

@@ -3,7 +3,7 @@ const StudentController = require('../controller/student.controller');
 const ScheduleStudentWeekController = require('../controller/schedule/schedule_student_week.controller');
 const ScheduleStudentTermController = require('../controller/schedule/schedule_student_term.controller');
 const AttendanceStudentTermController = require('../controller/attendance/attendance_student_term.controller');
-
+const AttendanceStudentByDayIDController = require('../controller/attendance/attendance_student_by_dayid.controller');
 
 router.post("/create", StudentController.createStudent);
 
@@ -26,5 +26,7 @@ router.post("/getAllScheduleWeek", ScheduleStudentWeekController.getAllScheduleS
 router.post("/getAllScheduleTerm", ScheduleStudentTermController.getAllScheduleStudentTerm);
 
 router.post("/getAllAttendanceTerm", AttendanceStudentTermController.getAllAttendanceStudentTerm);
+
+router.post("/getAttendanceStudentByDayID", AttendanceStudentByDayIDController.getAttendanceStudentByDayID);
 
 module.exports = router;

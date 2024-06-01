@@ -27,7 +27,7 @@ class AttendanceStudentTermService {
             const weekTimeStart = new Date(week.weekTimeStart);
 
             for (const weekDetail of weekDetails) {
-              const { dayID, day } = weekDetail;
+              const { dayID, day, time } = weekDetail;
 
               const numberOfDays = parseInt(day, 10);
               weekTimeStart.setDate(weekTimeStart.getDate() + numberOfDays - 2);
@@ -39,13 +39,11 @@ class AttendanceStudentTermService {
               const attendancePromise = AttendanceModel.findOne({ studentId, dayID }).exec();
 
               const attendance = await attendancePromise;
-              console.log('attendance')
-              console.log(attendance)
               const attendanceImages = attendance ? attendance.attendance : [];
               const NoImages = attendanceImages.length;
               NoImagesValid += NoImages;
 
-              attendances.push({ [weekTimeStartStr]: { attendanceImages: attendanceImages, NoImages: NoImages } });
+              attendances.push({ [weekTimeStartStr]: { attendanceImages: attendanceImages, NoImages: NoImages, time: time, dayID: dayID } });
             }
           }
         }

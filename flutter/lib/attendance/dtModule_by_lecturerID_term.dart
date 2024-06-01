@@ -188,7 +188,7 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
                                                     listen: false)
                                                 .appState!
                                                 .moduleTermByLecturerIDs;
-                                        widget.onPress(module.moduleID,
+                                        widget.onPress(moduleID,
                                             scheduleAdminTerms.length);
 
                                         // showDialog(

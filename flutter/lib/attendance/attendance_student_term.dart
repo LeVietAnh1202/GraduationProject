@@ -2,8 +2,10 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/attendance/attendanceService.dart';
+import 'package:flutter_todo_app/attendance/detail_attendance_student_day.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
+import 'package:flutter_todo_app/model/moduleTermByLecturerIDModel.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
 
@@ -73,70 +75,148 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
             ),
           )
         : Container(
-          // width: widthDataTable,
-          child: Scrollbar(
-            thumbVisibility: true,
-            child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    dividerThickness: 2.0, // Độ dày của đường kẻ
-                    border: TableBorder.all(color: Colors.grey),
-                    headingRowHeight: 90,
-                    columns: [
-                      ...(context
-                              .watch<AppStateProvider>()
-                              .appState!
-                              .attendanceStudentTerms['dateList'] as List<dynamic>)
-                          .map<DataColumn>((entry) {
-                        return DataColumn(
-                          label: Expanded(
-                            child: RotatedBox(
-                              quarterTurns: 1,
-                              child: Text(
-                                Utilities.formatDate(entry.keys.first),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Số ảnh/Tổng số tiết',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-          
-                      // Add other columns as needed
-                    ],
-                    rows: [
-                      DataRow(cells: [
+            // width: widthDataTable,
+            child: Scrollbar(
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      dividerThickness: 2.0, // Độ dày của đường kẻ
+                      border: TableBorder.all(color: Colors.grey),
+                      headingRowHeight: 90,
+                      columns: [
                         ...(context
                                     .watch<AppStateProvider>()
                                     .appState!
                                     .attendanceStudentTerms['dateList']
                                 as List<dynamic>)
-                            .map((entry) {
+                            .map<DataColumn>((entry) {
+                          print('check time');
+                          print(entry);
                           final date = entry.keys.first;
                           final value = entry[date];
-                          return DataCell(Center(
-                            child: Utilities.attendanceImages(value['NoImages']),
-                          ));
+                          return
+                              // DataColumn(
+                              //   label: Expanded(
+                              //     child: RotatedBox(
+                              //       quarterTurns: 0,
+                              //       child: Text(
+                              //         Utilities.formatDate(entry.keys.first),
+                              //         textAlign: TextAlign.center,
+                              //         style: TextStyle(fontWeight: FontWeight.bold),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // );
+                              DataColumn(
+                            label: Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 10),
+                                  RotatedBox(
+                                    quarterTurns: 0,
+                                    child: Text(
+                                      Utilities.formatDate(entry.keys.first),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          // fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(width: 10),
+                                      Text(
+                                        value["time"],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            // fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      IconButton(
+                                        iconSize: 20,
+                                        padding: EdgeInsets.all(0),
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    'Chi tiết điểm danh cho ngày ${Utilities.formatDate(entry.keys.first)}.'),
+                                                content: SingleChildScrollView(
+                                                  child: Column(
+                                                    children: [
+                                                      DetailAttendanceStudentDayWidget()
+                                                    ],
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Đóng'),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.info,
+                                          color: Colors.grey[600],
+                                          // size: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
                         }).toList(),
-                        DataCell(Center(
+                        DataColumn(
+                          label: Expanded(
                             child: Text(
-                                '${(attendances['NoImagesValid'] == 0 ? '-' : attendances['NoImagesValid']).toString()}/${attendances['numberOfLessons']}'))),
-                      ])
-                    ],
-                  ),
-                )),
-          ),
-        );
+                              'Số ảnh/Tổng số tiết',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+
+                        // Add other columns as needed
+                      ],
+                      rows: [
+                        DataRow(cells: [
+                          ...(context
+                                      .watch<AppStateProvider>()
+                                      .appState!
+                                      .attendanceStudentTerms['dateList']
+                                  as List<dynamic>)
+                              .map((entry) {
+                            final date = entry.keys.first;
+                            final value = entry[date];
+                            // final attendance = entry.value;
+                            return DataCell(Center(
+                              child:
+                                  Utilities.attendanceImages(value['NoImages']),
+                            ));
+                          }).toList(),
+                          DataCell(Center(
+                              child: Text(
+                                  '${(attendances['NoImagesValid'] == 0 ? '-' : attendances['NoImagesValid']).toString()}/${attendances['numberOfLessons']}'))),
+                        ])
+                      ],
+                    ),
+                  )),
+            ),
+          );
   }
 }

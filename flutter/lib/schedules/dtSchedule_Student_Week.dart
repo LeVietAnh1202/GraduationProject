@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/attendance/attendance_student_term.dart';
+import 'package:flutter_todo_app/attendance/detail_attendance_student_day.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
@@ -8,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class DtScheduleStudentWeek extends StatefulWidget {
   // final ValueChanged<bool> haveContentFunc;
-  DtScheduleStudentWeek({
+  const DtScheduleStudentWeek({
     Key? key,
     // required this.haveContentFunc
   });
@@ -115,11 +117,12 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
           // .where((item) => item != null)
           // .toList()
           // .cast<DropdownMenuItem<String>>(),
-          .whereType<DropdownMenuItem<String>>().toList(),
+          .whereType<DropdownMenuItem<String>>()
+          .toList(),
     );
   }
 
-   Widget _buildDataTable(BuildContext context) {
+  Widget _buildDataTable(BuildContext context) {
     final appState = context.watch<AppStateProvider>().appState!;
     final filteredSchedules = appState.scheduleStudentWeeks.where((schedule) {
       return schedule['week'] == selectedWeek;
@@ -131,13 +134,25 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
 
     return DataTable(
       columns: [
-        DataColumn(label: Expanded(child: Text('Thứ', textAlign: TextAlign.center))),
-        DataColumn(label: Expanded(child: Text('Tiết', textAlign: TextAlign.center))),
-        DataColumn(label: Expanded(child: Text('Mã học phần', textAlign: TextAlign.center))),
-        DataColumn(label: Expanded(child: Text('Tên môn', textAlign: TextAlign.center))),
-        DataColumn(label: Expanded(child: Text('Phòng học', textAlign: TextAlign.center))),
-        DataColumn(label: Expanded(child: Text('Tên giảng viên', textAlign: TextAlign.center))),
-        DataColumn(label: Expanded(child: Text('Điểm danh', textAlign: TextAlign.center))),
+        DataColumn(
+            label: Expanded(child: Text('Thứ', textAlign: TextAlign.center))),
+        DataColumn(
+            label: Expanded(child: Text('Tiết', textAlign: TextAlign.center))),
+        DataColumn(
+            label: Expanded(
+                child: Text('Mã học phần', textAlign: TextAlign.center))),
+        DataColumn(
+            label:
+                Expanded(child: Text('Tên môn', textAlign: TextAlign.center))),
+        DataColumn(
+            label: Expanded(
+                child: Text('Phòng học', textAlign: TextAlign.center))),
+        DataColumn(
+            label: Expanded(
+                child: Text('Tên giảng viên', textAlign: TextAlign.center))),
+        DataColumn(
+            label: Expanded(
+                child: Text('Điểm danh', textAlign: TextAlign.center))),
       ],
       rows: filteredSchedules.map((schedule) {
         return DataRow(
@@ -148,7 +163,52 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
             DataCell(Center(child: Text(schedule['subjectName']))),
             DataCell(Center(child: Text(schedule['roomName']))),
             DataCell(Center(child: Text(schedule['lecturerName']))),
-            DataCell(Center(child: Utilities.attendanceImages(schedule['NoImages']))),
+            // DataCell(Center(
+            //     child: Utilities.attendanceImages(schedule['NoImages']))),
+            DataCell(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _isLoading
+                      ? Container(
+                          child: CircularProgressIndicator(),
+                          margin: EdgeInsets.only(bottom: 5, top: 10),
+                        )
+                      : IconButton(
+                          icon: Icon(Icons.library_books),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(schedule['subjectName']),
+                                  content: DetailAttendanceStudentDayWidget(
+                                    dayID: schedule['dayID'],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text('Hủy'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    // TextButton(
+                                    //   child: Text('Xem'),
+                                    //   onPressed: () {
+                                    //     // Xử lý logic xóa sinh viên ở hàng tương ứng
+                                    //     // deleteStudent(index);
+                                    //     Navigator.of(context).pop();
+                                    //   },
+                                    // ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                ],
+              ),
+            ),
           ],
         );
       }).toList(growable: false),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/config.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
@@ -67,35 +68,6 @@ class _DetailStudentState extends State<DetailStudent> {
     _videoPlayerController.dispose();
     flickManager.dispose();
     super.dispose();
-  }
-
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 140, // Độ rộng cố định cho nhãn
-            child: Text(
-              label,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Future<FlickManager> getVideo(Student student) async {
@@ -214,13 +186,13 @@ class _DetailStudentState extends State<DetailStudent> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildInfoRow('Mã sinh viên:', student.studentId),
-                      _buildInfoRow('Họ tên:', student.studentName),
-                      _buildInfoRow('Lớp:', student.classCode),
-                      _buildInfoRow(
+                      Utilities.buildInfoRow('Mã sinh viên:', student.studentId),
+                      Utilities.buildInfoRow('Họ tên:', student.studentName),
+                      Utilities.buildInfoRow('Lớp:', student.classCode),
+                      Utilities.buildInfoRow(
                           'Chuyên ngành:', student.specializationName),
-                      _buildInfoRow('Giới tính:', student.gender),
-                      _buildInfoRow(
+                      Utilities.buildInfoRow('Giới tính:', student.gender),
+                      Utilities.buildInfoRow(
                         'Ngày sinh:',
                         DateFormat('dd/MM/yyyy').format(student.birthDate),
                       ),

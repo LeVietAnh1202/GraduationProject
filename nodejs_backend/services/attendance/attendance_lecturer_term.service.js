@@ -11,13 +11,6 @@ class AttendanceLecturerTermService {
   static async getAllAttendanceLecturerTerm(lecturerID, moduleID) {
 
     try {
-      // const modulePromise = ModuleModel.findOne({ lecturerID, moduleID }).exec();
-      // const classCodePromise = modulePromise.then(module => module.classCode);
-      // const studentsPromise = classCodePromise.then(classCode => StudentModel.find({ classCode }).exec());
-      // const scheduleModelsPromise = ScheduleModel.find({ moduleID }).exec();
-
-      // const [students, scheduleModels] = await Promise.all([studentsPromise, scheduleModelsPromise]);
-
       const module = await ModuleModel.findOne({ moduleID: moduleID });
       const listStudentID = module.listStudentID;
       const students = await StudentModel.find({ studentId: { $in: listStudentID } });

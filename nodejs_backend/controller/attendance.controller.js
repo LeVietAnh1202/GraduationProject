@@ -1,14 +1,8 @@
 const AttendanceService = require('../services/attendance.service');
 
-
-
 exports.createOrUpdateAttendance = async (req, res, next) => {
     try {
         const { studentId, dayID, attendanceImagePath } = req.body;
-        // const duplicate = await AttendanceService.getAttendanceByStudentId(studentId);
-        // if (duplicate) {
-        //     return res.json({ status: true, success: 'Attendance record already exists' });
-        // }
         const studentName = await AttendanceService.createOrUpdateAttendance(studentId, dayID, attendanceImagePath);
         res.json({ status: true, success: `Sinh viên ${studentId} - ${studentName} điểm danh thành công.` });
     } catch (err) {

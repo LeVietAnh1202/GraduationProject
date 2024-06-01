@@ -6,8 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DtScheduleStudentTerm extends StatefulWidget {
-  DtScheduleStudentTerm(
-  );
+  DtScheduleStudentTerm();
 
   @override
   State<DtScheduleStudentTerm> createState() => _DtScheduleStudentTermState();
@@ -133,14 +132,14 @@ class _DtScheduleStudentTermState extends State<DtScheduleStudentTerm> {
                       ),
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: Text(
-                        'Tác vụ',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+                  // DataColumn(
+                  //   label: Expanded(
+                  //     child: Text(
+                  //       'Tác vụ',
+                  //       textAlign: TextAlign.center,
+                  //     ),
+                  //   ),
+                  // ),
                   // Add other columns as needed
                 ],
               rows: context
@@ -151,8 +150,8 @@ class _DtScheduleStudentTermState extends State<DtScheduleStudentTerm> {
                   .entries
                   .map((entry) {
                     final schedule = entry.value;
-                    final dateStart = schedule['dateStart'];
-                    final dateEnd = schedule['dateEnd'];
+                    final dateStart = schedule['weekTimeStart'];
+                    final dateEnd = schedule['weekTimeEnd'];
 
                     final inputFormat =
                         DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -177,52 +176,52 @@ class _DtScheduleStudentTermState extends State<DtScheduleStudentTerm> {
                             child:
                                 Text('${formattedStart} - ${formattedEnd}'))),
                         DataCell(Center(child: Text(schedule['lecturerName']))),
-                        DataCell(
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _isLoading
-                                  ? Container(
-                                      child: CircularProgressIndicator(),
-                                      margin:
-                                          EdgeInsets.only(bottom: 5, top: 10),
-                                    )
-                                  : IconButton(
-                                      icon: Icon(Icons.library_books),
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title:
-                                                  Text(schedule['subjectName']),
-                                              content: AttendanceStudentTerm(
-                                                  moduleID:
-                                                      schedule['moduleID']),
-                                              actions: [
-                                                TextButton(
-                                                  child: Text('Hủy'),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                                // TextButton(
-                                                //   child: Text('Xem'),
-                                                //   onPressed: () {
-                                                //     // Xử lý logic xóa sinh viên ở hàng tương ứng
-                                                //     // deleteStudent(index);
-                                                //     Navigator.of(context).pop();
-                                                //   },
-                                                // ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
-                            ],
-                          ),
-                        ),
+                        // DataCell(
+                        //   Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       _isLoading
+                        //           ? Container(
+                        //               child: CircularProgressIndicator(),
+                        //               margin:
+                        //                   EdgeInsets.only(bottom: 5, top: 10),
+                        //             )
+                        //           : IconButton(
+                        //               icon: Icon(Icons.library_books),
+                        //               onPressed: () {
+                        //                 showDialog(
+                        //                   context: context,
+                        //                   builder: (BuildContext context) {
+                        //                     return AlertDialog(
+                        //                       title:
+                        //                           Text(schedule['subjectName']),
+                        //                       content: AttendanceStudentTerm(
+                        //                           moduleID:
+                        //                               schedule['moduleID']),
+                        //                       actions: [
+                        //                         TextButton(
+                        //                           child: Text('Hủy'),
+                        //                           onPressed: () {
+                        //                             Navigator.of(context).pop();
+                        //                           },
+                        //                         ),
+                        //                         // TextButton(
+                        //                         //   child: Text('Xem'),
+                        //                         //   onPressed: () {
+                        //                         //     // Xử lý logic xóa sinh viên ở hàng tương ứng
+                        //                         //     // deleteStudent(index);
+                        //                         //     Navigator.of(context).pop();
+                        //                         //   },
+                        //                         // ),
+                        //                       ],
+                        //                     );
+                        //                   },
+                        //                 );
+                        //               },
+                        //             ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     );
                   })

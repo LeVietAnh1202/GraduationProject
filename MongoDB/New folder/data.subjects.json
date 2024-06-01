@@ -1,98 +1,98 @@
 [
-    {
-        "_id": {
-          "$oid": "657985c56d8dd423d059ee97"
-        },
-        "subjectID": "311111",
-        "subjectName": "CĐ 5: Học máy cho IoT",
-        "numberOfCredits": "4",
-        "numberOfLessons": "75",
-        "createdAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "updatedAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "__v": 0
-      },
-      {
-        "_id": {
-          "$oid": "657985c56d8dd423d059ee98"
-        },
-        "subjectID": "311112",
-        "subjectName": "Xử lý dữ liệu lớn",
-        "numberOfCredits": "3",
-        "numberOfLessons": "60",
-        "createdAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "updatedAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "__v": 0
-      },
-      {
-        "_id": {
-          "$oid": "657985c56d8dd423d059ee99"
-        },
-        "subjectID": "311113",
-        "subjectName": "Tiếng anh cho CNTT 3",
-        "numberOfCredits": "2",
-        "numberOfLessons": "30",
-        "createdAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "updatedAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "__v": 0
-      },
-      {
-        "_id": {
-          "$oid": "657985c56d8dd423d059ee87"
-        },
-        "subjectID": "311114",
-        "subjectName": "Toán rời rạc",
-        "numberOfCredits": "3",
-        "numberOfLessons": "60",
-        "createdAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "updatedAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "__v": 0
-      },
-      {
-        "_id": {
-          "$oid": "657985c56d8dd423d059ee12"
-        },
-        "subjectID": "311115",
-        "subjectName": "Trí tuệ nhân tạo",
-        "numberOfCredits": "3",
-        "numberOfLessons": "60",
-        "createdAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "updatedAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "__v": 0
-      },
-      {
-        "_id": {
-          "$oid": "657985c56d8dd423d059ee13"
-        },
-        "subjectID": "311116",
-        "subjectName": "Cơ sở dữ liệu",
-        "numberOfCredits": "4",
-        "numberOfLessons": "75",
-        "createdAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "updatedAt": {
-          "$date": "2023-12-13T10:21:57.700Z"
-        },
-        "__v": 0
-      }
+  {
+    "_id": {
+      "$oid": "657985c56d8dd423d059ee97"
+    },
+    "subjectID": "311111",
+    "subjectName": "CĐ 5: Học máy cho IoT",
+    "numberOfCredits": "4",
+    "numberOfLessons": "72",
+    "createdAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "657985c56d8dd423d059ee98"
+    },
+    "subjectID": "311112",
+    "subjectName": "Xử lý dữ liệu lớn",
+    "numberOfCredits": "3",
+    "numberOfLessons": "60",
+    "createdAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "657985c56d8dd423d059ee99"
+    },
+    "subjectID": "311113",
+    "subjectName": "Tiếng anh cho CNTT 3",
+    "numberOfCredits": "2",
+    "numberOfLessons": "28",
+    "createdAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "657985c56d8dd423d059ee87"
+    },
+    "subjectID": "311114",
+    "subjectName": "Toán rời rạc",
+    "numberOfCredits": "3",
+    "numberOfLessons": "60",
+    "createdAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "657985c56d8dd423d059ee12"
+    },
+    "subjectID": "311115",
+    "subjectName": "Trí tuệ nhân tạo",
+    "numberOfCredits": "3",
+    "numberOfLessons": "60",
+    "createdAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "657985c56d8dd423d059ee13"
+    },
+    "subjectID": "311116",
+    "subjectName": "Cơ sở dữ liệu",
+    "numberOfCredits": "3",
+    "numberOfLessons": "60",
+    "createdAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "updatedAt": {
+      "$date": "2023-12-13T10:21:57.700Z"
+    },
+    "__v": 0
+  }
 ]

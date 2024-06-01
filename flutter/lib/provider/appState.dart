@@ -68,8 +68,8 @@ class AppState {
     required this.attendanceAdminWeeks,
     required this.attendanceAdminTerms,
   }) {
-    socket = IO.io(URLNodeJSServer,
-        IO.OptionBuilder().setTransports(['websocket']).build());
+    // socket = IO.io(URLNodeJSServer,
+    //     IO.OptionBuilder().setTransports(['websocket']).build());
   }
 }
 

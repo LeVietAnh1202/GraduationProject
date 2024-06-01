@@ -25,6 +25,8 @@ const String URLNodeJSServer_RaspberryPi_Images =
     'http://${url_ras}/images/default';
 const String URLNodeJSServer_RaspberryPi_Videos =
     'http://${url_ras}/videos/default';
+const String URLNodeJSServer_Python_AttendanceImages =
+    'http://${url_ras}/images/attendance_images';
 
 const String URLNodeJSServer_Python_Images =
     'http://${url_python}/public/images';
