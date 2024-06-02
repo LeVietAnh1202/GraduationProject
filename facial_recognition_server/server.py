@@ -1,3 +1,4 @@
+import asyncio
 from typing import Union
 from fastapi import FastAPI, responses, Form
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,7 +33,7 @@ import threading
 
 from globals_var import currentTime, time_lock, start_time_thread
 import globals_var
-
+from concurrent.futures import ThreadPoolExecutor
 # Tạo một Socket.IO server không đồng bộ
 sio = socketio.AsyncServer(async_mode='asgi')
 
@@ -154,7 +155,7 @@ async def update_time(sid, data):
     with time_lock:
         # Phân tích thời gian từ chuỗi ISO 8601
         received_time = parser.isoparse(data['currentTime'])
-        
+        print("data['currentTime']:", data['currentTime'])
         # Chuyển đổi thời gian sang UTC+7
         tz = pytz.timezone('Asia/Ho_Chi_Minh')
         globals_var.currentTime = received_time.astimezone(tz)
@@ -173,7 +174,8 @@ npy = './npy'
 train_img = "./train_img"
 
 def gpu_configuration():
-    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.7)
+    gpu_options = tf.GPUOptions(allow_growth = True)
+    # gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.7)
     sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False))
     return sess
 
@@ -273,11 +275,12 @@ def load_model_tensor(classifier_filename):
 def recognition_video(frame, minsize, pnet, rnet, onet, threshold, factor, image_size, input_image_size, HumanNames, images_placeholder, embeddings, phase_train_placeholder, embedding_size, sess, model):
     id = ''
     fullName = ''
+    cropped_copy = frame.copy()
 
     if frame.ndim == 2:
         frame = facenet.to_rgb(frame)
 
-    bounding_boxes, _ = detect_face(frame, minsize, pnet, rnet, onet, threshold, factor)
+    bounding_boxes, _ = detect_face.detect_face(frame, minsize, pnet, rnet, onet, threshold, factor)
     faceNum = bounding_boxes.shape[0]
     print(f'Number of faces: {faceNum}')
 
@@ -391,7 +394,7 @@ def text2speech(fullname, rate=150):
     engine.runAndWait()
 
 # Tạo hàng đợi để lưu trữ các khung hình
-frame_queue = queue.Queue(maxsize=200)
+frame_queue = queue.Queue(maxsize=10)
 
 # Cờ hiệu để dừng luồng
 stop_flag = threading.Event()
@@ -402,15 +405,12 @@ async def connect_camera(sio, sid, data):
     os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
     logged_id = []
     statusRecognize = data['status']
-    if (statusRecognize):
-        ids = data['ids']
-        dayID = data['dayID']
-        period = data['period']
 
     def capture_frames():
         print('khởi tạo camera')
         # cap = cv2.VideoCapture(0)
-        cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.1.2:554/0', cv2.CAP_FFMPEG)
+        cap = cv2.VideoCapture('rtsp://192.168.248.109:1202/h264_ulaw.sdp', cv2.CAP_FFMPEG)
+        # cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.1.2:554/0', cv2.CAP_FFMPEG)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
@@ -432,7 +432,11 @@ async def connect_camera(sio, sid, data):
     capture_thread.daemon = True
     capture_thread.start() """
 
-    def process_frames():
+    capture_thread = threading.Thread(target=capture_frames)
+    capture_thread.daemon = True
+    capture_thread.start()
+
+    async def process_frames():
         with tf.Graph().as_default():
             sess = gpu_configuration()
             with sess.as_default():
@@ -443,9 +447,9 @@ async def connect_camera(sio, sid, data):
                 with open(classifier_filename_exp, 'rb') as infile:
                     (model, class_names) = pickle.load(infile, encoding='latin1')  
 
-                """ capture_thread = threading.Thread(target=capture_frames)
-                capture_thread.daemon = True
-                capture_thread.start()       """  
+                # capture_thread = threading.Thread(target=capture_frames)
+                # capture_thread.daemon = True
+                # capture_thread.start()        
 
                 """  cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.163.114:554/0', cv2.CAP_FFMPEG)
                 # cap = cv2.VideoCapture('rtsp://192.168.1.162:1202/h264_ulaw.sdp')
@@ -527,21 +531,40 @@ async def connect_camera(sio, sid, data):
                             print('id rỗng')
                     else:
                         print('frame_queue.empty() false')
+                        await asyncio.sleep(0.1)
                         
                 # cap.release()
                 cv2.destroyAllWindows()
     
-    capture_thread = threading.Thread(target=capture_frames)
-    capture_thread.daemon = True
-    capture_thread.start()
+    if (statusRecognize):
+        ids = data['ids']
+        dayID = data['dayID']
+        period = data['period']
 
-    process_thread = threading.Thread(target=process_frames)
-    process_thread.daemon = True
-    process_thread.start()            
+        # loop = asyncio.get_event_loop()
+        # with ThreadPoolExecutor(max_workers=3) as pool:
+        #     await loop.run_in_executor(pool, process_frames)
+
+        loop = asyncio.get_event_loop()
+        task = loop.create_task(process_frames())
+        await task
+
+    # await process_frames()
+    # async def async_process_wrapper():
+    #     await process_frames()
+
+    # process_thread = threading.Thread(target=lambda: asyncio.run(async_process_wrapper()))
+    # process_thread.daemon = True
+    # process_thread.start()
+
+    # loop = asyncio.get_event_loop()
+    # with ThreadPoolExecutor() as pool:
+    #     await loop.run_in_executor(pool, process_frames)
+            
     
     # Đợi luồng kết thúc
-    capture_thread.join()
-    process_thread.join()            
+    # capture_thread.join()
+    # process_thread.join()            
     return {"success": True}
 # connect_camera()
 
@@ -589,10 +612,10 @@ def _get_frame():
 
 
 def main():
-    run("server:app", host="192.168.1.6", port=8001, reload=True)
+    run("server:app", host="192.168.248.112", port=8001, reload=True)
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
 
 # print("main")
 # connect_camera()
