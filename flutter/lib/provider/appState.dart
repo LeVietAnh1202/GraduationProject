@@ -128,6 +128,7 @@ class AppStateProvider with ChangeNotifier {
 
   void setBreadcrumbs(String breadcrumbs) {
     _appState?.breadcrumbs = breadcrumbs;
+    _appState?.currentPage = 1;
     notifyListeners();
   }
 

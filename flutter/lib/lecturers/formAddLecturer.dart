@@ -66,10 +66,9 @@ class _FromAddLecturerState extends State<FromAddLecturer> {
 
   Future<void> fetchLecturers() async {
     try {
-      final role =
-          Provider.of<AccountProvider>(context, listen: false).getRole();
-      final lecturerID =
-          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final accountProvider = context.read<AccountProvider>();
+      final role = accountProvider.getRole();
+      final lecturerID = accountProvider.getAccount();
       final lecturers = await LecturerService.fetchLecturers(role, lecturerID);
 
       Provider.of<AppStateProvider>(context, listen: false)

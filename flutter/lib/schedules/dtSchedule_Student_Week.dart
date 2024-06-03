@@ -182,9 +182,11 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text(schedule['subjectName']),
-                                  content: DetailAttendanceStudentDayWidget(
-                                    dayID: schedule['dayID'],
-                                  ),
+                                  content: 
+                                  Container(),
+                                  // DetailAttendanceStudentDayWidget(
+                                  //   dayID: schedule['dayID'],
+                                  // ),
                                   actions: [
                                     TextButton(
                                       child: Text('Hủy'),

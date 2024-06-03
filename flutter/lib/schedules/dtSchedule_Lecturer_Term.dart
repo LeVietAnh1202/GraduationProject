@@ -27,7 +27,6 @@ class DtScheduleTerm extends StatefulWidget {
 
 class _DtScheduleTermState extends State<DtScheduleTerm> {
   List<ScheduleAdminTerm> scheduleAdminTerms = [];
-  bool _isLoading = true;
   String moduleID = "";
 
   @override
@@ -39,12 +38,8 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
   }
 
   Future<void> fetchScheduleTerms() async {
-    scheduleAdminTerms =
-        await ScheduleService.fetchScheduleTerms(context, (bool value) {
-      setState(() {
-        _isLoading = value;
-      });
-    }, widget.lecturerID, widget.semesterID);
+    scheduleAdminTerms = await ScheduleService.fetchScheduleTerms(
+        context, (bool value) {}, widget.lecturerID, widget.semesterID);
     Provider.of<AppStateProvider>(context, listen: false)
         .setTableLength(scheduleAdminTerms.length);
   }
@@ -60,186 +55,148 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
 
   @override
   Widget build(BuildContext context) {
-    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
     return Container(
-      child: _isLoading
-          ? Container(
-              alignment: Alignment.center,
-              width: 60,
-              height: 60,
-              child: Container(
-                child: CircularProgressIndicator(),
-                margin: EdgeInsets.only(bottom: 5, top: 10),
+      child: DataTable(
+          dividerThickness: 2.0, // Độ dày của đường kẻ
+          border: TableBorder.all(color: Colors.grey),
+          columns: [
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Thứ',
+                  textAlign: TextAlign.center,
+                ),
               ),
-            )
-          : DataTable(
-              dividerThickness: 2.0, // Độ dày của đường kẻ
-              border: TableBorder.all(color: Colors.grey),
-              columns: [
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Thứ',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+            ),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Tiết',
+                  textAlign: TextAlign.center,
                 ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Tiết',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+              ),
+            ),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Mã học phần',
+                  textAlign: TextAlign.center,
                 ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Mã học phần',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+              ),
+            ),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Tên môn',
+                  textAlign: TextAlign.center,
                 ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Tên môn',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+              ),
+            ),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Số tín chỉ',
+                  textAlign: TextAlign.center,
                 ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Số tín chỉ',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+              ),
+            ),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Phòng học',
+                  textAlign: TextAlign.center,
                 ),
-                // if (role == Role.student)
-                //   DataColumn(
-                //     label: Expanded(
-                //       child: Text(
-                //         'Tên giảng viên',
-                //         textAlign: TextAlign.center,
-                //       ),
-                //     ),
-                //   ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Phòng học',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+              ),
+            ),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Thời gian',
+                  textAlign: TextAlign.center,
                 ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Thời gian',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+              ),
+            ),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Tác vụ',
+                  textAlign: TextAlign.center,
                 ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Tác vụ',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-                // Add other columns as needed
-              ],
-              rows: context
-                  .watch<AppStateProvider>()
-                  .appState!
-                  .scheduleAdminTerms
-                  .asMap()
-                  .entries
-                  .map((entry) {
-                    final schedule = entry.value;
-                    final dateStart = schedule.weekTimeStart;
-                    final dateEnd = schedule.weekTimeEnd;
+              ),
+            ),
+            // Add other columns as needed
+          ],
+          rows: context
+              .watch<AppStateProvider>()
+              .appState!
+              .scheduleAdminTerms
+              .asMap()
+              .entries
+              .map((entry) {
+                final schedule = entry.value;
+                final dateStart = schedule.weekTimeStart;
+                final dateEnd = schedule.weekTimeEnd;
+                final outputFormat = DateFormat('dd/MM/yyyy');
+                final formattedStart = outputFormat.format(dateStart);
+                final formattedEnd = outputFormat.format(dateEnd);
 
-                    // final inputFormat =
-                    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                    final outputFormat = DateFormat('dd/MM/yyyy');
+                return DataRow(
+                  cells: [
+                    DataCell(Center(child: Text(schedule.day))),
+                    DataCell(Center(child: Text(schedule.time))),
+                    DataCell(Center(child: Text(schedule.moduleID))),
+                    DataCell(Center(child: Text(schedule.subjectName))),
+                    DataCell(Center(
+                        child: Text(schedule.numberOfCredits.toString()))),
+                    DataCell(Center(child: Text(schedule.roomName))),
+                    DataCell(Center(
+                        child: Text('${formattedStart} - ${formattedEnd}'))),
+                    DataCell(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.library_books),
+                            onPressed: () async {
+                              scheduleAdminTerms =
+                                  Provider.of<AppStateProvider>(context,
+                                          listen: false)
+                                      .appState!
+                                      .scheduleAdminTerms;
+                              widget.onPress(
+                                  schedule.moduleID, scheduleAdminTerms.length);
 
-                    final formattedStart = outputFormat.format(dateStart);
-                    final formattedEnd = outputFormat.format(dateEnd);
-
-                    return DataRow(
-                      cells: [
-                        DataCell(Center(child: Text(schedule.day))),
-                        DataCell(Center(child: Text(schedule.time))),
-                        DataCell(Center(child: Text(schedule.moduleID))),
-                        DataCell(Center(child: Text(schedule.subjectName))),
-                        DataCell(Center(
-                            child: Text(schedule.numberOfCredits.toString()))),
-                        // if (role == Role.student)
-                        //   DataCell(Center(child: Text(schedule.lecturerName))),
-                        DataCell(Center(child: Text(schedule.roomName))),
-                        DataCell(Center(
-                            child:
-                                Text('${formattedStart} - ${formattedEnd}'))),
-                        DataCell(
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _isLoading
-                                  ? Container(
-                                      child: CircularProgressIndicator(),
-                                      margin:
-                                          EdgeInsets.only(bottom: 5, top: 10),
-                                    )
-                                  : IconButton(
-                                      icon: Icon(Icons.library_books),
-                                      onPressed: () async {
-                                        scheduleAdminTerms =
-                                            Provider.of<AppStateProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .appState!
-                                                .scheduleAdminTerms;
-                                        widget.onPress(schedule.moduleID,
-                                            scheduleAdminTerms.length);
-
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: Text(schedule.subjectName),
-                                              content: DataTableStudentByModule(
-                                                  moduleID: schedule.moduleID),
-                                              actions: [
-                                                TextButton(
-                                                  child: Text('Hủy'),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                    )
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  })
-                  .whereType<DataRow>()
-                  .toList(growable: false)
-                ..sort((a, b) => scheduleDayComparator(
-                    ((a.cells[0].child as Center).child as Text)
-                        .data
-                        .toString(),
-                    ((b.cells[0].child as Center).child as Text)
-                        .data
-                        .toString()))),
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text(schedule.subjectName),
+                                    content: DataTableStudentByModule(
+                                        moduleID: schedule.moduleID),
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Hủy'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              })
+              .whereType<DataRow>()
+              .toList(growable: false)
+            ..sort((a, b) => scheduleDayComparator(
+                ((a.cells[0].child as Center).child as Text).data.toString(),
+                ((b.cells[0].child as Center).child as Text).data.toString()))),
     );
   }
 }

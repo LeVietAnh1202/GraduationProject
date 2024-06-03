@@ -14,48 +14,52 @@ class FacultyService {
       BuildContext context, ValueChanged<bool> isLoading) async {
     final role = Provider.of<AccountProvider>(context, listen: false).getRole();
     Response? response;
-    if (role == Role.lecturer || role == Role.aao) {
-      final lecturerID =
-          Provider.of<AccountProvider>(context, listen: false).getAccount();
-      final bodyData = {'lecturerID': lecturerID};
-      response = await http.post(Uri.http(url, getAllFacultyByLecturerIDAPI),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode(bodyData));
-    }
-    if (role == Role.admin)
-      response = await http.get(Uri.http(url, getAllFacultyAPI));
-    if (response!.statusCode == 200) {
-      final data = jsonDecode(response.body) as Map<String, dynamic>;
-      List<dynamic> facultiesList = [];
-      if (role == Role.aao || role == Role.lecturer) {
-        facultiesList.add(data['data']);
-      } else
-        facultiesList = data['data'];
-      final List<Faculty> faculties =
-          facultiesList.map((e) => Faculty.fromMap(e)).toList();
+    try {
+      if (role == Role.lecturer || role == Role.aao) {
+        final lecturerID =
+            Provider.of<AccountProvider>(context, listen: false).getAccount();
+        final bodyData = {'lecturerID': lecturerID};
+        response = await http.post(Uri.http(url, getAllFacultyByLecturerIDAPI),
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode(bodyData));
+      } else if (role == Role.admin)
+        response = await http.get(Uri.http(url, getAllFacultyAPI));
 
-      Provider.of<AppStateProvider>(context, listen: false)
-          .setFaculties(faculties);
-      isLoading(false);
+      if (response!.statusCode == 200) {
+        final data = jsonDecode(response.body) as Map<String, dynamic>;
+        List<dynamic> facultiesList = [];
+        if (role == Role.aao || role == Role.lecturer) {
+          facultiesList.add(data['data']);
+        } else
+          facultiesList = data['data'];
+        final List<Faculty> faculties =
+            facultiesList.map((e) => Faculty.fromMap(e)).toList();
 
-      return faculties;
-    } else {
+        Provider.of<AppStateProvider>(context, listen: false)
+            .setFaculties(faculties);
+        isLoading(false);
+
+        return faculties;
+      } else {
+        throw Exception('Failed to fetch faculties');
+      }
+    } catch (e) {
+      print('Error: $e');
       throw Exception('Failed to fetch faculties');
     }
   }
 
   static Future<List<Faculty>> fetchFacultyByStudentID(
       BuildContext context, ValueChanged<bool> isLoading) async {
-    final studentId =
-        Provider.of<AccountProvider>(context, listen: false).account?.account;
-    final bodyData = {'studentId': studentId};
-    return http
-        .post(
-      Uri.http(url, getFacultyByStudentIDAPI),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(bodyData),
-    )
-        .then((response) {
+    try {
+      final studentId =
+          Provider.of<AccountProvider>(context, listen: false).account?.account;
+      final bodyData = {'studentId': studentId};
+      final response = await http.post(
+        Uri.http(url, getFacultyByStudentIDAPI),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(bodyData),
+      );
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         List<dynamic> facultyList = [];
@@ -70,9 +74,9 @@ class FacultyService {
       } else {
         throw Exception('Failed to fetch faculty by student ID');
       }
-    }).catchError((error) {
-      // Xử lý lỗi nếu có
-      print('Error: $error');
-    });
+    } catch (e) {
+      print('Error: $e');
+      throw Exception('Failed to fetch faculty by student ID');
+    }
   }
 }

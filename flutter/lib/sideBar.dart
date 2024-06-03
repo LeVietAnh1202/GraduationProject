@@ -26,33 +26,28 @@ class _SidebarState extends State<Sidebar> {
       final role =
           Provider.of<AccountProvider>(context, listen: false).getRole();
       if (role != Role.admin)
-        getfacultyID(); // Gọi hàm setAppState sau khi initState hoàn thành
+        getfacultyID(role!);
       else
-        setState(() {
-          _isLoading = false;
-        });
+        _setLoading(false);
     });
   }
 
-  Future<void> getfacultyID() async {
-    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
+  Future<void> getfacultyID(Role role) async {
     List<Faculty>? faculties;
     if (role == Role.lecturer || role == Role.aao) {
-      faculties = await FacultyService.fetchFaculties(context, (value) {
-        setState(() {
-          _isLoading = value;
-        });
-      });
+      faculties = await FacultyService.fetchFaculties(context, _setLoading);
     } else if (role == Role.student) {
       faculties =
-          await FacultyService.fetchFacultyByStudentID(context, (value) {
-        setState(() {
-          _isLoading = value;
-        });
-      });
+          await FacultyService.fetchFacultyByStudentID(context, _setLoading);
     }
     setState(() {
       facultyID = faculties![0].facultyID;
+    });
+  }
+
+  void _setLoading(bool value) {
+    setState(() {
+      _isLoading = value;
     });
   }
 
@@ -80,7 +75,6 @@ class _SidebarState extends State<Sidebar> {
       );
     }
 
-    print('logo: ' + facultyID);
     return Container(
       // width: _isSidebarCollapsed ? 60 : 200,
       child: Drawer(

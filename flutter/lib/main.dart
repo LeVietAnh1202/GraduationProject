@@ -23,8 +23,6 @@ class MyApp extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  // static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -40,8 +38,6 @@ class _MyAppState extends State<MyApp> {
             create: (_) => AppStateProvider())
       ],
       child: MaterialApp(
-          // key: UniqueKey(),
-          // navigatorKey: MyApp.navigatorKey,
           title: 'Attendance student using facial recognition',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

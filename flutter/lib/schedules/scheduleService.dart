@@ -159,7 +159,6 @@ class ScheduleService with ChangeNotifier {
       'semesterID': semesterID,
       'studentId': studentId
     };
-    isLoading(true);
     return http
         .post(
       Uri.http(url, getAllModuleTermByLecturerIDAPI),

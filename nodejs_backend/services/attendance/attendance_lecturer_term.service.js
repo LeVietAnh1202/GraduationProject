@@ -21,9 +21,6 @@ class AttendanceLecturerTermService {
 
       for (const student of students) {
         const attendances = [];
-        let numberOfOnTimeSessions = 0;
-        let numberOfLateSessions = 0;
-        let numberOfBreaksSessions = 0;
 
         for (const scheduleModel of scheduleModels) {
           const { details } = scheduleModel;
@@ -50,14 +47,8 @@ class AttendanceLecturerTermService {
 
               attendances.push(
                 attendancePromise.then(attendance => {
-                  const attendanceValue = attendance ? attendance.attendance : ((currentTime > afterTimeStartSession) ? 0 : null);
-                  if (attendanceValue === 0) {
-                    numberOfBreaksSessions++;
-                  } else if (attendanceValue === 1) {
-                    numberOfLateSessions++;
-                  } else if (attendanceValue === 2) {
-                    numberOfOnTimeSessions++;
-                  }
+                  const attendanceValue = attendance ? attendance.attendance : [];
+                  
 
                   return { [weekTimeStartStr]: attendanceValue, "time": time, "dayID": dayID };
                 })
@@ -67,7 +58,7 @@ class AttendanceLecturerTermService {
         }
 
         const studentName = student.studentName;
-        const attendanceLecturerTerm = new AttendanceLecturerTermModel(studentName, await Promise.all(attendances), numberOfOnTimeSessions, numberOfLateSessions, numberOfBreaksSessions);
+        const attendanceLecturerTerm = new AttendanceLecturerTermModel(studentName, await Promise.all(attendances));
         attendanceLecturerTerms.push(attendanceLecturerTerm);
       }
       return attendanceLecturerTerms;

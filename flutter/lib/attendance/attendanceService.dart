@@ -16,30 +16,31 @@ class AttendanceService with ChangeNotifier {
         Provider.of<AccountProvider>(context, listen: false).account?.account;
     final bodyData = {'lecturerID': lecturerID, 'moduleID': moduleID};
 
-    return http
-        .post(
-      Uri.http(url, getAllAttendanceLecturerTermAPI),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(bodyData),
-    )
-        .then((response) {
+    try {
+      final response = await http.post(
+        Uri.http(url, getAllAttendanceLecturerTermAPI),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(bodyData),
+      );
+
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final attendanceList = data['data'] as List<dynamic>;
 
         Provider.of<AppStateProvider>(context, listen: false)
             .setAttendanceLecturerTerms(
-                attendanceList.cast<Map<String, dynamic>>());
+          attendanceList.cast<Map<String, dynamic>>(),
+        );
 
         isLoading(false);
         return attendanceList;
       } else {
-        throw Exception('Failed to fetchAttendanceStudentWeeks');
+        throw Exception('Failed to fetch Attendance Lecturer Terms');
       }
-    }).catchError((error) {
-      // Xử lý lỗi nếu có
+    } catch (error) {
       print('Error: $error');
-    });
+      rethrow;
+    }
   }
 
   static Future<void> fetchAttendanceLecturerWeeks(
@@ -47,13 +48,13 @@ class AttendanceService with ChangeNotifier {
     final lecturerID =
         Provider.of<AccountProvider>(context, listen: false).account?.account;
     final bodyData = {'lecturerID': lecturerID, 'dayID': dayID};
-    http
-        .post(
-      Uri.http(url, getAllAttendanceLecturerWeekAPI),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(bodyData),
-    )
-        .then((response) {
+    try {
+      final response = await http.post(
+        Uri.http(url, getAllAttendanceLecturerWeekAPI),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(bodyData),
+      );
+
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final attendanceList = data['data'] as Map<String, dynamic>;
@@ -63,12 +64,11 @@ class AttendanceService with ChangeNotifier {
 
         isLoading(false);
       } else {
-        throw Exception('Failed to fetchAttendanceLecturerWeeks');
+        throw Exception('Failed to fetch Attendance Lecturer Weeks');
       }
-    }).catchError((error) {
-      // Xử lý lỗi nếu có
+    } catch (error) {
       print('Error: $error');
-    });
+    }
   }
 
   static Future<Map<String, dynamic>> fetchAttendanceStudentTerms(
@@ -79,31 +79,27 @@ class AttendanceService with ChangeNotifier {
         Provider.of<AccountProvider>(context, listen: false).account?.account;
     final bodyData = {'studentId': studentId, 'moduleID': moduleID};
 
-    return http
-        .post(
-      Uri.http(url, getAllAttendanceStudentTermAPI),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(bodyData),
-    )
-        .then((response) {
+    try {
+      final response = await http.post(
+        Uri.http(url, getAllAttendanceStudentTermAPI),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(bodyData),
+      );
+
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
-        print('data');
-        print(data);
         final attendanceList = data['data'] as Map<String, dynamic>;
-        print(attendanceList);
-        Provider.of<AppStateProvider>(context, listen: false)
-            .setAttendanceStudentTerms(attendanceList);
+
+        Provider.of<AppStateProvider>(context, listen: false).setAttendanceStudentTerms(attendanceList);
 
         isLoading(false);
         return attendanceList;
       } else {
-        throw Exception('Failed to fetchAttendanceStudentTerms');
+        throw Exception('Failed to fetch Attendance Student Terms');
       }
-    }).catchError((error) {
-      // Xử lý lỗi nếu có
+    } catch (error) {
       print('Error fetchAttendanceStudentTerms: $error');
-      throw Exception('Failed to fetchAttendanceStudentTerms');
-    });
+      throw Exception('Failed to fetch Attendance Student Terms');
+    }
   }
 }

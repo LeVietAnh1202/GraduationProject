@@ -151,7 +151,7 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
                                                 content: SingleChildScrollView(
                                                   child: Column(
                                                     children: [
-                                                      DetailAttendanceStudentDayWidget()
+                                                      // DetailAttendanceStudentDayWidget()
                                                     ],
                                                   ),
                                                 ),

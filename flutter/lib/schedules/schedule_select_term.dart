@@ -49,10 +49,9 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
     }
 
     try {
-      final role =
-          Provider.of<AccountProvider>(context, listen: false).getRole();
-      final lecturerID =
-          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final accountProvider = context.read<AccountProvider>();
+      final role = accountProvider.getRole();
+      final lecturerID = accountProvider.getAccount();
       final lecturers = await LecturerService.fetchLecturers(role, lecturerID);
 
       Provider.of<AppStateProvider>(context, listen: false)
@@ -67,6 +66,9 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
   Future<void> fetchScheduleTerms() async {
     try {
       if (!isNull()) {
+        setState(() {
+          _isLoading = true;
+        });
         final scheduleTerms = await ScheduleService.fetchScheduleTerms(
           context,
           (bool value) {
@@ -75,9 +77,7 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
             });
           },
           selectedLecturer!,
-          // selectedSubject!,
           selectedSemester!,
-          // selectedStudent!,
         );
         Provider.of<AppStateProvider>(context, listen: false)
             .setTableLength(scheduleTerms.length);
@@ -219,17 +219,28 @@ class _ScheduleSelectionTermState extends State<ScheduleSelectionTerm> {
         Row(
           children: [
             if (!isNull())
-              Expanded(
-                  child: DtScheduleTerm(
-                      lecturerID: selectedLecturer!,
-                      semesterID: selectedSemester!,
-                      // studentId: selectedStudent!,
-                      onPress: (moduleID_value, length) {
-                        setState(() {
-                          moduleID = moduleID_value;
-                          scheduleTermsLength = length;
-                        });
-                      })),
+              _isLoading
+                  ? Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: 60,
+                        height: 60,
+                        child: Container(
+                          child: CircularProgressIndicator(),
+                          margin: EdgeInsets.only(bottom: 5, top: 10),
+                        ),
+                      ),
+                    )
+                  : Expanded(
+                      child: DtScheduleTerm(
+                          lecturerID: selectedLecturer!,
+                          semesterID: selectedSemester!,
+                          onPress: (moduleID_value, length) {
+                            setState(() {
+                              moduleID = moduleID_value;
+                              scheduleTermsLength = length;
+                            });
+                          })),
           ],
         ),
         SizedBox(height: 20),

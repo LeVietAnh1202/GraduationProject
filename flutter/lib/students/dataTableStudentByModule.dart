@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/model/studentModel.dart';
+import 'package:flutter_todo_app/pageNumber.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/students/studentService.dart';
 import 'package:intl/intl.dart';
@@ -48,33 +49,28 @@ class _DataTableStudentByModuleState extends State<DataTableStudentByModule> {
     final rowsPerPage = appState.rowsPerPage;
     final students = appState.students;
     // double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
+    double screenHeight = MediaQuery.of(context).size.height;
     // double widthDataTable = screenWidth - sideBarWidth - 40;
-    // double heightDataTable = screenHeight -
-    //     appBarHeight -
-    //     2 * bodyContentPadding -
-    //     breadcrumbHeight -
-    //     3 * sizeBoxHeight -
-    //     selectHeight -
-    //     dataRowHeight * widget.scheduleTermsLength -
-    //     82;
+    double heightDataTable = screenHeight -
+        appBarHeight -
+        2 * bodyContentPadding -
+        breadcrumbHeight -
+        3 * sizeBoxHeight -
+        selectHeight -
+        dataRowHeight * rowsPerPage -
+        82;
 
     // Calculate the start and end index of the current page
     int startIndex = (currentPage - 1) * rowsPerPage;
     int endIndex = startIndex + rowsPerPage;
 
     // Get the student list for the current page
-    // List<Map<String, dynamic>> currentPageStudents =
     List<Student> currentPageStudents = students.sublist(
         startIndex, endIndex > students.length ? students.length : endIndex);
 
-    // double iconSize = 20;
-    int numberOfPages = Provider.of<AppStateProvider>(context, listen: false)
-        .getNumberOfPages();
-
     return Container(
       // width: widthDataTable,
-      // height: heightDataTable,
+      height: heightDataTable,
       child: Column(
         children: [
           SingleChildScrollView(
@@ -139,7 +135,6 @@ class _DataTableStudentByModuleState extends State<DataTableStudentByModule> {
                       ),
                     ),
                   ),
-                  // Add other columns as needed
                 ],
                 rows: currentPageStudents.asMap().entries.map((entry) {
                   final student = entry.value;
@@ -202,93 +197,8 @@ class _DataTableStudentByModuleState extends State<DataTableStudentByModule> {
             ),
           ),
           SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(Icons.first_page),
-                onPressed: () {
-                  // Handle pagination: Go to the first page
-                  Provider.of<AppStateProvider>(context, listen: false)
-                      .setCurrentPage(1);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  // Handle pagination: Go to the previous page
-                  Provider.of<AppStateProvider>(context, listen: false)
-                      .goToPreviousPage();
-                },
-              ),
-              SizedBox(width: 10),
-              for (int currentPage = 1;
-                  currentPage <= numberOfPages;
-                  currentPage++)
-                InkWell(
-                    onTap: () {
-                      // Handle pagination: Go to page i
-                      Provider.of<AppStateProvider>(context, listen: false)
-                          .setCurrentPage(currentPage);
-                    },
-                    child: currentPage ==
-                            Provider.of<AppStateProvider>(context,
-                                    listen: false)
-                                .appState!
-                                .currentPage
-                        ? pageNumberBlock(
-                            currentPage, Colors.blue, Colors.white)
-                        : pageNumberBlock(
-                            currentPage, Colors.white, Colors.black)),
-              SizedBox(width: 10),
-              IconButton(
-                icon: Icon(Icons.arrow_forward),
-                onPressed: () {
-                  // Handle pagination: Go to the next page
-                  Provider.of<AppStateProvider>(context, listen: false)
-                      .goToNextPage();
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.last_page),
-                onPressed: () {
-                  // Handle pagination: Go to the last page
-                  Provider.of<AppStateProvider>(context, listen: false)
-                      .goToLastPage();
-                },
-              ),
-            ],
-          ),
+          PageNumberWidget()
         ],
-      ),
-    );
-  }
-
-  Container pageNumberBlock(int currentPage, Color bgrColor, Color textColor) {
-    return Container(
-      alignment: Alignment.center,
-      width: 40,
-      height: 40,
-      margin: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black45),
-        color: bgrColor,
-        borderRadius: BorderRadius.circular(5),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Text(
-        '$currentPage',
-        style: TextStyle(
-          fontSize: 18,
-          color: textColor,
-        ),
       ),
     );
   }

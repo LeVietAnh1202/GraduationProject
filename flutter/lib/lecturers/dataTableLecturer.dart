@@ -27,19 +27,21 @@ class _DataTableLecturerState extends State<DataTableLecturer> {
 
   Future<void> fetchLecturers() async {
     try {
-      final role =
-          Provider.of<AccountProvider>(context, listen: false).getRole();
-      final lecturerID =
-          Provider.of<AccountProvider>(context, listen: false).getAccount();
+      final accountProvider =
+          Provider.of<AccountProvider>(context, listen: false);
+      final appStateProvider =
+          Provider.of<AppStateProvider>(context, listen: false);
+
+      final role = accountProvider.getRole();
+      final lecturerID = accountProvider.getAccount();
+
       final lecturers = await LecturerService.fetchLecturers(role, lecturerID);
 
-      Provider.of<AppStateProvider>(context, listen: false)
-          .setLecturers(lecturers);
+      appStateProvider.setLecturers(lecturers);
+      appStateProvider.setTableLength(lecturers.length);
     } catch (e) {
       print('Error fetching lecturers: $e');
     }
-    Provider.of<AppStateProvider>(context, listen: false)
-        .setTableLength(lecturers.length);
   }
 
   void deleteLecturer(int index) {}

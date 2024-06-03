@@ -18,10 +18,10 @@ class _SingleChoiceState extends State<SingleChoice> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<AppStateProvider>(context, listen: false)
-        .setCalendarView(Calendar.week);
-    Provider.of<AppStateProvider>(context, listen: false)
-        .setImagesView(ShowImage.video);
+    final appStateProvider =
+        Provider.of<AppStateProvider>(context, listen: false);
+    appStateProvider.setCalendarView(Calendar.week);
+    appStateProvider.setImagesView(ShowImage.video);
   }
 
   Widget segmentedButtonImage(BuildContext context) {

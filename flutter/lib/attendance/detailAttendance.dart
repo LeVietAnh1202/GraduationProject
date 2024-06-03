@@ -30,22 +30,14 @@ class _DetailAttendanceState extends State<DetailAttendance> {
 
   void init() async {
     attendances = Provider.of<AppStateProvider>(context, listen: false)
-        // attendances = context.watch<AppStateProvider>()
         .appState!
         .attendanceLecturerWeeks;
-    // if (attendances.isEmpty) {
     AttendanceService.fetchAttendanceLecturerWeeks(
         context,
         (bool value) => setState(() {
               _isLoading = value;
             }),
         widget.dayID);
-    // } else {
-    //   setState(() {
-    //     _isLoading = false;
-    //   }
-    //   );
-    // }
   }
 
   void deleteSchedule(int index) {
