@@ -214,7 +214,9 @@ class _FromAddStudentState extends State<FromAddStudent> {
 
   bool _checkFormValidity() {
     final studentIdPattern = RegExp(r'^\d{8}$');
-    final studentNamePattern = RegExp(r'^[a-zA-Z ]+$');
+    // final studentNamePattern = RegExp(r'^[a-zA-Z ]+$');
+    final studentNamePattern = RegExp(
+        r'^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ ]+$');
     final dateFormat = DateFormat('dd/MM/yyyy');
     final formattedDate = dateFormat.format(birthDate ?? DateTime.now());
 
@@ -364,8 +366,8 @@ class _FromAddStudentState extends State<FromAddStudent> {
                                       setState(() {
                                         birthDate = date;
                                         _birthDateController.text =
-                                            DateFormat('dd/MM/yyyy').format(
-                                                date);
+                                            DateFormat('dd/MM/yyyy')
+                                                .format(date);
                                         isFormValid = _checkFormValidity();
                                       });
                                     }
