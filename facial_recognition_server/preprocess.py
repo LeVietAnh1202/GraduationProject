@@ -44,7 +44,8 @@ class preprocesses:
             nrof_images_total = 0
             nrof_successfully_aligned = 0
             for cls in dataset:
-                output_class_dir = os.path.join(output_dir, cls.name)
+                # output_class_dir = os.path.join(output_dir, cls.name)
+                output_class_dir = output_dir
                 if not os.path.exists(output_class_dir):
                     os.makedirs(output_class_dir)
                 for image_path in cls.image_paths:

@@ -325,22 +325,33 @@ class ImageClass():
   
 def get_dataset(paths, has_class_directories=True):
     dataset = []
-    for path in paths.split(':'):
-        path_exp = os.path.expanduser(path)
-        classes = os.listdir(path_exp)
-        classes.sort()
-        nrof_classes = len(classes)
-        for i in range(nrof_classes):
-            class_name = classes[i]
-            facedir = os.path.join(path_exp, class_name)
-            image_paths = get_image_paths(facedir)
-            dataset.append(ImageClass(class_name, image_paths))
-  
+    # for path in paths.split(':'):
+    path_exp = os.path.expanduser(paths)
+    # classes = os.listdir(path_exp)
+    # print(classes)
+    # classes.sort()
+    # nrof_classes = len(classes)
+    # for i in range(nrof_classes):
+    # class_name = classes[i]
+    # print(class_name)
+    class_name = paths.split("/")[2]
+    # print('class_name')
+    # print(class_name)
+    # print('path_exp')
+    # print(path_exp)
+    # facedir = os.path.join(path_exp, class_name)
+    # print('facedir')
+    # print(facedir)
+    image_paths = get_image_paths(path_exp)
+    print(image_paths)
+    dataset.append(ImageClass(class_name, image_paths))
+    
     return dataset
 
 def get_image_paths(facedir):
     image_paths = []
     if os.path.isdir(facedir):
+        print('isdir')
         images = os.listdir(facedir)
         image_paths = [os.path.join(facedir,img) for img in images]
     return image_paths

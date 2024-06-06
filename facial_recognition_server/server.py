@@ -36,6 +36,8 @@ import concurrent.futures
 from globals_var import currentTime, time_lock, start_time_thread
 import globals_var
 from concurrent.futures import ThreadPoolExecutor
+import requests
+
 # Tạo một Socket.IO server không đồng bộ
 sio = socketio.AsyncServer(async_mode='asgi')
 
@@ -64,6 +66,7 @@ static_directory = "train_img"
 
 # Mount thư mục tĩnh vào đường dẫn /train_img
 app.mount("/train_img", StaticFiles(directory=static_directory), name="train_img")
+app.mount("/aligned_img", StaticFiles(directory=static_directory), name="aligned_img")
 app.mount("/public", StaticFiles(directory='public'), name="public")
 
 @app.get("/")
@@ -81,11 +84,54 @@ class Video(BaseModel):
 @app.post("/crop_video")
 async def crop_video(video: Video):
     # images_path = './public/images/full_images'
-    print(video.video_path)
+    print(video.images_path)
     obj = video_process(video.video_path, video.images_path)
-    image_count = -1
+    image_count = 200
     image_count = obj.auto_capture_save_images(100, 200)
-    return {"image_count": image_count}
+
+    folderName = video.images_path.split("/")[-1].split("\.")[0]
+    output_datadir = f'./aligned_img/{folderName}'
+
+    if image_count != -1:
+        obj = preprocesses(video.images_path, output_datadir)
+        nrof_images_total, nrof_successfully_aligned = obj.collect_data()
+
+        # Split the string by '/' and then by '_'
+        studentId = video.images_path.split('/')[-1].split('_')[0]
+
+        # URL of the API endpoint
+        urlNoImage = 'http://192.168.225.112:3000/attendance/updateNoImage'
+        # urlNoImage = 'http://192.168.225.112:3000/attendance/updateNoImage'
+
+        # Data to be sent in the POST request
+        data = {
+            'studentId': studentId,
+            'NoFullImage': image_count,
+            'NoCropImage': nrof_successfully_aligned
+        }
+        # Headers (optional)
+        headers = {
+            'Content-Type': 'application/json',
+        }
+
+        # Send POST request
+        response = requests.post(urlNoImage, json=data, headers=headers)
+
+        # Check the response status code
+        if response.status_code == 200:
+            print('Request was successful')
+            print(response.json())
+            return {
+                'status': True,
+                'total_images_processed': nrof_images_total,
+                'successfully_aligned_images': nrof_successfully_aligned
+            }
+        else:
+            print(f'Request failed with status code {response.status_code}')
+            return {
+                'status': False
+            }
+
 
 @app.get("/process")
 async def process_images():
@@ -138,7 +184,8 @@ def train_model():
 def connect_camera():
     connect_camera()
 
-app.mount('', socketio.ASGIApp(sio, other_asgi_app=app, socketio_path='socketio'))
+app.mount('', socketio.ASGIApp(sio, other_asgi_app=app))
+# app.mount('', socketio.ASGIApp(sio, other_asgi_app=app, socketio_path='socket.io'))
 
 # Import các sự kiện từ các tệp riêng
 import sio_event
@@ -162,6 +209,49 @@ async def update_time(sid, data):
         tz = pytz.timezone('Asia/Ho_Chi_Minh')
         globals_var.currentTime = received_time.astimezone(tz)
         print("Updated Current Time:", globals_var.currentTime)
+
+@sio.event
+async def crop_video(sid, data):
+    # images_path = './public/images/full_images'
+    print(data.video_path)
+    # obj = video_process(data.video_path, data.images_path)
+    # image_count = -1
+    # image_count = obj.auto_capture_save_images(100, 200)
+
+    # output_datadir = './aligned_img'
+
+    # if image_count != -1:
+    #     obj = preprocesses(data.images_path, output_datadir)
+    #     nrof_images_total, nrof_successfully_aligned = obj.collect_data()
+
+    #     # Split the string by '/' and then by '_'
+    #     studentId = data.images_path.split('/')[-1].split('_')[0]
+
+    #     # URL of the API endpoint
+    #     urlNoImage = 'http://192.168.225.112/attendance/updateNoImage'
+
+    #     # Data to be sent in the POST request
+    #     data = {
+    #         'studentId': studentId,
+    #         'NoFullImage': image_count,
+    #         'NoCropImage': nrof_successfully_aligned
+    #     }
+    #     # Headers (optional)
+    #     headers = {
+    #         'Content-Type': 'application/json',
+    #     }
+
+    #     # Send POST request
+    #     response = requests.post(urlNoImage, json=data, headers=headers)
+
+    #     # Check the response status code
+    #     if response.status_code == 200:
+    #         print('Request was successful')
+    #         print(response.json())
+    #         await sio.emit('updateNoImage', { 'status': True, 'total_images_processed': nrof_images_total, 'successfully_aligned_images': nrof_successfully_aligned }, to=sid)
+    #     else:
+    #         print(f'Request failed with status code {response.status_code}')
+    #         await sio.emit('updateNoImage', { 'status': False, 'status_code': response.status_code}, to=sid)
 
 # Khởi động luồng cập nhật thời gian khi ứng dụng khởi động
 @app.on_event("startup")
@@ -412,7 +502,8 @@ async def connect_camera(sio, sid, data):
         print('khởi tạo camera')
         # cap = cv2.VideoCapture(0, cv2.CAP_FFMPEG)
         # cap = cv2.VideoCapture('rtsp://192.168.248.109:1202/h264_ulaw.sdp', cv2.CAP_FFMPEG)
-        cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.1.2:554/0', cv2.CAP_FFMPEG)
+        # cap = cv2.VideoCapture('rtsp://admin:Vietanh123@14.247.77.150:554/0', cv2.CAP_FFMPEG)
+        cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.225.114:554/0', cv2.CAP_FFMPEG)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
@@ -597,7 +688,7 @@ def _get_frame():
 
 
 def main():
-    run("server:app", host="192.168.1.9", port=8001, reload=True)
+    run("server:app", host="192.168.225.112", port=8001, reload=True)
 
 if __name__ == '__main__':
     asyncio.run(main())
