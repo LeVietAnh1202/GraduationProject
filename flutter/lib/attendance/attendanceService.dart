@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/constant/config.dart';
+import 'package:flutter_todo_app/model/attendanceStudentByDayIDModel.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
@@ -90,7 +91,8 @@ class AttendanceService with ChangeNotifier {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final attendanceList = data['data'] as Map<String, dynamic>;
 
-        Provider.of<AppStateProvider>(context, listen: false).setAttendanceStudentTerms(attendanceList);
+        Provider.of<AppStateProvider>(context, listen: false)
+            .setAttendanceStudentTerms(attendanceList);
 
         isLoading(false);
         return attendanceList;
@@ -101,5 +103,44 @@ class AttendanceService with ChangeNotifier {
       print('Error fetchAttendanceStudentTerms: $error');
       throw Exception('Failed to fetch Attendance Student Terms');
     }
+  }
+
+  static Future<List<AttendanceStudentByDayID>> fetchAttendanceStudentByDayIDs(
+      BuildContext context,
+      ValueChanged<bool> isLoading,
+      String studentId,
+      String dayID
+      // String subjectID,
+      ) async {
+    final bodyData = {
+      'studentId': studentId,
+      'dayID': dayID,
+    };
+    isLoading(true);
+    return http
+        .post(
+      Uri.http(url, getAllAttendanceStudentByDayIDAPI),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(bodyData),
+    )
+        .then((response) {
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body) as Map<String, dynamic>;
+        final attendanceList = [];
+        attendanceList.add(data['data']);
+        print(attendanceList);
+
+        final attendances = attendanceList
+            .map((e) => AttendanceStudentByDayID.fromMap(e))
+            .toList();
+        print(attendances);
+        Provider.of<AppStateProvider>(context, listen: false)
+            .setAttendanceStudentByDayIDs(attendances);
+        isLoading(false);
+        return attendances;
+      } else {
+        throw Exception('Failed to fetch attendanceByDayID');
+      }
+    });
   }
 }

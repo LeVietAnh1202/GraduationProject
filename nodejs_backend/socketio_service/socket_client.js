@@ -2,9 +2,10 @@ const io = require('socket.io-client');
 const path = require('path');
 const fs = require('fs');
 const ScheduleService = require('../services/schedule/schedule.service');
+const AttendanceService = require('../services/attendance.service');
 
-const socket = io('http://192.168.248.112:8001', {
-    path: '/socketio'
+const socket = io('http://192.168.225.112:8001', {
+    path: '/socket.io'
 });
 
 socket.on('connect', () => {
@@ -42,6 +43,7 @@ socket.on('facial_recognition_result', async (data) => {
 
         const fullPath = path.join(__dirname, '../public/images/attendance_images', imagePath);
         await fs.promises.writeFile(fullPath, buffer);
+        AttendanceService.createOrUpdateAttendance(data['studentId'], data['dayID'], imagePath)
     }
     else {
         console.log(data['message']);
@@ -70,7 +72,7 @@ const attendanceFunc = async () => {
 
         const timeDifference = periodStartMinutes - currentMinutes;
 
-        if (timeDifference === 0) {
+        if (timeDifference === -10) {
             const scheduleData = await ScheduleService.checkSchedule(gct);
             console.log('scheduleData:', scheduleData); // Kiểm tra dữ liệu nhận được
             socket.emit('update_time', { currentTime: global.currentTime });
@@ -78,7 +80,7 @@ const attendanceFunc = async () => {
             // socket.emit('facial_recognition', { ids: ['12520088', '10120620'], dayID: '1012' });
             break;
         }
-        else if (timeDifference === 10) {
+        else if (timeDifference === 0) {
             socket.emit('facial_recognition', { status: false });
 
         }

@@ -1,8 +1,8 @@
-const url = '192.168.1.106:3000';
-// const url = '192.168.32.103:3000';
-// const url_ras = '192.168.32.103:3000';
-const url_ras = '192.168.1.106:3000';
-const url_python = '192.168.1.9:8001';
+const url = '192.168.225.112:3000';
+// const url = '192.168.1.3:3000';
+// const url_ras = '192.168.1.3:3000';
+const url_ras = '192.168.225.112:3000';
+const url_python = '192.168.225.112:8001';
 final register = "user/register";
 final login = 'user/login';
 
@@ -36,6 +36,7 @@ final getFacultyByStudentIDAPI = 'faculty/getFacultyByStudentID';
 
 final getAllScheduleStudentWeekAPI = 'student/getAllScheduleWeek';
 final getAllScheduleStudentTermAPI = 'student/getAllScheduleTerm';
+final getAllAttendanceStudentByDayIDAPI = 'student/getAttendanceStudentByDayID';
 
 final getAllScheduleLecturerWeekAPI = 'lecturer/getAllScheduleWeek';
 final getAllScheduleLecturerTermAPI = 'lecturer/getAllScheduleTerm';

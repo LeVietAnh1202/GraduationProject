@@ -155,7 +155,7 @@ class _FromAddStudentState extends State<FromAddStudent> {
   Map<String, String> getInforStudent() {
     final studentId = _studentIdController.text;
     final studentName = _studentNameController.text;
-
+    // final normalName = studentName.
     return {
       'studentId': studentId,
       'studentName': studentName,

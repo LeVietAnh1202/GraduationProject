@@ -1,6 +1,7 @@
 const ScheduleModel = require("../../models/schedule/schedule.model");
 
 const ModuleModel = require("../../models/module.model");
+const SubjectModel = require("../../models/subject.model");
 const AttendanceModel = require("../../models/attendance.model");
 
 const StudentModel = require("../../models/student.model");
@@ -13,6 +14,9 @@ class AttendanceLecturerTermService {
     try {
       const module = await ModuleModel.findOne({ moduleID: moduleID });
       const listStudentID = module.listStudentID;
+      const subjectID = module.subjectID;
+      const subject = await SubjectModel.findOne({ subjectID });
+      const numberOfLessons = subject.numberOfLessons;
       const students = await StudentModel.find({ studentId: { $in: listStudentID } });
       const scheduleModelsPromise = ScheduleModel.find({ moduleID }).exec();
 
@@ -21,7 +25,7 @@ class AttendanceLecturerTermService {
 
       for (const student of students) {
         const attendances = [];
-
+        var NoImagesValid = 0;
         for (const scheduleModel of scheduleModels) {
           const { details } = scheduleModel;
 
@@ -47,10 +51,11 @@ class AttendanceLecturerTermService {
 
               attendances.push(
                 attendancePromise.then(attendance => {
-                  const attendanceValue = attendance ? attendance.attendance : [];
-                  
+                  const attendanceImages = attendance ? attendance.attendance : [];
+                  const NoImages = attendanceImages.length;
+                  NoImagesValid += NoImages;
 
-                  return { [weekTimeStartStr]: attendanceValue, "time": time, "dayID": dayID };
+                  return { [weekTimeStartStr]: { attendanceImages: attendanceImages, NoImages: NoImages, time: time, dayID: dayID } };
                 })
               );
             }
@@ -58,7 +63,8 @@ class AttendanceLecturerTermService {
         }
 
         const studentName = student.studentName;
-        const attendanceLecturerTerm = new AttendanceLecturerTermModel(studentName, await Promise.all(attendances));
+        const attendanceLecturerTerm = new AttendanceLecturerTermModel(studentName, await Promise.all(attendances), NoImagesValid,
+          numberOfLessons);
         attendanceLecturerTerms.push(attendanceLecturerTerm);
       }
       return attendanceLecturerTerms;

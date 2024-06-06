@@ -5,7 +5,7 @@ const db = require('../../config/db');
 class AttendanceStudentByDayID {
     constructor(
         moduleID,
-        classRoomID,
+        roomName,
         lecturerName,
         subjectName,
         attendance,
@@ -13,7 +13,7 @@ class AttendanceStudentByDayID {
         time
     ) {
         this.moduleID = moduleID;
-        this.classRoomID = classRoomID;
+        this.roomName = roomName;
         this.lecturerName = lecturerName;
         this.subjectName = subjectName;
         this.attendance = attendance;

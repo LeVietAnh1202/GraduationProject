@@ -57,8 +57,8 @@ class _DataTableStudentByModuleState extends State<DataTableStudentByModule> {
         breadcrumbHeight -
         3 * sizeBoxHeight -
         selectHeight -
-        dataRowHeight * rowsPerPage -
-        82;
+        dataRowHeight * rowsPerPage +
+        339;
 
     // Calculate the start and end index of the current page
     int startIndex = (currentPage - 1) * rowsPerPage;

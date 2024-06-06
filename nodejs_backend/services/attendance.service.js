@@ -23,6 +23,23 @@ class AttendanceService {
     }
   }
 
+  static async updateNoImage(studentId, NoFullImage, NoCropImage) {
+    try {
+      console.log(NoFullImage);
+      const student = await StudentModel.findOneAndUpdate(
+        { studentId },
+        { $set: { NoFullImage, NoCropImage } },
+        { new: true } // Returns the updated document
+      );
+
+      console.log(student);
+      return student.studentName;
+    } catch (err) {
+      console.log(err);
+      throw err; // Ném lại lỗi để xử lý ở nơi gọi hàm này
+    }
+  }
+
   static uploadAttendanceImage(req) {
     return new Promise((resolve, reject) => {
       const storage = multer.diskStorage({

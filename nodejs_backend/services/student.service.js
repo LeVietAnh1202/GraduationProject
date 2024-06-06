@@ -2,6 +2,7 @@ const StudentModel = require("../models/student.model");
 const ModuleModel = require("../models/module.model");
 const FacultyModel = require("../models/faculty.model");
 const LecturerModel = require("../models/lecturer.model");
+const unidecode = require('unidecode');
 
 const multer = require('multer');
 const fs = require('fs');
@@ -164,7 +165,7 @@ class StudentService {
                     cb(null, './public/images/default/avatar'); // Thư mục lưu trữ avatar
                 },
                 filename: function (req, file, cb) {
-                    const fileName = file.originalname;
+                    const fileName = unidecode(file.originalname).replace(/ /g, '');
                     cb(null, fileName); // Sử dụng tên file được gửi
                 }
             });

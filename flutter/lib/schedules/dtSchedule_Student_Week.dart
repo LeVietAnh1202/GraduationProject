@@ -3,6 +3,7 @@ import 'package:flutter_todo_app/attendance/attendance_student_term.dart';
 import 'package:flutter_todo_app/attendance/detail_attendance_student_day.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
 import 'package:intl/intl.dart';
@@ -64,6 +65,9 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
 
   Widget _buildWeekDropdown(BuildContext context) {
     final List<String> weeks = [
+      '8',
+      '9',
+      '10',
       '11',
       '12',
       '13',
@@ -131,6 +135,8 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
     filteredSchedules.sort((a, b) {
       return scheduleDayComparator(a['day'], b['day']);
     });
+    final studentId =
+        Provider.of<AccountProvider>(context, listen: false).account!.account;
 
     return DataTable(
       columns: [
@@ -182,11 +188,11 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text(schedule['subjectName']),
-                                  content: 
-                                  Container(),
-                                  // DetailAttendanceStudentDayWidget(
-                                  //   dayID: schedule['dayID'],
-                                  // ),
+                                  content:
+                                      // Container(),
+                                      DetailAttendanceStudentDayWidget(
+                                          studentId: studentId,
+                                          dayID: schedule['dayID']),
                                   actions: [
                                     TextButton(
                                       child: Text('Hủy'),

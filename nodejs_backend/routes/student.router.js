@@ -30,3 +30,4 @@ router.post("/getAllAttendanceTerm", AttendanceStudentTermController.getAllAtten
 router.post("/getAttendanceStudentByDayID", AttendanceStudentByDayIDController.getAttendanceStudentByDayID);
 
 module.exports = router;
+

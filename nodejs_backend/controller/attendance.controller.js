@@ -11,6 +11,17 @@ exports.createOrUpdateAttendance = async (req, res, next) => {
     }
 };
 
+exports.updateNoImage = async (req, res, next) => {
+    try {
+        const { studentId, NoFullImage, NoCropImage } = req.body;
+        const studentName = await AttendanceService.updateNoImage(studentId, NoFullImage, NoCropImage );
+        res.json({ status: true, success: `Sinh viên ${studentId} - ${studentName} xử lý ảnh thành công.` });
+    } catch (err) {
+        console.log("---> err -->", err);
+        next(err);
+    }
+};
+
 exports.uploadAttendanceImage = async (req, res, next) => {
     try {
         const studentName = await AttendanceService.uploadAttendanceImage(req);

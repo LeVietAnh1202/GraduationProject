@@ -3,8 +3,10 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/attendance/attendanceService.dart';
 import 'package:flutter_todo_app/attendance/detailAttendance.dart';
+import 'package:flutter_todo_app/attendance/detail_attendance_student_day.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +36,7 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
   void initState() {
     super.initState();
     // Future.delayed(Duration.zero, () {
-      fetchAttendanceLecturerTerms();
+    fetchAttendanceLecturerTerms();
     // });
   }
 
@@ -55,7 +57,7 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
   }
 
   void fetchAttendanceLecturerTerms() async {
-      setState(() {
+    setState(() {
       _isLoading = true;
     });
     attendanceLecturerTerms =
@@ -71,6 +73,9 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
 
   @override
   Widget build(BuildContext context) {
+    final studentId =
+        Provider.of<AccountProvider>(context, listen: false).account!.account;
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     double widthDataTable = screenWidth - sideBarWidth - 40;
@@ -156,6 +161,8 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                                   .attendanceLecturerTerms
                                   .first['dateList'] as List<dynamic>)
                               .map<DataColumn>((entry) {
+                            print('entry');
+                            print(entry);
                             return DataColumn(
                               label: Expanded(
                                 child: Column(
@@ -179,7 +186,7 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                                       children: [
                                         SizedBox(width: 10),
                                         Text(
-                                          entry["time"],
+                                          entry[entry.keys.first]["time"],
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               // fontSize: 12,
@@ -199,9 +206,16 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                                                       SingleChildScrollView(
                                                     child: Column(
                                                       children: [
-                                                        DetailAttendance(
-                                                            dayID:
-                                                                entry['dayID'])
+                                                        //   DetailAttendance(
+                                                        //       dayID: entry[entry
+                                                        //               .keys.first]
+                                                        //           ['dayID'])
+                                                        // DetailAttendanceStudentDayWidget(
+                                                        //   studentId: studentId,
+                                                        //   dayID: entry[entry
+                                                        //       .keys
+                                                        //       .first]['dayID'],
+                                                        // )
                                                       ],
                                                     ),
                                                   ),
@@ -231,34 +245,6 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                               ),
                             );
                           }).toList(),
-
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                'Số buổi\nđúng giờ',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                'Số buổi\nđi muộn',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                'Số buổi\nnghỉ',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
                         ],
                         rows: context
                             .watch<AppStateProvider>()
@@ -291,35 +277,12 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                                     return DataCell(Center(
                                       child: Container(
                                         alignment: Alignment.center,
-                                        child: Utilities.attendanceIcon(
-                                            entry.values.first),
+                                        child: Utilities.attendanceImages(
+                                            entry[entry.keys.first]
+                                                ['NoImages']),
                                       ),
                                     ));
                                   }).toList(),
-                                  DataCell(Center(
-                                      child: Text(
-                                          (attendance['numberOfOnTimeSessions'] ==
-                                                      0
-                                                  ? '-'
-                                                  : attendance[
-                                                      'numberOfOnTimeSessions'])
-                                              .toString()))),
-                                  DataCell(Center(
-                                      child: Text(
-                                          (attendance['numberOfLateSessions'] ==
-                                                      0
-                                                  ? '-'
-                                                  : attendance[
-                                                      'numberOfLateSessions'])
-                                              .toString()))),
-                                  DataCell(Center(
-                                      child: Text(
-                                          (attendance['numberOfBreaksSessions'] ==
-                                                      0
-                                                  ? '-'
-                                                  : attendance[
-                                                      'numberOfBreaksSessions'])
-                                              .toString()))),
                                 ],
                               );
                             })

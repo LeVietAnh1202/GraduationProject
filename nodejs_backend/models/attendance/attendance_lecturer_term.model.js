@@ -46,12 +46,12 @@ const db = require('../../config/db');
 
 
 class AttendanceLecturerTerm {
-    constructor(studentName, dateList, numberOfOnTimeSessions, numberOfLateSessions, numberOfBreaksSessions) {
+    constructor(studentName, dateList, NoImagesValid,
+        numberOfLessons) {
         this.studentName = studentName;
         this.dateList = dateList;
-        this.numberOfOnTimeSessions = numberOfOnTimeSessions;
-        this.numberOfLateSessions = numberOfLateSessions;
-        this.numberOfBreaksSessions = numberOfBreaksSessions;
+        this.NoImagesValid = NoImagesValid;
+        this.numberOfLessons = numberOfLessons;
     }
 }
 

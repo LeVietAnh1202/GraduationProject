@@ -45,22 +45,24 @@ class _DetailStudentState extends State<DetailStudent> {
     super.initState();
     StudentService.fetchStudents(context, (value) {});
 
+    initStudent();
+
     flickManager = FlickManager(
-        videoPlayerController: VideoPlayerController.networkUrl(Uri.http(
-            "192.168.1.3:3000",
-            "videos/default/10120620_NguyenMinhDoanh.mp4")));
+        videoPlayerController: VideoPlayerController.networkUrl(
+            Uri.http("192.168.1.106:3000", "videos/default/${student.video}")));
   }
 
-  Future<void> initVideo() async {
-    // try {
+  void initStudent() {
     final defaultStudent = Student.fromMap({});
     final students = Provider.of<AppStateProvider>(context, listen: false)
         .appState!
         .students;
-    student = students.firstWhere(
-      (student) => student.studentId == widget.studentId,
-      orElse: () => defaultStudent,
-    );
+    setState(() {
+      student = students.firstWhere(
+        (student) => student.studentId == widget.studentId,
+        orElse: () => defaultStudent,
+      );
+    });
   }
 
   @override
@@ -88,50 +90,85 @@ class _DetailStudentState extends State<DetailStudent> {
     setState(() {
       _loading = true;
     });
+    // final socket = Provider.of<AppStateProvider>(context, listen: false).appState!.socket;
+    int dotIndex = student.video.lastIndexOf('.');
+    print(student.video);
+    var fileName = '';
+    if (dotIndex != -1) {
+      fileName = student.video.substring(0, dotIndex);
+    }
+    // socket.emit('crop_video', {
+    //   "video_path": "${URLNodeJSServer_RaspberryPi_Videos}/${student.video}",
+    //   "images_path": "./train_img/${fileName}"
+    // });
 
+    // socket.on('updateNoImage', (data) {
+    //   setState(() {
+    //     _loading = false;
+    //   });
+    // });
+
+    // setState(() {
+    //   _loading = true;
+    // });
+    print('_callAPIHandleVideo');
     try {
+      int dotIndex = student.video.lastIndexOf('.');
+      var fileName = '';
+      if (dotIndex != -1) {
+        fileName = student.video.substring(0, dotIndex);
+      }
       var response = await http.post(
-        Uri.http('192.168.1.4:8001', 'crop_video'),
+        Uri.http(url_python, 'crop_video'),
         headers: {
           'Content-Type': 'application/json',
         },
         body: jsonEncode({
           "video_path":
-              '${URLNodeJSServer_RaspberryPi_Videos}/10120620_NguyenMinhDoanh.mp4',
+              '${URLNodeJSServer_RaspberryPi_Videos}/${student.video}',
+          "images_path": "./train_img/${fileName}"
         }),
       );
-
-      // var response = await http.get(
-      //   Uri.http('192.168.1.4:8001', ''),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      // );
-
+      var jsonResponse;
       if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
+        jsonResponse = jsonDecode(response.body);
         setState(() {
           _result = jsonResponse.toString();
           _loading = false;
         });
 
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: Text('API Response handle'),
-            content:
-                Text("Images_count: " + jsonResponse['image_count'].toString()),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('OK'),
-              ),
-            ],
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Xử lý video của sinh viên thành công'),
+            backgroundColor: Colors.green,
           ),
         );
       } else {
+        jsonResponse = jsonDecode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                'Xử lý video của sinh viên thất bại - ${response.statusCode}'),
+            backgroundColor: Colors.red,
+          ),
+        );
         throw Exception('Failed to handle video');
       }
+
+      // showDialog(
+      //   context: context,
+      //   builder: (_) => AlertDialog(
+      //     title: Text('API Response handle'),
+      //     content: Text(
+      //         "Images_count:  + ${jsonResponse['status'] ? jsonResponse['total_images_processed'] : 'false'}"),
+      //     actions: [
+      //       TextButton(
+      //         onPressed: () => Navigator.pop(context),
+      //         child: Text('OK'),
+      //       ),
+      //     ],
+      //   ),
+      // );
     } catch (error) {
       setState(() {
         _loading = false;
@@ -186,7 +223,8 @@ class _DetailStudentState extends State<DetailStudent> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Utilities.buildInfoRow('Mã sinh viên:', student.studentId),
+                      Utilities.buildInfoRow(
+                          'Mã sinh viên:', student.studentId),
                       Utilities.buildInfoRow('Họ tên:', student.studentName),
                       Utilities.buildInfoRow('Lớp:', student.classCode),
                       Utilities.buildInfoRow(
@@ -248,22 +286,24 @@ class _DetailStudentState extends State<DetailStudent> {
                   },
                 ),
                 if (imagesView == ShowImage.video)
-                  ElevatedButton(
-                    onPressed: _callAPIHandleVideo,
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.pressed)) {
-                            return Colors
-                                .green; // Color when the button is pressed
-                          }
-                          return Colors.blue; // Default color
-                        },
-                      ),
-                    ),
-                    child: Text('Call API'),
-                  ),
+                  _loading
+                      ? CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: _callAPIHandleVideo,
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed)) {
+                                  return Colors
+                                      .green; // Color when the button is pressed
+                                }
+                                return Colors.blue; // Default color
+                              },
+                            ),
+                          ),
+                          child: Text('Xử lý video'),
+                        ),
               ],
             ),
             SizedBox(height: 30),
@@ -387,7 +427,8 @@ class _ImagesViewState extends State<ImagesView> {
   Widget build(BuildContext context) {
     // Xóa cache của hình ảnh cũ
     final imageProvider = NetworkImage(
-      '${URLNodeJSServer_Python_Images}/${Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView == ShowImage.full ? 'full_images' : 'crop_images'}/${widget.student.avatar.toString().substring(0, widget.student.avatar.toString().indexOf('.'))}/${widget.index + 1}.jpg',
+      // '${URLNodeJSServer_Python_Images}/${Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView == ShowImage.full ? 'full_images' : 'crop_images'}/${widget.student.avatar.toString().substring(0, widget.student.avatar.toString().indexOf('.'))}/${widget.index + 1}.jpg',
+      '${URLPythonServer}/${Provider.of<AppStateProvider>(context, listen: false).appState?.imagesView == ShowImage.full ? 'train_img' : 'aligned_img'}/${widget.student.avatar.toString().substring(0, widget.student.avatar.toString().indexOf('.'))}/${widget.index + 1}.jpg',
     );
     imageProvider.evict().then((bool success) {
       if (success) {

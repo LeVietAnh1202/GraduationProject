@@ -5,6 +5,7 @@ import 'package:flutter_todo_app/attendance/dtModule_by_lecturerID_term.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/lecturers/lecturerService.dart';
 import 'package:flutter_todo_app/model/lecturerModel.dart';
+import 'package:flutter_todo_app/model/moduleTermByLecturerIDModel.dart';
 import 'package:flutter_todo_app/model/schoolyearModel.dart';
 import 'package:flutter_todo_app/model/semesterModel.dart';
 import 'package:flutter_todo_app/provider/account.dart';
@@ -26,6 +27,7 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
   List<Semester> semesters = [];
   List<Lecturer> lecturers = [];
   int scheduleAdminTermsLength = 0;
+  late ModuleTermByLecturerID module;
   String moduleID = "";
   String? selectedSchoolYear;
   String? selectedSemester;

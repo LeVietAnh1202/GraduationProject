@@ -19,6 +19,7 @@ String adminTerm = '${Role.admin.toString()}Term';
 String aaoTerm = '${Role.aao.toString()}Term';
 
 const String URLNodeJSServer = 'http://${url}';
+const String URLPythonServer = 'http://${url_python}';
 const String URLNodeJSServer_RaspberryPi = 'http://${url_ras}';
 
 const String URLNodeJSServer_RaspberryPi_Images =
@@ -30,6 +31,9 @@ const String URLNodeJSServer_Python_AttendanceImages =
 
 const String URLNodeJSServer_Python_Images =
     'http://${url_python}/public/images';
+const String URLNodeJSServer_Python_Images_2 = 'http://${url_python}/train_img';
+const String URLNodeJSServer_Python_Images_3 =
+    'http://${url_python}/aligned_img';
 const String URLNodeJSServer_Python_Videos =
     'http://${url_python}/public/videos';
 

@@ -2,6 +2,7 @@ const ScheduleModel = require("../../models/schedule/schedule.model");
 const ModuleModel = require("../../models/module.model");
 const AttendanceModel = require("../../models/attendance.model");
 const LecturerModel = require("../../models/lecturer.model");
+const RoomModel = require("../../models/room.model");
 const SubjectModel = require("../../models/subject.model");
 const AttendanceStudentByDayIDModel = require("../../models/attendance/attendance_student_by_dayid.model");
 
@@ -52,6 +53,8 @@ class AttendanceStudentByDayIDService {
             if (!subject) {
                 throw new Error('Subject not found');
             }
+            const room = await RoomModel.findOne({ classRoomID });
+            const roomName = room.roomName;
 
             const lecturerName = lecturer.lecturerName;
             const subjectName = subject.subjectName;
@@ -60,7 +63,7 @@ class AttendanceStudentByDayIDService {
             // Construct and return the attendanceStudentTermModel
             const attendanceStudentTermModel = new AttendanceStudentByDayIDModel(
                 moduleID,
-                classRoomID,
+                roomName,
                 lecturerName,
                 subjectName,
                 attendance,

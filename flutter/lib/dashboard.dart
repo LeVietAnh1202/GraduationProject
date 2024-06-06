@@ -46,6 +46,7 @@ class _DashboardState extends State<Dashboard> {
       scheduleLecturerTerms: [],
       scheduleAdminTerms: [],
       moduleTermByLecturerIDs: [],
+      attendanceStudentByDayIDs: [],
       // - - - - - - - - - - - - - - - -
       attendanceStudentTerms: {},
       attendanceLecturerWeeks: {},
@@ -56,7 +57,6 @@ class _DashboardState extends State<Dashboard> {
     Future.delayed(Duration.zero, () {
       Provider.of<AppStateProvider>(context, listen: false)
           .setAppState(appState);
-          
     });
 
     // connectAndListen();
@@ -64,29 +64,35 @@ class _DashboardState extends State<Dashboard> {
 
   void connectAndListen() {
     print('Call func connectAndListen');
-    socket = IO.io(URLNodeJSServer,
-        IO.OptionBuilder().setTransports(['websocket']).build());
+    // socket = IO.io('${URLPythonServer}/socket.io',
+    // socket = IO.io('ws://192.168.1.106:8001',
+    //     IO.OptionBuilder().setTransports(['websocket']).build());
+
+    socket = IO.io('http://192.168.1.106:8001', <String, dynamic>{
+      'transports': ['websocket'],
+      'extraHeaders': {'foo': 'bar'} // optional
+    });
 
     socket.onConnect((_) {
       print('connect');
       socket.emit('fromClient', 'test from client');
     });
 
-    socket.on('attendance', (data) {
-      print('Received data: $data');
-      setState(() {
-        fingerID = data['fingerID'].toDouble();
-        confidence = data['confidence'].toDouble();
-        time = data['time'];
-      });
-    });
+    // socket.on('attendance', (data) {
+    //   print('Received data: $data');
+    //   setState(() {
+    //     fingerID = data['fingerID'].toDouble();
+    //     confidence = data['confidence'].toDouble();
+    //     time = data['time'];
+    //   });
+    // });
 
     socket.onDisconnect((reason) {
       print('Disconnected: $reason');
     });
 
-    //When an event recieved from server, data is added to the stream
-    socket.onDisconnect((_) => print('disconnect'));
+    // //When an event recieved from server, data is added to the stream
+    // socket.onDisconnect((_) => print('disconnect'));
   }
 
   @override
@@ -104,7 +110,10 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               width: 10,
             ),
-            Text('Hệ thống quản lý điểm danh sinh viên'.toUpperCase(), style: TextStyle(letterSpacing: 1.5, wordSpacing: 1.7),),
+            Text(
+              'Hệ thống quản lý điểm danh sinh viên'.toUpperCase(),
+              style: TextStyle(letterSpacing: 1.5, wordSpacing: 1.7),
+            ),
             // Text('fingerID: ${fingerID.toString()} - confidence: ${confidence.toString()} - time: ${time}'),
           ],
         ),
