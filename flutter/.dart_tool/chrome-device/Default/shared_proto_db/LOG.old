@@ -1,21 +1,4 @@
-2024/05/20-21:17:02.113 5638 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.6f7ce984\flutter_tools_chrome_device.5d22ed2b\Default\shared_proto_db/MANIFEST-000001
-2024/05/20-21:17:02.114 5638 Recovering log #32
-2024/05/20-21:17:02.114 5638 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.6f7ce984\flutter_tools_chrome_device.5d22ed2b\Default\shared_proto_db/000032.log 
-2024/05/20-21:17:02.115 5638 Delete type=0 #3
-2024/05/20-21:17:02.115 5638 Delete type=0 #4
-2024/05/20-21:17:02.115 5638 Delete type=0 #7
-2024/05/20-21:17:02.115 5638 Delete type=2 #8
-2024/05/20-21:17:02.115 5638 Delete type=0 #10
-2024/05/20-21:17:02.115 5638 Delete type=2 #11
-2024/05/20-21:17:02.115 5638 Delete type=0 #13
-2024/05/20-21:17:02.115 5638 Delete type=2 #14
-2024/05/20-21:17:02.117 5638 Delete type=0 #16
-2024/05/20-21:17:02.117 5638 Delete type=2 #17
-2024/05/20-21:17:02.117 5638 Delete type=0 #19
-2024/05/20-21:17:02.117 5638 Delete type=2 #21
-2024/05/20-21:17:02.117 5638 Delete type=0 #23
-2024/05/20-21:17:02.117 5638 Delete type=2 #24
-2024/05/20-21:17:02.117 5638 Delete type=0 #26
-2024/05/20-21:17:02.117 5638 Delete type=2 #27
-2024/05/20-21:17:02.117 5638 Delete type=0 #29
-2024/05/20-21:17:02.117 5638 Delete type=2 #30
+2024/06/01-22:52:13.017 23e0 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.1da8a16f\flutter_tools_chrome_device.77ca32aa\Default\shared_proto_db/MANIFEST-000001
+2024/06/01-22:52:13.018 23e0 Recovering log #4
+2024/06/01-22:52:13.018 23e0 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.1da8a16f\flutter_tools_chrome_device.77ca32aa\Default\shared_proto_db/000004.log 
+2024/06/01-22:52:13.018 23e0 Delete type=0 #3
