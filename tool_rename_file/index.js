@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-var index = 0;
-const directoryPath = 'D:/DHCQ-2020-2024/2023-2024_Ky 2/DATN/Project/GraduationProject/nodejs_backend/public/images/default/avatar/New folder';
+var index = 101;
+const directoryPath = 'D:/DHCQ-2020-2024/2023-2024_Ky 2/DATN/Project/GraduationProject/nodejs_backend/public/images/full_images/New folder';
 
 const arr = [
     '10120603_DoQuynhAnh',
@@ -77,7 +77,7 @@ fs.readdir(directoryPath, function (err, files) {
         const oldPath = path.join(directoryPath, file);
         // const result = file.match(/_(.*?)/./);
         // const extractedString = result[1];
-        const newName = arr[index++]; // Tên mới của tệp
+        const newName = index++ + '.jpg'; // Tên mới của tệp
         // console.log(newName);
         // console.log(file)
         const newPath = path.join(directoryPath, newName);

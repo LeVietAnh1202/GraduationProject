@@ -1,63 +1,19 @@
 {
    "epochs": [ {
-      "calculation_time": "13357577535387070",
+      "calculation_time": "13361356045621474",
       "config_version": 0,
       "model_version": "0",
       "padded_top_topics_start_index": 0,
       "taxonomy_version": 0,
       "top_topics_and_observing_domains": [  ]
    }, {
-      "calculation_time": "13358204372623894",
-      "config_version": 2,
-      "model_version": "4",
-      "padded_top_topics_start_index": 0,
-      "taxonomy_version": 2,
-      "top_topics_and_observing_domains": [ {
-         "hashed_domains": [  ],
-         "topic": 577
-      }, {
-         "hashed_domains": [  ],
-         "topic": 548
-      }, {
-         "hashed_domains": [  ],
-         "topic": 399
-      }, {
-         "hashed_domains": [  ],
-         "topic": 48
-      }, {
-         "hashed_domains": [  ],
-         "topic": 500
-      } ]
-   }, {
-      "calculation_time": "13359891885872829",
-      "config_version": 2,
-      "model_version": "5",
-      "padded_top_topics_start_index": 0,
-      "taxonomy_version": 2,
-      "top_topics_and_observing_domains": [ {
-         "hashed_domains": [  ],
-         "topic": 345
-      }, {
-         "hashed_domains": [  ],
-         "topic": 549
-      }, {
-         "hashed_domains": [  ],
-         "topic": 460
-      }, {
-         "hashed_domains": [  ],
-         "topic": 498
-      }, {
-         "hashed_domains": [  ],
-         "topic": 605
-      } ]
-   }, {
-      "calculation_time": "13360496690771070",
+      "calculation_time": "13362025577781176",
       "config_version": 0,
       "model_version": "0",
       "padded_top_topics_start_index": 0,
       "taxonomy_version": 0,
       "top_topics_and_observing_domains": [  ]
    } ],
-   "hex_encoded_hmac_key": "58D05B0C1459A8393FB8AD572F5BD6548D38D86AF0D30B20DDA0105DB56E2AE6",
-   "next_scheduled_calculation_time": "13361101490771295"
+   "hex_encoded_hmac_key": "42FACCFB18C3424DB5B3A0C8FA8D18135C1C50DC9C1F776D62CA6473063420D4",
+   "next_scheduled_calculation_time": "13362630377781306"
 }

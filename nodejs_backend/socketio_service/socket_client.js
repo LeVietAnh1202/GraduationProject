@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const ScheduleService = require('../services/schedule/schedule.service');
 
-const socket = io('http://192.168.248.112:8001', {
+const socket = io('http://192.168.1.9:8001', {
     path: '/socketio'
 });
 

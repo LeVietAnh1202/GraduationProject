@@ -30,6 +30,8 @@ import subprocess
 
 import queue
 import threading
+import asyncio
+import concurrent.futures
 
 from globals_var import currentTime, time_lock, start_time_thread
 import globals_var
@@ -408,9 +410,9 @@ async def connect_camera(sio, sid, data):
 
     def capture_frames():
         print('khởi tạo camera')
-        # cap = cv2.VideoCapture(0)
-        cap = cv2.VideoCapture('rtsp://192.168.248.109:1202/h264_ulaw.sdp', cv2.CAP_FFMPEG)
-        # cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.1.2:554/0', cv2.CAP_FFMPEG)
+        # cap = cv2.VideoCapture(0, cv2.CAP_FFMPEG)
+        # cap = cv2.VideoCapture('rtsp://192.168.248.109:1202/h264_ulaw.sdp', cv2.CAP_FFMPEG)
+        cap = cv2.VideoCapture('rtsp://admin:Vietanh123@192.168.1.2:554/0', cv2.CAP_FFMPEG)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
@@ -427,10 +429,6 @@ async def connect_camera(sio, sid, data):
             #     break
         cap.release()
         # cv2.destroyAllWindows()
-
-    """ capture_thread = threading.Thread(target=capture_frames)
-    capture_thread.daemon = True
-    capture_thread.start() """
 
     capture_thread = threading.Thread(target=capture_frames)
     capture_thread.daemon = True
@@ -547,20 +545,7 @@ async def connect_camera(sio, sid, data):
 
         loop = asyncio.get_event_loop()
         task = loop.create_task(process_frames())
-        await task
-
-    # await process_frames()
-    # async def async_process_wrapper():
-    #     await process_frames()
-
-    # process_thread = threading.Thread(target=lambda: asyncio.run(async_process_wrapper()))
-    # process_thread.daemon = True
-    # process_thread.start()
-
-    # loop = asyncio.get_event_loop()
-    # with ThreadPoolExecutor() as pool:
-    #     await loop.run_in_executor(pool, process_frames)
-            
+        await task           
     
     # Đợi luồng kết thúc
     # capture_thread.join()
@@ -612,7 +597,7 @@ def _get_frame():
 
 
 def main():
-    run("server:app", host="192.168.248.112", port=8001, reload=True)
+    run("server:app", host="192.168.1.9", port=8001, reload=True)
 
 if __name__ == '__main__':
     asyncio.run(main())
