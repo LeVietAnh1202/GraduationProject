@@ -6,6 +6,7 @@ import 'package:flutter_todo_app/attendance/detailAttendance.dart';
 import 'package:flutter_todo_app/attendance/detail_attendance_student_day.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
+import 'package:flutter_todo_app/export/export_attendance_lecturer.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
@@ -35,9 +36,9 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
   @override
   void initState() {
     super.initState();
-    // Future.delayed(Duration.zero, () {
-    fetchAttendanceLecturerTerms();
-    // });
+    Future.delayed(Duration.zero, () {
+      fetchAttendanceLecturerTerms();
+    });
   }
 
   @override
@@ -54,6 +55,11 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
     if (widget.moduleID != oldWidget.moduleID) {
       fetchAttendanceLecturerTerms();
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void fetchAttendanceLecturerTerms() async {
@@ -86,7 +92,7 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
         3 * sizeBoxHeight -
         selectHeight -
         dataRowHeight * widget.scheduleAdminTermsLength -
-        82;
+        140;
 
     return _isLoading
         ? Container(
@@ -200,16 +206,44 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
-                                                  title: Text(
-                                                      'Chi tiết điểm danh cho ngày ${Utilities.formatDate(entry.keys.first)}.'),
+                                                  // title: Text(
+                                                  //     'Chi tiết điểm danh cho ngày ${Utilities.formatDate(entry.keys.first)}.'),
+                                                  title: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                          'Chi tiết điểm danh cho ngày ${Utilities.formatDate(entry.keys.first)}.'),
+                                                      // IconButton(
+                                                      //   icon: Icon(Icons
+                                                      //       .file_download),
+                                                      //   onPressed: () async {
+                                                      //     final attendance =
+                                                      //         Provider.of<AppStateProvider>(
+                                                      //                 context,
+                                                      //                 listen:
+                                                      //                     false)
+                                                      //             .appState!
+                                                      //             .attendanceLecturerTerms;
+                                                      //     await ExportExcel
+                                                      //         .exportAttendanceLecturerWeekToExcel(
+                                                      //             attendance,
+                                                      //             subjectName,
+                                                      //             '10120TN'
+                                                      //             );
+                                                      //   },
+                                                      // ),
+                                                    ],
+                                                  ),
                                                   content:
                                                       SingleChildScrollView(
                                                     child: Column(
                                                       children: [
-                                                        //   DetailAttendance(
-                                                        //       dayID: entry[entry
-                                                        //               .keys.first]
-                                                        //           ['dayID'])
+                                                        DetailAttendance(
+                                                            dayID: entry[entry
+                                                                    .keys.first]
+                                                                ['dayID'])
                                                         // DetailAttendanceStudentDayWidget(
                                                         //   studentId: studentId,
                                                         //   dayID: entry[entry
@@ -245,6 +279,15 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                               ),
                             );
                           }).toList(),
+                          DataColumn(
+                            label: Expanded(
+                              child: Text(
+                                'Số ảnh/Tổng số tiết',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                         ],
                         rows: context
                             .watch<AppStateProvider>()
@@ -283,6 +326,9 @@ class _AttendanceLecturerTermState extends State<AttendanceLecturerTerm> {
                                       ),
                                     ));
                                   }).toList(),
+                                  DataCell(Center(
+                                      child: Text(
+                                          '${(attendance['NoImagesValid'] == 0 ? '-' : attendance['NoImagesValid']).toString()}/${attendance['numberOfLessons']}'))),
                                 ],
                               );
                             })

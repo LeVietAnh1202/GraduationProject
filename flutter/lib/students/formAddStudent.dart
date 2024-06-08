@@ -152,9 +152,36 @@ class _FromAddStudentState extends State<FromAddStudent> {
   }
 // ----------------------------------------------------------------
 
+  String removeDiacritics(String text) {
+    // Define the mapping of diacritic characters to non-diacritic characters
+    final diacritics =
+        'àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ'
+        'ÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴĐ';
+    final letters =
+        'aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiioooooooooooooooouuuuuuuuuuuuyyyyyd'
+        'AAAAAAAAAAAAAAAAAEEEEEEEEEEEIIIIIOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYYD';
+
+    String result = '';
+    for (int i = 0; i < text.length; i++) {
+      int index = diacritics.indexOf(text[i]);
+      print("index: ${index}");
+      result += index != -1 ? letters[index] : text[i];
+      print(result);
+    }
+    return result;
+  }
+
+  String normalizeName(String name) {
+    final normalized = removeDiacritics(name);
+    print("normalized: ${normalized}");
+    return normalized.replaceAll(' ', '');
+  }
+
   Map<String, String> getInforStudent() {
     final studentId = _studentIdController.text;
     final studentName = _studentNameController.text;
+    print('studentName: ${studentName}');
+    final normalizedStudentName = normalizeName(studentName);
     // final normalName = studentName.
     return {
       'studentId': studentId,
@@ -163,8 +190,8 @@ class _FromAddStudentState extends State<FromAddStudent> {
       'specializationID': specializationID!,
       'gender': gender!,
       'birthDate': birthDate!.toIso8601String(),
-      'avatar': '${studentId}_${studentName}.${imageExtension}',
-      'video': '${studentId}_${studentName}.${videoExtension}',
+      'avatar': '${studentId}_${normalizedStudentName}.${imageExtension}',
+      'video': '${studentId}_${normalizedStudentName}.${videoExtension}',
     };
   }
 

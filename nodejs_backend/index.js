@@ -3,10 +3,10 @@ const db = require('./config/db')
 
 const port = 3000;
 
-const socket_client = require('./socketio_service/socket_client');
-socket_client.socket
-setInterval(socket_client.attendanceFunc, 1000)
-setInterval(socket_client.updateSimulatedTime, 1000)
+// const socket_client = require('./socketio_service/socket_client');
+// socket_client.socket
+// setInterval(socket_client.attendanceFunc, 1000)
+// setInterval(socket_client.updateSimulatedTime, 1000)
 const server = require('http').createServer(app);
 // const options = {
 //     cors: {

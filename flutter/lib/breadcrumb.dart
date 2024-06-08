@@ -3,7 +3,7 @@ import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/constant/string.dart';
 import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
-import 'package:flutter_todo_app/students/formAddStudentPhone.dart';
+import 'package:flutter_todo_app/students/formAddStudent.dart';
 import 'package:flutter_todo_app/timePicker.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +20,7 @@ class _BreadcrumbState extends State<Breadcrumb> {
     BuildContext mainContext = context;
     String breadcrumbs =
         context.watch<AppStateProvider>().appState!.breadcrumbs;
-    final role =
-        Provider.of<AccountProvider>(context, listen: false).getRole();
+    final role = Provider.of<AccountProvider>(context, listen: false).getRole();
     return Column(
       children: [
         Row(
@@ -39,14 +38,13 @@ class _BreadcrumbState extends State<Breadcrumb> {
             (breadcrumbs == quanLyDinhDanh && role == Role.aao)
                 ? ElevatedButton(
                     onPressed: () {
-                      // if (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien') 
-                        showDialog(
-                          context: mainContext,
-                          builder: (BuildContext context) {
-                            return FromAddStudent();
-                          },
-                        );
-                      
+                      // if (breadcrumbs == '$quanLyDanhMuc > $danhMucSinhVien')
+                      showDialog(
+                        context: mainContext,
+                        builder: (BuildContext context) {
+                          return FromAddStudent();
+                        },
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green, // Đổi màu xanh cho nút

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class DtModuleByLecturerIDTerm extends StatefulWidget {
-  Function(String, int) onPress;
+  Function(String, String, int) onPress;
   String lecturerID;
   // String subjectID;
   String semesterID;
@@ -169,7 +169,7 @@ class _DtModuleByLecturerIDTermState extends State<DtModuleByLecturerIDTerm> {
                                       .appState!
                                       .moduleTermByLecturerIDs;
                               widget.onPress(
-                                  module.moduleID, scheduleAdminTerms.length);
+                                  module.moduleID, module.subjectName, scheduleAdminTerms.length);
                             },
                           )
                         ],

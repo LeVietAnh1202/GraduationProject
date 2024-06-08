@@ -49,7 +49,7 @@ class _DetailStudentState extends State<DetailStudent> {
 
     flickManager = FlickManager(
         videoPlayerController: VideoPlayerController.networkUrl(
-            Uri.http("192.168.1.106:3000", "videos/default/${student.video}")));
+            Uri.http(url_ras, "videos/default/${student.video}")));
   }
 
   void initStudent() {
@@ -317,7 +317,14 @@ class _DetailStudentState extends State<DetailStudent> {
                     child: Container(
                       width: 400,
                       height: 400,
-                      child: FlickVideoPlayer(flickManager: flickManager),
+                      child: FlickVideoPlayer(
+                        flickManager: flickManager,
+                        flickVideoWithControls: FlickVideoWithControls(
+                          videoFit: BoxFit
+                              .contain, // Đây là nơi bạn định nghĩa BoxFit.cover
+                          controls: FlickPortraitControls(),
+                        ),
+                      ),
                     ))
                 // : SizedBox(
                 //     child: Container(

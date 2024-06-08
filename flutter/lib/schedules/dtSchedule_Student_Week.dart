@@ -65,8 +65,8 @@ class _DtScheduleStudentWeekState extends State<DtScheduleStudentWeek> {
 
   Widget _buildWeekDropdown(BuildContext context) {
     final List<String> weeks = [
-      '8',
-      '9',
+      '08',
+      '09',
       '10',
       '11',
       '12',

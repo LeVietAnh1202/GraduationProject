@@ -46,9 +46,9 @@ class AttendanceService with ChangeNotifier {
 
   static Future<void> fetchAttendanceLecturerWeeks(
       BuildContext context, ValueChanged<bool> isLoading, String dayID) async {
-    final lecturerID =
-        Provider.of<AccountProvider>(context, listen: false).account?.account;
-    final bodyData = {'lecturerID': lecturerID, 'dayID': dayID};
+    // final lecturerID =
+    //     Provider.of<AccountProvider>(context, listen: false).account?.account;
+    final bodyData = {'dayID': dayID};
     try {
       final response = await http.post(
         Uri.http(url, getAllAttendanceLecturerWeekAPI),
@@ -59,7 +59,7 @@ class AttendanceService with ChangeNotifier {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final attendanceList = data['data'] as Map<String, dynamic>;
-
+        print('attendanceList ${attendanceList}');
         Provider.of<AppStateProvider>(context, listen: false)
             .setAttendanceLecturerWeeks(attendanceList);
 

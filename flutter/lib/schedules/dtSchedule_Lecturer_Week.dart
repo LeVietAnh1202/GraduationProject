@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/attendance/detailAttendance.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
-import 'package:flutter_todo_app/export/exxport_attendance_lecturer_week.dart';
+import 'package:flutter_todo_app/export/export_attendance_lecturer_week.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:flutter_todo_app/schedules/scheduleService.dart';
 import 'package:intl/intl.dart';

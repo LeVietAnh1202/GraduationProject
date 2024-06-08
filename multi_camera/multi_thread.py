@@ -72,8 +72,8 @@ def PlayCamera(id, count):
     video_capture.release()
 
 url1 = "rtsp://192.168.1.74:1202/h264_ulaw.sdp"
-url2 = "rtsp://admin:Vietanh*12021202@192.168.1.2:554/0"
-cameraIDs = [url1]
+url2 = "rtsp://admin:Vietanh123@192.168.225.114:554/0"
+cameraIDs = [url2]
 
 count = 0
 for id in cameraIDs:

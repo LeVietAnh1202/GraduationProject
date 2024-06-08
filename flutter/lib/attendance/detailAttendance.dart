@@ -29,9 +29,9 @@ class _DetailAttendanceState extends State<DetailAttendance> {
   }
 
   void init() async {
-    attendances = Provider.of<AppStateProvider>(context, listen: false)
-        .appState!
-        .attendanceLecturerWeeks;
+    // attendances = Provider.of<AppStateProvider>(context, listen: false)
+    //     .appState!
+    //     .attendanceLecturerWeeks;
     AttendanceService.fetchAttendanceLecturerWeeks(
         context,
         (bool value) => setState(() {
@@ -47,6 +47,18 @@ class _DetailAttendanceState extends State<DetailAttendance> {
 
   @override
   Widget build(BuildContext context) {
+    var attendanceLecturerWeeks;
+    var periodStart;
+    var periodEnd;
+    if (!_isLoading) {
+      attendanceLecturerWeeks =
+          context.watch<AppStateProvider>().appState!.attendanceLecturerWeeks;
+      final String period = attendanceLecturerWeeks['time'];
+      final periodSplited = period.split('-');
+      periodStart = int.parse(periodSplited[0]);
+      periodEnd = int.parse(periodSplited[1]);
+    }
+
     int index = 0; // Biến đếm số thứ tự
     return _isLoading
         ? Container(
@@ -63,7 +75,7 @@ class _DetailAttendanceState extends State<DetailAttendance> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
-                  dataRowHeight: 120,
+                  dataRowHeight: 149,
                   dividerThickness: 2.0, // Độ dày của đường kẻ
                   // decoration: BoxDecoration(
                   //   border:
@@ -116,11 +128,11 @@ class _DetailAttendanceState extends State<DetailAttendance> {
                         ),
                       ),
                     ),
-                    for (var i = 0; i < 5; i++)
+                    for (var i = periodStart; i <= periodEnd; i++)
                       DataColumn(
                         label: Expanded(
                           child: Text(
-                            'Điểm danh ${i + 1}',
+                            'Tiết ${i}',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -136,11 +148,12 @@ class _DetailAttendanceState extends State<DetailAttendance> {
                       ),
                     ),
                   ],
-                  rows: ((context
-                          .watch<AppStateProvider>()
-                          .appState!
-                          .attendanceLecturerWeeks['studentAttendance']))
+                  rows: attendanceLecturerWeeks['studentAttendance']
+                      .asMap()
+                      .entries
                       .map((entry) {
+                        print(entry.value);
+                        var value = entry.value;
                         return DataRow(
                           cells: [
                             DataCell(Container(
@@ -150,10 +163,10 @@ class _DetailAttendanceState extends State<DetailAttendance> {
                                 textAlign: TextAlign.right,
                               ),
                             )), // Thêm cột số thứ tự
-                            DataCell(Center(child: Text(entry['studentId']))),
-                            DataCell(Text(entry['studentName'])),
-                            DataCell(Center(child: Text(entry['gender']))),
-                            DataCell(Center(child: Text(entry['classCode']))),
+                            DataCell(Center(child: Text(value['studentId']))),
+                            DataCell(Text(value['studentName'])),
+                            DataCell(Center(child: Text(value['gender']))),
+                            DataCell(Center(child: Text(value['classCode']))),
                             // DataCell(Container(
                             //   height: 200,
                             //   width: 630,
@@ -188,23 +201,39 @@ class _DetailAttendanceState extends State<DetailAttendance> {
                             //   ),
                             // )),
 
-                            ...List.generate(5, (i) {
+                            ...List.generate(4, (i) {
+                              if (value['attendance'].length > i) {
+                                var img = value['attendance'][i];
+                                print(img);
+                              }
                               return DataCell(
                                 Container(
-                                  height: 150,
+                                  height: 165,
                                   width: 120,
-                                  child: entry['attendanceImages'].length > i
+                                  child: value['attendance'].length > i
                                       ? Column(
                                           children: [
+                                            // Image.network(
+                                            //   '${URLNodeJSServer}/images/attendance_images/${entry['attendanceImages'][i]}',
+                                            //   width: 100,
+                                            //   height: 100,
+                                            // ),
                                             Image.network(
-                                              '${URLNodeJSServer}/images/attendance_images/${entry['attendanceImages'][i]}',
-                                              width: 100,
-                                              height: 100,
+                                              '${URLNodeJSServer_Python_AttendanceImages}/${value['attendance'][i]}',
+                                              width: 120,
+                                              height: 120,
+                                              fit: BoxFit.contain,
+                                            ),
+                                            SizedBox(
+                                              height: 5,
                                             ),
                                             Text(
                                               Utilities.formatImageTime(
-                                                  entry['attendanceImages'][i]),
-                                              style: TextStyle(fontSize: 13),
+                                                  value['attendance'][i]),
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
                                             ),
                                           ],
                                         )
@@ -213,8 +242,8 @@ class _DetailAttendanceState extends State<DetailAttendance> {
                               );
                             }),
                             DataCell(Center(
-                              child: Utilities.attendanceIcon(
-                                  entry['attendanceValue']),
+                              child:
+                                  Utilities.attendanceImages(value['NoImage']),
                             )),
                           ],
                         );

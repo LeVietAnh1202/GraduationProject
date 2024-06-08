@@ -1,8 +1,11 @@
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/attendance/attendance_lecturer_term.dart';
 import 'package:flutter_todo_app/attendance/attendance_student_term.dart';
 import 'package:flutter_todo_app/attendance/dtModule_by_lecturerID_term.dart';
+import 'package:flutter_todo_app/export/export_attendance_lecturer.dart';
 import 'package:flutter_todo_app/constant/number.dart';
+import 'package:flutter_todo_app/export/export_attendance_lecturer.dart';
 import 'package:flutter_todo_app/lecturers/lecturerService.dart';
 import 'package:flutter_todo_app/model/lecturerModel.dart';
 import 'package:flutter_todo_app/model/moduleTermByLecturerIDModel.dart';
@@ -29,6 +32,7 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
   int scheduleAdminTermsLength = 0;
   late ModuleTermByLecturerID module;
   String moduleID = "";
+  String subjectName = "";
   String? selectedSchoolYear;
   String? selectedSemester;
   String? selectedLecturer;
@@ -70,11 +74,15 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
   }
 
   Future<void> fetchAttendanceTerms() async {
+    print('isNull(): ');
+    // print(isNull());
     if (!isNull()) {
       try {
         setState(() {
           _isLoading = true;
         });
+        print(' ');
+        print(_isLoading);
         final scheduleAdminTerms =
             await ScheduleService.fetchAllModuleTermByLecturerIDs(
           context,
@@ -96,6 +104,7 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
   }
 
   bool isNull() {
+    print('funcIsNull');
     final role = Provider.of<AccountProvider>(context, listen: false).getRole();
     if (role == Role.student) {
       selectedLecturer = '';
@@ -127,6 +136,17 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
       ],
     );
   }
+
+  // void exportToExcel() {
+  //   // Logic để xuất tệp Excel
+  //   var excel = Excel.createExcel(); // Tạo một workbook mới
+  //   Sheet sheetObject = excel['Sheet1']; // Tạo một sheet mới
+  //   sheetObject.cell(CellIndex.indexByString("A1")).value =
+  //       "Hello Excel!" as CellValue?; // Ví dụ: Ghi vào ô A1
+  //   // Lưu tệp Excel
+  //   excel.save(fileName: "example.xlsx");
+  //   // Bạn có thể thêm logic để lưu tệp vào thiết bị hoặc chia sẻ tệp...
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +214,8 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
                   moduleID = "";
                   selectedSemester = newValue;
                 });
-                if (role == Role.student) await fetchAttendanceTerms();
+                if (role == Role.student || role == Role.lecturer)
+                  await fetchAttendanceTerms();
               },
             ),
             SizedBox(width: 10),
@@ -243,14 +264,39 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
                           lecturerID: selectedLecturer!,
                           semesterID: selectedSemester!,
                           studentId: selectedStudent!,
-                          onPress: (moduleID_value, length) {
+                          onPress: (moduleID_value, subjectName_value, length) {
                             setState(() {
                               moduleID = moduleID_value;
+                              subjectName = subjectName_value;
                               scheduleAdminTermsLength = length;
                             });
                           })),
           ],
         ),
+        SizedBox(height: 20),
+        if (moduleID.isNotEmpty)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Center(
+                child: Text(
+                  subjectName,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.file_download),
+                onPressed: () async {
+                  final attendance =
+                      Provider.of<AppStateProvider>(context, listen: false)
+                          .appState!
+                          .attendanceLecturerTerms;
+                  await ExportExcel.exportAttendanceLecturerTermToExcel(
+                      attendance, subjectName, '10120TN');
+                },
+              ),
+            ],
+          ),
         SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

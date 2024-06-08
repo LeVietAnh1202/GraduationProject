@@ -158,6 +158,9 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
                           IconButton(
                             icon: Icon(Icons.library_books),
                             onPressed: () async {
+                              Provider.of<AppStateProvider>(context,
+                                      listen: false)
+                                  .setCurrentPage(1); 
                               scheduleAdminTerms =
                                   Provider.of<AppStateProvider>(context,
                                           listen: false)
