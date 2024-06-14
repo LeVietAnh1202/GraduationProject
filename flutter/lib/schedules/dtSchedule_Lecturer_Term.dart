@@ -160,7 +160,7 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
                             onPressed: () async {
                               Provider.of<AppStateProvider>(context,
                                       listen: false)
-                                  .setCurrentPage(1); 
+                                  .setCurrentPage(1);
                               scheduleAdminTerms =
                                   Provider.of<AppStateProvider>(context,
                                           listen: false)
@@ -173,7 +173,8 @@ class _DtScheduleTermState extends State<DtScheduleTerm> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text(schedule.subjectName),
+                                    title: Text(
+                                        "Danh sách sinh viên tham gia môn: ${schedule.subjectName}"),
                                     content: DataTableStudentByModule(
                                         moduleID: schedule.moduleID),
                                     actions: [

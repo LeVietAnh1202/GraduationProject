@@ -38,7 +38,7 @@ class preprocesses:
 
         # Add a random key to the filename to allow alignment using multiple processes
         random_key = np.random.randint(0, high=99999)
-        bounding_boxes_filename = os.path.join(output_dir, 'bounding_boxes_%05d.txt' % random_key)
+        bounding_boxes_filename = os.path.join(output_dir, '../', 'bounding_boxes_%05d.txt' % random_key)
 
         with open(bounding_boxes_filename, "w") as text_file:
             nrof_images_total = 0
@@ -51,7 +51,7 @@ class preprocesses:
                 for image_path in cls.image_paths:
                     nrof_images_total += 1
                     filename = os.path.splitext(os.path.split(image_path)[1])[0]
-                    output_filename = os.path.join(output_class_dir, filename + '.png')
+                    output_filename = os.path.join(output_class_dir, filename + '.jpg')
                     print("Image: %s" % image_path)
                     # yield f"Image: {image_path}\n\n"
                     if not os.path.exists(output_filename):

@@ -19,14 +19,14 @@ class AttendanceStudentByDayID {
 
   factory AttendanceStudentByDayID.fromMap(Map<String, dynamic> json) {
     return AttendanceStudentByDayID(
-      moduleID: json['moduleID'],
-      roomName: json['roomName'],
-      lecturerName: json['lecturerName'],
-      subjectName: json['subjectName'],
+      moduleID: json['moduleID'] ?? '',
+      roomName: json['roomName'] ?? '',
+      lecturerName: json['lecturerName'] ?? '',
+      subjectName: json['subjectName'] ?? '',
       attendance:
-          List<String>.from(json['attendance']), // Ensuring List<String>
-      day: json['day'],
-      time: json['time'],
+          List<String>.from(json['attendance'] ?? []), // Ensuring List<String>
+      day: json['day'] ?? '',
+      time: json['time'] ?? '',
     );
   }
 

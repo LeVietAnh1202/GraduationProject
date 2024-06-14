@@ -20,7 +20,8 @@ class DetailAttendanceStudentDayWidget extends StatefulWidget {
 
 class _DetailAttendanceStudentDayWidgetState
     extends State<DetailAttendanceStudentDayWidget> {
-  late AttendanceStudentByDayID attendance;
+  late AttendanceStudentByDayID? attendance =
+      AttendanceStudentByDayID.fromMap({});
   late List<AttendanceStudentByDayID> attendances;
   bool _isLoading = true;
 
@@ -82,19 +83,20 @@ class _DetailAttendanceStudentDayWidgetState
           Container(
             padding: EdgeInsets.only(left: 15),
             child: Column(children: [
-              Utilities.buildInfoRow('Thứ: ', ' ${attendance.day}'),
-              Utilities.buildInfoRow('Tiết: ', ' ${attendance.time}'),
-              Utilities.buildInfoRow('Tên môn: ', ' ${attendance.subjectName}'),
-              Utilities.buildInfoRow('Phòng học: ', ' ${attendance.roomName}'),
+              Utilities.buildInfoRow('Thứ: ', ' ${attendance!.day}'),
+              Utilities.buildInfoRow('Tiết: ', ' ${attendance!.time}'),
               Utilities.buildInfoRow(
-                  'Tên giảng viên: ', ' ${attendance.lecturerName}'),
+                  'Tên môn: ', ' ${attendance!.subjectName}'),
+              Utilities.buildInfoRow('Phòng học: ', ' ${attendance!.roomName}'),
+              Utilities.buildInfoRow(
+                  'Tên giảng viên: ', ' ${attendance!.lecturerName}'),
             ]),
           ),
           SizedBox(height: 20),
           Expanded(
               child: ListView(
             scrollDirection: Axis.horizontal,
-            children: (attendance.attendance).map((imagePath) {
+            children: (attendance!.attendance).map((imagePath) {
               final extractedParts = extractPartsFromFilename(imagePath);
               final String? period = extractedParts['period'];
               final String? timestamp = extractedParts['timestamp'];

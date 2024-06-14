@@ -48,6 +48,7 @@ class _FromAddStudentState extends State<FromAddStudent> {
   String? imageExtension;
   String? videoExtension;
   late String fileVideoName = '';
+  bool _loading = false;
 
   late List<Faculty> faculties;
 
@@ -285,6 +286,104 @@ class _FromAddStudentState extends State<FromAddStudent> {
     }
   }
 
+  Future<void> _callAPIHandleVideo(studentVideo) async {
+    setState(() {
+      _loading = true;
+    });
+    // final socket = Provider.of<AppStateProvider>(context, listen: false).appState!.socket;
+    int dotIndex = studentVideo.lastIndexOf('.');
+    print(studentVideo);
+    var fileName = '';
+    if (dotIndex != -1) {
+      fileName = studentVideo.substring(0, dotIndex);
+    }
+
+    // setState(() {
+    //   _loading = true;
+    // });
+    print('_callAPIHandleVideo');
+    try {
+      int dotIndex = studentVideo.lastIndexOf('.');
+      var fileName = '';
+      if (dotIndex != -1) {
+        fileName = studentVideo.substring(0, dotIndex);
+      }
+      var response = await http.post(
+        Uri.http(url_python, 'crop_video'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "video_path": '${URLNodeJSServer_RaspberryPi_Videos}/${studentVideo}',
+          "images_path": "./train_img/${fileName}"
+        }),
+      );
+      var jsonResponse;
+      if (response.statusCode == 200) {
+        jsonResponse = jsonDecode(response.body);
+        setState(() {
+          // _result = jsonResponse.toString();
+          _loading = false;
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Xử lý video của sinh viên thành công'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        jsonResponse = jsonDecode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                'Xử lý video của sinh viên thất bại - ${response.statusCode}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        throw Exception('Failed to handle video');
+      }
+
+      // showDialog(
+      //   context: context,
+      //   builder: (_) => AlertDialog(
+      //     title: Text('API Response handle'),
+      //     content: Text(
+      //         "Images_count:  + ${jsonResponse['status'] ? jsonResponse['total_images_processed'] : 'false'}"),
+      //     actions: [
+      //       TextButton(
+      //         onPressed: () => Navigator.pop(context),
+      //         child: Text('OK'),
+      //       ),
+      //     ],
+      //   ),
+      // );
+    } catch (error) {
+      setState(() {
+        _loading = false;
+      });
+
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text('Error'),
+          content: Text('An error occurred: $error'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+      print(error);
+    } finally {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -515,43 +614,49 @@ class _FromAddStudentState extends State<FromAddStudent> {
           ),
           child: Text('Hủy'),
         ),
-        ElevatedButton(
-          onPressed: () async {
-            if (isFormValid) {
-              final inforStudent = getInforStudent();
-              await createStudent(inforStudent);
-              await uploadImage(inforStudent);
-              await uploadVideo(inforStudent);
-            } else {
-              String errorMessage = 'Vui lòng nhập đầy đủ thông tin:';
-              if (!(studentId?.isNotEmpty ?? false)) {
-                errorMessage += '\n- Mã sinh viên không được để trống';
-              } else if (!RegExp(r'^\d{8}$').hasMatch(studentId!)) {
-                errorMessage +=
-                    '\n- Mã sinh viên không đúng định dạng số hoặc không đủ 8 số';
-              }
-              if (!(studentName?.isNotEmpty ?? false)) {
-                errorMessage += '\n- Tên sinh viên không được để trống';
-              } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(studentName!)) {
-                errorMessage += '\n- Tên sinh viên không đúng định dạng chữ';
-              }
-              if (birthDate == null) {
-                errorMessage += '\n- Ngày tháng năm sinh không được để trống';
-              }
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(errorMessage),
-                  backgroundColor: Colors.red,
+        _loading
+            ? CircularProgressIndicator()
+            : ElevatedButton(
+                onPressed: () async {
+                  if (isFormValid) {
+                    final inforStudent = getInforStudent();
+                    await createStudent(inforStudent);
+                    await uploadImage(inforStudent);
+                    await uploadVideo(inforStudent);
+                    await _callAPIHandleVideo(inforStudent['video']);
+                  } else {
+                    String errorMessage = 'Vui lòng nhập đầy đủ thông tin:';
+                    if (!(studentId?.isNotEmpty ?? false)) {
+                      errorMessage += '\n- Mã sinh viên không được để trống';
+                    } else if (!RegExp(r'^\d{8}$').hasMatch(studentId!)) {
+                      errorMessage +=
+                          '\n- Mã sinh viên không đúng định dạng số hoặc không đủ 8 số';
+                    }
+                    if (!(studentName?.isNotEmpty ?? false)) {
+                      errorMessage += '\n- Tên sinh viên không được để trống';
+                    } else if (!RegExp(r'^[a-zA-Z ]+$')
+                        .hasMatch(studentName!)) {
+                      errorMessage +=
+                          '\n- Tên sinh viên không đúng định dạng chữ';
+                    }
+                    if (birthDate == null) {
+                      errorMessage +=
+                          '\n- Ngày tháng năm sinh không được để trống';
+                    }
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(errorMessage),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green, // Đổi màu xanh cho nút
+                  padding: EdgeInsets.all(16.0), // Tăng kích thước của nút
                 ),
-              );
-            }
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green, // Đổi màu xanh cho nút
-            padding: EdgeInsets.all(16.0), // Tăng kích thước của nút
-          ),
-          child: Text('Thêm'),
-        ),
+                child: Text('Thêm'),
+              ),
       ],
     );
   }

@@ -1,95 +1,296 @@
 {
-  "_id": ObjectId,
-  "subjectID": String,
-  "subjectName": String,
-  "numberOfCredits": String,
-  "numberOfLessons": String,
-}
+  "_id": {
+    "$oid": "657985c56d8dd423d059ee91"
+  },
+  "moduleID": "215667",
+  "subjectID": "311115",
+  "lecturerID": "1223",
+  "semesterID": "232",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "listStudentID": [
+    "10120056",
+    "12520088",
+    "10120766",
+    "10120620",
+    "10120626",
+    "10121437",
+    "10121747",
+    "10120741",
+    "10121758",
+    "10121793",
+    "10121795",
+    "10121840",
+    "10121865",
+    "10121867",
+    "10121906",
+    "10121927",
+    "10121931",
+    "10121945",
+    "10121969",
+    "10122119",
+    "12421027",
+    "12421033",
+    "12421034"
 
-{
-  "_id": ObjectId,
-  "moduleID": String,
-  "subjectID": String,
-  "lecturerID": String,
-  "semesterID": String,
-  "listStudentID": [String]
-},
-{
-  "_id": ObjectId,
-  "classRoomID": String,
-  "roomName": String,
-}
-{
-  "_id": ObjectId,
-  "schoolYearID": String,
-  "semesters": [
-    {
-      "semesterID": String,
-      "semesterName": String
-    },
-    {...}
-  ],
-  "schoolYearName": String
-}
-
-{
-  "_id": ObjectId,
-  "facultyID": String,
-  "facultyName": String,
-  "majors": [
-    {
-      "majorID": String,
-      "majorName": String,
-      "specializations": [
-        {
-          "specializationID": String,
-          "specializationName": String
-        },
-        {...}
-      ]
-    },
-    {...}
   ]
-}
-
-{
-  "_id": ObjectId,
-  "scheduleID": String,
-  "moduleID": String,
-  "dayTerms": [
-    {
-      "day": String,
-      "classPeriod": String,
-      "weekTimeStart": Date,
-      "weekTimeEnd": Date
-    },
-    {...}
-  ],
-  "dateStart": Date,
-  "dateEnd": Date,
-  "details": [
-    {
-      "week": "12",
-      "weekTimeStart": Date,
-      "weekTimeEnd": Date,
-      "weekDetails": [
-        {
-          "day": String,
-          "classPeriod": String,
-          "dayID": String
-        },
-        {...}
-      ],
-      [...]
-    },
-    {...}
-  ],
-  "classRoomID": String,
-}
-
-{
-  "_id": ObjectId,
-  "studentId": String,
-  "dayID": String,
-  "attendance": [String],
 },
+{
+  "_id": {
+    "$oid": "657985c56d8dd423d059ee96"
+  },
+  "moduleID": "211011",
+  "subjectID": "311114",
+  "lecturerID": "1224",
+  "semesterID": "232",
+  "createdAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T10:21:57.700Z"
+  },
+  "__v": 0,
+  "listStudentID": [
+    "10120056",
+    "12520088",
+    "10120766",
+    "10120620",
+    "10120626",
+    "12421036",
+    "10120678",
+    "12421037",
+    "12421041",
+    "12521156",
+    "10120707",
+    "10121865",
+    "10121969"
+  ]
+},
+
+
+
+
+10120056_LeNgocLanh
+10120056_LeNgocLanh
+10120056_LeNgocLanh
+10120056_LeNgocLanh
+
+10120766_NguyenMinhAnh
+10120766_NguyenMinhAnh
+10120766_NguyenMinhAnh
+10120766_NguyenMinhAnh
+
+12520088_LeVietAnh
+12520088_LeVietAnh
+12520088_LeVietAnh
+12520088_LeVietAnh
+
+10120620_NguyenMinhDoanh
+10120620_NguyenMinhDoanh
+10120620_NguyenMinhDoanh
+10120620_NguyenMinhDoanh
+
+10120626_LeHaiDang
+10120626_LeHaiDang
+10120626_LeHaiDang
+10120626_LeHaiDang
+
+12421036_NguyenTruongPhuc
+12421036_NguyenTruongPhuc
+12421036_NguyenTruongPhuc
+12421036_NguyenTruongPhuc
+
+10120678_VuNgocMinh
+10120678_VuNgocMinh
+10120678_VuNgocMinh
+10120678_VuNgocMinh
+
+12421037_NguyenXuanChinh
+12421037_NguyenXuanChinh
+12421037_NguyenXuanChinh
+12421037_NguyenXuanChinh
+
+12421041_HoaThiNguyet
+12421041_HoaThiNguyet
+12421041_HoaThiNguyet
+12421041_HoaThiNguyet
+
+12521156_NguyenVanTung
+12521156_NguyenVanTung
+12521156_NguyenVanTung
+12521156_NguyenVanTung
+
+10120707_NguyenVanThai
+10120707_NguyenVanThai
+10120707_NguyenVanThai
+10120707_NguyenVanThai
+
+10121865_LyVanLinh
+10121865_LyVanLinh
+10121865_LyVanLinh
+10121865_LyVanLinh
+
+10121969_NguyenThanhTu
+10121969_NguyenThanhTu
+10121969_NguyenThanhTu
+10121969_NguyenThanhTu
+
+
+
+10120056_LeNgocLanh
+10120056_LeNgocLanh
+10120056_LeNgocLanh
+10120056_LeNgocLanh
+
+
+10120766_NguyenMinhAnh
+10120766_NguyenMinhAnh
+10120766_NguyenMinhAnh
+10120766_NguyenMinhAnh
+
+
+12520088_LeVietAnh
+12520088_LeVietAnh
+12520088_LeVietAnh
+12520088_LeVietAnh
+
+
+10120620_NguyenMinhDoanh
+10120620_NguyenMinhDoanh
+10120620_NguyenMinhDoanh
+10120620_NguyenMinhDoanh
+
+
+10120626_LeHaiDang
+10120626_LeHaiDang
+10120626_LeHaiDang
+10120626_LeHaiDang
+
+
+10120741_LuuHuyHoang
+10120741_LuuHuyHoang
+10120741_LuuHuyHoang
+10120741_LuuHuyHoang
+
+
+10121437_LeXuanHung
+10121437_LeXuanHung
+10121437_LeXuanHung
+10121437_LeXuanHung
+
+
+10121747_DaoThiNgocAnh
+10121747_DaoThiNgocAnh
+10121747_DaoThiNgocAnh
+10121747_DaoThiNgocAnh
+
+
+10121758_DoThanhCong
+10121758_DoThanhCong
+10121758_DoThanhCong
+10121758_DoThanhCong
+
+
+10121793_TranQuangDuc
+10121793_TranQuangDuc
+10121793_TranQuangDuc
+10121793_TranQuangDuc
+
+
+10121795_LeThiHa
+10121795_LeThiHa
+10121795_LeThiHa
+10121795_LeThiHa
+
+
+10121840_HoangQuangHuy
+10121840_HoangQuangHuy
+10121840_HoangQuangHuy
+10121840_HoangQuangHuy
+
+
+10121865_LyVanLinh
+10121865_LyVanLinh
+10121865_LyVanLinh
+10121865_LyVanLinh
+
+
+10121867_PhamGiaLong
+10121867_PhamGiaLong
+10121867_PhamGiaLong
+10121867_PhamGiaLong
+
+
+10121906_DaoVanTam
+10121906_DaoVanTam
+10121906_DaoVanTam
+10121906_DaoVanTam
+
+
+10121927_NguyenThuThuy
+10121927_NguyenThuThuy
+10121927_NguyenThuThuy
+10121927_NguyenThuThuy
+
+
+10121931_DoThiKieuTrang
+10121931_DoThiKieuTrang
+10121931_DoThiKieuTrang
+10121931_DoThiKieuTrang
+
+
+10121945_NguyenHuuTuan
+10121945_NguyenHuuTuan
+10121945_NguyenHuuTuan
+10121945_NguyenHuuTuan
+
+
+10121969_NguyenThanhTu
+10121969_NguyenThanhTu
+10121969_NguyenThanhTu
+10121969_NguyenThanhTu
+
+
+10122119_NguyenTienDat
+10122119_NguyenTienDat
+10122119_NguyenTienDat
+10122119_NguyenTienDat
+
+
+12421027_LuyenThanhBinh
+12421027_LuyenThanhBinh
+12421027_LuyenThanhBinh
+12421027_LuyenThanhBinh
+
+
+12421033_DoThiNgocAnh
+12421033_DoThiNgocAnh
+12421033_DoThiNgocAnh
+12421033_DoThiNgocAnh
+
+
+12421034_NguyenThiAnhDuong
+12421034_NguyenThiAnhDuong
+12421034_NguyenThiAnhDuong
+12421034_NguyenThiAnhDuong
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

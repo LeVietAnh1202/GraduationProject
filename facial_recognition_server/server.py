@@ -66,7 +66,7 @@ static_directory = "train_img"
 
 # Mount thư mục tĩnh vào đường dẫn /train_img
 app.mount("/train_img", StaticFiles(directory=static_directory), name="train_img")
-app.mount("/aligned_img", StaticFiles(directory=static_directory), name="aligned_img")
+app.mount("/aligned_img", StaticFiles(directory="aligned_img"), name="aligned_img")
 app.mount("/public", StaticFiles(directory='public'), name="public")
 
 @app.get("/")
@@ -101,6 +101,7 @@ async def crop_video(video: Video):
         # URL of the API endpoint
         urlNoImage = 'http://192.168.225.112:3000/attendance/updateNoImage'
 
+        print('nrof_successfully_aligned: ' + str(nrof_successfully_aligned))
         # Data to be sent in the POST request
         data = {
             'studentId': studentId,
@@ -568,7 +569,7 @@ async def connect_camera(sio, sid, data):
                                 
                                 # Tạo chuỗi thời gian có dạng yyyy-MM-DD_hh-mm-ss
                                 formatted_time = globals_var.currentTime.strftime('%Y-%m-%d_%H-%M-%S')
-                                image_path = f'{dayID}/{id}_{fullName}/{period}_{formatted_time}.jpg'
+                                image_path = f'{dayID}/{id}_{fullName}/{"0" if len(period) == 1 else "" }{period}_{formatted_time}.jpg'
                                 await sio.emit('facial_recognition_result', {'status': True, 'studentId': id, 'dayID': dayID, 'image': frame_encoded, 'image_path': image_path}, to=sid)
                                 ids.remove(id)
                                 del id_count[id]  # Reset the count for the id

@@ -6,6 +6,7 @@ import 'package:flutter_todo_app/attendance/detail_attendance_student_day.dart';
 import 'package:flutter_todo_app/attendance/utilities.dart';
 import 'package:flutter_todo_app/constant/number.dart';
 import 'package:flutter_todo_app/model/moduleTermByLecturerIDModel.dart';
+import 'package:flutter_todo_app/provider/account.dart';
 import 'package:flutter_todo_app/provider/appState.dart';
 import 'package:provider/provider.dart';
 
@@ -64,6 +65,10 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double widthDataTable = screenWidth - sideBarWidth - 40;
+    final attendanceStudent =
+        context.watch<AppStateProvider>().appState!.attendanceStudentTerms;
+    final studentId =
+        Provider.of<AccountProvider>(context, listen: false).account!.account;
     return _isLoading
         ? Container(
             alignment: Alignment.center,
@@ -151,7 +156,11 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
                                                 content: SingleChildScrollView(
                                                   child: Column(
                                                     children: [
-                                                      // DetailAttendanceStudentDayWidget()
+                                                      DetailAttendanceStudentDayWidget(
+                                                        studentId: studentId,
+                                                        dayID: entry[entry.keys
+                                                            .first]['dayID'],
+                                                      )
                                                     ],
                                                   ),
                                                 ),
@@ -211,7 +220,7 @@ class _AttendanceStudentTermState extends State<AttendanceStudentTerm> {
                           }).toList(),
                           DataCell(Center(
                               child: Text(
-                                  '${(attendances['NoImagesValid'] == 0 ? '-' : attendances['NoImagesValid']).toString()}/${attendances['numberOfLessons']}'))),
+                                  '${(attendanceStudent['NoImagesValid'] == 0 ? '-' : attendanceStudent['NoImagesValid']).toString()}/${attendanceStudent['numberOfLessons']}'))),
                         ])
                       ],
                     ),

@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-var index = 101;
-const directoryPath = 'D:/DHCQ-2020-2024/2023-2024_Ky 2/DATN/Project/GraduationProject/nodejs_backend/public/images/full_images/New folder';
+var index = 0;
+const name = '12521156_NguyenVanTung'
+// const directoryPath = 'G:/Ki_8/GraduationProject/nodejs_backend/public/images/attendance_images/Sample/' + name;
+const directoryPath = 'G:/Ki_8/GraduationProject/facial_recognition_server/aligned_img/10120766_NguyenMinhAnh';
 
 const arr = [
     '10120603_DoQuynhAnh',
@@ -27,6 +29,32 @@ const arr = [
     '10120734_TranAnhTu',
     '10120736_DoTrangTuan',
 ]
+
+const arr2 = [
+    "10121437_LeXuanHung",
+    "10121747_DaoThiNgocAnh",
+    "10121758_DoThanhCong",
+    "10121793_TranQuangDuc",
+    "10121795_LeThiHa",
+    "10121840_HoangQuangHuy",
+    "10121865_LyVanLinh",
+    "10121867_PhamGiaLong",
+    "10121906_DaoVanTam",
+    "10121927_NguyenThuThuy",
+    "10121931_DoThiKieuTrang",
+    "10121945_NguyenHuuTuan",
+    "10121969_NguyenThanhTu",
+    "10122119_NguyenTienDat",
+    "12421027_LuyenThanhBinh",
+    "12421033_DoThiNgocAnh",
+    "12421034_NguyenThiAnhDuong",
+    "12421036_NguyenTruongPhuc",
+    "12421037_NguyenXuanChinh",
+    "12421041_HoaThiNguyet",
+    "12521156_NguyenVanTung",
+]
+
+const arr3 = ['01', '02', '03', '04', '08', '09', '10', '11']
 
 // const arr = [
 //     '11421327_BiTranQuynhAnh',
@@ -77,7 +105,9 @@ fs.readdir(directoryPath, function (err, files) {
         const oldPath = path.join(directoryPath, file);
         // const result = file.match(/_(.*?)/./);
         // const extractedString = result[1];
-        const newName = index++ + '.jpg'; // Tên mới của tệp
+        // console.log(file.split('.')[0])
+        const newName = file.split('.')[0] + '.jpg'; // Tên mới của tệp
+        // const newName = arr3[index++] + '_' + name + '.png'; // Tên mới của tệp
         // console.log(newName);
         // console.log(file)
         const newPath = path.join(directoryPath, newName);

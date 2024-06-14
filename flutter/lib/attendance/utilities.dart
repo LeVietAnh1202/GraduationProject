@@ -120,7 +120,7 @@ class Utilities {
 
     // Cắt chuỗi từ dấu \ thứ tư đến trước dấu .
     String stringSplited =
-        imageTime.substring(fourthBackslashIndex + 3, dotIndex);
+        imageTime.substring(fourthBackslashIndex + 4, dotIndex);
     // imageTime.substring(fourthBackslashIndex + 1, dotIndex);
     print('stringSplited ${stringSplited}');
 

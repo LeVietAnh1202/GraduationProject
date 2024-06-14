@@ -1,7 +1,7 @@
 const url = '192.168.225.112:3000';
+const url_ras = '192.168.225.112:3000';
 // const url = '192.168.1.3:3000';
 // const url_ras = '192.168.1.3:3000';
-const url_ras = '192.168.225.112:3000';
 const url_python = '192.168.225.112:8001';
 final register = "user/register";
 final login = 'user/login';

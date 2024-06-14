@@ -161,7 +161,7 @@ class AttendanceLecturerTermService {
           const NoImages = attendanceImages.length;
           NoImagesValid += NoImages;
 
-          attendances.push({ [weekTimeStartStr]: { attendanceImages, NoImages, time, dayID } });
+          attendances.push({ [weekTimeStartStr]: { attendanceImages, NoImages, time, dayID, day } });
         }
 
         return new AttendanceLecturerTermModel(student.studentName, attendances, NoImagesValid, numberOfLessons);

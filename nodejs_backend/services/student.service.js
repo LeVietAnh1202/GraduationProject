@@ -11,7 +11,7 @@ const Lecturer = require("../models/lecturer.model");
 class StudentService {
     static async createStudent(studentId, studentName, classCode, specializationID, gender, birthDate, avatar, video) {
         try {
-            const createStudent = new StudentModel({ studentId, studentName, classCode, specializationID, gender, birthDate, avatar, video });
+            const createStudent = new StudentModel({ studentId, studentName, classCode, specializationID, gender, birthDate, avatar, video, NoAvatar: 1, NoFullImage: 0, NoCropImage: 0, NoVideo: 1 });
             return await createStudent.save();
         } catch (err) {
             throw err;

@@ -195,6 +195,68 @@ class _DetailStudentState extends State<DetailStudent> {
     }
   }
 
+  void _callAPITrainModel() async {
+    setState(() {
+      _loading = true;
+    });
+    print('_callAPITrainModel');
+    try {
+      var response = await http.get(
+        Uri.http(url_python, 'train_model'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      var jsonResponse;
+      if (response.statusCode == 200) {
+        jsonResponse = jsonDecode(response.body);
+        setState(() {
+          _result = jsonResponse.toString();
+          _loading = false;
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Huấn luyện thành công'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        jsonResponse = jsonDecode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Huấn luyện thất bại - ${response.statusCode}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        throw Exception('Failed to handle video');
+      }
+    } catch (error) {
+      setState(() {
+        _loading = false;
+      });
+
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text('Error'),
+          content: Text('An error occurred: $error'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+      print(error);
+    } finally {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final defaultStudent = Student.fromMap({});
@@ -289,7 +351,7 @@ class _DetailStudentState extends State<DetailStudent> {
                   _loading
                       ? CircularProgressIndicator()
                       : ElevatedButton(
-                          onPressed: _callAPIHandleVideo,
+                          onPressed: _callAPITrainModel,
                           style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.resolveWith<Color?>(
@@ -302,7 +364,7 @@ class _DetailStudentState extends State<DetailStudent> {
                               },
                             ),
                           ),
-                          child: Text('Xử lý video'),
+                          child: Text('Huấn luyện'),
                         ),
               ],
             ),

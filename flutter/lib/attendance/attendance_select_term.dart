@@ -284,17 +284,18 @@ class _AttendanceSelectionTermState extends State<AttendanceSelectionTerm> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.file_download),
-                onPressed: () async {
-                  final attendance =
-                      Provider.of<AppStateProvider>(context, listen: false)
-                          .appState!
-                          .attendanceLecturerTerms;
-                  await ExportExcel.exportAttendanceLecturerTermToExcel(
-                      attendance, subjectName, '10120TN');
-                },
-              ),
+              if (role == Role.aao || role == Role.lecturer)
+                IconButton(
+                  icon: Icon(Icons.file_download),
+                  onPressed: () async {
+                    final attendance =
+                        Provider.of<AppStateProvider>(context, listen: false)
+                            .appState!
+                            .attendanceLecturerTerms;
+                    await ExportExcel.exportAttendanceLecturerTermToExcel(
+                        attendance, subjectName, '10120TN');
+                  },
+                ),
             ],
           ),
         SizedBox(height: 20),

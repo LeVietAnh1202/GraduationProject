@@ -19,7 +19,7 @@ class training:
     def main_train(self):
         with tf.Graph().as_default():
             with tf.Session() as sess:
-                img_data = facenet.get_dataset(self.datadir)
+                img_data = facenet.get_dataset_model(self.datadir)
                 path, label = facenet.get_image_paths_and_labels(img_data)
                 print('Classes: %d' % len(img_data))
                 print('Images: %d' % len(path))

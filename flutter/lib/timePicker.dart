@@ -103,7 +103,7 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
         SizedBox(width: 20),
         ElevatedButton(
           onPressed: () => _selectDateTime(context),
-          child: Text('Select Date and Time'),
+          child: Text('Thay đổi thời gian mô phỏng'),
         ),
       ],
     );
